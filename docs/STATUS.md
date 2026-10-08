@@ -14,7 +14,7 @@
 | 10 | Fracture/knee/TB models | Done | | | Trained efficiently using EfficientNetB0 |
 | 11 | Comorbidity research | Done | 2026-10-08 | | Rules verified with DOIs |
 | 12 | Comorbidity engine | Done | 2026-10-08 | | Live verified engine, graph, and triage |
-| 13 | Longitudinal engine | Pending | | | |
+| 13 | Longitudinal engine | Done | 2026-10-08 | | Registration, diff maps, mismatch check, and caliper measures |
 | 14 | Healing priors + exploratory predictor | Pending | | | |
 | 15 | Orchestrator + API | Pending | | | |
 | 16 | Frontend foundation | Pending | | | |
