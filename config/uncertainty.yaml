@@ -1,16 +1,23 @@
+heatmap_unreliable:
+- Atelectasis
+- Effusion
+- Mass
+- Nodule
+- Pneumonia
+- Pneumothorax
 uncertainty:
-  source: "data-derived from validation set"
-  review_status: draft
   mc_dropout:
     n_passes: 10
+  ood:
+    val_percentile_threshold: 95
+  review_status: draft
+  rule_out:
+    alpha: 0.05
+  source: data-derived from validation set
+  tiers:
+    target_high_ppv: 0.8
   tta:
+    contrast_jitter: 0.1
     k_augmentations: 4
     rotate_deg: 5
     scale_factor: 1.05
-    contrast_jitter: 0.1
-  tiers:
-    target_high_ppv: 0.80
-  rule_out:
-    alpha: 0.05
-  ood:
-    val_percentile_threshold: 95
