@@ -13,3 +13,6 @@ Record of architectural and tooling decisions.
 
 ### Longitudinal Registration (Step 13)
 - **Optical Flow (Non-rigid refinement):** Decided against using dense optical flow (e.g., cv2.DISOpticalFlow) for 2D X-ray registration. While it can technically reduce pixel-wise error, in medical X-rays (which are 2D projections of 3D structures), non-rigid warping often creates 'fake healing' by artificially aligning tissues or fractures that have genuinely changed or moved in 3D space. Affine registration (ORB + ECC) preserves the rigid geometry necessary for accurate comparison and measurement.
+
+### Anatomy & Bone Localisation (Step 10A)
+- **Fine-grained bone localisation:** Decided against implementing fine-grained bounding box or mask-based localisation for FracAtlas. The dataset metadata contains `bbox_path` and `mask_path` headers, but these are completely empty in the processed manifest and raw data folder. Only coarse `body_part` labels (e.g., "hand", "leg", "hip") are genuinely available. Therefore, we predict the `body_part` and map it to a skeletal region (e.g., `hand_wrist`), explicitly deciding not to invent fake granular bone labels (R1).

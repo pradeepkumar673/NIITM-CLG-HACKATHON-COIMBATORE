@@ -229,6 +229,16 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
             except Exception as e:
                 log.error(f"LLM Summary error: {e}")
                 
+            # 6. Anatomy resolution (Step 10A)
+            _notify(study_id, "stage", {"stage": "anatomy", "message": "Resolving anatomy..."})
+            try:
+                from backend.app.services.anatomy import resolve_anatomy
+                anatomy_res = resolve_anatomy(study.body_part, study.image_path, result_json)
+                result_json["anatomy"] = anatomy_res
+            except Exception as e:
+                log.error(f"Anatomy resolution error: {e}")
+                result_json["anatomy"] = {"error": str(e), "status": "failed"}
+
             result_json["disclaimer"] = "Exploratory estimate; not validated on outcome data."
             from backend.app.db.models import Result
             res_obj = Result(

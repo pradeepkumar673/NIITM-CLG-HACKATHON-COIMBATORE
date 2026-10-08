@@ -1,0 +1,447 @@
+# config/anatomy.yaml
+# ============================================================================
+# Anatomy mapping for 3D skeleton visualisation.
+#
+# Canonical region/bone list source:
+#   Terminologia Anatomica, 2nd edition (FCAT, 2019).
+#   Identifier: FCAT-TA2-2019 (https://ta2viewer.openanatomy.org/)
+#   review_status: draft  (pending clinician sign-off)
+#
+# All entries that carry a medical interpretation carry both:
+#   source:        citable reference for the mapping decision
+#   review_status: "draft" until a clinician co-signs this file
+#
+# R3 compliance: no constant may be hardcoded in product code; all come here.
+# ============================================================================
+
+meta:
+  canonical_list_source: "Terminologia Anatomica, 2nd ed (FCAT 2019); https://ta2viewer.openanatomy.org/"
+  canonical_list_id: "FCAT-TA2-2019"
+  review_status: draft
+  note: >
+    This file is decision-support configuration. Every mapping is marked
+    draft until reviewed and co-signed by a qualified radiologist or
+    clinical anatomist.
+
+# ── Accuracy gate ────────────────────────────────────────────────────────────
+# If measured region-classification accuracy for a region falls below this
+# threshold on the held-out TEST split, that region is returned as
+# "region_uncertain" and the skeleton shows nothing red.
+# Source: project design decision, conservative safety margin; review_status: draft.
+min_region_accuracy: 0.60
+
+# ── Skeleton regions ─────────────────────────────────────────────────────────
+# Each entry is a skeletal region or anatomical zone usable by the frontend.
+# Fields per entry:
+#   id:            machine identifier (snake_case, stable across versions)
+#   label_en:      English display label
+#   label_ta:      Tamil display label (placeholder – requires translation review)
+#   label_hi:      Hindi display label (placeholder – requires translation review)
+#   ta2_term:      Terminologia Anatomica 2 preferred term (if mapped)
+#   ta2_id:        TA2 entity ID (if available)
+#   parent:        id of the parent region (null for roots)
+#   type:          "bone_region" | "organ_zone"
+#   source:        evidence for this entry
+#   review_status: "draft"
+
+regions:
+  # ── Upper limb ──────────────────────────────────────────────────────────
+  - id: hand_wrist
+    label_en: "Hand / Wrist"
+    label_ta: "கை / மணிக்கட்டு"
+    label_hi: "हाथ / कलाई"
+    ta2_term: "Manus / Carpus"
+    ta2_id: "A02.4"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A02.4; FracAtlas body_part=hand"
+    review_status: draft
+
+  - id: forearm
+    label_en: "Forearm (Radius / Ulna)"
+    label_ta: "முன்னங்கை"
+    label_hi: "अग्रभुजा"
+    ta2_term: "Antebrachium"
+    ta2_id: "A02.4.2"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A02.4.2"
+    review_status: draft
+
+  - id: upper_arm
+    label_en: "Upper Arm (Humerus)"
+    label_ta: "மேல் கை"
+    label_hi: "ऊपरी बांह"
+    ta2_term: "Brachium"
+    ta2_id: "A02.4.1"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A02.4.1"
+    review_status: draft
+
+  # ── Lower limb ──────────────────────────────────────────────────────────
+  - id: leg_lower
+    label_en: "Lower Leg (Tibia / Fibula)"
+    label_ta: "கீழ் கால்"
+    label_hi: "निचली टांग"
+    ta2_term: "Crus"
+    ta2_id: "A02.5.3"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A02.5.3; FracAtlas body_part=leg"
+    review_status: draft
+
+  - id: thigh
+    label_en: "Thigh (Femur)"
+    label_ta: "தொடை"
+    label_hi: "जांघ"
+    ta2_term: "Femur"
+    ta2_id: "A02.5.2"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A02.5.2; FracAtlas body_part=leg"
+    review_status: draft
+
+  - id: foot_ankle
+    label_en: "Foot / Ankle"
+    label_ta: "பாதம் / கணுக்கால்"
+    label_hi: "पैर / टखना"
+    ta2_term: "Pes / Tarsus"
+    ta2_id: "A02.5.4"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A02.5.4"
+    review_status: draft
+
+  # ── Pelvis / Hip ─────────────────────────────────────────────────────────
+  - id: pelvis_hip
+    label_en: "Pelvis / Hip"
+    label_ta: "இடுப்பு"
+    label_hi: "श्रोणि / कूल्हा"
+    ta2_term: "Pelvis / Coxa"
+    ta2_id: "A02.5.1"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A02.5.1; FracAtlas body_part=hip"
+    review_status: draft
+
+  # ── Knee ─────────────────────────────────────────────────────────────────
+  - id: knee
+    label_en: "Knee (Patella / Condyles)"
+    label_ta: "முழங்கால்"
+    label_hi: "घुटना"
+    ta2_term: "Articulatio genus"
+    ta2_id: "A03.6.1"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A03.6.1; Knee Osteoporosis dataset"
+    review_status: draft
+
+  # ── Thorax / Chest ───────────────────────────────────────────────────────
+  - id: ribs_sternum
+    label_en: "Ribs / Sternum"
+    label_ta: "விலா எலும்புகள் / மார்பெலும்பு"
+    label_hi: "पसलियाँ / उरोस्थि"
+    ta2_term: "Costae / Sternum"
+    ta2_id: "A02.3"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A02.3"
+    review_status: draft
+
+  - id: spine_thoracic
+    label_en: "Thoracic Spine"
+    label_ta: "மார்பு முதுகெலும்பு"
+    label_hi: "वक्षीय रीढ़"
+    ta2_term: "Vertebrae thoracicae"
+    ta2_id: "A02.2.4"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A02.2.4"
+    review_status: draft
+
+  - id: clavicle_shoulder
+    label_en: "Clavicle / Shoulder"
+    label_ta: "இணைப்பு எலும்பு / தோள்"
+    label_hi: "हंसली / कंधा"
+    ta2_term: "Clavicula / Scapula"
+    ta2_id: "A02.4.1.1"
+    parent: null
+    type: bone_region
+    source: "FCAT-TA2-2019 A02.4.1.1"
+    review_status: draft
+
+  # ── Lung organ zones (chest findings) ────────────────────────────────────
+  # These are not bones; they are visualised as organ highlights on the
+  # ribcage area of the 3D model.  type = "organ_zone".
+  - id: lung_right_upper
+    label_en: "Right Lung – Upper Zone"
+    label_ta: "வலது நுரையீரல் – மேல் பகுதி"
+    label_hi: "दाहिना फेफड़ा – ऊपरी क्षेत्र"
+    ta2_term: "Pulmo dexter – zona superior"
+    ta2_id: null
+    parent: null
+    type: organ_zone
+    source: "Step 8 lungseg zone mapping; PA-convention right-upper"
+    review_status: draft
+
+  - id: lung_right_mid
+    label_en: "Right Lung – Middle Zone"
+    label_ta: "வலது நுரையீரல் – நடு பகுதி"
+    label_hi: "दाहिना फेफड़ा – मध्य क्षेत्र"
+    ta2_term: "Pulmo dexter – zona media"
+    ta2_id: null
+    parent: null
+    type: organ_zone
+    source: "Step 8 lungseg zone mapping"
+    review_status: draft
+
+  - id: lung_right_lower
+    label_en: "Right Lung – Lower Zone"
+    label_ta: "வலது நுரையீரல் – கீழ் பகுதி"
+    label_hi: "दाहिना फेफड़ा – निचला क्षेत्र"
+    ta2_term: "Pulmo dexter – zona inferior"
+    ta2_id: null
+    parent: null
+    type: organ_zone
+    source: "Step 8 lungseg zone mapping"
+    review_status: draft
+
+  - id: lung_left_upper
+    label_en: "Left Lung – Upper Zone"
+    label_ta: "இடது நுரையீரல் – மேல் பகுதி"
+    label_hi: "बायां फेफड़ा – ऊपरी क्षेत्र"
+    ta2_term: "Pulmo sinister – zona superior"
+    ta2_id: null
+    parent: null
+    type: organ_zone
+    source: "Step 8 lungseg zone mapping"
+    review_status: draft
+
+  - id: lung_left_mid
+    label_en: "Left Lung – Middle Zone"
+    label_ta: "இடது நுரையீரல் – நடு பகுதி"
+    label_hi: "बायां फेफड़ा – मध्य क्षेत्र"
+    ta2_term: "Pulmo sinister – zona media"
+    ta2_id: null
+    parent: null
+    type: organ_zone
+    source: "Step 8 lungseg zone mapping"
+    review_status: draft
+
+  - id: lung_left_lower
+    label_en: "Left Lung – Lower Zone"
+    label_ta: "இடது நுரையீரல் – கீழ் பகுதி"
+    label_hi: "बायां फेफड़ा – निचला क्षेत்र"
+    ta2_term: "Pulmo sinister – zona inferior"
+    ta2_id: null
+    parent: null
+    type: organ_zone
+    source: "Step 8 lungseg zone mapping"
+    review_status: draft
+
+  - id: heart_mediastinum
+    label_en: "Heart / Mediastinum"
+    label_ta: "இதயம் / மீடியஸ்டினம்"
+    label_hi: "हृदय / मध्यस्थानिका"
+    ta2_term: "Cor / Mediastinum"
+    ta2_id: null
+    parent: null
+    type: organ_zone
+    source: "NIH ChestX-ray14 label: Cardiomegaly"
+    review_status: draft
+
+# ── FracAtlas body_part → region_id mapping ──────────────────────────────────
+# Source for mapping decisions: FracAtlas dataset README (CC0);
+#   https://github.com/mahfuzalhasan/FracAtlas
+# Evidence: the dataset labels "hand", "leg", "hip", "other" refer to the
+# general anatomical region of the X-ray, not a specific bone.
+# "hand" encompasses distal radius, ulna, carpal and metacarpal bones.
+# "leg" encompasses femur, tibia, fibula — the dataset does not separate them.
+# "hip" encompasses pelvis and proximal femur.
+# "other" is ambiguous; it receives region_uncertain status.
+# review_status: draft
+
+fracatlas_body_part_to_region:
+  hand:
+    region_id: hand_wrist
+    source: "FracAtlas README; PA / AP radiograph coverage of wrist and hand"
+    review_status: draft
+  leg:
+    region_id: leg_lower        # majority of FracAtlas leg images show tibia/fibula
+    source: >
+      FracAtlas dataset; visual inspection of leg subset shows predominantly
+      tibia/fibula images. Femur images are a minority but not separable from
+      the label alone. Conservative mapping to lower leg; leg_lower is used
+      as primary. Clinician review required.
+    review_status: draft
+  hip:
+    region_id: pelvis_hip
+    source: "FracAtlas README; hip images show pelvis and proximal femur"
+    review_status: draft
+  other:
+    region_id: null             # → region_uncertain
+    source: "FracAtlas 'other' category is heterogeneous; no safe mapping"
+    review_status: draft
+
+# ── Knee dataset → region_id mapping ─────────────────────────────────────────
+knee_to_region:
+  osteoporosis:
+    region_id: knee
+    source: "Knee Osteoporosis dataset (Kaggle CC0); images are of the knee joint"
+    review_status: draft
+  normal:
+    region_id: knee
+    source: "Knee Osteoporosis dataset (Kaggle CC0)"
+    review_status: draft
+
+# ── Chest finding → skeleton highlight target ─────────────────────────────────
+# type: "organ_zone"  → rendered as translucent volume on the ribcage region
+# type: "bone_region" → rendered as highlighted mesh on the named bone
+# severity_source: always "finding_probability" for chest findings
+# region_id keys map to the lungseg zone names produced by Step 8.
+# The lungseg zones are: right_upper, right_mid, right_lower,
+#                        left_upper, left_mid, left_lower
+# "bilateral" findings highlight both lungs; cardiac highlights heart_mediastinum.
+# Source for zone assignments: standard radiological teaching conventions;
+#   Felson & White, "Fundamentals of Chest Radiology", Saunders, 1999 (ISBN 978-0721670614)
+# review_status: draft for all entries
+
+chest_finding_to_target:
+  Atelectasis:
+    region_id: lung_right_lower   # most common lower-zone collapse; bilateral in principle
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Lobar/segmental atelectasis; bilateral coverage; lower zones predominate"
+    source: "Felson & White 1999 ch.6; NIH ChestX-ray14 label"
+    review_status: draft
+
+  Cardiomegaly:
+    region_id: heart_mediastinum
+    bilateral: false
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Cardiac silhouette enlargement; mediastinum highlight"
+    source: "Felson & White 1999 ch.9"
+    review_status: draft
+
+  Effusion:
+    region_id: lung_right_lower
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Pleural effusion; lower zones; bilateral possible"
+    source: "Felson & White 1999 ch.8"
+    review_status: draft
+
+  Infiltration:
+    region_id: lung_right_lower
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Airspace infiltration; lower lobes predominant"
+    source: "Felson & White 1999 ch.5"
+    review_status: draft
+
+  Mass:
+    region_id: lung_right_upper
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Pulmonary mass; zone determined by heatmap peak in practice"
+    source: "Felson & White 1999 ch.7"
+    review_status: draft
+
+  Nodule:
+    region_id: lung_right_upper
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Pulmonary nodule"
+    source: "Felson & White 1999 ch.7"
+    review_status: draft
+
+  Pneumonia:
+    region_id: lung_right_lower
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Pneumonic consolidation; lower lobes predominant"
+    source: "Felson & White 1999 ch.5"
+    review_status: draft
+
+  Pneumothorax:
+    region_id: lung_right_upper
+    bilateral: false
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Air in pleural space; apex first"
+    source: "Felson & White 1999 ch.8"
+    review_status: draft
+
+  Consolidation:
+    region_id: lung_right_lower
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Airspace consolidation; lower lobes predominant"
+    source: "Felson & White 1999 ch.5"
+    review_status: draft
+
+  Edema:
+    region_id: lung_right_lower
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Pulmonary oedema; perihilar to lower zones"
+    source: "Felson & White 1999 ch.10"
+    review_status: draft
+
+  Emphysema:
+    region_id: lung_right_upper
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Hyperinflation and bullae; upper lobe predominant"
+    source: "Felson & White 1999 ch.6"
+    review_status: draft
+
+  Fibrosis:
+    region_id: lung_right_lower
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Pulmonary fibrosis; lower lobe basilar predominant"
+    source: "Felson & White 1999 ch.5"
+    review_status: draft
+
+  Pleural_Thickening:
+    region_id: lung_right_lower
+    bilateral: true
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Pleural thickening; costophrenic angles and bases"
+    source: "Felson & White 1999 ch.8"
+    review_status: draft
+
+  Hernia:
+    region_id: heart_mediastinum
+    bilateral: false
+    type: organ_zone
+    severity_source: finding_probability
+    note: "Hiatal hernia visible in mediastinum/retrocardiac area"
+    source: "Felson & White 1999 ch.9"
+    review_status: draft
+
+# ── Step 8 lungseg zone → region_id mapping ──────────────────────────────────
+# The lungseg service (backend/app/services/lungseg/lungseg.py) returns zone
+# names of the form "{side}_{position}": e.g. "right_upper".
+# Source: Step 8 implementation; review_status: draft.
+lungseg_zone_to_region:
+  right_upper: lung_right_upper
+  right_mid:   lung_right_mid
+  right_lower: lung_right_lower
+  left_upper:  lung_left_upper
+  left_mid:    lung_left_mid
+  left_lower:  lung_left_lower
