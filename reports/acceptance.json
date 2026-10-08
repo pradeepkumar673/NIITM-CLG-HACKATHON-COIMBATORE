@@ -1,0 +1,11 @@
+{
+  "chest_mean_auroc": "FAIL",
+  "ece_calibration_improvement": "FAIL",
+  "tier_ppv_meets_target": "FAIL",
+  "ood_detection_rate": "PASS",
+  "lung_dice": "PASS",
+  "fracture_auroc": "PASS",
+  "registration_error_px": "PASS",
+  "gate_rejection_rate": "FAIL",
+  "p95_latency_ms": "PASS"
+}
