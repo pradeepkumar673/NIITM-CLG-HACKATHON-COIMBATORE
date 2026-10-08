@@ -1,0 +1,11 @@
+policy:
+  - rule: "OOD"
+    reason: "Image is out-of-distribution (doesn't look like a standard chest X-ray)."
+  - rule: "GateWarning"
+    reason: "Image quality warning from the ingestion gate."
+  - rule: "LowTierPositive"
+    reason: "A positive finding was detected, but only at a low confidence tier."
+  - rule: "HighSpread"
+    reason: "Model uncertainty (spread) is unusually high."
+  - rule: "UnreliableTopFinding"
+    reason: "The top finding is a label marked as unreliable by calibration."

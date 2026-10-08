@@ -8,7 +8,7 @@
 | 4 | Backend skeleton + auth | Done | | | |
 | 5 | Train chest model | Done | | | |
 | 6 | Ingestion + quality gate | Done | | | |
-| 7 | Calibration + uncertainty | Pending | | | |
+| 7 | Calibration + uncertainty | Done | | | |
 | 8 | Lung segmentation + zones | Pending | | | |
 | 9 | Explainability | Pending | | | |
 | 10 | Fracture/knee/TB models | Pending | | | |
