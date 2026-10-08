@@ -1,0 +1,12 @@
+R1 No mock, placeholder, fake, sample or hardcoded data in product code. No lorem ipsum. No random.* or numpy.random generating results. No static JSON standing in for an API. No hardcoded users, passwords, diagnoses.
+R2 If a dataset, model file, credential or decision is missing: STOP and print a block starting with "MANUAL ACTION REQUIRED:" giving the exact link, file name and target folder. Never fabricate a substitute.
+R3 All URLs, ports, keys, paths, thresholds and medical constants come from .env or config/*.yaml validated by pydantic-settings. Any medical constant needs a `source` (DOI, guideline or calibration artifact id) and a `review_status`.
+R4 Model endpoints return HTTP 503 with code model_not_available if weights are missing. Never placeholder predictions.
+R5 Every step ends with: run tests, start the real services, verify the feature live (browser or HTTP), update docs/STATUS.md, then run `python scripts/push_step.py <N> "<message>"`.
+R6 Wording is decision support, never a definitive diagnosis. Low-confidence, OOD or poor-quality cases set needs_human_review=true.
+R7 Code must run on Windows, macOS and Linux: use pathlib, provide Python scripts (or both .ps1 and .sh), never bash-only.
+R8 Never commit secrets, patient data, datasets or weights. Use models/registry.json (hashes + metrics) for weights.
+R9 Write tests with each feature. Use real images from the held-out test split in tests.
+R10 Typed Python (type hints, ruff clean) and strict TypeScript. Structured logs; never log patient identifiers or image contents.
+R11 When unsure of a library's current API, read its official docs (browse) before coding. Record version choices in docs/DECISIONS.md.
+R12 Update docs/STATUS.md and docs/DATA_REGISTRY.md whenever project state or data changes.

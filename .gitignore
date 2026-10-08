@@ -1,0 +1,16 @@
+data/
+models/*.pt
+models/*.pth
+models/*.onnx
+models/checkpoints/
+.env
+.env.*
+!.env.example
+.venv
+node_modules
+__pycache__
+dist
+*.dcm
+kaggle.json
+logs/
+storage/
