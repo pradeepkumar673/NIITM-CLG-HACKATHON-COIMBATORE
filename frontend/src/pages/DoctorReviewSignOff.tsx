@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getStudyResultStudiesIdResultGet, reviewStudyStudiesIdReviewPost } from '../client';
 import { AppShell } from '../components/AppShell';
 import { SkeletonViewer } from '../components/SkeletonViewer';
+import { useTranslation } from 'react-i18next';
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
@@ -71,10 +72,12 @@ export function DoctorReviewSignOff() {
 
   const [decision, setDecision] = useState('agree');
   const [notes, setNotes] = useState('');
+  const { t, i18n } = useTranslation();
 
   const { data: resp, isLoading } = useQuery({
-    queryKey: ['studyResult', id],
-    queryFn: () => getStudyResultStudiesIdResultGet({ path: { id: parseInt(id!) } }),
+    queryKey: ['studyResult', id, i18n.language],
+    // @ts-ignore
+    queryFn: () => getStudyResultStudiesIdResultGet({ path: { id: parseInt(id!) }, query: { lang: i18n.language } }),
     enabled: !!id
   });
 
@@ -111,6 +114,19 @@ export function DoctorReviewSignOff() {
   return (
     <AppShell userRole="doctor" userName="Dr. Arti Sharma">
       <div className="flex flex-col w-full gap-4 pb-8">
+        {(i18n.language === 'ta' || i18n.language === 'hi') && (
+          <div className="w-full bg-error-container text-on-error-container px-4 py-3 rounded-lg flex items-center justify-between border border-error-container/30">
+            <div className="flex items-center gap-3">
+              <span className="material-symbols-outlined text-2xl">warning</span>
+              <span className="font-bold text-sm">
+                {i18n.language === 'ta' 
+                  ? 'இயந்திரத்தால் உருவாக்கப்பட்ட மொழிபெயர்ப்பு; மருத்துவ நிபுணரால் சரிபார்க்கப்படவில்லை' 
+                  : 'मशीन-ड्राफ्टेड अनुवाद; किसी चिकित्सक द्वारा समीक्षा नहीं की गई'}
+              </span>
+            </div>
+          </div>
+        )}
+
         {isSignedOff && (
           <div className="w-full bg-tertiary-container/10 px-4 py-3 rounded-lg flex items-center justify-between border border-tertiary-container/30">
             <div className="flex items-center gap-3 text-tertiary">
@@ -135,6 +151,13 @@ export function DoctorReviewSignOff() {
             </div>
           </div>
           <div className="flex gap-2">
+            <a 
+              href={`${BASE_URL}/studies/${study.id}/report.pdf?lang=${i18n.language}`} 
+              target="_blank" 
+              className="px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-sm font-semibold flex items-center gap-1 transition-colors"
+            >
+              <span className="material-symbols-outlined text-sm">picture_as_pdf</span> {t('signoff.download_pdf', 'Download PDF Report')}
+            </a>
             <button onClick={() => navigate(-1)} className="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-sm font-semibold flex items-center gap-1 transition-colors">
               <span className="material-symbols-outlined text-sm">arrow_back</span> Back
             </button>
@@ -153,9 +176,9 @@ export function DoctorReviewSignOff() {
               <div className="flex flex-col gap-2 max-h-[400px] overflow-y-auto pr-2">
                 {Object.entries(findings).map(([k, v]: any) => (
                   <div key={k} className="flex flex-col p-2 bg-surface-container-low rounded">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-semibold capitalize">{k}</span>
-                      <span className={`text-xs font-bold px-1.5 py-0.5 rounded ${v.probability > 0.5 ? 'bg-error-container text-error' : 'bg-surface-container text-on-surface-variant'}`}>
+                    <div className="flex justify-between items-start gap-2">
+                      <span className="text-sm font-semibold capitalize break-words leading-normal flex-1">{v.label || k}</span>
+                      <span className={`text-xs font-bold px-1.5 py-0.5 rounded shrink-0 ${v.probability > 0.5 ? 'bg-error-container text-error' : 'bg-surface-container text-on-surface-variant'}`}>
                         {(v.probability * 100).toFixed(1)}%
                       </span>
                     </div>
@@ -170,7 +193,7 @@ export function DoctorReviewSignOff() {
               <div className="flex-1 rounded-lg overflow-hidden relative border border-surface-container">
                 <SkeletonViewer anatomyData={{ 
                   status: 'ok', 
-                  findings: Object.keys(findings).filter(k => findings[k].probability > 0.5).map(k => ({id: k, name: k})) 
+                  findings: Object.keys(findings).filter(k => findings[k].probability > 0.5).map(k => ({id: k, name: findings[k].label || k})) 
                 }} />
               </div>
             </div>
@@ -192,26 +215,26 @@ export function DoctorReviewSignOff() {
 
         {!isSignedOff && (
           <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
-            <h2 className="text-lg font-bold mb-4 text-primary">Clinical Sign-off</h2>
+            <h2 className="text-lg font-bold mb-4 text-primary">{t('signoff.title', 'Clinical Sign-off')}</h2>
             <div className="flex flex-col gap-4">
               <div className="flex gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="radio" name="decision" value="agree" checked={decision === 'agree'} onChange={e => setDecision(e.target.value)} className="w-4 h-4 accent-primary" />
-                  <span className="font-semibold text-sm">Agree with AI</span>
+                  <span className="font-semibold text-sm">{t('signoff.agree', 'Agree')}</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="radio" name="decision" value="disagree" checked={decision === 'disagree'} onChange={e => setDecision(e.target.value)} className="w-4 h-4 accent-error" />
-                  <span className="font-semibold text-sm">Disagree with AI</span>
+                  <span className="font-semibold text-sm">{t('signoff.disagree', 'Disagree')}</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="radio" name="decision" value="needs_more_imaging" checked={decision === 'needs_more_imaging'} onChange={e => setDecision(e.target.value)} className="w-4 h-4 accent-secondary" />
-                  <span className="font-semibold text-sm">Needs More Imaging</span>
+                  <span className="font-semibold text-sm">{t('signoff.needs_more', 'Needs more imaging')}</span>
                 </label>
               </div>
               <textarea 
                 className="w-full bg-surface-container-low p-3 rounded-lg border-none focus:ring-2 focus:ring-primary outline-none text-sm" 
                 rows={3} 
-                placeholder="Clinical notes / observations..." 
+                placeholder={t('signoff.notes', 'Notes')} 
                 value={notes} 
                 onChange={e => setNotes(e.target.value)}
               />
@@ -220,7 +243,7 @@ export function DoctorReviewSignOff() {
                 disabled={reviewMutation.isPending}
                 className="self-end px-6 py-2 bg-primary text-on-primary font-bold rounded-lg hover:bg-primary-container disabled:opacity-50 transition-colors"
               >
-                {reviewMutation.isPending ? 'Submitting...' : 'Submit Sign-off'}
+                {reviewMutation.isPending ? 'Submitting...' : t('signoff.submit', 'Submit Sign-off')}
               </button>
             </div>
           </div>

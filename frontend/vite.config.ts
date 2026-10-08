@@ -8,5 +8,5 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     exclude: ['**/*.spec.ts', 'node_modules/**/*']
-  }
+  } as any
 })
