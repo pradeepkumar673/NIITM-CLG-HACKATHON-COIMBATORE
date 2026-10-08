@@ -1,0 +1,15 @@
+urgent_findings:
+  - finding: "Pneumothorax"
+    rationale: "Requires immediate chest tube or decompression"
+    review_status: draft
+  - finding: "Cardiomegaly"
+    rationale: "In certain combinations indicates heart failure; generally needs prompt assessment"
+    review_status: draft
+
+unreliable_findings:
+  - finding: "Infiltration"
+    rationale: "Often confused with other opacities; highly reader-dependent"
+    review_status: draft
+  - finding: "Mass"
+    rationale: "2D projection makes it hard to distinguish from superimposed structures"
+    review_status: draft

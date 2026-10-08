@@ -13,7 +13,7 @@
 | 9 | Explainability | Done | | | |
 | 10 | Fracture/knee/TB models | Done | | | Trained efficiently using EfficientNetB0 |
 | 11 | Comorbidity research | Done | 2026-10-08 | | Rules verified with DOIs |
-| 12 | Comorbidity engine | Pending | | | |
+| 12 | Comorbidity engine | Done | 2026-10-08 | | Live verified engine, graph, and triage |
 | 13 | Longitudinal engine | Pending | | | |
 | 14 | Healing priors + exploratory predictor | Pending | | | |
 | 15 | Orchestrator + API | Pending | | | |
