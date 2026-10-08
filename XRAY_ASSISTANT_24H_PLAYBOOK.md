@@ -894,6 +894,15 @@ F4 Upload 5 images quickly: they queue and all complete without GPU out-of-memor
 CONSOLE/NETWORK: capture browser console errors and failed network calls during all flows; there must be none unexplained.
 
 When all pass, print the PASS/FAIL table in the chat with screenshot paths. Update docs/STATUS.md.
+
+ADDITIONAL FLOWS (frontend patch):
+S1: real FracAtlas TEST fractured image -> skeleton shows a red region matching the dataset body part; the heatmap image comes from /studies/{id}/heatmap/{label}.png.
+S2: real non-fractured image -> skeleton fully neutral.
+S3: real chest image with a positive finding -> organ_zone highlight in the matching Step 8 zone.
+S4: empty database state for each dashboard screen -> empty states, no sample values.
+S5: for every Stitch screen, pixel-diff against the Stitch screenshot, assert mismatch below threshold outside the data regions.
+S6: network blocked to CDNs -> app still renders (fonts and decoders are self-hosted).
+S7: kill the API -> UI shows an error state, not stale or fake numbers.
 ```
 
 ### Push
