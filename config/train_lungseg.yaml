@@ -1,0 +1,24 @@
+model:
+  encoder_name: "resnet34"
+  encoder_weights: "imagenet"
+  in_channels: 1
+  classes: 1
+  
+data:
+  manifest: "data/processed/lung_manifest.csv"
+  image_size: 256
+  # Mild augmentations
+  rotate_deg: 10
+  scale_factor: 1.1
+  intensity_jitter: 0.1
+  
+training:
+  batch_size: 16
+  epochs: 10
+  lr: 0.001
+  weight_decay: 1.0e-4
+  num_workers: 0  # 0 for Windows compatibility
+  patience: 3
+  
+checkpoint:
+  dir: "models/lungseg_unet"
