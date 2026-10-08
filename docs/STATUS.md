@@ -16,8 +16,8 @@
 | 12 | Comorbidity engine | Done | 2026-10-08 | | Live verified engine, graph, and triage |
 | 13 | Longitudinal engine | Done | 2026-10-08 | | Registration, diff maps, mismatch check, and caliper measures |
 | 14 | Healing priors + exploratory predictor | Done | 2026-10-08 | | Researched priors, built outcome DB logic |
-| 15 | Orchestrator + API | Done | 2026-10-08 | | Pipeline, Endpoints, Latency Profiling |
-| 16 | Frontend foundation | Pending | | | |
+| 15 | Orchestrator + API | Done | 2026-10-08 | | Pipeline, Endpoints, Latency Profiling. Step 15A: Dashboard metrics built (counts, triage, queue, findings, audit). |
+| 16 | Frontend foundation | Pending | 2026-10-08 | | Step 16.0: Inventoried Stitch UI into STITCH_INVENTORY.md. |
 | 17 | Doctor dashboard + compare | Pending | | | |
 | 18 | Languages + PDF | Pending | | | |
 | 19 | Cursor UI polish | Pending | | | |

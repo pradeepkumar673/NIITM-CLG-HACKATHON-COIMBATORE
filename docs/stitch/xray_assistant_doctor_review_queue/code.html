@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#004e5a", "secondary-fixed": "#d6e3fb", "surface-tint": "#1e6774", "surface-dim": "#d1daeb", "outline-variant": "#bfc8cb", "error": "#ba1a1a", "on-primary-container": "#93d5e4", "on-secondary-fixed-variant": "#3b485a", "on-background": "#131c28", "surface-container": "#e5eeff", "secondary-fixed-dim": "#bac7de", "secondary-container": "#d6e3fb", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#98f6bb", "on-error-container": "#93000a", "inverse-primary": "#8fd1e0", "on-secondary": "#ffffff", "on-surface-variant": "#3f484b", "primary": "#004550", "on-secondary-fixed": "#0f1c2d", "surface-variant": "#dae3f4", "tertiary-container": "#00633a", "on-primary-fixed": "#001f25", "outline": "#6f797b", "on-secondary-container": "#586579", "on-tertiary-fixed-variant": "#00522f", "tertiary-fixed-dim": "#7cd9a1", "on-tertiary": "#ffffff", "surface-bright": "#f8f9ff", "surface": "#f8f9ff", "inverse-surface": "#28313d", "surface-container-high": "#e0e9f9", "secondary": "#525f73", "inverse-on-surface": "#eaf1ff", "surface-container-highest": "#dae3f4", "background": "#f8f9ff", "tertiary": "#004929", "on-surface": "#131c28", "on-primary": "#ffffff", "primary-fixed": "#abedfc", "on-error": "#ffffff", "primary-fixed-dim": "#8fd1e0", "on-tertiary-container": "#81dea5", "on-tertiary-fixed": "#002110", "error-container": "#ffdad6", "surface-container-low": "#eff4ff", "primary-container": "#0f5e6b" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "margin": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-md": "1rem", "gutter": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-sm": [ "Inter" ], "mono-data-lg": [ "JetBrains Mono" ], "body-lg": [ "Inter" ], "label-sm": [ "Inter" ], "label-md": [ "Inter" ], "headline-xl": [ "Inter" ], "mono-data-md": [ "JetBrains Mono" ], "headline-md": [ "Inter" ], "body-md": [ "Inter" ], "mono-data-sm": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Inter" ], "headline-lg": [ "Inter" ], "headline-lg-mobile": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "600" } ], "mono-data-lg": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "500" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-xl": [ "2rem", { "lineHeight": "2.5rem", "fontWeight": "700" } ], "mono-data-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-md": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-md": [ "1rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "mono-data-sm": [ "0.75rem", { "lineHeight": "1rem", "fontWeight": "400" } ], "headline-xl-mobile": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "700" } ], "headline-lg": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-60 bg-surface-container-low z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">XRAY-ASSISTANT</span><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>Online</span></div><div class="flex items-center gap-1 text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="material-symbols-outlined text-[14px]">wifi</span><span>Sync: Local Edge</span></div></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-primary text-on-primary font-label-md text-label-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="dashboard" href="#"><span>Dashboard</span></a><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm rounded-lg transition-colors bg-primary text-on-primary font-label-md text-label-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]" data-path="review-queue" href="#"><span>Review queue</span><span class="px-1.5 py-0.5 rounded-full bg-error text-on-error font-mono-data-sm text-mono-data-sm font-semibold leading-none">07</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="studies" href="#"><span>Studies</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-study" href="#"><span>Ingest / New study</span></a></nav><div class="px-space-md pt-space-xs"><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Language</label><div class="relative"><select class="w-full appearance-none bg-surface-container-lowest text-on-surface font-body-sm text-body-sm py-2 pl-3 pr-8 rounded-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-1 focus:ring-primary"><option value="en">English</option><option value="ta">Tamil [machine-drafted]</option><option value="hi">Hindi [machine-drafted]</option></select><span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span></div></div></div><div class="px-space-md flex flex-col gap-space-sm"><div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col gap-1"><div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">dns</span>Edge Node</span><span class="font-medium text-on-surface">Active</span></div><div class="font-mono-data-sm text-mono-data-sm text-primary font-semibold">KASHTI-PHC-04</div></div><button class="w-full flex items-center justify-center gap-space-sm py-2 px-space-md rounded-lg text-error hover:bg-error-container hover:text-on-error-container font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">logout</span>Sign out</button></div></aside><div class="pl-60 min-h-screen flex flex-col justify-between"><div class="w-full"><header class="fixed top-0 left-60 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold">Kashti PHC / District Cluster</span><span class="font-body-sm text-body-sm text-on-surface-variant">District Ahmadnagar • Rural Health Cluster 2</span></div><div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="font-mono-data-sm text-mono-data-sm">ABHA Network Connected</span></div></div><div class="flex items-center gap-space-md"><div class="text-right hidden sm:flex flex-col"><span class="font-label-md text-label-md text-on-surface font-medium">Dr. Arti Sharma</span><span class="font-body-sm text-body-sm text-on-surface-variant">MO / Tele-radiologist</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-space-lg py-space-md bg-surface"><div class="flex flex-col w-full">
+<!-- Interactive Prototype State Switcher -->
+<div class="w-full bg-surface-container-high/60 backdrop-blur-md px-space-lg py-2.5 rounded-xl shadow-sm mb-space-md flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary text-on-primary font-mono-data-sm text-mono-data-sm font-semibold">α</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Prototype View State:</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5" id="state-switcher-container">
+<button class="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-primary text-on-primary shadow-sm flex items-center gap-1.5" id="tab-prioritized" onclick="switchViewState('prioritized')" type="button">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed"></span>
+        1. Prioritized Queue (Default)
+      </button>
+<button class="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm flex items-center gap-1.5" id="tab-empty" onclick="switchViewState('empty')" type="button">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+        2. Queue Clear (Empty State)
+      </button>
+<button class="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm flex items-center gap-1.5" id="tab-loading" onclick="switchViewState('loading')" type="button">
+<span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-ping"></span>
+        3. Loading Skeletons
+      </button>
+<button class="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm flex items-center gap-1.5" id="tab-mobile" onclick="switchViewState('mobile')" type="button">
+<span class="material-symbols-outlined text-[15px]">stay_current_portrait</span>
+        4. Mobile Viewport (390px)
+      </button>
+</div>
+</div>
+<!-- Breadcrumb, Header & Action Bar -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+<span class="hover:text-primary cursor-pointer transition-colors">Triage Dashboard</span>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-medium">Clinical Review Queue</span>
+<span class="text-outline-variant">•</span>
+<span class="inline-flex items-center gap-1 text-on-tertiary-container font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>
+          Cluster Sync Live
+        </span>
+</div>
+<div class="flex items-center gap-3 mt-1">
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight font-bold">Review queue</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-mono-data-md text-mono-data-md font-bold" id="queue-badge-count">14 awaiting sign-off</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">
+        Prioritized tele-consultation and radiograph sign-off worklist • Kashti PHC Node #04 &amp; Cluster Tele-rad • Calibrated deterministic triage pipeline.
+      </p>
+</div>
+<div class="flex items-center gap-2.5 flex-wrap">
+<button class="h-11 px-4 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md font-semibold shadow-sm hover:bg-surface-container-low transition-all duration-150 flex items-center gap-2" onclick="batchSignOffModal()" type="button">
+<span class="material-symbols-outlined text-[18px]">rule_folder</span>
+<span>Batch Sign-off Eligible (3)</span>
+</button>
+<button class="h-11 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold shadow-sm hover:bg-primary-container transition-all duration-150 flex items-center gap-2" onclick="exportQueueLog()" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Export Queue Log</span>
+</button>
+</div>
+</div>
+<!-- VIEW 1: PRIORITIZED QUEUE (DEFAULT DESKTOP) -->
+<div class="flex flex-col gap-space-lg transition-opacity duration-200" id="view-prioritized">
+<!-- Clickable Clinical Summary Strip -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Card 1: Urgent Triage -->
+<div class="cursor-pointer group relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden" id="card-urgent" onclick="filterBySummary('urgent')" role="button" tabindex="0">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-lg bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">local_fire_department</span>
+</span>
+<span class="font-label-md text-label-md font-semibold text-error">Urgent Triage</span>
+</div>
+<span class="font-mono-data-lg text-mono-data-lg font-bold text-error px-2 py-0.5 rounded-full bg-error-container">5</span>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tier 1 High (Consolidation, Pneumothorax, Effusion)</span>
+<span class="font-mono-data-sm text-mono-data-sm text-error font-medium group-hover:translate-x-0.5 transition-transform">Filter →</span>
+</div>
+<div class="w-full bg-error-container h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-error h-full rounded-full w-2/3"></div>
+</div>
+</div>
+<!-- Card 2: Needs Review -->
+<div class="cursor-pointer group relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden" id="card-review" onclick="filterBySummary('review')" role="button" tabindex="0">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-lg bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Needs Human Review</span>
+</div>
+<span class="font-mono-data-lg text-mono-data-lg font-bold text-on-secondary-fixed-variant px-2 py-0.5 rounded-full bg-secondary-container">6</span>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Flagged: High CI variance, artifact blur, discordant priors</span>
+<span class="font-mono-data-sm text-mono-data-sm text-primary font-medium group-hover:translate-x-0.5 transition-transform">Filter →</span>
+</div>
+<div class="w-full bg-secondary-container h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-secondary h-full rounded-full w-3/4"></div>
+</div>
+</div>
+<!-- Card 3: Awaiting Sign-off (Total) -->
+<div class="cursor-pointer group relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden" id="card-all" onclick="filterBySummary('all')" role="button" tabindex="0">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Awaiting Sign-off</span>
+</div>
+<span class="font-mono-data-lg text-mono-data-lg font-bold text-primary px-2 py-0.5 rounded-full bg-surface-container">14</span>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Combined Tier 1–3 studies pending final digital signature</span>
+<span class="font-mono-data-sm text-mono-data-sm text-primary font-medium group-hover:translate-x-0.5 transition-transform">Show all →</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-primary h-full rounded-full w-full"></div>
+</div>
+</div>
+</div>
+<!-- Filter & Sort Control Bar -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1 min-w-[280px]">
+<span class="material-symbols-outlined absolute left-3.5 top-3 text-[20px] text-on-surface-variant pointer-events-none">search</span>
+<input class="w-full h-11 pl-10 pr-9 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-colors shadow-inner" id="filter-search" oninput="handleSearch(this.value)" placeholder="Search Patient ID, ABHA, Study ID, or Clinical Finding..." type="text"/>
+<button class="absolute right-3 top-3 text-on-surface-variant hover:text-on-surface transition-colors" onclick="clearSearch()" type="button">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+<!-- Dropdown Selectors -->
+<div class="flex flex-wrap items-center gap-2.5">
+<!-- Status Dropdown -->
+<div class="relative">
+<select class="appearance-none h-11 pl-3 pr-8 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm shadow-inner focus:outline-none focus:bg-surface-container-lowest cursor-pointer font-medium" id="filter-status" onchange="applyFilters()">
+<option value="all">All Sign-off Statuses</option>
+<option value="awaiting">Awaiting Doctor Review (14)</option>
+<option value="second">Second Opinion Requested (2)</option>
+<option value="clarification">Clarification Needed (1)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3.5 text-[16px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<!-- Modality Dropdown -->
+<div class="relative">
+<select class="appearance-none h-11 pl-3 pr-8 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm shadow-inner focus:outline-none focus:bg-surface-container-lowest cursor-pointer font-medium" id="filter-modality" onchange="applyFilters()">
+<option value="all">All Modalities</option>
+<option value="chest">Chest (PA / AP Supine)</option>
+<option value="knee">Knee Bilateral</option>
+<option value="bone">Bone / Trauma Extremity</option>
+<option value="spine">Spine Lumbar</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3.5 text-[16px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<!-- Tier Dropdown -->
+<div class="relative">
+<select class="appearance-none h-11 pl-3 pr-8 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm shadow-inner focus:outline-none focus:bg-surface-container-lowest cursor-pointer font-medium" id="filter-tier" onchange="applyFilters()">
+<option value="all">All Triage Tiers</option>
+<option value="tier1">Tier 1 High (p &gt; 0.70)</option>
+<option value="tier2">Tier 2 Medium (0.30 ≤ p ≤ 0.70)</option>
+<option value="tier3">Tier 3 Low (p &lt; 0.30)</option>
+<option value="artifact">Unreliable / Artifact</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3.5 text-[16px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<!-- Date Pill -->
+<div class="h-11 px-3 bg-surface-container-low rounded-lg flex items-center gap-1.5 text-on-surface font-mono-data-sm text-mono-data-sm shadow-inner">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">calendar_today</span>
+<span>Today (24 Oct 2024)</span>
+</div>
+<!-- Reset Button -->
+<button class="h-11 px-3 text-on-surface-variant hover:text-error font-label-sm text-label-sm font-semibold transition-colors flex items-center gap-1" onclick="resetAllFilters()" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Reset</span>
+</button>
+</div>
+</div>
+<!-- Active Sort Indicator Banner -->
+<div class="flex items-center justify-between px-space-md py-2 rounded-lg bg-surface-container-low text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">swap_vert</span>
+<span class="font-semibold text-on-surface">Strict Sort Enforcement:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-mono-data-sm">Triage Tier (Tier 1 High &gt; Tier 2 Med &gt; Tier 3 Low)</span>
+<span class="text-outline-variant">→</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-mono-data-sm">Human Review Flagged (Flagged first)</span>
+</div>
+<div class="text-on-surface-variant">
+        Protocol: <span class="text-on-surface font-medium">CDSS-IND-TB-REV-3.2</span>
+</div>
+</div>
+<!-- Prioritized Radiograph Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[1080px]" id="studies-table">
+<thead>
+<tr class="bg-surface-container-high/60 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider sticky top-0 z-20">
+<th class="py-3.5 px-4 font-semibold" scope="col">Triage Tier</th>
+<th class="py-3.5 px-3 font-semibold" scope="col">Study ID</th>
+<th class="py-3.5 px-3 font-semibold" scope="col">Patient Demographics</th>
+<th class="py-3.5 px-3 font-semibold" scope="col">Body Part</th>
+<th class="py-3.5 px-4 font-semibold min-w-[240px]" scope="col">Top AI Finding &amp; Inference</th>
+<th class="py-3.5 px-3 font-semibold min-w-[200px]" scope="col">Needs Review Flag</th>
+<th class="py-3.5 px-3 font-semibold" scope="col">Submitted</th>
+<th class="py-3.5 px-4 text-right font-semibold" scope="col">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-sm text-body-sm text-on-surface" id="table-body">
+<!-- Row 1: Tier 1 High, Flagged (2 reasons) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-flagged="true" data-modality="chest" data-tier="tier1">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error ring-2 ring-error-container"></span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-error font-mono-data-sm text-mono-data-sm font-bold">
+                    Tier 1 High
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
+<div class="flex items-center gap-1.5 group-hover:underline cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-outline">radiology</span>
+<span>STU-2024-0984</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface">IND-MH-82109</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">F, 42y • ABHA: ••••9012</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  Chest PA
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-error">
+<span>Right Lower Zone Consolidation</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-error">p = 0.84</span>
+<div class="w-24 bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 84%;"></div>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">[95% CI: 0.79–0.89]</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="inline-flex flex-col gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                    Flagged (2 reasons)
+                  </span>
+<span class="text-[11px] font-mono-data-sm text-on-surface-variant">1. Motion artifact (mild) • 2. Prior TB scar</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-medium text-error">12m ago</span>
+<span class="text-on-surface-variant font-mono-data-sm text-[11px]">14:12 IST</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<button class="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1" onclick="openStudy('STU-2024-0984')" type="button">
+<span>Open</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+<div class="relative">
+<button class="h-9 w-8 rounded-md bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" onclick="toggleRowMenu('menu-1')" type="button">
+<span class="material-symbols-outlined text-[16px]">more_vert</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-48 bg-surface-container-lowest rounded-lg shadow-xl py-1 z-30 font-label-sm text-label-sm text-on-surface" id="menu-1">
+<button class="w-full text-left px-3 py-2 hover:bg-surface-container-low flex items-center gap-2" onclick="quickSignOff('STU-2024-0984')" type="button"><span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>Quick Sign-off</button>
+<button class="w-full text-left px-3 py-2 hover:bg-surface-container-low flex items-center gap-2" type="button"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">refresh</span>Request Retake</button>
+<button class="w-full text-left px-3 py-2 hover:bg-surface-container-low flex items-center gap-2" type="button"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">forward_to_inbox</span>Escalate to Radiologist</button>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 2: Tier 1 High, Flagged (1 reason) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-flagged="true" data-modality="chest" data-tier="tier1">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error ring-2 ring-error-container"></span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-error font-mono-data-sm text-mono-data-sm font-bold">
+                    Tier 1 High
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
+<div class="flex items-center gap-1.5 group-hover:underline cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-outline">radiology</span>
+<span>STU-2024-0981</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface">IND-MH-77402</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">M, 61y • ABHA: ••••4431</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  Chest AP Supine
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-error">
+<span>Left Pneumothorax (Tension suspect)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-error">p = 0.91</span>
+<div class="w-24 bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 91%;"></div>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">[95% CI: 0.86–0.96]</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="inline-flex flex-col gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">priority_high</span>
+                    Flagged (1 reason)
+                  </span>
+<span class="text-[11px] font-mono-data-sm text-on-surface-variant">Calibrated p &gt; 0.90 critical alert</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-medium text-error">21m ago</span>
+<span class="text-on-surface-variant font-mono-data-sm text-[11px]">14:03 IST</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<button class="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1" onclick="openStudy('STU-2024-0981')" type="button">
+<span>Open</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+<button class="h-9 px-2 rounded-md bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" onclick="quickSignOff('STU-2024-0981')" type="button">
+<span class="material-symbols-outlined text-[16px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Tier 1 High, Clean Ingest -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-flagged="false" data-modality="chest" data-tier="tier1">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-error font-mono-data-sm text-mono-data-sm font-bold">
+                    Tier 1 High
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
+<div class="flex items-center gap-1.5 group-hover:underline cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-outline">radiology</span>
+<span>STU-2024-0979</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface">IND-MH-91033</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">F, 50y • ABHA: ••••1820</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  Chest PA
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-error">
+<span>Right Pleural Effusion (Blunted Costophrenic)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-error">p = 0.79</span>
+<div class="w-24 bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 79%;"></div>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">[95% CI: 0.72–0.85]</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+<span class="inline-flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+                  Clean ingest
+                </span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-medium text-on-surface">34m ago</span>
+<span class="text-on-surface-variant font-mono-data-sm text-[11px]">13:50 IST</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onclick="openStudy('STU-2024-0979')" type="button">
+<span>Open</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Tier 1 High, Clean Ingest -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-flagged="false" data-modality="bone" data-tier="tier1">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-error font-mono-data-sm text-mono-data-sm font-bold">
+                    Tier 1 High
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
+<div class="flex items-center gap-1.5 group-hover:underline cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-outline">radiology</span>
+<span>STU-2024-0975</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface">IND-MH-65129</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">M, 28y • ABHA: ••••6621</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  Tibia / Fibula AP
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-error">
+<span>Displaced Tibial Shaft Fracture</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-error">p = 0.88</span>
+<div class="w-24 bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 88%;"></div>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">[95% CI: 0.82–0.93]</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+<span class="inline-flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+                  Clean ingest
+                </span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-medium text-on-surface">45m ago</span>
+<span class="text-on-surface-variant font-mono-data-sm text-[11px]">13:39 IST</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onclick="openStudy('STU-2024-0975')" type="button">
+<span>Open</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Tier 1 High, Clean Ingest -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-flagged="false" data-modality="chest" data-tier="tier1">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-error font-mono-data-sm text-mono-data-sm font-bold">
+                    Tier 1 High
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
+<div class="flex items-center gap-1.5 group-hover:underline cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-outline">radiology</span>
+<span>STU-2024-0970</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface">IND-MH-44211</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">M, 73y • ABHA: ••••0019</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  Chest PA
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-error">
+<span>Cardiomegaly with Pulmonary Venous Congestion</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-error">p = 0.74</span>
+<div class="w-24 bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 74%;"></div>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">[95% CI: 0.68–0.81]</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+<span class="inline-flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+                  Clean ingest
+                </span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-medium text-on-surface">52m ago</span>
+<span class="text-on-surface-variant font-mono-data-sm text-[11px]">13:32 IST</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onclick="openStudy('STU-2024-0970')" type="button">
+<span>Open</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 6: Tier 2 Med, Flagged (1 reason: CI variance) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-flagged="true" data-modality="chest" data-tier="tier2">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-bold">
+                    Tier 2 Med
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
+<div class="flex items-center gap-1.5 group-hover:underline cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-outline">radiology</span>
+<span>STU-2024-0968</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface">IND-MH-98101</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">F, 35y • ABHA: ••••8712</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  Chest PA
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-on-surface">
+<span>Equivocal Reticular Interstitial Pattern</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-secondary">p = 0.58</span>
+<div class="w-24 bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 58%;"></div>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">[95% CI: 0.44–0.71]</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="inline-flex flex-col gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                    Flagged (Wide CI)
+                  </span>
+<span class="text-[11px] font-mono-data-sm text-on-surface-variant">Spread &gt; 0.25 (model uncertainty)</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-medium text-on-surface">1h 05m ago</span>
+<span class="text-on-surface-variant font-mono-data-sm text-[11px]">13:19 IST</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onclick="openStudy('STU-2024-0968')" type="button">
+<span>Open</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 7: Tier 2 Med, Flagged (Foreign Body / Artifact) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-flagged="true" data-modality="knee" data-tier="tier2">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-bold">
+                    Tier 2 Med
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
+<div class="flex items-center gap-1.5 group-hover:underline cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-outline">radiology</span>
+<span>STU-2024-0963</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface">IND-MH-33829</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">M, 52y • ABHA: ••••4110</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  Knee Bilateral
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-on-surface">
+<span>Moderate Osteoarthritis (Joint Space Loss)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-secondary">p = 0.62</span>
+<div class="w-24 bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 62%;"></div>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">[95% CI: 0.54–0.70]</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="inline-flex flex-col gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+                    Flagged (Jewelry artifact)
+                  </span>
+<span class="text-[11px] font-mono-data-sm text-on-surface-variant">Radio-opaque overlay left patella</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-medium text-on-surface">1h 18m ago</span>
+<span class="text-on-surface-variant font-mono-data-sm text-[11px]">13:06 IST</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onclick="openStudy('STU-2024-0963')" type="button">
+<span>Open</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 8: Tier 2 Med, Clean Ingest -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-flagged="false" data-modality="chest" data-tier="tier2">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-bold">
+                    Tier 2 Med
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
+<div class="flex items-center gap-1.5 group-hover:underline cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-outline">radiology</span>
+<span>STU-2024-0958</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface">IND-MH-19280</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">F, 29y • ABHA: ••••5531</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  Chest PA
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-on-surface">
+<span>Mild Bronchial Wall Thickening</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-secondary">p = 0.44</span>
+<div class="w-24 bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 44%;"></div>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">[95% CI: 0.38–0.51]</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+<span class="inline-flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+                  Clean ingest
+                </span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-medium text-on-surface">1h 40m ago</span>
+<span class="text-on-surface-variant font-mono-data-sm text-[11px]">12:44 IST</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onclick="openStudy('STU-2024-0958')" type="button">
+<span>Open</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 9: Tier 3 Low, Flagged (1 reason: Clinical discordant symptom) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-flagged="true" data-modality="chest" data-tier="tier3">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container"></span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-primary font-mono-data-sm text-mono-data-sm font-bold">
+                    Tier 3 Low
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
+<div class="flex items-center gap-1.5 group-hover:underline cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-outline">radiology</span>
+<span>STU-2024-0951</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface">IND-MH-55209</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">M, 19y • ABHA: ••••9921</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  Chest PA
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-on-surface">
+<span>No Acute Infiltrate Detected</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-tertiary">p = 0.08</span>
+<div class="w-24 bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 8%;"></div>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">[95% CI: 0.04–0.12]</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="inline-flex flex-col gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+                    Flagged (Hemoptysis note)
+                  </span>
+<span class="text-[11px] font-mono-data-sm text-on-surface-variant">MO indicated clinical red flag</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-medium text-on-surface">2h 10m ago</span>
+<span class="text-on-surface-variant font-mono-data-sm text-[11px]">12:14 IST</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onclick="openStudy('STU-2024-0951')" type="button">
+<span>Open</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 10: Tier 3 Low, Clean Ingest (Batch Eligible) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-flagged="false" data-modality="chest" data-tier="tier3">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-primary font-mono-data-sm text-mono-data-sm font-bold">
+                    Tier 3 Low
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
+<div class="flex items-center gap-1.5 group-hover:underline cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-outline">radiology</span>
+<span>STU-2024-0947</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface">IND-MH-02844</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">F, 24y • ABHA: ••••3319</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  Chest PA
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-on-surface">
+<span>Unremarkable Bilateral Lung Fields</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-tertiary">p = 0.03</span>
+<div class="w-24 bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 3%;"></div>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">[95% CI: 0.01–0.05]</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+<span class="inline-flex items-center gap-1 text-on-tertiary-container font-medium">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                  Batch Eligible
+                </span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-mono-data-sm text-mono-data-sm font-medium text-on-surface">2h 38m ago</span>
+<span class="text-on-surface-variant font-mono-data-sm text-[11px]">11:46 IST</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<button class="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1" onclick="openStudy('STU-2024-0947')" type="button">
+<span>Open</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+<button class="h-9 px-2 rounded-md bg-tertiary-fixed text-on-tertiary-fixed-variant hover:bg-tertiary-fixed-dim transition-colors flex items-center" onclick="quickSignOff('STU-2024-0947')" title="Quick Sign-off as Normal" type="button">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination and Table Controls -->
+<div class="px-space-md py-3.5 bg-surface-container-high/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<div class="flex items-center gap-3">
+<span>Showing <strong class="text-on-surface font-semibold">1–10</strong> of <strong class="text-on-surface font-semibold">14</strong> studies awaiting sign-off</span>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1">
+<span>Rows:</span>
+<select class="bg-surface-container-lowest text-on-surface rounded px-2 py-0.5 border-0 focus:outline-none cursor-pointer">
+<option>10</option>
+<option>25</option>
+<option>50</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors disabled:opacity-50" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary font-semibold flex items-center justify-center" type="button">1</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" type="button">2</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- VIEW 2: EMPTY STATE ("QUEUE CLEAR") -->
+<div class="hidden flex-col items-center justify-center py-16 px-space-md transition-opacity duration-200" id="view-empty">
+<div class="w-full max-w-xl bg-surface-container-lowest p-space-xl rounded-2xl shadow-md text-center flex flex-col items-center">
+<div class="w-20 h-20 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant flex items-center justify-center mb-space-md shadow-sm">
+<span class="material-symbols-outlined text-[44px]">task_alt</span>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-container/10 text-tertiary font-mono-data-sm text-mono-data-sm font-semibold mb-3">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+        Zero Pending Worklist • Local Edge In Sync
+      </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight mb-2">Queue is clear. No studies waiting for review.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mb-space-lg">
+        All urgent triages and routine radiographs for Kashti PHC Node #04 have been reviewed and digitally signed. New DICOM acquisitions will appear here automatically via live WebSocket.
+      </p>
+<div class="flex flex-wrap items-center justify-center gap-3 w-full">
+<button class="h-11 px-5 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container shadow-sm transition-all flex items-center gap-2" onclick="switchViewState('prioritized')" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span>Refresh Queue</span>
+</button>
+<button class="h-11 px-5 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold hover:bg-surface-container shadow-sm transition-all flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>View Signed Studies History</span>
+</button>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-surface-container-low w-full flex items-center justify-center gap-4 text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span>Last signed: STU-2024-0946 (Dr. Arti Sharma)</span>
+<span>•</span>
+<span>14:28:10 IST</span>
+</div>
+</div>
+</div>
+<!-- VIEW 3: LOADING SKELETONS -->
+<div class="hidden flex-col gap-space-lg transition-opacity duration-200" id="view-loading">
+<!-- Skeletons: Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm animate-pulse flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="w-28 h-5 bg-surface-container-high rounded"></div>
+<div class="w-8 h-6 bg-surface-container rounded-full"></div>
+</div>
+<div class="w-48 h-4 bg-surface-container rounded"></div>
+<div class="w-full h-1 bg-surface-container-high rounded-full mt-2"></div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm animate-pulse flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="w-32 h-5 bg-surface-container-high rounded"></div>
+<div class="w-8 h-6 bg-surface-container rounded-full"></div>
+</div>
+<div class="w-56 h-4 bg-surface-container rounded"></div>
+<div class="w-full h-1 bg-surface-container-high rounded-full mt-2"></div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm animate-pulse flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="w-36 h-5 bg-surface-container-high rounded"></div>
+<div class="w-8 h-6 bg-surface-container rounded-full"></div>
+</div>
+<div class="w-52 h-4 bg-surface-container rounded"></div>
+<div class="w-full h-1 bg-surface-container-high rounded-full mt-2"></div>
+</div>
+</div>
+<!-- Skeletons: Table Structure -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden p-space-md animate-pulse">
+<div class="flex items-center justify-between mb-4">
+<div class="w-64 h-10 bg-surface-container-high rounded-lg"></div>
+<div class="flex gap-2">
+<div class="w-32 h-10 bg-surface-container rounded-lg"></div>
+<div class="w-32 h-10 bg-surface-container rounded-lg"></div>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<div class="w-full h-12 bg-surface-container-high/60 rounded"></div>
+<div class="w-full h-14 bg-surface-container-low rounded"></div>
+<div class="w-full h-14 bg-surface-container-low rounded"></div>
+<div class="w-full h-14 bg-surface-container-low rounded"></div>
+<div class="w-full h-14 bg-surface-container-low rounded"></div>
+<div class="w-full h-14 bg-surface-container-low rounded"></div>
+<div class="w-full h-14 bg-surface-container-low rounded"></div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="w-48 h-4 bg-surface-container rounded"></div>
+<div class="w-36 h-8 bg-surface-container rounded-lg"></div>
+</div>
+</div>
+</div>
+<!-- VIEW 4: MOBILE VIEWPORT SIMULATION (390px) -->
+<div class="hidden flex-col items-center justify-center transition-opacity duration-200" id="view-mobile">
+<div class="text-center mb-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container font-mono-data-sm text-mono-data-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">smartphone</span>
+        Mobile Device Preview (390px Canvas) • Strict Triage Order
+      </span>
+</div>
+<!-- 390px Mockup Container -->
+<div class="w-[390px] max-w-full bg-surface-bright rounded-2xl shadow-xl overflow-hidden flex flex-col p-3 gap-3">
+<!-- Mobile Micro Header -->
+<div class="flex items-center justify-between px-1 py-1">
+<div>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Review queue</h2>
+<span class="font-mono-data-sm text-mono-data-sm text-error font-semibold">14 awaiting sign-off</span>
+</div>
+<span class="px-2 py-1 rounded-full bg-surface-container font-mono-data-sm text-mono-data-sm text-primary">Sorted Tier 1→3</span>
+</div>
+<!-- Mobile Card 1: Tier 1 High (Red Strip) -->
+<div class="relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- 4px Left Color Bar -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
+<div class="pl-4 pr-3 py-3 flex flex-col gap-2">
+<!-- Top Row -->
+<div class="flex items-center justify-between">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-primary">STU-2024-0984</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-error font-mono-data-sm text-mono-data-sm font-bold">Tier 1 High p=0.84</span>
+</div>
+<!-- Patient Demographics -->
+<div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span class="font-semibold text-on-surface">IND-MH-82109 (F, 42y)</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface text-[11px]">Chest PA</span>
+</div>
+<!-- Top Finding -->
+<div class="font-label-md text-label-md font-semibold text-error">
+            Right Lower Zone Consolidation
+          </div>
+<!-- Needs Review Flag Banner -->
+<div class="p-2 rounded-lg bg-secondary-fixed/50 flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>Needs review (2 reasons)</span>
+</div>
+<span class="font-mono-data-sm text-[11px] text-on-secondary-fixed-variant">Motion blur detected • Prior TB history</span>
+</div>
+<!-- Bottom Row & Button -->
+<div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm pt-1">
+<span>Submitted 12m ago</span>
+<span>Kashti PHC</span>
+</div>
+<button class="w-full h-11 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm hover:bg-primary-container transition-all" onclick="openStudy('STU-2024-0984')" type="button">
+<span>Open Study for Sign-off</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Mobile Card 2: Tier 1 High (Red Strip) -->
+<div class="relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
+<div class="pl-4 pr-3 py-3 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-primary">STU-2024-0981</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-error font-mono-data-sm text-mono-data-sm font-bold">Tier 1 High p=0.91</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span class="font-semibold text-on-surface">IND-MH-77402 (M, 61y)</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface text-[11px]">Chest AP Supine</span>
+</div>
+<div class="font-label-md text-label-md font-semibold text-error">
+            Left Pneumothorax (Tension suspect)
+          </div>
+<div class="p-2 rounded-lg bg-secondary-fixed/50 flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">priority_high</span>
+<span>Needs review (Critical calibration)</span>
+</div>
+<span class="font-mono-data-sm text-[11px] text-on-secondary-fixed-variant">Inference p &gt; 0.90 requires mandatory tele-eval</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm pt-1">
+<span>Submitted 21m ago</span>
+<span>Emergency Node</span>
+</div>
+<button class="w-full h-11 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm hover:bg-primary-container transition-all" onclick="openStudy('STU-2024-0981')" type="button">
+<span>Open Study for Sign-off</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Mobile Card 3: Tier 2 Med (Amber/Muted Strip) -->
+<div class="relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+<div class="pl-4 pr-3 py-3 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-primary">STU-2024-0968</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-bold">Tier 2 Med p=0.58</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span class="font-semibold text-on-surface">IND-MH-98101 (F, 35y)</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface text-[11px]">Chest PA</span>
+</div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">
+            Equivocal Reticular Pattern
+          </div>
+<div class="p-2 rounded-lg bg-secondary-fixed/50 flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>Needs review (Wide CI: 0.44–0.71)</span>
+</div>
+<span class="font-mono-data-sm text-[11px] text-on-secondary-fixed-variant">AI confidence margin exceeds threshold</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm pt-1">
+<span>Submitted 1h 05m ago</span>
+<span>Kashti PHC</span>
+</div>
+<button class="w-full h-11 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-2 hover:bg-surface-container shadow-sm transition-all" onclick="openStudy('STU-2024-0968')" type="button">
+<span>Open Study for Sign-off</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Mobile Card 4: Tier 3 Low (Green Strip) -->
+<div class="relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-tertiary"></div>
+<div class="pl-4 pr-3 py-3 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-primary">STU-2024-0947</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-primary font-mono-data-sm text-mono-data-sm font-bold">Tier 3 Low p=0.03</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span class="font-semibold text-on-surface">IND-MH-02844 (F, 24y)</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface text-[11px]">Chest PA</span>
+</div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">
+            Unremarkable Lung Fields
+          </div>
+<div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm pt-1">
+<span class="text-tertiary font-medium">✓ Clean Ingest • Batch eligible</span>
+<span>11:46 IST</span>
+</div>
+<button class="w-full h-11 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-2 hover:bg-surface-container shadow-sm transition-all" onclick="openStudy('STU-2024-0947')" type="button">
+<span>Open Study for Sign-off</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Persistent Compliance & Regulatory Footer -->
+<div class="mt-space-xl p-space-md rounded-xl bg-surface-container-low text-on-surface-variant flex flex-col md:flex-row items-center justify-between gap-3 font-mono-data-sm text-mono-data-sm shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span class="font-semibold text-on-surface">Clinical Decision Support System (CDSS):</span>
+<span>Decision support only. Not a definitive diagnosis. Requires clinician sign-off.</span>
+</div>
+<div class="flex items-center gap-3 text-[11px] text-outline">
+<span>ABDM Milestone 2/3 Validated</span>
+<span>•</span>
+<span>ISO 13485:2016 Compliant</span>
+<span>•</span>
+<span>Edge Node: KASHTI-PHC-04</span>
+</div>
+</div>
+<!-- Interactive JavaScript -->
+<script>
+    function switchViewState(view) {
+      const views = ['prioritized', 'empty', 'loading', 'mobile'];
+      views.forEach(v => {
+        const el = document.getElementById('view-' + v);
+        const tab = document.getElementById('tab-' + v);
+        if (el) {
+          if (v === view) {
+            el.classList.remove('hidden');
+            el.classList.add('flex');
+          } else {
+            el.classList.add('hidden');
+            el.classList.remove('flex');
+          }
+        }
+        if (tab) {
+          if (v === view) {
+            tab.className = "px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-primary text-on-primary shadow-sm flex items-center gap-1.5";
+          } else {
+            tab.className = "px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm flex items-center gap-1.5";
+          }
+        }
+      });
+    }
+
+    function filterBySummary(type) {
+      const cards = ['urgent', 'review', 'all'];
+      cards.forEach(c => {
+        const el = document.getElementById('card-' + c);
+        if (el) {
+          if (c === type) {
+            el.classList.add('bg-surface-container');
+          } else {
+            el.classList.remove('bg-surface-container');
+          }
+        }
+      });
+
+      const rows = document.querySelectorAll('#table-body tr');
+      rows.forEach(row => {
+        const tier = row.getAttribute('data-tier');
+        const flagged = row.getAttribute('data-flagged') === 'true';
+        if (type === 'urgent') {
+          row.style.display = (tier === 'tier1') ? '' : 'none';
+        } else if (type === 'review') {
+          row.style.display = flagged ? '' : 'none';
+        } else {
+          row.style.display = '';
+        }
+      });
+    }
+
+    function handleSearch(query) {
+      const term = query.toLowerCase().trim();
+      const rows = document.querySelectorAll('#table-body tr');
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(term) ? '' : 'none';
+      });
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('filter-search');
+      if (input) {
+        input.value = '';
+        handleSearch('');
+      }
+    }
+
+    function applyFilters() {
+      const tierVal = document.getElementById('filter-tier').value;
+      const modalityVal = document.getElementById('filter-modality').value;
+      const rows = document.querySelectorAll('#table-body tr');
+
+      rows.forEach(row => {
+        const rowTier = row.getAttribute('data-tier');
+        const rowModality = row.getAttribute('data-modality');
+        let show = true;
+
+        if (tierVal !== 'all' && rowTier !== tierVal) {
+          show = false;
+        }
+        if (modalityVal !== 'all' && rowModality !== modalityVal) {
+          show = false;
+        }
+        row.style.display = show ? '' : 'none';
+      });
+    }
+
+    function resetAllFilters() {
+      clearSearch();
+      document.getElementById('filter-status').value = 'all';
+      document.getElementById('filter-modality').value = 'all';
+      document.getElementById('filter-tier').value = 'all';
+      filterBySummary('all');
+    }
+
+    function toggleRowMenu(menuId) {
+      const menu = document.getElementById(menuId);
+      if (menu) {
+        menu.classList.toggle('hidden');
+      }
+    }
+
+    function openStudy(studyId) {
+      alert("Opening DICOM Viewer canvas for " + studyId + " with Dr. Arti Sharma sign-off credentials.");
+    }
+
+    function quickSignOff(studyId) {
+      if (confirm("Quick Sign-off study " + studyId + " with 'Clinician Confirmed Normal / Expected Finding'?")) {
+        alert("Study " + studyId + " digitally signed and archived. ABDM record updated.");
+      }
+    }
+
+    function batchSignOffModal() {
+      alert("Batch Sign-off: 3 Tier-3 clean ingest studies are eligible for 1-click batch concurrence.");
+    }
+
+    function exportQueueLog() {
+      alert("Generating signed CSV audit log for PHC Node Kashti #04...");
+    }
+  </script>
+</div></main></div><footer class="w-full bg-surface-container-low py-space-xs px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-center gap-2 text-center text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[16px]">verified_user</span><span>Decision support only. Not a diagnosis. Requires clinician review.</span></div></footer></div></body></html>
