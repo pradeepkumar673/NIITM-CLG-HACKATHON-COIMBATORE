@@ -20,8 +20,8 @@ data:
 training:
   batch_size: 32
   grad_accum_steps: 1           # increase if OOM, effective_batch = batch * accum
-  num_workers: 4
-  persistent_workers: true      # required on Windows for DataLoader
+  num_workers: 0
+  persistent_workers: false      # required on Windows for DataLoader
   pin_memory: true
   epochs: 20
   lr: 1.0e-4

@@ -1,0 +1,20 @@
+ingest:
+  storage_dir: "data/storage"
+  max_size_bytes: 52428800     # 50 MB
+  max_pixel_count: 64000000    # 8000x8000
+  allowed_magic_bytes:
+    - "89504e47"               # PNG
+    - "ffd8ffe0"               # JPEG (several variants exist, checked in code)
+    - "ffd8ffe1"
+    - "ffd8ffe2"
+    - "ffd8ffe3"
+    - "ffd8ffe8"
+    - "52494646"               # WEBP (not explicitly requested but common)
+    - "DICM"                   # DICOM is special (offset 128)
+
+gate:
+  confidence_threshold_xray: 0.5
+  quality_percentiles:
+    blur: [1.0, 100.0]        # will keep bottom 1% to 100%
+    exposure: [1.0, 99.0]
+    resolution: [1.0, 100.0]
