@@ -1,0 +1,177 @@
+--- PNEUMONIA AGE 65 ---
+1. Cureus. 2026 Jul 18;18(7):e112901. doi: 10.7759/cureus.112901. eCollection
+2026  Jul.
+
+An Audit Assessing Compliance With CURB-65 (Confusion, Urea, Respiratory Rate, 
+Blood Pressure, and Age ≥65 Years) Documentation in Adult Patients Admitted With 
+Community-Acquired Pneumonia at a Tertiary Institution in Trinidad and Tobago.
+
+Ramlogan TV(1), Basdeo D(1), Bhagaloo R(1), De Freitas L(2).
+
+Author information:
+(1)Internal Medicine, Sangre Grande Hospital Campus, Sangre Grande, TTO.
+(2)Medical Sciences, The University of the West Indies, St Augustine, TTO.
+
+Introduction Community-acquired pneumonia (CAP) is a major cause of morbidity 
+and mortality worldwide. Early severity assessment is essential in guiding 
+decisions regarding hospital admission, level of care, and antimicrobial 
+management. The CURB-65 (Confusion, Urea, Respiratory Rate, Blood Pressure, and 
+Age ≥65 Years) score is a validated clinical prediction tool recommended by the 
+National Institute for Health and Care Excellence (NICE) NG250 guidelines for 
+assessing mortality risk in adult CAP patients. Despite its clinical relevance, 
+documentation and utilisation of the CURB-65 score are often inconsistent in 
+busy healthcare settings. This audit aimed to assess CURB-65 documentation in 
+adult patients admitted with CAP at the Sangre Grande Hospital Campus (SGHC), 
+Trinidad and Tobago, and the effectiveness of targeted educational interventions 
+in improving adherence. Methodology A retrospective and prospective clinical 
+audit was conducted in the Internal Medicine Department at SGHC. Adult patients 
+aged ≥18 years admitted with CAP between March and May 2025 were included in the 
+retrospective phase, while patients admitted between February and April 2026 
+formed the prospective post-intervention phase. Data were collected from paper 
+and electronic medical records. Variables assessed included demographic 
+characteristics, CURB-65 documentation, and score accuracy. The intervention 
+included a CME sensitisation session on CURB-65 and NICE NG250 guidelines, 
+followed by monthly reminders circulated through the departmental WhatsApp 
+communication platform. Data were analysed using Microsoft Excel and SPSS 23. 
+Chi-square testing was used to compare documentation rates pre- and 
+post-intervention. Results In the retrospective phase, 67 patient records were 
+analysed. CURB-65 documentation was identified in only 10.3% (n = 7) of cases, 
+although all documented scores were calculated correctly. Following the 
+intervention, 76 patient records were analysed during the prospective phase. 
+CURB-65 documentation increased significantly to 43.4% (n = 33), with 90.9% (n = 
+30) of documented scores calculated correctly. Statistical analysis showed a 
+significant improvement in documentation compliance after the intervention (p < 
+0.001). The majority of patients in both phases had CURB-65 scores of 0 or 1, 
+suggesting that a substantial proportion may have been suitable for outpatient 
+management depending on clinical judgement and comorbidities. Discussion This 
+audit demonstrated poor baseline compliance with CURB-65 documentation at SGHC, 
+consistent with findings from studies conducted in Oman, China, and Ireland. 
+Education through CME sessions and regular reminders significantly improved 
+compliance rates. The findings reinforce the importance of ongoing clinical 
+education and guideline sensitisation in improving adherence to evidence-based 
+practice. Despite the improvement, documentation rates remained below the 
+NICE-recommended standard of 100%, indicating the need for further quality 
+improvement measures, including electronic decision-support tools and 
+institutional clinical pathways. Conclusion CURB-65 documentation for CAP 
+patients at SGHC was initially suboptimal but improved significantly following 
+targeted educational interventions and sensitisation. However, future 
+interventions such as CURB-65 posters, incorporating the score into initial 
+clerking documents and the Health Information System should be implemented as 
+part of a formal improvement project.
+
+Copyright © 2026, Ramlogan et al.
+
+DOI: 10.7759/cureus.112901
+PMCID: PMC13401331
+PMID: 42502304
+
+Conflict of interest statement: Human subjects: Informed consent for treatment 
+and open access publication was obtained or waived by all participants in this 
+study. Eastern Regional Health Authority (ERHA) Research Ethics Committee issued 
+approval ERHA-REC.033/06/2025. Animal subjects: All authors have confirmed that 
+this study did not involve animal subjects or tissue. Conflicts of interest: In 
+compliance with the ICMJE uniform disclosure form, all authors declare the 
+following: Payment/services info: All authors have declared that no financial 
+support was received from any organization for the submitted work. Financial 
+relationships: All authors have declared that they have no financial 
+relationships at present or within the previous three years with any 
+organizations that might have an interest in the submitted work. Other 
+relationships: All authors have declared that there are no other relationships 
+or activities that could appear to have influenced the submitted work.
+--- HYPERTENSION CARDIOMEGALY ---
+1. Curr Med Res Opin. 2026 Jun;42(6):1275-1286. doi:
+10.1080/03007995.2026.2706900.  Epub 2026 Jul 30.
+
+Refractory arterial hypertension: important, but suboptimally characterized.
+
+Koraćević G(1)(2), Stojanović M(2)(3), Zdravković M(4)(5), Otašević S(2)(6), 
+Zdravković M(7), Randjelović M(1), Lazarević G(1)(2), Pavlović D(8).
+
+Author information:
+(1)Department for Cardiology, University Clinical Center Niš, Serbia.
+(2)Faculty of Medicine, University of Niš, Serbia.
+(3)Institute for Treatment and Rehabilitation Niška Banja, Niš, Serbia.
+(4)Faculty of Medicine, Belgrade University, Belgrade, Serbia.
+(5)University Hospital Medical Center Bežanijska Kosa, Belgrade, Serbia.
+(6)Public Health Institute Niš, Niš, Serbia.
+(7)Department for Cardiac Surgery, University Clinical Center Nis, Serbia.
+(8)Department of Plastic and Reconstructive Surgery, University Clinical Center 
+Niš, Niš, Serbia.
+
+Refractory arterial hypertension (HTN) is a newly described severe phenotype of 
+anti-hypertensive therapy failure. It is defined as uncontrolled blood pressure 
+on (near-)maximal treatment using ≥ 5 antihypertensive drugs, two of which are 
+long-acting thiazide-like diuretics (e.g. chlorthalidone) and mineralocorticoid 
+receptor antagonists, with an additional requirement in one of the first 
+reports: uncontrolled blood pressure after a minimum of three visits to the 
+department. We observed important differences in the definitions of refractory 
+HTN over time and even in the same period in the most important documents in 
+medicine today - guidelines. The AIMs of the study were threefold: to underline 
+the high risk and consequent importance of this phenotype of HTN, to analyze the 
+evolution of the definition of refractory HTN and the consonance in the 
+guidelines on the topic, to study potential insufficiencies of the current 
+definitions, and possibly suggest some improvements. Patients with refractory 
+HTN are at a higher risk of developing cardiovascular complications such as 
+heart failure (HF), left ventricular hypertrophy (LVH), or stroke than those 
+with controlled resistant HTN. Moreover, hypertension-mediated organ damage and 
+comorbidities such as diabetes and obstructive sleep apnea are more prevalent in 
+patients with refractory HTN. Some guidelines list treatment for refractory HTN, 
+but the definition of refractory HTN is actually resistant to HTN. Generally, 
+what is recognized as insufficient for the definition of resistant HTN is also 
+likely true for refractory HTN.
+
+DOI: 10.1080/03007995.2026.2706900
+PMID: 42528385 [Indexed for MEDLINE]
+--- TB HIV ---
+1. Lancet Gastroenterol Hepatol. 2026 May;11(5):417-425. doi: 
+10.1016/S2468-1253(25)00266-3. Epub 2026 Mar 18.
+
+Who to test and reflex testing for hepatitis D virus infection: evidence and 
+rationale to inform policy recommendations and future directions.
+
+Bajis S(1), Luhmann N(2), Okamoto E(3), Islam R(3), Lesi O(2), Easterbrook P(4).
+
+Author information:
+(1)Department for HIV, Tuberculosis, Hepatitis, and Sexually Transmitted 
+Infections, WHO, Geneva, Switzerland. Electronic address: sahar.bajis@gmail.com.
+(2)Department for HIV, Tuberculosis, Hepatitis, and Sexually Transmitted 
+Infections, WHO, Geneva, Switzerland.
+(3)Clinton Health Access Initiative, Boston, MA, USA.
+(4)Department for HIV, Tuberculosis, Hepatitis, and Sexually Transmitted 
+Infections, WHO, Geneva, Switzerland; Faculty of Medicine, Imperial College 
+London, London, UK.
+
+Chronic hepatitis D coinfection affects an estimated 12 million people globally, 
+with higher prevalence in low-income and middle-income countries, especially the 
+African and Western Pacific regions. It leads to accelerated progression to 
+liver cirrhosis, hepatocellular carcinoma, and increased mortality. The 
+treatment landscape is evolving with the introduction of bulevirtide, but 
+hepatitis D virus (HDV) testing uptake and case-finding remain low. The 2024 WHO 
+guidelines on the management of chronic hepatitis B provide recommendations for 
+the first time on who to test and how to test for HDV infection. WHO recommends 
+universal anti-HDV testing among all HBsAg-positive individuals, and where this 
+is not feasible, a complementary focused (risk-based) testing approach among 
+higher-risk populations. We present two complementary Reviews-one on who to test 
+and one on how to test for HDV infection. This Review on who to test summarises 
+the evidence base and rationale for the two recommendations regarding the 
+universal and risk-based testing approaches, as well as the recommendation for 
+the laboratory-based reflex HDV testing both for anti-HDV and HDR RNA. Key 
+implementation considerations include the need for countries to incorporate HDV 
+testing into their national policies and guidelines, education and training of 
+health-care providers in counselling and linkage to care, community awareness 
+raising and demand creation, and the establishment of clinical care pathways for 
+HDV infection. Research priorities include the development of HDV rapid 
+diagnostic tests to facilitate decentralisation of HDV testing, the generation 
+of improved epidemiological data across different populations and settings to 
+inform testing approaches, and evaluating the cost-effectiveness and feasibility 
+of both universal and risk-based HDV testing approaches, alongside reflex HDV 
+serology and HDV RNA testing.
+
+Copyright © 2026 Elsevier Ltd. All rights reserved, including those for text and 
+data mining, AI training, and similar technologies.
+
+DOI: 10.1016/S2468-1253(25)00266-3
+PMID: 41861841 [Indexed for MEDLINE]
+
+Conflict of interest statement: Declaration of interests All authors declared no 
+competing interests.

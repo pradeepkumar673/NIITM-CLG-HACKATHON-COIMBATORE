@@ -12,7 +12,7 @@
 | 8 | Lung segmentation + zones | Done | | | |
 | 9 | Explainability | Done | | | |
 | 10 | Fracture/knee/TB models | Done | | | Trained efficiently using EfficientNetB0 |
-| 11 | Comorbidity research | Pending | | | |
+| 11 | Comorbidity research | Done | 2026-10-08 | | Rules verified with DOIs |
 | 12 | Comorbidity engine | Pending | | | |
 | 13 | Longitudinal engine | Pending | | | |
 | 14 | Healing priors + exploratory predictor | Pending | | | |

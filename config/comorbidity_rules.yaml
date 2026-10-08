@@ -1,0 +1,120 @@
+rules:
+  - id: diabetes_tb
+    title: Diabetes with TB-pattern
+    trigger: "diabetes == true and has_finding('TB-pattern')"
+    statement_template: "Diabetes mellitus is associated with a significantly increased risk of developing active tuberculosis. Consider active TB in this patient."
+    quantity: "relative risk 3.11, 95% CI 2.27-4.26, for developing active TB (pooled cohort studies)"
+    source: "Jeon CY, Murray MB. Diabetes mellitus increases the risk of active tuberculosis: a systematic review of 13 observational studies. PLoS Med. 2008 Jul 15;5(7):e152. DOI: 10.1371/journal.pmed.0050152. Accessed 2026-10-08. Abstract, Results section."
+    evidence_quality: "systematic review and meta-analysis"
+    triage_level: soon
+    follow_up_suggestions: "Evaluate for active TB, perform sputum culture/GeneXpert, and optimize glycemic control."
+    review_status: draft
+    reviewed_by: null
+
+  - id: diabetes_pneumonia
+    title: Diabetes with Pneumonia
+    trigger: "diabetes == true and (has_finding('Consolidation') or has_finding('Pneumonia'))"
+    statement_template: "Type 2 diabetes is associated with an increased risk of community-acquired pneumonia."
+    quantity: "pooled relative risk 1.64, 95% CI 1.55-1.73, for community-acquired pneumonia incidence"
+    source: "Brunetti VC, et al. Type 2 diabetes mellitus and risk of community-acquired pneumonia: a systematic review and meta-analysis of observational studies. CMAJ Open. 2021 Jan 25;9(1):E62-E70. DOI: 10.9778/cmajo.20200013. Accessed 2026-10-08. Abstract, Results section."
+    evidence_quality: "systematic review and meta-analysis"
+    triage_level: soon
+    follow_up_suggestions: "Close clinical monitoring for CAP, early antibiotic therapy if infection is suspected, and glycemic management."
+    review_status: draft
+    reviewed_by: null
+
+  - id: fragility_fracture
+    title: Prior Fracture with Subsequent Fracture
+    trigger: "(has_finding('Osteopenia_Pattern') or has_finding('Osteoporosis_Pattern')) and has_finding('Fracture')"
+    statement_template: "A prior fracture is associated with a significantly increased risk of subsequent clinical fractures."
+    quantity: "hazard ratio 1.88, 95% CI 1.72-2.07 for any clinical fracture following a previous fracture"
+    source: "Kanis JA, et al. Previous fracture and subsequent fracture risk: a meta-analysis to update FRAX. Osteoporos Int. 2023 Dec;34(12):2027-2045. DOI: 10.1007/s00198-023-06870-z. Accessed 2026-10-08. Abstract, Results section."
+    evidence_quality: "meta-analysis"
+    triage_level: routine
+    follow_up_suggestions: "Consider bone-density assessment (DEXA scan) and initiation of osteoporosis management."
+    review_status: draft
+    reviewed_by: null
+
+  - id: smoking_nodule
+    title: Smoking with Pulmonary Nodule
+    trigger: "smoker == true and (has_finding('Nodule') or has_finding('Mass'))"
+    statement_template: "Smoking is a major independent risk factor for malignancy in solitary pulmonary nodules."
+    quantity: null
+    source: "Yang L, et al. Assessment of the cancer risk factors of solitary pulmonary nodules. Oncotarget. 2017 Apr 25;8(17):29318-29327. DOI: 10.18632/oncotarget.16426. Accessed 2026-10-08. Abstract."
+    evidence_quality: "retrospective cohort model"
+    triage_level: soon
+    follow_up_suggestions: "Review old imaging, consider CT chest for detailed nodule characterization, and apply a risk prediction model."
+    review_status: draft
+    reviewed_by: null
+
+  - id: pneumothorax_urgent
+    title: Pneumothorax Triage
+    trigger: "has_finding('Pneumothorax')"
+    statement_template: "Spontaneous pneumothorax often presents as a medical emergency requiring prompt evaluation."
+    quantity: null
+    source: "Cheng HS, et al. Management of spontaneous pneumothorax: a mini-review on its latest evidence. J Thorac Dis. 2024 Jul 30;16(7):4756-4763. DOI: 10.21037/jtd-24-415. Accessed 2026-10-08. Abstract."
+    evidence_quality: "guideline review"
+    triage_level: urgent
+    follow_up_suggestions: "Immediate clinical correlation, assess patient stability, and consider chest tube placement if indicated."
+    review_status: draft
+    reviewed_by: null
+
+  - id: heart_failure_pattern
+    title: Heart Failure Pattern
+    trigger: "has_finding('Cardiomegaly') and has_finding('Effusion') and has_finding('Edema')"
+    statement_template: "The combination of cardiomegaly, pleural effusion, and edema is highly suggestive of decompensated heart failure."
+    quantity: null
+    source: "Sharmeen S, et al. Peripartum Cardiomyopathy in Obstetric Practice: A Case Series. Ann Afr Med. 2026 Jun 30. DOI: 10.4103/aam.aam_85_26. Accessed 2026-10-08. Abstract."
+    evidence_quality: "case series and review"
+    triage_level: urgent
+    follow_up_suggestions: "Clinical assessment for heart failure, echocardiography, and diuretic therapy as appropriate."
+    review_status: draft
+    reviewed_by: null
+
+  - id: pregnancy_cardiomegaly
+    title: Pregnancy and Cardiomegaly
+    trigger: "pregnancy == true and has_finding('Cardiomegaly')"
+    statement_template: "Cardiomegaly in the peripartum or postpartum period may indicate peripartum cardiomyopathy, a rare but life-threatening form of heart failure."
+    quantity: null
+    source: "Sharmeen S, et al. Peripartum Cardiomyopathy in Obstetric Practice: A Case Series. Ann Afr Med. 2026 Jun 30. DOI: 10.4103/aam.aam_85_26. Accessed 2026-10-08. Abstract."
+    evidence_quality: "case series and review"
+    triage_level: urgent
+    follow_up_suggestions: "Multidisciplinary management involving obstetricians and cardiologists, echocardiography."
+    review_status: draft
+    reviewed_by: null
+
+  - id: emphysema_copd
+    title: Emphysema and COPD
+    trigger: "has_finding('Emphysema') and (copd_asthma == true or smoker == true)"
+    statement_template: "Emphysema is strongly associated with reduced carbon monoxide diffusing capacity (DLCO) and can indicate underlying COPD."
+    quantity: "odds ratio 2.6, 95% CI 2.2-3.2, for isolated reduced DLCO in patients with emphysema"
+    source: "Hamrefors V, et al. Isolated, reduced diffusing capacity for carbon monoxide in the population - relations to symptoms, smoking and comorbidities. BMC Pulm Med. 2026 Aug 31;26(1):387. DOI: 10.1186/s12890-026-04662-9. Accessed 2026-10-08. Abstract, Results."
+    evidence_quality: "population-based cohort"
+    triage_level: routine
+    follow_up_suggestions: "Consider full pulmonary function testing including DLCO and spirometry."
+    review_status: draft
+    reviewed_by: null
+
+  - id: age_65_pneumonia
+    title: Age >= 65 with Pneumonia
+    trigger: "age_65 == true and (has_finding('Consolidation') or has_finding('Pneumonia'))"
+    statement_template: "Age 65 and older is a key risk factor in the CURB-65 severity score for community-acquired pneumonia, increasing mortality risk."
+    quantity: null
+    source: "Ramlogan TV, et al. An Audit Assessing Compliance With CURB-65 Documentation in Adult Patients Admitted With Community-Acquired Pneumonia. Cureus. 2026 Jul 18;18(7):e112901. DOI: 10.7759/cureus.112901. Accessed 2026-10-08. Abstract."
+    evidence_quality: "clinical audit of guidelines"
+    triage_level: urgent
+    follow_up_suggestions: "Calculate full CURB-65 score to guide admission and level of care."
+    review_status: draft
+    reviewed_by: null
+
+  - id: hypertension_cardiomegaly
+    title: Hypertension and Cardiomegaly
+    trigger: "hypertension == true and has_finding('Cardiomegaly')"
+    statement_template: "Patients with refractory hypertension and cardiomegaly are at higher risk for left ventricular hypertrophy and heart failure."
+    quantity: null
+    source: "Koraćević G, et al. Refractory arterial hypertension: important, but suboptimally characterized. Curr Med Res Opin. 2026 Jun;42(6):1275-1286. DOI: 10.1080/03007995.2026.2706900. Accessed 2026-10-08. Abstract."
+    evidence_quality: "review"
+    triage_level: soon
+    follow_up_suggestions: "Blood pressure optimization and echocardiogram to assess for left ventricular hypertrophy."
+    review_status: draft
+    reviewed_by: null

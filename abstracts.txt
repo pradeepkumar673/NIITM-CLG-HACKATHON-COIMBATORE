@@ -1,0 +1,243 @@
+1. PLoS Med. 2008 Jul 15;5(7):e152. doi: 10.1371/journal.pmed.0050152.
+
+Diabetes mellitus increases the risk of active tuberculosis: a systematic review 
+of 13 observational studies.
+
+Jeon CY(1), Murray MB.
+
+Author information:
+(1)Department of Epidemiology, Harvard School of Public Health, Boston, 
+Massachusetts, United States of America. chjeon@hsph.harvard.edu
+
+BACKGROUND: Several studies have suggested that diabetes mellitus (DM) increases 
+the risk of active tuberculosis (TB). The rising prevalence of DM in TB-endemic 
+areas may adversely affect TB control. We conducted a systematic review and a 
+meta-analysis of observational studies assessing the association of DM and TB in 
+order to summarize the existing evidence and to assess methodological quality of 
+the studies.
+METHODS AND FINDINGS: We searched the PubMed and EMBASE databases to identify 
+observational studies that had reported an age-adjusted quantitative estimate of 
+the association between DM and active TB disease. The search yielded 13 
+observational studies (n = 1,786,212 participants) with 17,698 TB cases. Random 
+effects meta-analysis of cohort studies showed that DM was associated with an 
+increased risk of TB (relative risk = 3.11, 95% CI 2.27-4.26). Case-control 
+studies were heterogeneous and odds ratios ranged from 1.16 to 7.83. Subgroup 
+analyses showed that effect estimates were higher in non-North American studies.
+CONCLUSION: DM was associated with an increased risk of TB regardless of study 
+design and population. People with DM may be important targets for interventions 
+such as active case finding and treatment of latent TB and efforts to diagnose, 
+detect, and treat DM may have a beneficial impact on TB control.
+
+DOI: 10.1371/journal.pmed.0050152
+PMCID: PMC2459204
+PMID: 18630984 [Indexed for MEDLINE]
+
+Conflict of interest statement: Competing Interests: The authors have declared 
+that no competing interests exist.
+
+
+2. Proc Natl Acad Sci U S A. 2021 Feb 2;118(5):e2018053118. doi: 
+10.1073/pnas.2018053118.
+
+Structural insights into a dimeric Psb27-photosystem II complex from a 
+cyanobacterium Thermosynechococcus vulcanus.
+
+Huang G(1), Xiao Y(2)(3), Pi X(1), Zhao L(1), Zhu Q(2)(3), Wang W(2), Kuang 
+T(2), Han G(4), Sui SF(5)(6), Shen JR(4)(7).
+
+Author information:
+(1)State Key Laboratory of Membrane Biology, Beijing Advanced Innovation Center 
+for Structural Biology and Frontier Research Center for Biological Structure, 
+School of Life Sciences, Tsinghua University, 100084 Beijing, China.
+(2)Photosynthesis Research Center, Key Laboratory of Photobiology, Institute of 
+Botany, The Chinese Academy of Sciences, 100093 Beijing, China.
+(3)University of Chinese Academy of Sciences, 100049 Beijing, China.
+(4)Photosynthesis Research Center, Key Laboratory of Photobiology, Institute of 
+Botany, The Chinese Academy of Sciences, 100093 Beijing, China; 
+hanguangye@ibcas.ac.cn suisf@mail.tsinghua.edu.cn shen@cc.okayama-u.ac.jp.
+(5)State Key Laboratory of Membrane Biology, Beijing Advanced Innovation Center 
+for Structural Biology and Frontier Research Center for Biological Structure, 
+School of Life Sciences, Tsinghua University, 100084 Beijing, China; 
+hanguangye@ibcas.ac.cn suisf@mail.tsinghua.edu.cn shen@cc.okayama-u.ac.jp.
+(6)Department of Biology, Southern University of Science and Technology, 518055 
+Shenzhen, Guangdong, China.
+(7)Research Institute for Interdisciplinary Science and Graduate School of 
+Natural Science and Technology, Okayama University, 700-8530 Okayama, Japan.
+
+Photosystem II (PSII) is a multisubunit pigment-protein complex and catalyzes 
+light-driven water oxidation, leading to the conversion of light energy into 
+chemical energy and the release of molecular oxygen. Psb27 is a small thylakoid 
+lumen-localized protein known to serve as an assembly factor for the biogenesis 
+and repair of the PSII complex. The exact location and binding fashion of Psb27 
+in the intermediate PSII remain elusive. Here, we report the structure of a 
+dimeric Psb27-PSII complex purified from a psbV deletion mutant (ΔPsbV) of the 
+cyanobacterium Thermosynechococcus vulcanus, solved by cryo-electron microscopy. 
+Our structure showed that Psb27 is associated with CP43 at the luminal side, 
+with specific interactions formed between Helix 2 and Helix 3 of Psb27 and a 
+loop region between Helix 3 and Helix 4 of CP43 (loop C) as well as the large, 
+lumen-exposed and hydrophilic E-loop of CP43. The binding of Psb27 imposes some 
+conflicts with the N-terminal region of PsbO and also induces some 
+conformational changes in CP43, CP47, and D2. This makes PsbO unable to bind in 
+the Psb27-PSII. Conformational changes also occurred in D1, PsbE, PsbF, and 
+PsbZ; this, together with the conformational changes occurred in CP43, CP47, and 
+D2, may prevent the binding of PsbU and induce dissociation of PsbJ. This 
+structural information provides important insights into the regulation mechanism 
+of Psb27 in the biogenesis and repair of PSII.
+
+DOI: 10.1073/pnas.2018053118
+PMCID: PMC7865125
+PMID: 33495333 [Indexed for MEDLINE]
+
+Conflict of interest statement: The authors declare no competing interest.
+
+
+3. World J Urol. 2023 Nov;41(11):3277-3285. doi: 10.1007/s00345-023-04565-y. Epub
+ 2023 Aug 26.
+
+Experts' recommendations in laser use for the endoscopic treatment of prostate 
+hypertrophy: a comprehensive guide by the European Section of Uro-Technology 
+(ESUT) and Training-Research in Urological Surgery and Technology 
+(T.R.U.S.T.)-Group.
+
+Ortner G(1)(2), Güven S(3), Somani BK(4), Nicklas A(5)(6), Scoffone CM(7), 
+Gracco C(7), Goumas IK(8), Bach T(9), Sancha FG(10), Figueredo FCA(11), Krambeck 
+A(12), Bozzini G(13), Lehrich K(14), Liatsikos E(15), Kallidonis P(15), Roche 
+JB(16), Miernik A(17), Enikeev D(18)(19)(20), Tunc L(21), Bhojani N(22), Gilling 
+P(23), Otero JR(24), Porreca A(25), Ahyai S(26), Netsch C(27), Gözen AS(28), 
+Nagele U(5)(6), Herrmann TRW(6)(29), Tokas T(6)(30).
+
+Author information:
+(1)Department of Urology and Andrology, General Hospital Hall i.T., Hall in 
+Tirol, Austria. gerni_o@hotmail.com.
+(2)Training and Research in Urological Surgery and Technology 
+(T.R.U.S.T.)-Group, Hall in Tirol, Austria. gerni_o@hotmail.com.
+(3)Department of Urology, Meram School of Medicine, Necmettin Erbakan 
+University, Konya, Turkey.
+(4)Department of Urology, University Hospital Southampton NHS Foundation Trust, 
+Southampton, UK.
+(5)Department of Urology and Andrology, General Hospital Hall i.T., Hall in 
+Tirol, Austria.
+(6)Training and Research in Urological Surgery and Technology 
+(T.R.U.S.T.)-Group, Hall in Tirol, Austria.
+(7)Department of Urology, Cottolengo Hospital of Torino, Turin, Italy.
+(8)Department of Urology, Istituto Clinico Beato Matteo, Vigevano, Italy.
+(9)Department of Urology, Asklepios Westklinikum Rissen, Hamburg, Germany.
+(10)Department of Urology, ICUA-Clínica CEMTRO, Madrid, Spain.
+(11)Instituto da Próstata Aumentada, Hospital Pompéia, Caxias do Sul, Brazil.
+(12)Department of Urology, Northwestern Medicine, Chicago, IL, USA.
+(13)Department of Urology, ASST Lariana, Como, Italy.
+(14)Department of Urology, Urological Laser Center, Vivantes 
+Auguste-Viktoria-Hospital Berlin, Berlin, Germany.
+(15)Department of Urology, University of Patras, Patras, Greece.
+(16)Department of Urology, Clinique Saint-Augustin, Bordeaux, France.
+(17)Department of Urology, University of Freiburg, Freiburg, Germany.
+(18)Department of Urology, Medical University of Vienna, Vienna, Austria.
+(19)Karl Landstainer Institute of Urology and Andrology, Vienna, Austria.
+(20)Institute for Urology and Reproductive Health, Sechenov University, Moscow, 
+Russia.
+(21)Department of Urology, Acibadem Hospital, Ankara, Turkey.
+(22)Division of Urology, Centre Hospitalier de l'Université de Montréal, 
+Université de Montréal, Montreal, QC, Canada.
+(23)Department of Urology, Tauranga Hospital, University of Auckland, Auckland, 
+New Zealand.
+(24)ROC Clinic and HM Urological Department, Fundación Investigación HM 
+Hospitales, HM Hospitales, Madrid, Spain.
+(25)Department of Oncological Urology, Veneto Institute of Oncology (IOV)-IRCCS, 
+Padua, Italy.
+(26)Department of Urology, Medical University of Graz, Graz, Austria.
+(27)Department of Urology, Asklepios Klinik Barmbek, Hamburg, Germany.
+(28)Department of Urology, Medius Kliniken, Ruit, Baden-Württemberg, Germany.
+(29)Department of Urology, Kantonspital Frauenfeld, Spital Thurgau AG, 
+Frauenfeld, Switzerland.
+(30)Department of Urology, University General Hospital of Heraklion, University 
+of Crete, Medical School, Heraklion, Greece.
+
+PURPOSE: To identify expert laser settings for BPH treatment and evaluate the 
+application of preventive measures to reduce complications.
+METHODS: A survey was conducted after narrative literature research to identify 
+relevant questions regarding laser use for BPH treatment (59 questions). Experts 
+were asked for laser settings during specific clinical scenarios. Settings were 
+compared for the reported laser types, and common settings and preventive 
+measures were identified.
+RESULTS: Twenty-two experts completed the survey with a mean filling time of 
+12.9 min. Ho:YAG, Thulium fiber laser (TFL), continuous wave (cw) Tm:YAG, pulsed 
+Tm:YAG and Greenlight™ lasers are used by 73% (16/22), 50% (11/22), 23% (5/22), 
+13.6% (3/22) and 9.1% (2/22) of experts, respectively. All experts use 
+anatomical enucleation of the prostate (EEP), preferentially in one- or two-lobe 
+technique. Laser settings differ significantly between laser types, with median 
+laser power for apical/main gland EEP of 75/94 W, 60/60 W, 100/100 W, 100/100 W, 
+and 80/80 W for Ho:YAG, TFL, cwTm:YAG, pulsed Tm:YAG and Greenlight™ lasers, 
+respectively (p = 0.02 and p = 0.005). However, power settings within the same 
+laser source are similar. Pulse shapes for main gland EEP significantly differ 
+between lasers with long and pulse shape modified (e.g., Moses, Virtual Basket) 
+modes preferred for Ho:YAG and short pulse modes for TFL (p = 0.031).
+CONCLUSION: Ho:YAG lasers no longer seem to be the mainstay of EEP. TFL lasers 
+are generally used in pulsed mode though clinical applicability for 
+quasi-continuous settings has recently been demonstrated. One and two-lobe 
+techniques are beneficial regarding operative time and are used by most experts.
+
+© 2023. The Author(s), under exclusive licence to Springer-Verlag GmbH Germany, 
+part of Springer Nature.
+
+DOI: 10.1007/s00345-023-04565-y
+PMID: 37632557 [Indexed for MEDLINE]
+
+
+4. Biotechnol Biofuels. 2017 May 19;10:132. doi: 10.1186/s13068-017-0819-8. 
+eCollection 2017.
+
+Conferring cellulose-degrading ability to Yarrowia lipolytica to facilitate a 
+consolidated bioprocessing approach.
+
+Guo ZP(1), Duquesne S(1), Bozonnet S(1), Cioci G(1), Nicaud JM(2), Marty A(1), 
+O'Donohue MJ(1).
+
+Author information:
+(1)Biocatalysis Group, INSA/INRA UMR 792, CNRS, LISBP, Université de Toulouse, 
+135, Avenue de Rangueil, 31077 Toulouse, France.
+(2)Micalis Institute, INRA, AgroParisTech, Université Paris-Saclay, 
+Jouy-en-Josas, France.
+
+BACKGROUND: Yarrowia lipolytica, one of the most widely studied 
+"nonconventional" oleaginous yeast species, is unable to grow on cellulose. 
+Recently, we identified and overexpressed two endogenous β-glucosidases in Y. 
+lipolytica, thus enabling this yeast to use cello-oligosaccharides as a carbon 
+source for growth. Using this engineered yeast platform, we have now gone 
+further toward building a fully cellulolytic Y. lipolytica for use in 
+consolidated bioprocessing of cellulose.
+RESULTS: Initially, different essential enzyme components of a cellulase 
+cocktail (i.e,. cellobiohydrolases and endoglucanases) were individually 
+expressed in Y. lipolytica in order to ascertain the viability of the strategy. 
+Accordingly, the Trichoderma reesei endoglucanase I (TrEG I) and II (TrEG II) 
+were secreted as active proteins in Y. lipolytica, with the secretion yield of 
+EG II being twice that of EG I. Characterization of the purified His-tagged 
+recombinant EG proteins (rhTrEGs) revealed that rhTrEG I displayed higher 
+specific activity than rhTrEG II on both cellotriose and insoluble cellulosic 
+substrates, such as Avicel, β-1, 3 glucan, β-1, 4 glucan, and PASC. Similarly, 
+cellobiohydrolases, such as T. reesei CBH I and II (TrCBH I and II), and the CBH 
+I from Neurospora crassa (NcCBH I) were successfully expressed in Y. lipolytica. 
+However, the yield of the expressed TrCBH I was low, so work on this was not 
+pursued. Contrastingly, rhNcCBH I was not only well expressed, but also highly 
+active on PASC and more active on Avicel (0.11 U/mg) than wild-type TrCBH I 
+(0.065 U/mg). Therefore, work was pursued using a combination of NcCBH I and 
+TrCBH II. The quantification of enzyme levels in culture supernatants revealed 
+that the use of a hybrid promoter instead of the primarily used TEF promoter 
+procured four and eight times more NcCBH I and TrCBH II expressions, 
+respectively. Finally, the coexpression of the previously described Y. 
+lipolytica β-glucosidases, the CBH II, and EG I and II from T. reesei, and the 
+N. crassa CBH I procured an engineered Y. lipolytica strain that was able to 
+grow both on model cellulose substrates, such as highly crystalline Avicel, and 
+on industrial cellulose pulp, such as that obtained using an organosolv process.
+CONCLUSIONS: A Y. lipolytica strain coexpressing six cellulolytic enzyme 
+components has been successfully developed. In addition, the results presented 
+show how the recombinant strain can be optimized, for example, using artificial 
+promoters to tailor expression levels. Most significantly, this study has 
+provided a demonstration of how the strain can grow on a sample of industrial 
+cellulose as sole carbon source, thus revealing the feasibility of 
+Yarrowia-based consolidated bioprocess for the production of fuel and chemical 
+precursors. Further, enzyme and strain optimization, coupled to appropriate 
+process design, will undoubtedly lead to much better performances in the future.
+
+DOI: 10.1186/s13068-017-0819-8
+PMCID: PMC5438512
+PMID: 28533816
