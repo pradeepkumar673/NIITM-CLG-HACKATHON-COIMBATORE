@@ -268,6 +268,10 @@ export function StudyResult() {
 </div>
 </section>
 
+<section className="xl:col-span-3 flex flex-col gap-space-sm h-[600px] lg:h-auto min-h-[400px]">
+  <SkeletonViewer anatomyData={resultData?.anatomy} />
+</section>
+
 <section className="xl:col-span-3 flex flex-col gap-space-sm">
 <div className="flex items-center justify-between px-1">
 <div className="flex items-center gap-1.5">

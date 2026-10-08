@@ -1,0 +1,15 @@
+{
+  "meshes": [
+    "spine_thoracic",
+    "ribs_sternum",
+    "clavicle_shoulder",
+    "upper_arm",
+    "forearm",
+    "hand_wrist",
+    "pelvis_hip",
+    "thigh",
+    "knee",
+    "leg_lower",
+    "foot_ankle"
+  ]
+}
