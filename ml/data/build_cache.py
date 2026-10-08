@@ -39,7 +39,7 @@ def process_manifest(manifest_path, cache_dir, image_size=224):
     
     # Process train, val, test separately to make memmaps
     for split in ["train", "val", "test"]:
-        sub = df[df["split"] == split].copy()
+        sub = df[df["split"] == split].reset_index(drop=True)
         if len(sub) == 0: continue
         
         args = [(i, row["image_path"], name, image_size) for i, row in sub.iterrows()]
@@ -109,8 +109,8 @@ def main():
         "tb_manifest.csv",
         "fracture_manifest.csv",
         "knee_manifest.csv",
-        "gate_manifest.csv"
-        # Skip chest full cache for now if memory is tight, or just cache it (it will take ~14k * 224 * 224 = ~700MB)
+        "gate_manifest.csv",
+        "chest_manifest.csv"
     ]
     
     for m in manifests:

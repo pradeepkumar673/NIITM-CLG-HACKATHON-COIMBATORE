@@ -1,0 +1,438 @@
+--- PNEUMONIA DIABETES ---
+1. CMAJ Open. 2021 Jan 25;9(1):E62-E70. doi: 10.9778/cmajo.20200013. Print 2021 
+Jan-Mar.
+
+Type 2 diabetes mellitus and risk of community-acquired pneumonia: a systematic 
+review and meta-analysis of observational studies.
+
+Brunetti VC(1), Ayele HT(1), Yu OHY(1), Ernst P(1), Filion KB(2).
+
+Author information:
+(1)Department of Epidemiology, Biostatistics and Occupational Health (Brunetti, 
+Ayele, Filion), McGill University; Centre for Clinical Epidemiology (Brunetti, 
+Ayele, Yu, Ernst, Filion), Lady Davis Institute for Medical Research, and 
+Divisions of Endocrinology (Yu) and Pulmonary Medicine (Ernst), Jewish General 
+Hospital, McGill University; Department of Medicine (Ernst, Filion), McGill 
+University, Montréal, Que.
+(2)Department of Epidemiology, Biostatistics and Occupational Health (Brunetti, 
+Ayele, Filion), McGill University; Centre for Clinical Epidemiology (Brunetti, 
+Ayele, Yu, Ernst, Filion), Lady Davis Institute for Medical Research, and 
+Divisions of Endocrinology (Yu) and Pulmonary Medicine (Ernst), Jewish General 
+Hospital, McGill University; Department of Medicine (Ernst, Filion), McGill 
+University, Montréal, Que. kristian.filion@mcgill.ca.
+
+BACKGROUND: People with type 2 diabetes are at greater risk for infections than 
+those without type 2 diabetes. Our objective was to examine the association 
+between type 2 diabetes and the risk of community-acquired pneumonia (CAP).
+METHODS: In this systematic review and meta-analysis, we searched MEDLINE, 
+Embase, CINAHL, ProQuest theses and dissertations, Global Health, the Global 
+Index Medicus of the World Health Organization, and Google Scholar. We included 
+observational studies published in English or French between Jan. 1, 1946 (start 
+of MEDLINE) and July 18, 2020. Two independent reviewers extracted data and 
+assessed quality using the ROBINS-I tool. DerSimonian-Laird random-effects 
+models were used to pool estimates of the association between type 2 diabetes 
+and CAP.
+RESULTS: Our systematic review included 15 articles, reporting on 13 cohort 
+studies and 4 case-control studies (14 538 968 patients). All studies reported 
+an increased risk of pneumonia among patients with type 2 diabetes, and all were 
+at serious risk of bias. When estimates were pooled across studies, the pooled 
+relative risk was 1.64 (95% confidence interval [CI] 1.55-1.73); although there 
+was a substantial amount of relative heterogeneity (I 2 94.2), the amount of 
+absolute heterogeneity was more modest (T2 0.008). The relative risk was 1.70 
+(95% CI 1.63-1.77, I 2 85.2%, T2 0.002) among cohort studies (n = 13), and the 
+odds ratio was 1.54 (95% CI 1.14-2.09, I 2 92.7%, T2 0.07) among case-control 
+studies (n = 4).
+INTERPRETATION: Type 2 diabetes may be associated with an increased risk of CAP; 
+however, the available evidence is from studies at serious risk of bias, and 
+additional, high-quality studies are needed to confirm these findings.
+PROSPERO REGISTRATION: CRD42018116409.
+
+© 2021 Joule Inc. or its licensors.
+
+DOI: 10.9778/cmajo.20200013
+PMCID: PMC7843079
+PMID: 33495386 [Indexed for MEDLINE]
+
+Conflict of interest statement: Competing interests: None declared.
+--- PRIOR FRACTURE ---
+1. Osteoporos Int. 2023 Dec;34(12):2027-2045. doi: 10.1007/s00198-023-06870-z.
+Epub  2023 Aug 11.
+
+Previous fracture and subsequent fracture risk: a meta-analysis to update FRAX.
+
+Kanis JA(1)(2), Johansson H(3)(4), McCloskey EV(5)(6), Liu E(3), Åkesson 
+KE(7)(8), Anderson FA(9), Azagra R(10)(11)(12), Bager CL(13), Beaudart 
+C(14)(15), Bischoff-Ferrari HA(16)(17), Biver E(18), Bruyère O(14), Cauley 
+JA(19), Center JR(20)(21)(22), Chapurlat R(23), Christiansen C(13), Cooper 
+C(24)(25)(26), Crandall CJ(27), Cummings SR(28), da Silva JAP(29)(30), 
+Dawson-Hughes B(31), Diez-Perez A(32), Dufour AB(33)(34), Eisman JA(20)(21)(22), 
+Elders PJM(35), Ferrari S(18), Fujita Y(36), Fujiwara S(37), Glüer CC(38), 
+Goldshtein I(39)(40), Goltzman D(41), Gudnason V(42)(43), Hall J(44), Hans 
+D(45), Hoff M(46)(47), Hollick RJ(48), Huisman M(49)(50), Iki M(51), Ish-Shalom 
+S(52), Jones G(53), Karlsson MK(7)(8), Khosla S(54), Kiel DP(33)(34), Koh 
+WP(55)(56), Koromani F(57)(58), Kotowicz MA(59)(60)(61), Kröger H(62)(63), Kwok 
+T(64)(65), Lamy O(66)(67), Langhammer A(68), Larijani B(69), Lippuner K(70), 
+Mellström D(71)(72), Merlijn T(73), Nordström A(74)(75)(76), Nordström P(77), 
+O'Neill TW(78)(79), Obermayer-Pietsch B(80)(81), Ohlsson C(82)(83), Orwoll 
+ES(84), Pasco JA(59)(60)(61)(85), Rivadeneira F(57), Schott AM(86), Shiroma 
+EJ(87), Siggeirsdottir K(42)(88), Simonsick EM(89), Sornay-Rendu E(90), Sund 
+R(63), Swart KMA(35)(91), Szulc P(90), Tamaki J(92), Torgerson DJ(93), van 
+Schoor NM(49), van Staa TP(94), Vila J(95), Wareham NJ(96), Wright NC(97), 
+Yoshimura N(98), Zillikens MC(57), Zwart M(12)(99)(100)(101), Vandenput 
+L(3)(82), Harvey NC(24)(25), Lorentzon M(3)(4), Leslie WD(102).
+
+Author information:
+(1)Mary McKillop Institute for Health Research, Australian Catholic University, 
+Melbourne, Australia. w.j.Pontefract@sheffield.ac.uk.
+(2)Centre for Metabolic Bone Diseases, University of Sheffield, Sheffield, UK. 
+w.j.Pontefract@sheffield.ac.uk.
+(3)Mary McKillop Institute for Health Research, Australian Catholic University, 
+Melbourne, Australia.
+(4)Sahlgrenska Osteoporosis Centre, Institute of Medicine, University of 
+Gothenburg, Gothenburg, Sweden.
+(5)Centre for Metabolic Bone Diseases, University of Sheffield, Sheffield, UK.
+(6)MRC Versus Arthritis Centre for Integrated research in Musculoskeletal 
+Ageing, Mellanby Centre for Musculoskeletal Research, University of Sheffield, 
+Sheffield, UK.
+(7)Clinical and Molecular Osteoporosis Research Unit, Department of Clinical 
+Sciences, Lund University, Lund, Sweden.
+(8)Department of Orthopedics, Skåne University Hospital, Malmö, Sweden.
+(9)GLOW Coordinating Center, Center for Outcomes Research, University of 
+Massachusetts Medical School, Worcester, MA, USA.
+(10)Department of Medicine, Autonomous University of Barcelona, Barcelona, 
+Spain.
+(11)Health Centre Badia del Valles, Catalan Institute of Health, Barcelona, 
+Spain.
+(12)PRECIOSA-Fundación para la investigación, Barberà del Vallés, Barcelona, 
+Spain.
+(13)Nordic Bioscience A/S, Herlev, Denmark.
+(14)WHO Collaborating Centre for Public Health Aspects of Musculoskeletal Health 
+and Aging, Division of Public Health, Epidemiology and Health Economics, 
+University of Liège, Liège, Belgium.
+(15)Department of Health Services Research, University of Maastricht, 
+Maastricht, the Netherlands.
+(16)Department of Aging Medicine and Aging Research, University Hospital, 
+Zurich, and University of Zurich, Zurich, Switzerland.
+(17)Centre on Aging and Mobility, University of Zurich and City Hospital, 
+Zurich, Switzerland.
+(18)Division of Bone Diseases, Department of Medicine, Geneva University 
+Hospitals and Faculty of Medicine, University of Geneva, Geneva, Switzerland.
+(19)Department of Epidemiology, School of Public Health, University of 
+Pittsburgh, Pittsburgh, Philadelphia, USA.
+(20)Skeletal Diseases Program, Garvan Institute of Medical Research, Sydney, 
+NSW, Australia.
+(21)St Vincent's Clinical School, School of Medicine and Health, University of 
+New South Wales Sydney, Sydney, NSW, Australia.
+(22)School of Medicine Sydney, University of Notre Dame Australia, Sydney, NSW, 
+Australia.
+(23)INSERM UMR 1033, Université Claude Bernard-Lyon1, Hôpital Edouard Herriot, 
+Lyon, France.
+(24)MRC Lifecourse Epidemiology Centre, University of Southampton, Southampton, 
+UK.
+(25)NIHR Southampton Biomedical Research Centre, University of Southampton and 
+University Hospitals Southampton NHS Foundation Trust, Southampton, UK.
+(26)NIHR Oxford Biomedical Research Unit, University of Oxford, Oxford, UK.
+(27)Division of General Internal Medicine and Health Services Research, David 
+Geffen School of Medicine, University of California, Los Angeles, CA, USA.
+(28)San Francisco Coordinating Center, California Pacific Medical Center 
+Research Institute, San Francisco, CA, USA.
+(29)Coimbra Institute for Clinical and Biomedical Research, Faculty of Medicine, 
+University of Coimbra, Coimbra, Portugal.
+(30)Rheumatology Department, Centro Hospitalar e Universitário de Coimbra, 
+Coimbra, Portugal.
+(31)Bone Metabolism Laboratory, Jean Mayer US Department of Agriculture Human 
+Nutrition Research Center on Aging, Tufts University, Boston, MA, USA.
+(32)Department of Internal Medicine, Hospital del Mar and CIBERFES, Autonomous 
+University of Barcelona, Barcelona, Spain.
+(33)Marcus Institute for Aging Research, Hebrew Senior Life, Boston, MA, USA.
+(34)Department of Medicine, Beth Israel Deaconess Medical Center and Harvard 
+Medical School, Boston, MA, USA.
+(35)Petra JM Elders Department of General Practice, Amsterdam UMC, location AMC, 
+Amsterdam Public Health Research Institute, Amsterdam, The Netherlands.
+(36)Center for Medical Education and Clinical Training, Kindai University 
+Faculty of Medicine, Osaka, Japan.
+(37)Department of Pharmacy, Yasuda Women's University, Hiroshima, Japan.
+(38)Section Biomedical Imaging, Molecular Imaging North Competence Center, 
+Department of Radiology and Neuroradiology, University Medical Center 
+Schleswig-Holstein Kiel, Kiel University, Kiel, Germany.
+(39)Maccabitech Institute of Research and Innovation, Maccabi Healthcare 
+Services, Tel Aviv, Israel.
+(40)Department of Epidemiology and Preventive Medicine, School of Public Health, 
+Sackler Faculty of Medicine, Tel Aviv University, Tel Aviv, Israel.
+(41)Department of Medicine, McGill University and McGill University Health 
+Centre, Montreal, Canada.
+(42)Icelandic Heart Association, Kopavogur, Iceland.
+(43)University of Iceland, Reykjavik, Iceland.
+(44)MRC Centre for Reproductive Health, University of Edinburgh, Edinburgh, UK.
+(45)Interdisciplinary Centre of Bone Diseases, Bone and Joint Department, 
+Lausanne University Hospital (CHUV) & University of Lausanne, Lausanne, 
+Switzerland.
+(46)Department of Neuromedicine and Movement Science, Norwegian University of 
+Science and Technology, Trondheim, Norway.
+(47)Department of Rheumatology, St Olavs Hospital, Trondheim, Norway.
+(48)Aberdeen Centre for Arthritis and Musculoskeletal Health, Epidemiology 
+Group, University of Aberdeen, Aberdeen, UK.
+(49)Department of Epidemiology and Data Science, Amsterdam Public Health 
+Research Institute, VU University Medical Center, Amsterdam, The Netherlands.
+(50)Department of Sociology, VU University, Amsterdam, The Netherlands.
+(51)Department of Public Health, Kindai University Faculty of Medicine, Osaka, 
+Japan.
+(52)Endocrine Clinic, Elisha Hospital, Haifa, Israel.
+(53)Menzies Institute for Medical Research, University of Tasmania, Hobart, 
+Australia.
+(54)Robert and Arlene Kogod Center on Aging and Division of Endocrinology, Mayo 
+Clinic College of Medicine, Mayo Clinic, Rochester, MN, USA.
+(55)Healthy Longevity Translational Research Programme, Yong Loo Lin School of 
+Medicine, National University of Singapore, Singapore, Singapore.
+(56)Singapore Institute for Clinical Sciences, Agency for Science Technology and 
+Research (A*STAR), Singapore, Singapore.
+(57)Department of Internal Medicine, Erasmus University Medical Center, 
+Rotterdam, The Netherlands.
+(58)Department of Radiology and Nuclear Medicine, Erasmus University Medical 
+Center, Rotterdam, The Netherlands.
+(59)IMPACT (Institute for Mental and Physical Health and Clinical Translation), 
+Deakin University, Geelong, Victoria, Australia.
+(60)Barwon Health, Geelong, Victoria, Australia.
+(61)Department of Medicine -Western Health, The University of Melbourne, St 
+Albans, Victoria, Australia.
+(62)Department of Orthopedics and Traumatology, Kuopio University Hospital, 
+Kuopio, Finland.
+(63)Kuopio Musculoskeletal Research Unit, University of Eastern Finland, Kuopio, 
+Finland.
+(64)Department of Medicine and Therapeutics, Faculty of Medicine, The Chinese 
+University of Hong Kong, Hong Kong, Hong Kong.
+(65)Jockey Club Centre for Osteoporosis Care and Control, Faculty of Medicine, 
+The Chinese University of Hong Kong, Hong Kong, Hong Kong.
+(66)Centre of Bone Diseases, Lausanne University Hospital, Lausanne, 
+Switzerland.
+(67)Service of Internal Medicine, Lausanne University Hospital, Lausanne, 
+Switzerland.
+(68)HUNT Research Centre, Department of Public Health and Nursing, Faculty of 
+Medicine and Health Sciences, Norwegian University of Science and Technology, 
+Trondheim, Norway.
+(69)Endocrinology and Metabolism Research Center, Endocrinology and Metabolism 
+Clinical Sciences Institute, Tehran University of Medical Sciences, Tehran, 
+Iran.
+(70)Department of Osteoporosis, Bern University Hospital, University of Bern, 
+Bern, Switzerland.
+(71)Geriatric Medicine, Department of Internal Medicine and Clinical Nutrition, 
+Institute of Medicine, Sahlgrenska Academy, University of Gothenburg, 
+Gothenburg, Sweden.
+(72)Geriatric Medicine, Sahlgrenska University Hospital Mölndal, Mölndal, 
+Sweden.
+(73)Department of General Practice, Amsterdam UMC, location AMC, Amsterdam 
+Public Health Research Institute, Amsterdam, The Netherlands.
+(74)School of Sport Sciences, UiT The Arctic University of Norway, Tromsø, 
+Norway.
+(75)Department of Health Sciences, Swedish Winter Sports Research Centre, Mid 
+Sweden University, Östersund, Sweden.
+(76)Department of Medical Sciences, Uppsala University, Uppsala, Sweden.
+(77)Department of Public Health and Caring Sciences, Uppsala University, 
+Uppsala, Sweden.
+(78)National Institute for Health Research Manchester Biomedical Research 
+Centre, Manchester University NHS Foundation Trust, Manchester Academic Health 
+Science Centre, Manchester, UK.
+(79)Centre for Epidemiology Versus Arthritis, University of Manchester, 
+Manchester, UK.
+(80)Department of Internal Medicine, Division of Endocrinology and Diabetology, 
+Medical University Graz, Graz, Austria.
+(81)Center for Biomarker Research in Medicine, Graz, Austria.
+(82)Sahlgrenska Osteoporosis Centre, Department of Internal Medicine and 
+Clinical Nutrition, Institute of Medicine, Sahlgrenska Academy, University of 
+Gothenburg, Gothenburg, Sweden.
+(83)Department of Drug Treatment, Sahlgrenska University Hospital, Region Västra 
+Götaland, Gothenburg, Sweden.
+(84)Department of Medicine, Oregon Health and Science University, Portland, OR, 
+USA.
+(85)Department of Epidemiology and Preventive Medicine, Monash University, 
+Melbourne, Australia.
+(86)Université Claude Bernard Lyon 1, U INSERM 1290 RESHAPE, Lyon, France.
+(87)Laboratory of Epidemiology and Population Sciences, National Institute on 
+Aging, Baltimore, MD, USA.
+(88)Janus Rehabilitation, Reykjavik, Iceland.
+(89)Translational Gerontology Branch, National Institute on Aging Intramural 
+Research Program, Baltimore, MD, USA.
+(90)INSERM UMR 1033, University of Lyon, Hôpital Edouard Herriot, Lyon, France.
+(91)PHARMO Institute for Drug Outcomes Research, Utrecht, The Netherlands.
+(92)Department of Hygiene and Public Health, Faculty of Medicine, Educational 
+Foundation of Osaka Medical and Pharmaceutical University, Osaka, Japan.
+(93)York Trials Unit, Department of Health Sciences, University of York, York, 
+UK.
+(94)Centre for Health Informatics, Faculty of Biology, Medicine and Health, 
+School of Health Sciences, University of Manchester, Manchester, UK.
+(95)Statistics Support Unit, Hospital del Mar Medical Research Institute, CIBER 
+Epidemiology and Public Health (CIBERESP), Barcelona, Spain.
+(96)MRC Epidemiology Unit, University of Cambridge, Cambridge, UK.
+(97)Department of Epidemiology, University of Alabama at Birmingham, Birmingham, 
+AL, USA.
+(98)Department of Preventive Medicine for Locomotive Organ Disorders, The 
+University of Tokyo Hospital, Tokyo, Japan.
+(99)Health Center Can Gibert del Plà, Catalan Institute of Health, Girona, 
+Spain.
+(100)Department of Medical Sciences, University of Girona, Girona, Spain.
+(101)GROIMAP/GROICAP (research groups), Unitat de Suport a la Recerca Girona, 
+Institut Universitari d'Investigació en Atenció Primària Jordi Gol, Girona, 
+Spain.
+(102)Department of Medicine, University of Manitoba, Winnipeg, Manitoba, Canada.
+
+A large international meta-analysis using primary data from 64 cohorts has 
+quantified the increased risk of fracture associated with a previous history of 
+fracture for future use in FRAX.
+INTRODUCTION: The aim of this study was to quantify the fracture risk associated 
+with a prior fracture on an international basis and to explore the relationship 
+of this risk with age, sex, time since baseline and bone mineral density (BMD).
+METHODS: We studied 665,971 men and 1,438,535 women from 64 cohorts in 32 
+countries followed for a total of 19.5 million person-years. The effect of a 
+prior history of fracture on the risk of any clinical fracture, any osteoporotic 
+fracture, major osteoporotic fracture, and hip fracture alone was examined using 
+an extended Poisson model in each cohort. Covariates examined were age, sex, 
+BMD, and duration of follow-up. The results of the different studies were merged 
+by using the weighted β-coefficients.
+RESULTS: A previous fracture history, compared with individuals without a prior 
+fracture, was associated with a significantly increased risk of any clinical 
+fracture (hazard ratio, HR = 1.88; 95% CI = 1.72-2.07). The risk ratio was 
+similar for the outcome of osteoporotic fracture (HR = 1.87; 95% CI = 
+1.69-2.07), major osteoporotic fracture (HR = 1.83; 95% CI = 1.63-2.06), or for 
+hip fracture (HR = 1.82; 95% CI = 1.62-2.06). There was no significant 
+difference in risk ratio between men and women. Subsequent fracture risk was 
+marginally downward adjusted when account was taken of BMD. Low BMD explained a 
+minority of the risk for any clinical fracture (14%), osteoporotic fracture 
+(17%), and for hip fracture (33%). The risk ratio for all fracture outcomes 
+related to prior fracture decreased significantly with adjustment for age and 
+time since baseline examination.
+CONCLUSION: A previous history of fracture confers an increased risk of fracture 
+of substantial importance beyond that explained by BMD. The effect is similar in 
+men and women. Its quantitation on an international basis permits the more 
+accurate use of this risk factor in case finding strategies.
+
+© 2023. International Osteoporosis Foundation and Bone Health and Osteoporosis 
+Foundation.
+
+DOI: 10.1007/s00198-023-06870-z
+PMCID: PMC7615305
+PMID: 37566158 [Indexed for MEDLINE]
+
+Conflict of interest statement: Conflict of interest JA Kanis led the team that 
+developed FRAX as director of the WHO Collaborating Centre for Metabolic Bone 
+Diseases. EV McCloskey, WD Leslie, M Lorentzon, NC Harvey, E Liu, L Vandenput 
+and H Johansson are members of the FRAX team. JA Kanis, NC Harvey, and EV 
+McCloskey are members of the advisory body to the National Osteoporosis 
+Guideline Group. JA Kanis reports no additional competing interests. KE Åkesson 
+has no financial interest related to FRAX; chaired the National SALAR Group for 
+Person-Centered Care Pathway Osteoporosis. FA Anderson led the team that 
+developed GLOW, while director of the Center for Outcomes Research at the 
+University of Massachusetts Medical School; he has no financial interest in 
+FRAX. R Azagra has received funding for research from Instituto Carlos III of 
+Spanish Ministry of Health, IDIAP Jordi Gol of Catalan Government and from 
+Scientific Societies SEMFYC and SEIOMM. CL Bager is employed at Nordic 
+Bioscience and owns stock in Nordic Bioscience. She declares no competing 
+interests in relation to this work. HA Bischoff-Ferrari has no financial 
+interest in FRAX. For the DO-HEALTH trial cohort, Prof. Bischoff-Ferrari reports 
+independent and investigator-initiated grants from European Commission Framework 
+7 Research Program, from the University of Zurich, from NESTEC, from Pfizer 
+Consumer Healthcare, from Streuli Pharma, plus non-financial support from DNP. 
+For the study cohort extension, she reports independent and 
+investigator-initiated grants from Pfizer and from Vifor. Further, Prof. 
+Bischoff-Ferrari reports non-financial support from Roche Diagnostics and 
+personal fees from Wild, Sandoz, Pfizer, Vifor, Mylan, Roche, Meda Pharma, 
+outside the submitted work with regard to speaker fees and travel fees. JR 
+Center has received honoraria for speaking at educational meetings and for 
+advisory boards from Amgen and honoraria for an advisory board from Bayer. R 
+Chapurlat has no financial interest in FRAX. He has received grant funding from 
+Amgen, UCB, Chugai, MSD, Mylan and Medac. He has received honoraria from Amgen, 
+UCB, Chugai, Galapagos, Biocon, Abbvie, Haoma Medica, Pfizer, Amolyt, MSD, 
+Lilly, BMS, Novartis, Arrow, PKMed, Kyowa-Kirin, and Sanofi. C Christiansen owns 
+stock in Nordic Bioscience. He declares no competing interests in relation to 
+this work. C Cooper reports personal fees from Alliance for Better Bone Health, 
+Amgen, Eli Lilly, GSK, Medtronic, Merck, Novartis, Pfizer, Roche, Servier, 
+Takeda and UCB. A Diez-Perez reports personal fees from Amgen, Lilly, Theramex 
+and grants from Instituto Carlos III and owns shares of Active Life Scientific, 
+all outside the submitted work. JA Eisman declares consulting and research 
+support from Actavis, Amgen, Aspen, Lilly, Merck Sharp and Dohme, Novartis, 
+Sanofi-Aventis, Servier and Theramex. PJM Elders has no financial interest in 
+FRAX. PJM Elders reports support for the SOS study by Stichting Achmea 
+Gezondheidszorg, Achmea and VGZ zorgverzekeraar. Additional support was given by 
+the stichting Artsenlaboratorium en Trombosedienst. Outside the submitted work, 
+she did receive independent investigator driven grants by Zonmw, the 
+Netherlands, de Hartstichting, the Netherlands, the European foundation for the 
+study of Diabetes, Amgen the Netherlands, TEVA, the Netherlands and Takeda, the 
+Netherlands. Claus-C. Glüer reports honoraria and research support from AgNovos, 
+Amgen, osteolabs and UCB unrelated to this work. NC Harvey has received 
+consultancy/lecture fees/honoraria/grant funding from Alliance for Better Bone 
+Health, Amgen, MSD, Eli Lilly, Radius Health, Servier, Shire, UCB, Consilient 
+Healthcare and Internis Pharma. DP Kiel has no financial interest in FRAX but 
+has received support for his work in the Framingham Study over the past 30 years 
+by the National Institutes of Health, Astra Zeneca, Merck, Amgen, and Radius 
+Health. MA Kotowicz has received funding from the National Health and Medical 
+Research Council (NHMRC) Australia, and the Medical Research Future Fund (MRFF) 
+Australia. He has served on advisory boards for Amgen Australia, Novartic and 
+Eli Lilly – all unrelated to this work and is the Director of the Geelong Bone 
+Densitometry Service. M Lorentzon has received lecture fees from Amgen, Lilly, 
+Meda, Renapharma and UCB Pharma and consulting fees from Amgen, Radius Health, 
+UCB Pharma, Renapharma and Consilient Health, all outside the presented work. EV 
+McCloskey has received consultancy/lecture fees/grant funding/honoraria from 
+AgNovos, Amgen, AstraZeneca, Consilient Healthcare, Fresenius Kabi, Gilead, GSK, 
+Hologic, Internis, Lilly, Merck, Novartis, Pfizer, Radius Health, Redx Oncology, 
+Roche, Sanofi Aventis, UCB, ViiV, Warner Chilcott and I3 Innovus. C Ohlsson is 
+listed as a coinventor on two patent applications regarding probiotics in 
+osteoporosis treatment. ES Orwoll reports consulting fees from Amgen, Biocon, 
+Radius, and Bayer, and research support from Mereo. JA Pasco has received 
+funding from the National Health and Medical Research Council (NHMRC) Australia, 
+and the Medical Research Future Fund (MRFF) Australia, all unrelated to this 
+work. KMA Swart is an employee of the PHARMO Institute for Drug Outcomes 
+Research. This independent research institute performs financially supported 
+studies for government and related healthcare authorities and several 
+pharmaceutical companies. NC Wright sits on the Board of Trustee of the US Bone 
+Health and Osteoporosis Foundation, and has received consulting fees from Radius 
+and ArgenX MC Zillikens has received honoraria in the past for lectures or 
+advice from Alexion, Amgen, Eli Lilly, Kyowa Kirin, Shire and UCB, unrelated to 
+the current work. M Zwart has received research funding from national societies 
+(SEMFYC and SEIOMM). C Beaudart, E Biver, · Bruyère, JA Cauley, CJ Crandall, SR 
+Cummings, JAP da Silva, B Dawson-Huges, AB Dufour, S Ferrari, Y Fujita, S 
+Fujiwara, I Goldshtein, D Goltzman, V Gudnason, J Hall, D Hans, M Hoff, RJ 
+Hollick, M Huisman, M Iki, S Ish-Shalom, H Johansson, G Jones, MK Karlsson, S 
+Khosla, W-P Koh, F Koromani, H Kröger, T Kwok, · Lamy, A Langhammer, B Larijani, 
+WD Leslie, K Lippuner, E Liu, D Mellström, T Merlijn, A Nordström, P Nordström, 
+TW O’Neill, B Obermayer-Pietsch, F Rivadeneira, A-M Schott, EJ Shiroma, K 
+Sigeirsdottir, EM Simonsick, E Sornay-Rendu, R Sund, KMA Swart, P Szulc, J 
+Tamaki, DJ Torgerson, L Vandenput, NM van Schoor, TP van Staa, J Vila, NJ 
+Wareham, N Yoshimura declare no competing interests in relation to this work.
+--- SMOKING NODULE ---
+1. Oncotarget. 2017 Apr 25;8(17):29318-29327. doi: 10.18632/oncotarget.16426.
+
+Assessment of the cancer risk factors of solitary pulmonary nodules.
+
+Yang L(1), Zhang Q(2), Bai L(2), Li TY(1), He C(1), Ma QL(2), Li LS(1), Huang 
+XQ(1), Qian GS(2).
+
+Author information:
+(1)Interventional Radiology Department, the First Hospital of the Third Military 
+Medical University, Chongqing 400038, China.
+(2)Institute of Respiratory Diseases, the Second Hospital of the Third Military 
+Medical University, Chongqing 400038, China.
+
+There are no large samples or exact prediction models for assessing the cancer 
+risk factors of solitary pulmonary nodules (SPNs) in the Chinese population. We 
+retrospectively analyzed the clinical and imaging data of patients with SPNs who 
+underwent computer tomography guided needle biopsy in our hospital from Jan 1st 
+of 2011 to March 30th of 2016. These patients were divided into a development 
+data set and a validation data set. These groups included 1078 and 344 patients, 
+respectively. A prediction model was developed from the development data set and 
+was validated with the validation data set using logistic regression. The 
+predictors of cancer in our model included female gender, age, pack-years of 
+smoking, a previous history of malignancy, nodule size, lobulated and spiculated 
+edges, lobulation alone and spiculation alone. The Area Under the Curves, 
+sensitivity and specificity of our model in the development and validation data 
+sets were significantly higher than those of the Mayo model and VA model (p < 
+0.001). We established the largest sampling risk prediction model of SPNs in a 
+Chinese cohort. This model is particularly applicable to SPNs > 8 mm in size. 
+SPNs in female patients, as well as SPNs featuring a combination of lobulated 
+and spiculated edges or lobulated edges alone, should be evaluated carefully due 
+to the probability that they are malignant.
+
+DOI: 10.18632/oncotarget.16426
+PMCID: PMC5438732
+PMID: 28404977 [Indexed for MEDLINE]
+
+Conflict of interest statement: CONFLICTS OF INTEREST The authors declare that 
+they have no competing interests.
