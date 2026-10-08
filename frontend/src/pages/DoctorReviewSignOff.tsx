@@ -92,7 +92,7 @@ export function DoctorReviewSignOff() {
 
   const [decision, setDecision] = useState('agree');
   const [notes, setNotes] = useState('');
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const { data: resp, isLoading } = useQuery({
     queryKey: ['studyResult', id, i18n.language],
@@ -114,9 +114,8 @@ export function DoctorReviewSignOff() {
   const data = resp?.data as any;
   if (!data || !data.study) return <AppShell userRole={authUser?.role} userName={authUser?.name}><div className="p-8">Study not found</div></AppShell>;
 
-  const { study, patient, result, reviews } = data;
+  const { study, patient, result } = data;
   const findings = result?.findings || {};
-  const interactions = result?.interactions || { nodes: [], edges: [] };
   const groqSummary = result?.llm_summary || '';
   
   // Get top finding for heatmap
@@ -128,8 +127,6 @@ export function DoctorReviewSignOff() {
       topLabel = k;
     }
   }
-
-  const isSignedOff = reviews && reviews.length > 0;
   
   // Prepare differential findings (sort by probability desc)
   const sortedFindings = Object.entries(findings)

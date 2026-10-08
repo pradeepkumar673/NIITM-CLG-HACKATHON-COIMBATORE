@@ -23,8 +23,25 @@ def get_test_image(dataset: str, condition: callable):
 def test_skeleton_map_endpoint():
     from fastapi.testclient import TestClient
     from backend.app.main import app
+    from backend.app.db.session import init_db, get_db
+    from backend.app.db.models import User, UserRole
+    from backend.app.core.security import create_access_token, hash_password
+    init_db()
+    db = next(get_db())
+    admin_user = db.query(User).filter(User.role == UserRole.admin).first()
+    if not admin_user:
+        admin_user = User(
+            email="admin_anatomy@example.com",
+            password_hash=hash_password("admin123"),
+            full_name="Admin Anatomy",
+            role=UserRole.admin
+        )
+        db.add(admin_user)
+        db.commit()
+        db.refresh(admin_user)
+    token = create_access_token({"sub": str(admin_user.id), "role": "admin"})
     client = TestClient(app)
-    response = client.get("/anatomy/skeleton-map")
+    response = client.get("/anatomy/skeleton-map", headers={"Authorization": f"Bearer {token}"})
     assert response.status_code == 200
     data = response.json()
     assert "meta" in data

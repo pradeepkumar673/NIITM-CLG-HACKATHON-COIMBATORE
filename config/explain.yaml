@@ -6,7 +6,7 @@ deletion_k_values: [0.1, 0.2, 0.5]
 # salient_threshold: minimum normalised CAM value (0..1) a pixel must exceed
 #   to be counted as part of a salient region.
 #   Source: common GradCAM post-processing practice; review_status: draft
-salient_threshold: 0.50
+salient_threshold: 0.80
 # salient_max_regions: upper bound on the number of connected regions
 #   returned per heatmap (largest by mean saliency first).
 salient_max_regions: 5
