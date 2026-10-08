@@ -1,20 +1,3 @@
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { getStudyResultStudiesIdResultGet } from '../client';
-import { AppShell } from '../components/AppShell';
-import { SkeletonViewer } from '../components/SkeletonViewer';
-
-export function StudyResult() {
-  const { id } = useParams<{ id: string }>();
-
-  const { data: resultData, isLoading } = useQuery({
-    queryKey: ['studyResult', id],
-    queryFn: () => getStudyResultStudiesIdResultGet({ path: { id: parseInt(id!) } }),
-    enabled: !!id
-  });
-
-  return (
-    <AppShell userRole="health_worker" userName="Sister Lakshmi Devi">
 <>
 <div className="flex flex-col w-full">
 
@@ -25,22 +8,22 @@ export function StudyResult() {
         Prototype State:
       </span>
 <div className="inline-flex rounded-lg bg-surface p-0.5 shadow-sm gap-0.5">
-<button className="px-2.5 py-1 text-xs font-medium rounded text-on-primary bg-primary transition-all" id="btn-state-1" >
+<button className="px-2.5 py-1 text-xs font-medium rounded text-on-primary bg-primary transition-all" id="btn-state-1" onClick="setScenario(1)">
           1. Review Needed (High)
         </button>
-<button className="px-2.5 py-1 text-xs font-medium rounded text-on-surface-variant hover:text-on-surface transition-all" id="btn-state-2" >
+<button className="px-2.5 py-1 text-xs font-medium rounded text-on-surface-variant hover:text-on-surface transition-all" id="btn-state-2" onClick="setScenario(2)">
           2. Normal / Low
         </button>
-<button className="px-2.5 py-1 text-xs font-medium rounded text-on-surface-variant hover:text-on-surface transition-all" id="btn-state-3" >
+<button className="px-2.5 py-1 text-xs font-medium rounded text-on-surface-variant hover:text-on-surface transition-all" id="btn-state-3" onClick="setScenario(3)">
           3. Unreliable Artifact
         </button>
-<button className="px-2.5 py-1 text-xs font-medium rounded text-on-surface-variant hover:text-on-surface transition-all" id="btn-state-4" >
+<button className="px-2.5 py-1 text-xs font-medium rounded text-on-surface-variant hover:text-on-surface transition-all" id="btn-state-4" onClick="setScenario(4)">
           4. Experimental TB/Knee
         </button>
 </div>
 </div>
 <div className="flex items-center gap-space-sm">
-<button className="inline-flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium bg-surface text-on-surface-variant hover:text-primary shadow-sm transition-colors" id="btn-mobile-toggle" >
+<button className="inline-flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium bg-surface text-on-surface-variant hover:text-primary shadow-sm transition-colors" id="btn-mobile-toggle" onClick="toggleMobileSim()">
 <span className="material-symbols-outlined text-[16px]">smartphone</span>
 <span id="mobile-toggle-text">Simulate Mobile (390px)</span>
 </button>
@@ -80,7 +63,7 @@ export function StudyResult() {
 <span className="material-symbols-outlined text-[18px]">forward_to_inbox</span>
         Refer to Dr. Sharma (MO)
       </button>
-<button className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md shadow-sm transition-colors" id="btn-reviewed" >
+<button className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md shadow-sm transition-colors" id="btn-reviewed" onClick="markReviewed()">
 <span className="material-symbols-outlined text-[18px]">verified</span>
 <span>Mark Reviewed</span>
 </button>
@@ -95,27 +78,27 @@ export function StudyResult() {
 
 <div className="flex flex-wrap items-center justify-between gap-space-sm pb-1">
 <div className="inline-flex p-1 bg-surface-container rounded-lg shadow-sm">
-<button className="px-3 py-1 text-xs font-semibold rounded text-on-surface-variant hover:text-on-surface transition-all" id="view-mode-orig" >
+<button className="px-3 py-1 text-xs font-semibold rounded text-on-surface-variant hover:text-on-surface transition-all" id="view-mode-orig" onClick="setViewerMode('orig')">
               Original
             </button>
-<button className="px-3 py-1 text-xs font-semibold rounded bg-primary text-on-primary shadow-sm transition-all" id="view-mode-cam" >
+<button className="px-3 py-1 text-xs font-semibold rounded bg-primary text-on-primary shadow-sm transition-all" id="view-mode-cam" onClick="setViewerMode('cam')">
               Heatmap overlay
             </button>
-<button className="px-3 py-1 text-xs font-semibold rounded text-on-surface-variant hover:text-on-surface transition-all" id="view-mode-unc" >
+<button className="px-3 py-1 text-xs font-semibold rounded text-on-surface-variant hover:text-on-surface transition-all" id="view-mode-unc" onClick="setViewerMode('unc')">
               Uncertainty map
             </button>
 </div>
 <div className="flex items-center gap-1 text-on-surface-variant">
-<button className="p-1.5 rounded hover:bg-surface-container transition-colors"  title="Zoom 1:1">
+<button className="p-1.5 rounded hover:bg-surface-container transition-colors" onClick="resetZoom()" title="Zoom 1:1">
 <span className="material-symbols-outlined text-[18px]">zoom_in</span>
 </button>
-<button className="p-1.5 rounded hover:bg-surface-container transition-colors"  title="Invert Grayscale LUT">
+<button className="p-1.5 rounded hover:bg-surface-container transition-colors" onClick="toggleInvert()" title="Invert Grayscale LUT">
 <span className="material-symbols-outlined text-[18px]">invert_colors</span>
 </button>
-<button className="p-1.5 rounded hover:bg-surface-container transition-colors"  title="Reset Pan">
+<button className="p-1.5 rounded hover:bg-surface-container transition-colors" onClick="resetPan()" title="Reset Pan">
 <span className="material-symbols-outlined text-[18px]">filter_center_focus</span>
 </button>
-<button className="p-1.5 rounded hover:bg-surface-container transition-colors"  title="Full View">
+<button className="p-1.5 rounded hover:bg-surface-container transition-colors" onClick="fullscreenViewer()" title="Full View">
 <span className="material-symbols-outlined text-[18px]">fullscreen</span>
 </button>
 </div>
@@ -234,7 +217,7 @@ export function StudyResult() {
 
 <div className="flex items-center gap-space-md px-1 py-1 bg-surface-container-low rounded-lg">
 <span className="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">Overlay Opacity</span>
-<input className="w-full accent-primary h-1.5 bg-surface-container rounded-lg cursor-pointer" id="opacity-slider" max="100" min="0"  type="range" value="65"/>
+<input className="w-full accent-primary h-1.5 bg-surface-container rounded-lg cursor-pointer" id="opacity-slider" max="100" min="0" onInput="updateOpacity(this.value)" type="range" value="65"/>
 <span className="font-mono-data-md text-mono-data-md text-primary font-bold min-w-[3rem] text-right" id="opacity-val-readout">65%</span>
 </div>
 
@@ -274,7 +257,7 @@ export function StudyResult() {
 <span className="font-headline-sm text-headline-sm text-on-surface font-semibold">Findings</span>
 <span className="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-mono-data-sm text-mono-data-sm font-semibold" id="findings-count">14 Evaluated</span>
 </div>
-<button className="font-label-sm text-label-sm text-primary hover:text-primary-container font-medium flex items-center gap-0.5" id="btn-toggle-all-findings" >
+<button className="font-label-sm text-label-sm text-primary hover:text-primary-container font-medium flex items-center gap-0.5" id="btn-toggle-all-findings" onClick="toggleAllFindings()">
 <span id="findings-toggle-text">Show all 14</span>
 <span className="material-symbols-outlined text-[16px]" id="findings-toggle-icon">expand_more</span>
 </button>
@@ -641,6 +624,3 @@ export function StudyResult() {
 </div>
 
 </>
-</AppShell>
-  );
-}

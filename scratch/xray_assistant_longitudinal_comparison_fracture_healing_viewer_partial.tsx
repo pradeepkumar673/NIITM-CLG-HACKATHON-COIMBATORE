@@ -1,8 +1,3 @@
-import { AppShell } from '../components/AppShell';
-
-export function LongitudinalComparison() {
-  return (
-    <AppShell userRole="doctor" userName="Dr. Arti Sharma">
 <>
 <div className="flex flex-col w-full">
 
@@ -17,19 +12,19 @@ export function LongitudinalComparison() {
 </div>
 
 <div className="flex flex-wrap items-center gap-1 bg-surface-container-high p-1 rounded-lg" id="state-tab-container">
-<button className="px-3 py-1.5 rounded text-on-surface font-label-sm text-label-sm transition-all bg-surface shadow-sm font-semibold text-primary" id="btn-state-complete"  type="button">
+<button className="px-3 py-1.5 rounded text-on-surface font-label-sm text-label-sm transition-all bg-surface shadow-sm font-semibold text-primary" id="btn-state-complete" onClick="switchState('complete')" type="button">
           1. Complete Comparison
         </button>
-<button className="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-state-low-reg"  type="button">
+<button className="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-state-low-reg" onClick="switchState('low-reg')" type="button">
           2. Low Registration (&lt;0.65)
         </button>
-<button className="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-state-uncalibrated"  type="button">
+<button className="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-state-uncalibrated" onClick="switchState('uncalibrated')" type="button">
           3. Calibration Required
         </button>
-<button className="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-state-mismatch"  type="button">
+<button className="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-state-mismatch" onClick="switchState('mismatch')" type="button">
           4. Mismatched Patient ID
         </button>
-<button className="px-2.5 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all flex items-center gap-1" id="btn-state-mobile"  title="Simulate 390px Mobile Viewport" type="button">
+<button className="px-2.5 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all flex items-center gap-1" id="btn-state-mobile" onClick="toggleMobileViewport()" title="Simulate 390px Mobile Viewport" type="button">
 <span className="material-symbols-outlined text-[15px]">smartphone</span>
 <span id="mobile-toggle-text">Mobile Sim</span>
 </button>
@@ -51,7 +46,7 @@ export function LongitudinalComparison() {
           Longitudinal alignment and subtraction calculation are strictly inhibited to prevent cross-patient misattribution.
         </p>
 </div>
-<button className="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-error font-label-sm text-label-sm font-semibold hover:bg-surface-dim transition-colors"  type="button">
+<button className="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-error font-label-sm text-label-sm font-semibold hover:bg-surface-dim transition-colors" onClick="dismissMismatchAlert()" type="button">
         Override Interlock (Audit Logged)
       </button>
 </div>
@@ -67,7 +62,7 @@ export function LongitudinalComparison() {
           Images may not show the same anatomy or projection angle differs significantly (tilt discrepancy &gt; 8.4°). <strong>Do not rely on automated density subtraction or volume estimates.</strong> Manual caliper re-verification required.
         </p>
 </div>
-<button className="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-dim transition-colors"  type="button">
+<button className="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-dim transition-colors" onClick="resetAlignmentManual()" type="button">
         Recalculate Landmark Fit
       </button>
 </div>
@@ -83,7 +78,7 @@ export function LongitudinalComparison() {
           Pixel pitch metadata absent in DICOM tag (0028,0030). Select two distinct cortical margins or a reference coin/marker on the radiograph to calibrate millimetric metrics.
         </p>
 </div>
-<button className="px-3.5 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-colors shadow-sm"  type="button">
+<button className="px-3.5 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-colors shadow-sm" onClick="activateCalibrationMode()" type="button">
         Launch Caliper Calibration Tool
       </button>
 </div>
@@ -163,19 +158,19 @@ export function LongitudinalComparison() {
 
 <div className="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-wrap items-center justify-between gap-space-sm">
 <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0 w-full sm:w-auto">
-<button className="px-3 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 hover:bg-surface-dim transition-colors" id="tool-calibrate"  title="Calibrate scale against cortical thickness" type="button">
+<button className="px-3 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 hover:bg-surface-dim transition-colors" id="tool-calibrate" onClick="toggleTool('calibrate')" title="Calibrate scale against cortical thickness" type="button">
 <span className="material-symbols-outlined text-[18px]">square_foot</span>
 <span>Calibrate Scale</span>
 </button>
-<button className="px-3 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center gap-1.5 hover:bg-primary-container transition-colors shadow-sm" id="tool-roi"  type="button">
+<button className="px-3 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center gap-1.5 hover:bg-primary-container transition-colors shadow-sm" id="tool-roi" onClick="toggleTool('roi')" type="button">
 <span className="material-symbols-outlined text-[18px]">polyline</span>
 <span>Fracture ROI</span>
 </button>
-<button className="px-3 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 hover:bg-surface-dim transition-colors" id="tool-ref"  type="button">
+<button className="px-3 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 hover:bg-surface-dim transition-colors" id="tool-ref" onClick="toggleTool('ref')" type="button">
 <span className="material-symbols-outlined text-[18px]">crop_free</span>
 <span>Ref Bone ROI</span>
 </button>
-<button className="px-3 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 hover:bg-surface-dim transition-colors" id="tool-caliper"  type="button">
+<button className="px-3 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 hover:bg-surface-dim transition-colors" id="tool-caliper" onClick="toggleTool('caliper')" type="button">
 <span className="material-symbols-outlined text-[18px]">linear_scale</span>
 <span>Caliper (Gap)</span>
 </button>
@@ -187,13 +182,13 @@ export function LongitudinalComparison() {
 <span id="calibrated-ratio-text">1 px = 0.142 mm</span>
 </div>
 <div className="flex items-center gap-1">
-<button className="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"  title="Invert Grayscale LUT" type="button">
+<button className="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" onClick="toggleInvertLut()" title="Invert Grayscale LUT" type="button">
 <span className="material-symbols-outlined text-[20px]">invert_colors</span>
 </button>
-<button className="p-2 rounded-lg bg-surface-container-high text-primary hover:bg-surface-dim transition-colors" id="btn-sync-toggle"  title="Sync Pan/Zoom between views" type="button">
+<button className="p-2 rounded-lg bg-surface-container-high text-primary hover:bg-surface-dim transition-colors" id="btn-sync-toggle" onClick="toggleSyncPanZoom()" title="Sync Pan/Zoom between views" type="button">
 <span className="material-symbols-outlined text-[20px]">sync_alt</span>
 </button>
-<button className="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"  title="Reset Frame and Zoom" type="button">
+<button className="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" onClick="resetCanvasTransform()" title="Reset Frame and Zoom" type="button">
 <span className="material-symbols-outlined text-[20px]">fit_screen</span>
 </button>
 </div>
@@ -566,7 +561,7 @@ export function LongitudinalComparison() {
             </span>
 <span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">ABHA Sync</span>
 </div>
-<form className="flex flex-col gap-space-sm" >
+<form className="flex flex-col gap-space-sm" onSubmit="handleOutcomeSubmit(event)">
 <div>
 <label className="block font-label-sm text-label-sm text-on-surface-variant mb-1">Assessment Date</label>
 <div className="relative">
@@ -607,7 +602,7 @@ export function LongitudinalComparison() {
 <span className="material-symbols-outlined text-[24px]">straighten</span>
 <span className="font-headline-sm text-headline-sm font-bold text-on-surface">Spatial Calibration</span>
 </div>
-<button className="text-on-surface-variant hover:text-on-surface p-1 rounded-lg"  type="button">
+<button className="text-on-surface-variant hover:text-on-surface p-1 rounded-lg" onClick="closeCalibrationModal()" type="button">
 <span className="material-symbols-outlined text-[20px]">close</span>
 </button>
 </div>
@@ -627,10 +622,10 @@ export function LongitudinalComparison() {
 <span className="text-[11px] text-on-surface-variant font-body-sm block mt-1">Default: 10.0 mm reference cortical diameter</span>
 </div>
 <div className="flex items-center justify-end gap-space-sm pt-space-xs">
-<button className="px-4 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold hover:bg-surface-dim transition-colors"  type="button">
+<button className="px-4 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold hover:bg-surface-dim transition-colors" onClick="closeCalibrationModal()" type="button">
           Cancel
         </button>
-<button className="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors shadow-sm flex items-center gap-1.5"  type="button">
+<button className="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors shadow-sm flex items-center gap-1.5" onClick="applyCalibration()" type="button">
 <span className="material-symbols-outlined text-[18px]">check</span>
 <span>Apply Calibration</span>
 </button>
@@ -647,6 +642,3 @@ export function LongitudinalComparison() {
 </div>
 
 </>
-</AppShell>
-  );
-}

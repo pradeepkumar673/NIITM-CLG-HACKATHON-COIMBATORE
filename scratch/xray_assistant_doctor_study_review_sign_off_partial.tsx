@@ -1,20 +1,3 @@
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { getStudyResultStudiesIdResultGet } from '../client';
-import { AppShell } from '../components/AppShell';
-import { SkeletonViewer } from '../components/SkeletonViewer';
-
-export function DoctorReviewSignOff() {
-  const { id } = useParams<{ id: string }>();
-
-  const { data: resultData, isLoading } = useQuery({
-    queryKey: ['studyResult', id],
-    queryFn: () => getStudyResultStudiesIdResultGet({ path: { id: parseInt(id!) } }),
-    enabled: !!id
-  });
-
-  return (
-    <AppShell userRole="doctor" userName="Dr. Arti Sharma">
 <>
 <div className="flex flex-col w-full">
 
@@ -24,16 +7,16 @@ export function DoctorReviewSignOff() {
 <span className="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Prototype Viewport &amp; State Controller:</span>
 </div>
 <div className="flex flex-wrap items-center gap-1.5" id="state-ribbon">
-<button className="px-2.5 py-1 rounded bg-primary text-on-primary font-mono-data-sm text-mono-data-sm transition-all shadow-sm" id="btn-state-default"  type="button">
+<button className="px-2.5 py-1 rounded bg-primary text-on-primary font-mono-data-sm text-mono-data-sm transition-all shadow-sm" id="btn-state-default" onClick="setState('default')" type="button">
         1. In Review (Default)
       </button>
-<button className="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-mono-data-sm text-mono-data-sm hover:bg-surface-container transition-all shadow-sm" id="btn-state-signed"  type="button">
+<button className="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-mono-data-sm text-mono-data-sm hover:bg-surface-container transition-all shadow-sm" id="btn-state-signed" onClick="setState('signed')" type="button">
         2. Sign-off Submitted
       </button>
-<button className="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-mono-data-sm text-mono-data-sm hover:bg-surface-container transition-all shadow-sm" id="btn-state-no-rules"  type="button">
+<button className="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-mono-data-sm text-mono-data-sm hover:bg-surface-container transition-all shadow-sm" id="btn-state-no-rules" onClick="setState('no-rules')" type="button">
         3. Graph: No Rules Fired
       </button>
-<button className="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-mono-data-sm text-mono-data-sm hover:bg-surface-container transition-all shadow-sm flex items-center gap-1" id="btn-toggle-mobile"  type="button">
+<button className="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-mono-data-sm text-mono-data-sm hover:bg-surface-container transition-all shadow-sm flex items-center gap-1" id="btn-toggle-mobile" onClick="toggleMobileSim()" type="button">
 <span className="material-symbols-outlined text-[14px]">smartphone</span>
 <span id="mobile-toggle-text">4. Mobile View Sim (390px)</span>
 </button>
@@ -50,7 +33,7 @@ export function DoctorReviewSignOff() {
 </div>
 <div className="flex items-center gap-2">
 <span className="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-mono-data-sm text-mono-data-sm font-semibold">IMMUTABLE DICOM-SR GENERATED</span>
-<button className="px-2 py-1 rounded text-primary hover:bg-surface-container-high font-label-sm text-label-sm" >Edit Assessment</button>
+<button className="px-2 py-1 rounded text-primary hover:bg-surface-container-high font-label-sm text-label-sm" onClick="setState('default')">Edit Assessment</button>
 </div>
 </div>
 
@@ -122,16 +105,16 @@ export function DoctorReviewSignOff() {
 </div>
 
 <div className="flex items-center gap-1 bg-surface-container p-0.5 rounded-lg">
-<button className="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors" id="btn-toggle-invert"  title="Invert LUT" type="button">
+<button className="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors" id="btn-toggle-invert" onClick="toggleInvert()" title="Invert LUT" type="button">
 <span className="material-symbols-outlined text-[18px]">contrast</span>
 </button>
-<button className="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors"  title="Zoom In" type="button">
+<button className="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors" onClick="adjustZoom(1.1)" title="Zoom In" type="button">
 <span className="material-symbols-outlined text-[18px]">zoom_in</span>
 </button>
-<button className="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors"  title="Zoom Out" type="button">
+<button className="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors" onClick="adjustZoom(0.9)" title="Zoom Out" type="button">
 <span className="material-symbols-outlined text-[18px]">zoom_out</span>
 </button>
-<button className="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors"  title="Reset View" type="button">
+<button className="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors" onClick="resetViewer()" title="Reset View" type="button">
 <span className="material-symbols-outlined text-[18px]">restart_alt</span>
 </button>
 </div>
@@ -142,7 +125,7 @@ export function DoctorReviewSignOff() {
 <span className="material-symbols-outlined text-[14px]">local_fire_department</span>
               Heatmap Blend:
             </span>
-<input className="w-32 h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-primary" id="opacity-slider" max="100" min="0"  type="range" value="70"/>
+<input className="w-32 h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-primary" id="opacity-slider" max="100" min="0" onInput="updateHeatmapOpacity(this.value)" type="range" value="70"/>
 <span className="font-mono-data-sm text-mono-data-sm text-primary font-semibold" id="opacity-val">70%</span>
 </div>
 
@@ -498,19 +481,19 @@ export function DoctorReviewSignOff() {
 </marker>
 </defs>
 
-<g className="cursor-pointer group" >
+<g className="cursor-pointer group" onClick="selectRule('rule-c04')">
 <path className="group-hover:stroke-width-3 transition-all" d="M 170 65 L 340 120" marker-end="url(#arrow-amber)" stroke="#B54708" strokeDasharray="4,3" strokeWidth="2.5"></path>
 <rect fill="#FFFAEB" height="20" rx="4" stroke="#FEDF89" strokeWidth="1" width="94" x="210" y="78"></rect>
 <text fill="#B54708" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="257" y="92">Rule C-04 [TB Scar]</text>
 </g>
 
-<g className="cursor-pointer group" >
+<g className="cursor-pointer group" onClick="selectRule('rule-c09')">
 <path className="group-hover:stroke-width-3 transition-all" d="M 170 175 L 340 125" marker-end="url(#arrow)" stroke="#0F5E6B" strokeWidth="2"></path>
 <rect fill="#E6F4F6" height="20" rx="4" stroke="#B2DFE6" strokeWidth="1" width="102" x="205" y="148"></rect>
 <text fill="#0F5E6B" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="256" y="162">Rule C-09 [Smoker]</text>
 </g>
 
-<g className="cursor-pointer group" >
+<g className="cursor-pointer group" onClick="selectRule('rule-p02')">
 <path className="group-hover:stroke-width-3 transition-all" d="M 450 120 L 550 120" marker-end="url(#arrow)" stroke="#0F5E6B" strokeWidth="2"></path>
 <rect fill="#E6F4F6" height="20" rx="4" stroke="#B2DFE6" strokeWidth="1" width="70" x="468" y="100"></rect>
 <text fill="#0F5E6B" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="503" y="114">Rule P-02</text>
@@ -617,15 +600,15 @@ export function DoctorReviewSignOff() {
 
 <div className="flex flex-wrap items-center gap-1.5 pt-1">
 <span className="font-label-sm text-label-sm text-on-surface-variant">Insert Snippet:</span>
-<button className="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors"  type="button">+ Confirmed RLZ opacity</button>
-<button className="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors"  type="button">+ Prior scar</button>
-<button className="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors"  type="button">+ Antibiotic dispatch</button>
-<button className="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors"  type="button">+ Schedule follow-up</button>
+<button className="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors" onClick="insertSnippet('Confirmed RLZ dense alveolar consolidation. Immediate sputum sample required.')" type="button">+ Confirmed RLZ opacity</button>
+<button className="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors" onClick="insertSnippet('Consistent with prior inactive TB residual calcification. No acute flare.')" type="button">+ Prior scar</button>
+<button className="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors" onClick="insertSnippet('Advise oral amoxicillin-clavulanate + urgent tele-consult in 48h.')" type="button">+ Antibiotic dispatch</button>
+<button className="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors" onClick="insertSnippet('Schedule 2-week follow-up chest radiograph.')" type="button">+ Schedule follow-up</button>
 </div>
 </div>
 
 <div className="flex flex-col gap-2 pt-1" id="submit-action-group">
-<button className="w-full py-3 px-space-md rounded-lg bg-primary hover:bg-[#0B4A54] text-on-primary font-label-md text-label-md font-semibold transition-all shadow-md flex items-center justify-center gap-2" id="btn-submit-signoff"  type="button">
+<button className="w-full py-3 px-space-md rounded-lg bg-primary hover:bg-[#0B4A54] text-on-primary font-label-md text-label-md font-semibold transition-all shadow-md flex items-center justify-center gap-2" id="btn-submit-signoff" onClick="submitSignoff()" type="button">
 <span className="material-symbols-outlined text-[20px]">vpn_key</span>
 <span>Submit review &amp; Sign-off study (ABHA Secure Key)</span>
 </button>
@@ -690,16 +673,16 @@ export function DoctorReviewSignOff() {
 </div>
 
 <div className="flex border-b-0 bg-surface-container">
-<button className="flex-1 py-2.5 text-center font-label-md text-label-md text-primary font-bold bg-surface-container-lowest border-b-2 border-primary" id="btn-m-tab-image"  type="button">
+<button className="flex-1 py-2.5 text-center font-label-md text-label-md text-primary font-bold bg-surface-container-lowest border-b-2 border-primary" id="btn-m-tab-image" onClick="switchMobileTab('m-tab-image')" type="button">
           Image
         </button>
-<button className="flex-1 py-2.5 text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface" id="btn-m-tab-findings"  type="button">
+<button className="flex-1 py-2.5 text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface" id="btn-m-tab-findings" onClick="switchMobileTab('m-tab-findings')" type="button">
           Findings
         </button>
-<button className="flex-1 py-2.5 text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface" id="btn-m-tab-graph"  type="button">
+<button className="flex-1 py-2.5 text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface" id="btn-m-tab-graph" onClick="switchMobileTab('m-tab-graph')" type="button">
           Graph
         </button>
-<button className="flex-1 py-2.5 text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface" id="btn-m-tab-signoff"  type="button">
+<button className="flex-1 py-2.5 text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface" id="btn-m-tab-signoff" onClick="switchMobileTab('m-tab-signoff')" type="button">
           Sign-off
         </button>
 </div>
@@ -712,7 +695,7 @@ export function DoctorReviewSignOff() {
 
 <div className="flex items-center justify-between bg-surface-container-low p-2 rounded-lg">
 <span className="font-label-sm text-label-sm text-on-surface">Show Grad-CAM Heatmap:</span>
-<input checked className="w-4 h-4 accent-primary"  type="checkbox"/>
+<input checked className="w-4 h-4 accent-primary" onChange="toggleMobileHeatmap(this.checked)" type="checkbox"/>
 </div>
 <div className="relative bg-black rounded-lg aspect-[4/5] flex items-center justify-center overflow-hidden">
 <svg className="w-full h-full object-contain" viewBox="0 0 400 500">
@@ -823,7 +806,7 @@ export function DoctorReviewSignOff() {
 </label>
 </div>
 <textarea className="w-full rounded bg-surface-container-low p-2 font-body-sm text-body-sm" placeholder="Quick clinical notes..." rows="2"></textarea>
-<button className="w-full py-2.5 rounded bg-primary text-on-primary font-label-md text-label-md font-semibold"  type="button">
+<button className="w-full py-2.5 rounded bg-primary text-on-primary font-label-md text-label-md font-semibold" onClick="submitSignoff()" type="button">
           Submit &amp; Sign-off Study
         </button>
 </div>
@@ -837,6 +820,3 @@ export function DoctorReviewSignOff() {
 
 </div>
 </>
-</AppShell>
-  );
-}

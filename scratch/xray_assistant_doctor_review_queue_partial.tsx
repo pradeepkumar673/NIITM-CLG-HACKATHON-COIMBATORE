@@ -1,17 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-import { getQueueSizeDashboardStudiesQueueGet } from '../client';
-import { AppShell } from '../components/AppShell';
-
-export function DoctorReviewQueue() {
-  const { data: queueData, isLoading } = useQuery({
-    queryKey: ['queueSize'],
-    queryFn: () => getQueueSizeDashboardStudiesQueueGet()
-  });
-
-  const awaitingDoctor = queueData?.data?.awaiting_sign_off ?? 0;
-
-  return (
-    <AppShell userRole="doctor" userName="Dr. Arti Sharma">
 <>
 <div className="flex flex-col w-full">
 
@@ -21,19 +7,19 @@ export function DoctorReviewQueue() {
 <span className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Prototype View State:</span>
 </div>
 <div className="flex flex-wrap items-center gap-1.5" id="state-switcher-container">
-<button className="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-primary text-on-primary shadow-sm flex items-center gap-1.5" id="tab-prioritized"  type="button">
+<button className="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-primary text-on-primary shadow-sm flex items-center gap-1.5" id="tab-prioritized" onClick="switchViewState('prioritized')" type="button">
 <span className="w-2 h-2 rounded-full bg-tertiary-fixed"></span>
         1. Prioritized Queue (Default)
       </button>
-<button className="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm flex items-center gap-1.5" id="tab-empty"  type="button">
+<button className="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm flex items-center gap-1.5" id="tab-empty" onClick="switchViewState('empty')" type="button">
 <span className="w-2 h-2 rounded-full bg-outline-variant"></span>
         2. Queue Clear (Empty State)
       </button>
-<button className="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm flex items-center gap-1.5" id="tab-loading"  type="button">
+<button className="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm flex items-center gap-1.5" id="tab-loading" onClick="switchViewState('loading')" type="button">
 <span className="w-2 h-2 rounded-full bg-primary-fixed-dim animate-ping"></span>
         3. Loading Skeletons
       </button>
-<button className="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm flex items-center gap-1.5" id="tab-mobile"  type="button">
+<button className="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm flex items-center gap-1.5" id="tab-mobile" onClick="switchViewState('mobile')" type="button">
 <span className="material-symbols-outlined text-[15px]">stay_current_portrait</span>
         4. Mobile Viewport (390px)
       </button>
@@ -61,11 +47,11 @@ export function DoctorReviewQueue() {
       </p>
 </div>
 <div className="flex items-center gap-2.5 flex-wrap">
-<button className="h-11 px-4 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md font-semibold shadow-sm hover:bg-surface-container-low transition-all duration-150 flex items-center gap-2"  type="button">
+<button className="h-11 px-4 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md font-semibold shadow-sm hover:bg-surface-container-low transition-all duration-150 flex items-center gap-2" onClick="batchSignOffModal()" type="button">
 <span className="material-symbols-outlined text-[18px]">rule_folder</span>
 <span>Batch Sign-off Eligible (3)</span>
 </button>
-<button className="h-11 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold shadow-sm hover:bg-primary-container transition-all duration-150 flex items-center gap-2"  type="button">
+<button className="h-11 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold shadow-sm hover:bg-primary-container transition-all duration-150 flex items-center gap-2" onClick="exportQueueLog()" type="button">
 <span className="material-symbols-outlined text-[18px]">download</span>
 <span>Export Queue Log</span>
 </button>
@@ -76,7 +62,7 @@ export function DoctorReviewQueue() {
 
 <div className="grid grid-cols-1 md:grid-cols-3 gap-space-md">
 
-<div className="cursor-pointer group relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden" id="card-urgent"  role="button" tabIndex="0">
+<div className="cursor-pointer group relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden" id="card-urgent" onClick="filterBySummary('urgent')" role="button" tabIndex="0">
 <div className="flex items-center justify-between mb-3">
 <div className="flex items-center gap-2">
 <span className="w-8 h-8 rounded-lg bg-error-container text-error flex items-center justify-center">
@@ -95,7 +81,7 @@ export function DoctorReviewQueue() {
 </div>
 </div>
 
-<div className="cursor-pointer group relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden" id="card-review"  role="button" tabIndex="0">
+<div className="cursor-pointer group relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden" id="card-review" onClick="filterBySummary('review')" role="button" tabIndex="0">
 <div className="flex items-center justify-between mb-3">
 <div className="flex items-center gap-2">
 <span className="w-8 h-8 rounded-lg bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center">
@@ -114,7 +100,7 @@ export function DoctorReviewQueue() {
 </div>
 </div>
 
-<div className="cursor-pointer group relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden" id="card-all"  role="button" tabIndex="0">
+<div className="cursor-pointer group relative bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden" id="card-all" onClick="filterBySummary('all')" role="button" tabIndex="0">
 <div className="flex items-center justify-between mb-3">
 <div className="flex items-center gap-2">
 <span className="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
@@ -138,8 +124,8 @@ export function DoctorReviewQueue() {
 
 <div className="relative flex-1 min-w-[280px]">
 <span className="material-symbols-outlined absolute left-3.5 top-3 text-[20px] text-on-surface-variant pointer-events-none">search</span>
-<input className="w-full h-11 pl-10 pr-9 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-colors shadow-inner" id="filter-search"  placeholder="Search Patient ID, ABHA, Study ID, or Clinical Finding..." type="text"/>
-<button className="absolute right-3 top-3 text-on-surface-variant hover:text-on-surface transition-colors"  type="button">
+<input className="w-full h-11 pl-10 pr-9 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-colors shadow-inner" id="filter-search" onInput="handleSearch(this.value)" placeholder="Search Patient ID, ABHA, Study ID, or Clinical Finding..." type="text"/>
+<button className="absolute right-3 top-3 text-on-surface-variant hover:text-on-surface transition-colors" onClick="clearSearch()" type="button">
 <span className="material-symbols-outlined text-[18px]">cancel</span>
 </button>
 </div>
@@ -147,7 +133,7 @@ export function DoctorReviewQueue() {
 <div className="flex flex-wrap items-center gap-2.5">
 
 <div className="relative">
-<select className="appearance-none h-11 pl-3 pr-8 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm shadow-inner focus:outline-none focus:bg-surface-container-lowest cursor-pointer font-medium" id="filter-status" >
+<select className="appearance-none h-11 pl-3 pr-8 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm shadow-inner focus:outline-none focus:bg-surface-container-lowest cursor-pointer font-medium" id="filter-status" onChange="applyFilters()">
 <option value="all">All Sign-off Statuses</option>
 <option value="awaiting">Awaiting Doctor Review (14)</option>
 <option value="second">Second Opinion Requested (2)</option>
@@ -157,7 +143,7 @@ export function DoctorReviewQueue() {
 </div>
 
 <div className="relative">
-<select className="appearance-none h-11 pl-3 pr-8 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm shadow-inner focus:outline-none focus:bg-surface-container-lowest cursor-pointer font-medium" id="filter-modality" >
+<select className="appearance-none h-11 pl-3 pr-8 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm shadow-inner focus:outline-none focus:bg-surface-container-lowest cursor-pointer font-medium" id="filter-modality" onChange="applyFilters()">
 <option value="all">All Modalities</option>
 <option value="chest">Chest (PA / AP Supine)</option>
 <option value="knee">Knee Bilateral</option>
@@ -168,7 +154,7 @@ export function DoctorReviewQueue() {
 </div>
 
 <div className="relative">
-<select className="appearance-none h-11 pl-3 pr-8 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm shadow-inner focus:outline-none focus:bg-surface-container-lowest cursor-pointer font-medium" id="filter-tier" >
+<select className="appearance-none h-11 pl-3 pr-8 bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm shadow-inner focus:outline-none focus:bg-surface-container-lowest cursor-pointer font-medium" id="filter-tier" onChange="applyFilters()">
 <option value="all">All Triage Tiers</option>
 <option value="tier1">Tier 1 High (p &gt; 0.70)</option>
 <option value="tier2">Tier 2 Medium (0.30 ≤ p ≤ 0.70)</option>
@@ -183,7 +169,7 @@ export function DoctorReviewQueue() {
 <span>Today (24 Oct 2024)</span>
 </div>
 
-<button className="h-11 px-3 text-on-surface-variant hover:text-error font-label-sm text-label-sm font-semibold transition-colors flex items-center gap-1"  type="button">
+<button className="h-11 px-3 text-on-surface-variant hover:text-error font-label-sm text-label-sm font-semibold transition-colors flex items-center gap-1" onClick="resetAllFilters()" type="button">
 <span className="material-symbols-outlined text-[16px]">restart_alt</span>
 <span>Reset</span>
 </button>
@@ -277,16 +263,16 @@ export function DoctorReviewQueue() {
 </td>
 <td className="py-3.5 px-4 text-right">
 <div className="inline-flex items-center gap-1.5 justify-end">
-<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1"  type="button">
+<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1" onClick="openStudy('STU-2024-0984')" type="button">
 <span>Open</span>
 <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
 </button>
 <div className="relative">
-<button className="h-9 w-8 rounded-md bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors"  type="button">
+<button className="h-9 w-8 rounded-md bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" onClick="toggleRowMenu('menu-1')" type="button">
 <span className="material-symbols-outlined text-[16px]">more_vert</span>
 </button>
 <div className="hidden absolute right-0 mt-1 w-48 bg-surface-container-lowest rounded-lg shadow-xl py-1 z-30 font-label-sm text-label-sm text-on-surface" id="menu-1">
-<button className="w-full text-left px-3 py-2 hover:bg-surface-container-low flex items-center gap-2"  type="button"><span className="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>Quick Sign-off</button>
+<button className="w-full text-left px-3 py-2 hover:bg-surface-container-low flex items-center gap-2" onClick="quickSignOff('STU-2024-0984')" type="button"><span className="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>Quick Sign-off</button>
 <button className="w-full text-left px-3 py-2 hover:bg-surface-container-low flex items-center gap-2" type="button"><span className="material-symbols-outlined text-[16px] text-on-surface-variant">refresh</span>Request Retake</button>
 <button className="w-full text-left px-3 py-2 hover:bg-surface-container-low flex items-center gap-2" type="button"><span className="material-symbols-outlined text-[16px] text-on-surface-variant">forward_to_inbox</span>Escalate to Radiologist</button>
 </div>
@@ -352,11 +338,11 @@ export function DoctorReviewQueue() {
 </td>
 <td className="py-3.5 px-4 text-right">
 <div className="inline-flex items-center gap-1.5 justify-end">
-<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1"  type="button">
+<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1" onClick="openStudy('STU-2024-0981')" type="button">
 <span>Open</span>
 <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
 </button>
-<button className="h-9 px-2 rounded-md bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"  type="button">
+<button className="h-9 px-2 rounded-md bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" onClick="quickSignOff('STU-2024-0981')" type="button">
 <span className="material-symbols-outlined text-[16px]">more_vert</span>
 </button>
 </div>
@@ -416,7 +402,7 @@ export function DoctorReviewQueue() {
 </div>
 </td>
 <td className="py-3.5 px-4 text-right">
-<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1"  type="button">
+<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onClick="openStudy('STU-2024-0979')" type="button">
 <span>Open</span>
 <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
 </button>
@@ -476,7 +462,7 @@ export function DoctorReviewQueue() {
 </div>
 </td>
 <td className="py-3.5 px-4 text-right">
-<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1"  type="button">
+<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onClick="openStudy('STU-2024-0975')" type="button">
 <span>Open</span>
 <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
 </button>
@@ -536,7 +522,7 @@ export function DoctorReviewQueue() {
 </div>
 </td>
 <td className="py-3.5 px-4 text-right">
-<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1"  type="button">
+<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onClick="openStudy('STU-2024-0970')" type="button">
 <span>Open</span>
 <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
 </button>
@@ -599,7 +585,7 @@ export function DoctorReviewQueue() {
 </div>
 </td>
 <td className="py-3.5 px-4 text-right">
-<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1"  type="button">
+<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onClick="openStudy('STU-2024-0968')" type="button">
 <span>Open</span>
 <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
 </button>
@@ -662,7 +648,7 @@ export function DoctorReviewQueue() {
 </div>
 </td>
 <td className="py-3.5 px-4 text-right">
-<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1"  type="button">
+<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onClick="openStudy('STU-2024-0963')" type="button">
 <span>Open</span>
 <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
 </button>
@@ -722,7 +708,7 @@ export function DoctorReviewQueue() {
 </div>
 </td>
 <td className="py-3.5 px-4 text-right">
-<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1"  type="button">
+<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onClick="openStudy('STU-2024-0958')" type="button">
 <span>Open</span>
 <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
 </button>
@@ -785,7 +771,7 @@ export function DoctorReviewQueue() {
 </div>
 </td>
 <td className="py-3.5 px-4 text-right">
-<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1"  type="button">
+<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1" onClick="openStudy('STU-2024-0951')" type="button">
 <span>Open</span>
 <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
 </button>
@@ -846,11 +832,11 @@ export function DoctorReviewQueue() {
 </td>
 <td className="py-3.5 px-4 text-right">
 <div className="inline-flex items-center gap-1.5 justify-end">
-<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1"  type="button">
+<button className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1" onClick="openStudy('STU-2024-0947')" type="button">
 <span>Open</span>
 <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
 </button>
-<button className="h-9 px-2 rounded-md bg-tertiary-fixed text-on-tertiary-fixed-variant hover:bg-tertiary-fixed-dim transition-colors flex items-center"  title="Quick Sign-off as Normal" type="button">
+<button className="h-9 px-2 rounded-md bg-tertiary-fixed text-on-tertiary-fixed-variant hover:bg-tertiary-fixed-dim transition-colors flex items-center" onClick="quickSignOff('STU-2024-0947')" title="Quick Sign-off as Normal" type="button">
 <span className="material-symbols-outlined text-[18px]">done_all</span>
 </button>
 </div>
@@ -901,7 +887,7 @@ export function DoctorReviewQueue() {
         All urgent triages and routine radiographs for Kashti PHC Node #04 have been reviewed and digitally signed. New DICOM acquisitions will appear here automatically via live WebSocket.
       </p>
 <div className="flex flex-wrap items-center justify-center gap-3 w-full">
-<button className="h-11 px-5 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container shadow-sm transition-all flex items-center gap-2"  type="button">
+<button className="h-11 px-5 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container shadow-sm transition-all flex items-center gap-2" onClick="switchViewState('prioritized')" type="button">
 <span className="material-symbols-outlined text-[18px]">refresh</span>
 <span>Refresh Queue</span>
 </button>
@@ -1020,7 +1006,7 @@ export function DoctorReviewQueue() {
 <span>Submitted 12m ago</span>
 <span>Kashti PHC</span>
 </div>
-<button className="w-full h-11 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm hover:bg-primary-container transition-all"  type="button">
+<button className="w-full h-11 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm hover:bg-primary-container transition-all" onClick="openStudy('STU-2024-0984')" type="button">
 <span>Open Study for Sign-off</span>
 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
 </button>
@@ -1052,7 +1038,7 @@ export function DoctorReviewQueue() {
 <span>Submitted 21m ago</span>
 <span>Emergency Node</span>
 </div>
-<button className="w-full h-11 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm hover:bg-primary-container transition-all"  type="button">
+<button className="w-full h-11 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm hover:bg-primary-container transition-all" onClick="openStudy('STU-2024-0981')" type="button">
 <span>Open Study for Sign-off</span>
 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
 </button>
@@ -1084,7 +1070,7 @@ export function DoctorReviewQueue() {
 <span>Submitted 1h 05m ago</span>
 <span>Kashti PHC</span>
 </div>
-<button className="w-full h-11 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-2 hover:bg-surface-container shadow-sm transition-all"  type="button">
+<button className="w-full h-11 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-2 hover:bg-surface-container shadow-sm transition-all" onClick="openStudy('STU-2024-0968')" type="button">
 <span>Open Study for Sign-off</span>
 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
 </button>
@@ -1109,7 +1095,7 @@ export function DoctorReviewQueue() {
 <span className="text-tertiary font-medium">✓ Clean Ingest • Batch eligible</span>
 <span>11:46 IST</span>
 </div>
-<button className="w-full h-11 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-2 hover:bg-surface-container shadow-sm transition-all"  type="button">
+<button className="w-full h-11 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-2 hover:bg-surface-container shadow-sm transition-all" onClick="openStudy('STU-2024-0947')" type="button">
 <span>Open Study for Sign-off</span>
 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
 </button>
@@ -1136,6 +1122,3 @@ export function DoctorReviewQueue() {
 
 </div>
 </>
-</AppShell>
-  );
-}

@@ -1,8 +1,3 @@
-import { AppShell } from '../components/AppShell';
-
-export function MyStudiesHistory() {
-  return (
-    <AppShell userRole="health_worker" userName="Sister Lakshmi Devi">
 <>
 <div className="flex flex-col w-full">
 
@@ -12,19 +7,19 @@ export function MyStudiesHistory() {
 <span className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Interactive Prototype State:</span>
 </div>
 <div className="flex flex-wrap items-center gap-1.5" id="state-toggle-group">
-<button className="px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-primary text-on-primary shadow-sm flex items-center gap-1.5" id="btn-state-active"  type="button">
+<button className="px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-primary text-on-primary shadow-sm flex items-center gap-1.5" id="btn-state-active" onClick="switchViewState('active')" type="button">
 <span className="material-symbols-outlined text-[16px]">table_rows</span>
 <span>1. Active Studies (Default)</span>
 </button>
-<button className="px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container shadow-sm flex items-center gap-1.5" id="btn-state-empty"  type="button">
+<button className="px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container shadow-sm flex items-center gap-1.5" id="btn-state-empty" onClick="switchViewState('empty')" type="button">
 <span className="material-symbols-outlined text-[16px]">filter_alt_off</span>
 <span>2. Filtered Empty State</span>
 </button>
-<button className="px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container shadow-sm flex items-center gap-1.5" id="btn-state-skeleton"  type="button">
+<button className="px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container shadow-sm flex items-center gap-1.5" id="btn-state-skeleton" onClick="switchViewState('skeleton')" type="button">
 <span className="material-symbols-outlined text-[16px]">hourglass_empty</span>
 <span>3. Loading Skeletons</span>
 </button>
-<button className="px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container shadow-sm flex items-center gap-1.5" id="btn-state-mobile"  type="button">
+<button className="px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container shadow-sm flex items-center gap-1.5" id="btn-state-mobile" onClick="switchViewState('mobile')" type="button">
 <span className="material-symbols-outlined text-[16px]">smartphone</span>
 <span>4. Mobile Mode (390px Simulation)</span>
 </button>
@@ -115,7 +110,7 @@ export function MyStudiesHistory() {
 <div className="md:col-span-4 relative flex items-center">
 <span className="material-symbols-outlined absolute left-3 text-secondary text-[20px]">search</span>
 <input className="w-full h-11 pl-10 pr-9 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="filter-search-input" placeholder="Search Patient ID or ABHA ID..." type="text" value=""/>
-<button className="absolute right-3 text-on-surface-variant hover:text-on-surface"  type="button">
+<button className="absolute right-3 text-on-surface-variant hover:text-on-surface" onClick="document.getElementById('filter-search-input').value=''" type="button">
 <span className="material-symbols-outlined text-[18px]">cancel</span>
 </button>
 </div>
@@ -167,7 +162,7 @@ export function MyStudiesHistory() {
 <button className="h-8 px-3 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold flex items-center gap-1.5 hover:bg-surface-container-highest transition-colors" type="button">
 <span>Today (18)</span>
 </button>
-<button className="h-8 px-2.5 rounded-full text-secondary hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1"  type="button">
+<button className="h-8 px-2.5 rounded-full text-secondary hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1" onClick="resetFilters()" type="button">
 <span className="material-symbols-outlined text-[16px]">restart_alt</span>
 <span>Reset filters</span>
 </button>
@@ -588,11 +583,11 @@ export function MyStudiesHistory() {
         Try adjusting your date range, body part modality, or triage status filters. Active parameters yielded 0 results on this PHC node.
       </p>
 <div className="flex items-center gap-space-sm">
-<button className="h-11 px-5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-colors shadow-sm flex items-center gap-2"  type="button">
+<button className="h-11 px-5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-colors shadow-sm flex items-center gap-2" onClick="resetFilters()" type="button">
 <span className="material-symbols-outlined text-[20px]">restart_alt</span>
 <span>Clear all filters</span>
 </button>
-<button className="h-11 px-4 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors"  type="button">
+<button className="h-11 px-4 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors" onClick="switchViewState('active')" type="button">
           View full study directory
         </button>
 </div>
@@ -673,7 +668,7 @@ export function MyStudiesHistory() {
 <span className="material-symbols-outlined absolute left-2.5 top-2.5 text-on-surface-variant text-[18px]">search</span>
 <input className="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-lowest font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none shadow-sm" placeholder="Patient ID or ABHA..." type="text"/>
 </div>
-<button className="h-10 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-1.5 shadow-sm"  type="button">
+<button className="h-10 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-1.5 shadow-sm" onClick="toggleMobileFilterDrawer()" type="button">
 <span className="material-symbols-outlined text-[18px]">tune</span>
 <span>Filters</span>
 <span className="w-5 h-5 rounded-full bg-primary text-on-primary font-mono-data-sm text-mono-data-sm flex items-center justify-center">2</span>
@@ -684,7 +679,7 @@ export function MyStudiesHistory() {
 <div className="hidden bg-surface-container p-space-md shadow-inner flex flex-col gap-3" id="mobile-filter-drawer">
 <div className="flex items-center justify-between">
 <span className="font-label-sm text-label-sm uppercase font-bold text-on-surface">Active Filter Sheet</span>
-<button className="text-on-surface-variant"  type="button">
+<button className="text-on-surface-variant" onClick="toggleMobileFilterDrawer()" type="button">
 <span className="material-symbols-outlined text-[18px]">close</span>
 </button>
 </div>
@@ -701,10 +696,10 @@ export function MyStudiesHistory() {
 </select>
 </div>
 <div className="flex items-center gap-2 pt-2">
-<button className="flex-1 h-9 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold"  type="button">
+<button className="flex-1 h-9 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold" onClick="toggleMobileFilterDrawer()" type="button">
             Apply filters (140)
           </button>
-<button className="px-3 h-9 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm"  type="button">
+<button className="px-3 h-9 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm" onClick="toggleMobileFilterDrawer()" type="button">
             Reset
           </button>
 </div>
@@ -826,6 +821,3 @@ export function MyStudiesHistory() {
 
 </div>
 </>
-</AppShell>
-  );
-}

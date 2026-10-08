@@ -1,33 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-import { 
-  getModelStatusDashboardModelsStatusGet,
-  getUsersClinicsDashboardUsersClinicsGet,
-  getRecentActivityDashboardAuditActivityGet
-} from '../client';
-import { AppShell } from '../components/AppShell';
-
-export function AdminDashboard() {
-  const { data: modelsData, isLoading: loadingModels } = useQuery({
-    queryKey: ['modelsStatus'],
-    queryFn: () => getModelStatusDashboardModelsStatusGet()
-  });
-
-  const { data: usersData, isLoading: loadingUsers } = useQuery({
-    queryKey: ['usersClinics'],
-    queryFn: () => getUsersClinicsDashboardUsersClinicsGet()
-  });
-
-  const { data: auditData, isLoading: loadingAudit } = useQuery({
-    queryKey: ['auditActivity'],
-    queryFn: () => getRecentActivityDashboardAuditActivityGet()
-  });
-
-  const models = modelsData?.data || [];
-  const users = usersData?.data || [];
-  const auditLogs = auditData?.data || [];
-
-  return (
-    <AppShell userRole="admin" userName="Dr. Rajesh Kulkarni">
 <>
 <div className="flex flex-col w-full">
 
@@ -37,19 +7,19 @@ export function AdminDashboard() {
 <span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant uppercase tracking-wider font-semibold">Interactive Prototype State</span>
 </div>
 <div className="flex flex-wrap items-center gap-1.5" id="prototype-states">
-<button className="state-btn px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold transition-all shadow-sm" data-state-btn="default"  type="button">
+<button className="state-btn px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold transition-all shadow-sm" data-state-btn="default" onClick="setAppState('default')" type="button">
         1. Full Management (Default)
       </button>
-<button className="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="mismatch-focused"  type="button">
+<button className="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="mismatch-focused" onClick="setAppState('mismatch-focused')" type="button">
         2. Checksum Mismatch Alert Focused
       </button>
-<button className="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="empty"  type="button">
+<button className="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="empty" onClick="setAppState('empty')" type="button">
         3. Empty States (No Models / No Users)
       </button>
-<button className="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="loading"  type="button">
+<button className="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="loading" onClick="setAppState('loading')" type="button">
         4. Loading Skeletons
       </button>
-<button className="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="mobile"  type="button">
+<button className="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="mobile" onClick="setAppState('mobile')" type="button">
         5. Mobile Simulation (390px)
       </button>
 </div>
@@ -71,15 +41,15 @@ export function AdminDashboard() {
 </div>
 
 <div className="flex flex-wrap items-center gap-space-sm self-start lg:self-center">
-<button className="h-11 px-4 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-medium shadow-sm transition-all flex items-center gap-2"  type="button">
+<button className="h-11 px-4 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-medium shadow-sm transition-all flex items-center gap-2" onClick="syncWithCentralRegistry()" type="button">
 <span className="material-symbols-outlined text-[18px] text-primary" id="sync-icon">sync</span>
 <span>Sync Central Registry</span>
 </button>
-<button className="h-11 px-4 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-medium shadow-sm transition-all flex items-center gap-2"  type="button">
+<button className="h-11 px-4 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-medium shadow-sm transition-all flex items-center gap-2" onClick="verifyAllChecksums()" type="button">
 <span className="material-symbols-outlined text-[18px] text-tertiary-container" id="verify-icon">verified_user</span>
 <span>Verify All Checksums</span>
 </button>
-<button className="h-11 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-2"  type="button">
+<button className="h-11 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-2" onClick="openCreateUserModal()" type="button">
 <span className="material-symbols-outlined text-[18px]">person_add</span>
 <span>+ Create user</span>
 </button>
@@ -179,11 +149,11 @@ export function AdminDashboard() {
 </div>
 </div>
 <div className="flex items-center gap-2 shrink-0">
-<button className="h-10 px-4 rounded-lg bg-error hover:bg-on-error-container text-on-error font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-1.5"  type="button">
+<button className="h-10 px-4 rounded-lg bg-error hover:bg-on-error-container text-on-error font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-1.5" onClick="resolveMismatchModal()" type="button">
 <span className="material-symbols-outlined text-[16px]">file_download</span>
 <span>Force Replace Binary</span>
 </button>
-<button className="h-10 px-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-error-container font-label-md text-label-md font-medium transition-all"  type="button">
+<button className="h-10 px-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-error-container font-label-md text-label-md font-medium transition-all" onClick="inspectMismatchDigest()" type="button">
             Inspect Digest
           </button>
 </div>
@@ -226,7 +196,7 @@ export function AdminDashboard() {
 <td className="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-on-surface">
 <div className="flex items-center gap-1.5">
 <span className="bg-surface-container px-2 py-0.5 rounded">sha256:8f2a9c1b...3e80</span>
-<button className="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors"  title="Copy SHA-256" type="button">
+<button className="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onClick="copyHash('sha256:8f2a9c1b984711d5f309a4b37012ef490c29a8f33194be08412ec708913e3e80', this)" title="Copy SHA-256" type="button">
 <span className="material-symbols-outlined text-[16px]">content_copy</span>
 </button>
 </div>
@@ -248,7 +218,7 @@ export function AdminDashboard() {
                 </td>
 <td className="py-3.5 px-4 text-center">
 <div className="flex items-center justify-center gap-1">
-<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors"  title="Re-verify Hash" type="button">
+<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onClick="reverifyModel('Chest-CAD')" title="Re-verify Hash" type="button">
 <span className="material-symbols-outlined text-[18px]">rule</span>
 </button>
 <button className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Model Diagnostics" type="button">
@@ -285,7 +255,7 @@ export function AdminDashboard() {
 <td className="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-error font-semibold">
 <div className="flex items-center gap-1.5">
 <span className="bg-error-container px-2 py-0.5 rounded line-through text-error">sha256:4d12c0aa...1f99</span>
-<button className="p-1 rounded text-error hover:bg-error/10 transition-colors"  type="button">
+<button className="p-1 rounded text-error hover:bg-error/10 transition-colors" onClick="copyHash('sha256:4d12c0aa48209bb9910d5402fe091c33a2908811d7c9e0a8110b991f99c011a0', this)" type="button">
 <span className="material-symbols-outlined text-[16px]">content_copy</span>
 </button>
 </div>
@@ -307,7 +277,7 @@ export function AdminDashboard() {
                 </td>
 <td className="py-3.5 px-4 text-center">
 <div className="flex items-center justify-center gap-1.5">
-<button className="px-2.5 py-1 rounded-md bg-error hover:bg-on-error-container text-on-error font-label-sm text-label-sm font-semibold transition-colors flex items-center gap-1"  type="button">
+<button className="px-2.5 py-1 rounded-md bg-error hover:bg-on-error-container text-on-error font-label-sm text-label-sm font-semibold transition-colors flex items-center gap-1" onClick="resolveMismatchModal()" type="button">
 <span className="material-symbols-outlined text-[14px]">refresh</span>
 <span>Replace</span>
 </button>
@@ -335,7 +305,7 @@ export function AdminDashboard() {
 <td className="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-on-surface">
 <div className="flex items-center gap-1.5">
 <span className="bg-surface-container px-2 py-0.5 rounded">sha256:3a71fe90...11bc</span>
-<button className="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors"  title="Copy SHA-256" type="button">
+<button className="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onClick="copyHash('sha256:3a71fe904092bba40194883ef028c614bca881773099acfe14088211bc901a55', this)" title="Copy SHA-256" type="button">
 <span className="material-symbols-outlined text-[16px]">content_copy</span>
 </button>
 </div>
@@ -357,7 +327,7 @@ export function AdminDashboard() {
                 </td>
 <td className="py-3.5 px-4 text-center">
 <div className="flex items-center justify-center gap-1">
-<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors"  title="Re-verify Hash" type="button">
+<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onClick="reverifyModel('Fracture-RegNet')" title="Re-verify Hash" type="button">
 <span className="material-symbols-outlined text-[18px]">rule</span>
 </button>
 <button className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Model Diagnostics" type="button">
@@ -387,7 +357,7 @@ export function AdminDashboard() {
 <td className="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-on-surface">
 <div className="flex items-center gap-1.5">
 <span className="bg-surface-container px-2 py-0.5 rounded">sha256:0d91ca82...99ee</span>
-<button className="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors"  title="Copy SHA-256" type="button">
+<button className="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onClick="copyHash('sha256:0d91ca824419aa400199fba67198bba108422ca1108842199eef091a182904bc', this)" title="Copy SHA-256" type="button">
 <span className="material-symbols-outlined text-[16px]">content_copy</span>
 </button>
 </div>
@@ -409,7 +379,7 @@ export function AdminDashboard() {
                 </td>
 <td className="py-3.5 px-4 text-center">
 <div className="flex items-center justify-center gap-1">
-<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors"  title="Promote to Production" type="button">
+<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onClick="reverifyModel('Spine-Alignment')" title="Promote to Production" type="button">
 <span className="material-symbols-outlined text-[18px]">publish</span>
 </button>
 <button className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Model Diagnostics" type="button">
@@ -442,7 +412,7 @@ export function AdminDashboard() {
 </div>
 <div className="p-2 bg-surface-container-low rounded flex items-center justify-between text-mono-data-sm font-mono-data-sm mt-1">
 <span className="text-on-surface-variant truncate">sha256:8f2a9c1b...3e80</span>
-<button className="text-primary ml-2 flex items-center gap-0.5"  type="button">
+<button className="text-primary ml-2 flex items-center gap-0.5" onClick="copyHash('sha256:8f2a9c1b...3e80', this)" type="button">
 <span className="material-symbols-outlined text-[14px]">content_copy</span>
 <span>Copy</span>
 </button>
@@ -470,7 +440,7 @@ export function AdminDashboard() {
             Local SHA-256 mismatch vs central registry. Quarantined.
           </div>
 <div className="flex items-center justify-between pt-1">
-<button className="w-full py-2 px-3 rounded-lg bg-error text-on-error font-label-md text-label-md font-semibold text-center"  type="button">
+<button className="w-full py-2 px-3 rounded-lg bg-error text-on-error font-label-md text-label-md font-semibold text-center" onClick="resolveMismatchModal()" type="button">
               Force Replace Binary
             </button>
 </div>
@@ -510,7 +480,7 @@ export function AdminDashboard() {
             No AI models deployed on this edge node. Upload or sync models from Central Health Cloud registry to enable local CDSS inference.
           </p>
 </div>
-<button className="h-11 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-2"  type="button">
+<button className="h-11 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-2" onClick="deployNewModel()" type="button">
 <span className="material-symbols-outlined text-[18px]">add_box</span>
 <span>+ Deploy model</span>
 </button>
@@ -594,13 +564,13 @@ export function AdminDashboard() {
 <span className="text-tertiary-container font-semibold">12m ago</span> • 24 Oct 14:18
                 </td>
 <td className="py-3 px-4 text-center">
-<button aria-checked="true" className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container transition-colors duration-200 ease-in-out focus:outline-none"  role="switch" type="button">
+<button aria-checked="true" className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container transition-colors duration-200 ease-in-out focus:outline-none" onClick="toggleUserAccess(this)" role="switch" type="button">
 <span className="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-tertiary shadow ring-0 transition duration-200 ease-in-out mt-0.5 ml-0.5"></span>
 </button>
 </td>
 <td className="py-3 px-4 text-center">
 <div className="flex items-center justify-center gap-1">
-<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors"  title="Edit permissions" type="button">
+<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onClick="editUser('Dr. Arti Sharma')" title="Edit permissions" type="button">
 <span className="material-symbols-outlined text-[18px]">edit</span>
 </button>
 <button className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
@@ -639,13 +609,13 @@ export function AdminDashboard() {
                   Today, 09:15 IST
                 </td>
 <td className="py-3 px-4 text-center">
-<button aria-checked="true" className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container transition-colors duration-200 ease-in-out focus:outline-none"  role="switch" type="button">
+<button aria-checked="true" className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container transition-colors duration-200 ease-in-out focus:outline-none" onClick="toggleUserAccess(this)" role="switch" type="button">
 <span className="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-tertiary shadow ring-0 transition duration-200 ease-in-out mt-0.5 ml-0.5"></span>
 </button>
 </td>
 <td className="py-3 px-4 text-center">
 <div className="flex items-center justify-center gap-1">
-<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors"  title="Edit permissions" type="button">
+<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onClick="editUser('Sister Lakshmi Devi')" title="Edit permissions" type="button">
 <span className="material-symbols-outlined text-[18px]">edit</span>
 </button>
 <button className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
@@ -690,7 +660,7 @@ export function AdminDashboard() {
 </td>
 <td className="py-3 px-4 text-center">
 <div className="flex items-center justify-center gap-1">
-<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors"  title="Edit permissions" type="button">
+<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onClick="editUser('Dr. Rajesh Kulkarni')" title="Edit permissions" type="button">
 <span className="material-symbols-outlined text-[18px]">edit</span>
 </button>
 <button className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
@@ -728,13 +698,13 @@ export function AdminDashboard() {
                   Yesterday, 17:40 IST
                 </td>
 <td className="py-3 px-4 text-center">
-<button aria-checked="false" className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-surface-container-high transition-colors duration-200 ease-in-out focus:outline-none"  role="switch" type="button">
+<button aria-checked="false" className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-surface-container-high transition-colors duration-200 ease-in-out focus:outline-none" onClick="toggleUserAccess(this)" role="switch" type="button">
 <span className="translate-x-0.5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-surface-container-lowest shadow ring-0 transition duration-200 ease-in-out mt-0.5 ml-0.5"></span>
 </button>
 </td>
 <td className="py-3 px-4 text-center">
 <div className="flex items-center justify-center gap-1">
-<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors"  title="Edit permissions" type="button">
+<button className="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onClick="editUser('Babu Rao')" title="Edit permissions" type="button">
 <span className="material-symbols-outlined text-[18px]">edit</span>
 </button>
 <button className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
@@ -769,10 +739,10 @@ export function AdminDashboard() {
 <div className="flex items-center justify-between pt-2">
 <span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Active: 12m ago</span>
 <div className="flex items-center gap-3">
-<button className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container"  role="switch" type="button">
+<button className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container" onClick="toggleUserAccess(this)" role="switch" type="button">
 <span className="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-tertiary mt-0.5 ml-0.5"></span>
 </button>
-<button className="p-1 text-primary"  type="button">
+<button className="p-1 text-primary" onClick="editUser('Dr. Arti Sharma')" type="button">
 <span className="material-symbols-outlined text-[18px]">edit</span>
 </button>
 </div>
@@ -798,10 +768,10 @@ export function AdminDashboard() {
 <div className="flex items-center justify-between pt-2">
 <span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Active: Today, 09:15</span>
 <div className="flex items-center gap-3">
-<button className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container"  role="switch" type="button">
+<button className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container" onClick="toggleUserAccess(this)" role="switch" type="button">
 <span className="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-tertiary mt-0.5 ml-0.5"></span>
 </button>
-<button className="p-1 text-primary"  type="button">
+<button className="p-1 text-primary" onClick="editUser('Sister Lakshmi Devi')" type="button">
 <span className="material-symbols-outlined text-[18px]">edit</span>
 </button>
 </div>
@@ -819,7 +789,7 @@ export function AdminDashboard() {
             No users found matching current filters or facility node permissions. Create new clinical operator accounts to grant access.
           </p>
 </div>
-<button className="h-11 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-2"  type="button">
+<button className="h-11 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-2" onClick="openCreateUserModal()" type="button">
 <span className="material-symbols-outlined text-[18px]">person_add</span>
 <span>+ Invite user</span>
 </button>
@@ -850,7 +820,7 @@ export function AdminDashboard() {
 </div>
 <div className="flex items-center gap-3">
 <span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Attestation Log ID: #ATT-2024-9981</span>
-<button className="px-3 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold shadow-sm transition-colors flex items-center gap-1"  type="button">
+<button className="px-3 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold shadow-sm transition-colors flex items-center gap-1" onClick="exportAuditManifest()" type="button">
 <span className="material-symbols-outlined text-[16px]">download</span>
 <span>Export Manifest</span>
 </button>
@@ -880,11 +850,11 @@ export function AdminDashboard() {
 </div>
 <h3 className="font-headline-sm text-headline-sm font-bold text-on-surface">Create Clinical Operator</h3>
 </div>
-<button className="p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container"  type="button">
+<button className="p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container" onClick="closeCreateUserModal()" type="button">
 <span className="material-symbols-outlined text-[20px]">close</span>
 </button>
 </div>
-<form className="flex flex-col gap-space-sm" >
+<form className="flex flex-col gap-space-sm" onSubmit="handleUserSubmit(event)">
 <div>
 <label className="block font-label-sm text-label-sm text-on-surface-variant mb-1">Full Legal Name</label>
 <input className="w-full h-10 px-3 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Dr. / Sister / Shri..." required="" type="text"/>
@@ -915,7 +885,7 @@ export function AdminDashboard() {
 <input checked className="w-4 h-4 accent-primary rounded" type="checkbox"/>
 </div>
 <div className="flex items-center justify-end gap-2 pt-space-xs mt-2">
-<button className="h-10 px-4 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-label-md text-label-md font-medium"  type="button">
+<button className="h-10 px-4 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-label-md text-label-md font-medium" onClick="closeCreateUserModal()" type="button">
             Cancel
           </button>
 <button className="h-10 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm" type="submit">
@@ -935,7 +905,7 @@ export function AdminDashboard() {
 </div>
 <h3 className="font-headline-sm text-headline-sm font-bold text-on-surface">Resolve Mismatch: Knee-BoneCAD</h3>
 </div>
-<button className="p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container"  type="button">
+<button className="p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container" onClick="closeReplaceModal()" type="button">
 <span className="material-symbols-outlined text-[20px]">close</span>
 </button>
 </div>
@@ -962,10 +932,10 @@ export function AdminDashboard() {
 </div>
 </div>
 <div className="flex items-center justify-end gap-2 pt-space-xs mt-2" id="replace-actions">
-<button className="h-10 px-4 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-label-md text-label-md font-medium"  type="button">
+<button className="h-10 px-4 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-label-md text-label-md font-medium" onClick="closeReplaceModal()" type="button">
           Cancel
         </button>
-<button className="h-10 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm flex items-center gap-1.5"  type="button">
+<button className="h-10 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm flex items-center gap-1.5" onClick="startBinaryDownload()" type="button">
 <span className="material-symbols-outlined text-[18px]">cloud_download</span>
 <span>Download &amp; Hot-Reload</span>
 </button>
@@ -980,6 +950,3 @@ export function AdminDashboard() {
 </div>
 
 </>
-</AppShell>
-  );
-}
