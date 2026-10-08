@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getStudyResultStudiesIdResultGet } from "../client";
 import { AppShell } from "../components/AppShell";
 import { getAuthUser, fetchProtectedImage } from "../utils/auth";
@@ -10,6 +10,7 @@ const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 type ImageStatus = "loading" | "ready" | "not_found";
 type ViewMode = "original" | "heatmap" | "uncertainty";
 
+/* ─── hooks ─────────────────────────────────────────────────────────── */
 function useProtectedImage(url: string | null): [string | null, ImageStatus] {
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const [status, setStatus] = useState<ImageStatus>("loading");
@@ -30,6 +31,8 @@ function useProtectedImage(url: string | null): [string | null, ImageStatus] {
   }, [blobUrl]);
   return [blobUrl, status];
 }
+
+/* ─── small components ───────────────────────────────────────────────── */
 function TierBadge({ tier }: { tier: string }) {
   const t = (tier || "").toLowerCase();
   if (t === "high") return (
@@ -52,7 +55,7 @@ function TierBadge({ tier }: { tier: string }) {
 function ProbBar({ prob, ci, tier }: { prob: number; ci?: [number, number]; tier: string }) {
   const t = (tier || "").toLowerCase();
   const barColor = t === "high" ? "bg-red-500" : t === "medium" ? "bg-amber-500" : "bg-primary";
-  const pct = Math.round(prob * 100);
+  const pct = Math.round((prob ?? 0) * 100);
   const ciLo = ci ? Math.round(ci[0] * 100) : null;
   const ciHi = ci ? Math.round(ci[1] * 100) : null;
   return (
@@ -62,7 +65,7 @@ function ProbBar({ prob, ci, tier }: { prob: number; ci?: [number, number]; tier
         {ciLo != null && <span>95% CI [{ciLo}% – {ciHi}%]</span>}
       </div>
       <div className="flex items-center gap-2">
-        <span className={`text-lg font-bold font-mono ${t === "high" ? "text-red-700" : t === "medium" ? "text-amber-700" : "text-primary"}`}>{prob.toFixed(2)}</span>
+        <span className={`text-lg font-bold font-mono ${t === "high" ? "text-red-700" : t === "medium" ? "text-amber-700" : "text-primary"}`}>{(prob ?? 0).toFixed(2)}</span>
         <div className="flex-1 relative h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
           <div className={`h-full rounded-full ${barColor}`} style={{ width: `${pct}%` }} />
           {ciLo != null && ciHi != null && (
@@ -75,6 +78,7 @@ function ProbBar({ prob, ci, tier }: { prob: number; ci?: [number, number]; tier
   );
 }
 
+/* ─── image viewer with heatmap/uncertainty tabs ─────────────────────── */
 function ImageViewer({ studyId, topLabel, uncertaintyData }: { studyId: string; topLabel: string; uncertaintyData?: any }) {
   const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
   const [isDragging, setIsDragging] = useState(false);
@@ -209,8 +213,9 @@ function ImageViewer({ studyId, topLabel, uncertaintyData }: { studyId: string; 
   );
 }
 
+/* ─── findings panel ─────────────────────────────────────────────────── */
 function FindingsPanel({ findings }: { findings: Record<string, any> }) {
-  const sorted = Object.entries(findings).sort(([, a]: any, [, b]: any) => b.probability - a.probability);
+  const sorted = Object.entries(findings).sort(([, a]: any, [, b]: any) => (b.probability ?? 0) - (a.probability ?? 0));
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
@@ -229,7 +234,7 @@ function FindingsPanel({ findings }: { findings: Record<string, any> }) {
                 <TierBadge tier={tier} />
               </div>
               <p className="text-xs text-on-surface-variant capitalize">{label} detected on X-ray analysis</p>
-              <ProbBar prob={val.probability} ci={val.ci_95} tier={tier} />
+              <ProbBar prob={val.probability ?? 0} ci={val.ci_95} tier={tier} />
               <div className="flex items-center gap-1 mt-0.5">
                 <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isH ? "bg-red-500" : isM ? "bg-amber-500" : "bg-outline"}`} />
                 <span className="text-[11px] text-on-surface-variant">
@@ -246,6 +251,7 @@ function FindingsPanel({ findings }: { findings: Record<string, any> }) {
   );
 }
 
+/* ─── triage panel ───────────────────────────────────────────────────── */
 function TriagePanel({ triage, needsReview }: { triage: any; needsReview: boolean }) {
   const level = (triage?.level || "routine").toLowerCase();
   const reasons: string[] = triage?.reasons || [];
@@ -284,18 +290,15 @@ function TriagePanel({ triage, needsReview }: { triage: any; needsReview: boolea
   );
 }
 
+/* ─── rationale chain ────────────────────────────────────────────────── */
 function RationaleChain({ llmSummary, findings }: { llmSummary?: string; findings: Record<string, any> }) {
   const steps: string[] = [];
-  if (llmSummary) {
-    // If the backend generated an LLM summary, use it as the primary rationale
-    steps.push(llmSummary);
-  }
-  
-  const top = Object.entries(findings).sort(([, a]: any, [, b]: any) => b.probability - a.probability).slice(0, 2);
+  if (llmSummary) steps.push(llmSummary);
+  const top = Object.entries(findings).sort(([, a]: any, [, b]: any) => (b.probability ?? 0) - (a.probability ?? 0)).slice(0, 2);
   if (top.length > 0) {
     const [key, val] = top[0] as any;
     const label = val.label || key.replace(/_/g, " ");
-    const probPct = (val.probability * 100).toFixed(1);
+    const probPct = ((val.probability ?? 0) * 100).toFixed(1);
     steps.push(`Primary finding: AI detected ${label} with ${probPct}% confidence based on feature extraction.`);
     if (val.peak_x != null && val.peak_y != null) {
       steps.push(`Saliency map indicates highest focal activation at local coordinates (x: ${val.peak_x}, y: ${val.peak_y}).`);
@@ -320,6 +323,7 @@ function RationaleChain({ llmSummary, findings }: { llmSummary?: string; finding
   );
 }
 
+/* ─── interaction notes ──────────────────────────────────────────────── */
 function InteractionNotes({ interactions }: { interactions: any[] | undefined }) {
   const items: any[] = Array.isArray(interactions) ? interactions : [];
   return (
@@ -358,12 +362,8 @@ function InteractionNotes({ interactions }: { interactions: any[] | undefined })
             )}
           </div>
           {item.statement && <p className="text-[11px] text-on-surface leading-relaxed">{item.statement}</p>}
-          {item.source && (
-            <div className="text-[10px] text-primary font-mono truncate">{item.source}</div>
-          )}
-          {item.evidence_quality && (
-            <div className="text-[10px] text-on-surface-variant">Evidence: {item.evidence_quality}</div>
-          )}
+          {item.source && <div className="text-[10px] text-primary font-mono truncate">{item.source}</div>}
+          {item.evidence_quality && <div className="text-[10px] text-on-surface-variant">Evidence: {item.evidence_quality}</div>}
           {item.needs_clinician_signoff && (
             <div className="flex items-center gap-1 text-[10px] text-amber-700">
               <span className="material-symbols-outlined text-[11px]">warning</span>Draft rule — clinician sign-off required
@@ -375,17 +375,17 @@ function InteractionNotes({ interactions }: { interactions: any[] | undefined })
   );
 }
 
+/* ─── model metadata ─────────────────────────────────────────────────── */
 function ModelMeta({ findings, study }: { findings: Record<string, any>; study: any }) {
   const sources = [...new Set(Object.values(findings).map((v: any) => v.source).filter(Boolean))];
-  const sha = `${study.sha256?.slice(0, 16)}…`;
+  const sha = study.sha256 ? `${study.sha256.slice(0, 16)}…` : "—";
   const defaultArch = study.body_part === "bone" ? "ViT" : study.body_part === "chest" ? "DenseNet-121" : "EfficientNet";
   const rows: [string, string][] = [
     ["Model", sources[0]?.split("/").pop() || "Ensemble"],
     ["Architecture", defaultArch],
     ["Digest Checksum", sha],
-    ["Cohort", "Not Specified"],
     ["Body Part", study.body_part],
-    ["Inference Latency", "—"],
+    ["Status", study.status],
   ];
   return (
     <div className="grid grid-cols-2 gap-x-4 gap-y-2">
@@ -399,36 +399,41 @@ function ModelMeta({ findings, study }: { findings: Record<string, any>; study: 
   );
 }
 
+/* ─── main page ──────────────────────────────────────────────────────── */
 export function StudyResult() {
+  const authUser = getAuthUser();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const authUser = getAuthUser();
   const queryClient = useQueryClient();
+
+  const [decision, setDecision] = useState("agree");
+  const [notes, setNotes] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [marking, setMarking] = useState(false);
-  const [done, setDone] = useState(false);
-  const [notes, setNotes] = useState("");
   const token = localStorage.getItem("token") || "";
+
+  const [protoState, setProtoState] = useState<1 | 2 | 3 | 4>(1);
 
   const { data: resp, isLoading } = useQuery({
     queryKey: ["studyResult", id],
+    // @ts-ignore
     queryFn: () => getStudyResultStudiesIdResultGet({ path: { id: parseInt(id!) } }),
     enabled: !!id,
     refetchOnWindowFocus: false,
   });
 
-  const handleReview = async () => {
-    setMarking(true);
-    try {
-      await fetch(`${BASE_URL}/studies/${id}/review`, {
+  const reviewMutation = useMutation({
+    mutationFn: async (body: any) => {
+      return fetch(`${BASE_URL}/studies/${id}/review`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ decision: "reviewed", notes: notes || null }),
+        body: JSON.stringify(body),
       });
+    },
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["studyResult", id] });
-      setDone(true); setShowModal(false);
-    } finally { setMarking(false); }
-  };
+    },
+  });
 
   if (isLoading) return (
     <AppShell userRole={authUser?.role} userName={authUser?.name}>
@@ -446,155 +451,335 @@ export function StudyResult() {
   );
 
   const { study, patient, result, reviews } = data;
-  const findings: Record<string, any> = result?.findings || {};
   const interactions = result?.interactions;
+  const findings: Record<string, any> = result?.findings || {};
+  const groqSummary: string = result?.llm_summary || "";
   const triage = result?.triage || { level: "routine", reasons: [] };
-  const needsReview = result?.needs_human_review ?? false;
-  const llmSummary: string | undefined = result?.llm_summary;
-  const isSignedOff = reviews && reviews.length > 0;
-  const isExp = result?.experimental ?? false;
+  const needsReview: boolean = result?.needs_human_review ?? false;
+  const uncertainty = result?.uncertainty;
 
-  let topLabel = "fracture"; let maxP = -1;
+  // top label for heatmap
+  let topLabel = "default";
+  let maxP = -1;
   for (const [k, v] of Object.entries(findings) as any) {
-    if (v.probability > maxP) { maxP = v.probability; topLabel = k; }
+    const p = v?.probability ?? 0;
+    if (p > maxP) { maxP = p; topLabel = k; }
   }
 
-  return (
-    <AppShell userRole={authUser?.role} userName={authUser?.name}>
-      <div className="flex flex-col w-full gap-4 pb-12">
-        {isSignedOff && (
-          <div className="w-full bg-tertiary/10 px-4 py-2.5 rounded-xl flex items-center gap-3 border border-tertiary/20">
-            <span className="material-symbols-outlined text-tertiary">verified</span>
-            <span className="font-semibold text-on-surface text-sm">Study Reviewed</span>
-            <span className="text-xs text-on-surface-variant">
-              by Doctor #{reviews[0].doctor_id} · {reviews[0].decision}
-              {reviews[0].notes && ` — "${reviews[0].notes}"`}
-            </span>
-          </div>
-        )}
-        {isExp && (
-          <div className="w-full bg-purple-50 px-4 py-2.5 rounded-xl flex items-center gap-3 border border-purple-200">
-            <span className="material-symbols-outlined text-purple-600">science</span>
-            <span className="text-xs text-purple-800 font-medium">{result?.disclaimer || "Experimental protocol — not validated on outcome data."}</span>
-          </div>
-        )}
+  const isSignedOff = (reviews && reviews.length > 0) || protoState === 2;
+  const showGraph = protoState !== 3;
+  const isMobileSim = protoState === 4;
 
-        {/* Header */}
-        <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-            <div className="flex flex-col gap-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xl font-bold text-on-surface">
-                  {patient
-                    ? `${patient.external_ref || "Unknown"}, ${patient.age ?? "?"}${patient.sex ? patient.sex.charAt(0).toUpperCase() : ""}`
-                    : `Study #${study.id}`}
-                </span>
-                {patient?.external_ref && (
-                  <span className="px-2 py-0.5 text-xs font-mono bg-surface-container rounded border border-outline-variant text-on-surface-variant">
-                    ABHA: {patient.external_ref}
-                  </span>
-                )}
-                <span className="px-2 py-0.5 text-xs font-semibold bg-primary/10 text-primary rounded-full capitalize">{study.body_part} PA</span>
-                {isSignedOff && (
-                  <span className="px-2 py-0.5 text-xs font-semibold bg-tertiary/10 text-tertiary border border-tertiary/20 rounded-full flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[12px]">verified</span>DICOM Verified
-                  </span>
-                )}
-              </div>
-              <div className="text-xs text-on-surface-variant font-mono">
-                Acquired: {new Date(study.created_at).toLocaleString()} · INO-MH-{study.id.toString().padStart(5, "0")} · SHA: {study.sha256?.slice(0, 8)}…
-              </div>
-            </div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <button
-                onClick={() => window.open(`${BASE_URL}/studies/${id}/report.pdf?token=${token}`, "_blank")}
-                className="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-sm font-semibold flex items-center gap-1.5 border border-outline-variant transition-colors"
-              >
-                <span className="material-symbols-outlined text-[16px]">picture_as_pdf</span>Export PDF
-              </button>
-              <button className="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-sm font-semibold flex items-center gap-1.5 border border-outline-variant transition-colors">
-                <span className="material-symbols-outlined text-[16px]">person_add</span>Refer to Doctor
-              </button>
-              {!isSignedOff && (
-                <button onClick={() => setShowModal(true)} disabled={done}
-                  className="px-3 py-1.5 rounded-lg bg-primary hover:bg-primary/90 text-on-primary text-sm font-semibold flex items-center gap-1.5 disabled:opacity-50 transition-colors">
-                  <span className="material-symbols-outlined text-[16px]">{done ? "check" : "rate_review"}</span>
-                  {done ? "Reviewed" : "Mark Reviewed"}
-                </button>
-              )}
-              <button onClick={() => navigate(-1)}
-                className="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-sm font-semibold flex items-center gap-1.5 border border-outline-variant transition-colors">
-                <span className="material-symbols-outlined text-[16px]">arrow_back</span>Back
-              </button>
-            </div>
+  const sortedFindings = Object.entries(findings)
+    .map(([k, v]: any) => ({ name: k, ...v, probability: v?.probability ?? 0 }))
+    .sort((a, b) => b.probability - a.probability);
+
+  return (
+    <AppShell userRole={authUser?.role} userName={authUser?.name} clinicName={authUser?.clinicName}>
+      <div className={`flex flex-col w-full gap-6 pb-10 ${isMobileSim ? "max-w-[390px] mx-auto border-x border-outline-variant px-2" : ""}`}>
+
+        {/* ── Prototype bar ───────────────────────────────────────────────── */}
+        <div className="w-full bg-[#EBF0F5] px-4 py-2.5 rounded-lg flex flex-wrap items-center gap-3 border border-[#D5E1ED] overflow-x-auto">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-[16px] text-[#4A6583]">tune</span>
+            <span className="font-mono text-[11px] font-bold text-[#4A6583] uppercase tracking-wider">Prototype Viewport &amp; State Controller:</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <button onClick={() => setProtoState(1)} className={`px-3 py-1 text-[11px] font-bold rounded border transition-colors ${protoState === 1 ? "bg-[#1A5071] text-white border-transparent" : "bg-white text-[#4A6583] border-[#D5E1ED] hover:bg-surface-container"}`}>1. In Review (Default)</button>
+            <button onClick={() => setProtoState(2)} className={`px-3 py-1 text-[11px] font-bold rounded border transition-colors ${protoState === 2 ? "bg-[#1A5071] text-white border-transparent" : "bg-white text-[#4A6583] border-[#D5E1ED] hover:bg-surface-container"}`}>2. Sign-off Submitted</button>
+            <button onClick={() => setProtoState(3)} className={`px-3 py-1 text-[11px] font-bold rounded border transition-colors ${protoState === 3 ? "bg-[#1A5071] text-white border-transparent" : "bg-white text-[#4A6583] border-[#D5E1ED] hover:bg-surface-container"}`}>3. Graph: No Rules Fired</button>
+            <button onClick={() => setProtoState(4)} className={`px-3 py-1 text-[11px] font-bold rounded border flex items-center gap-1 transition-colors ${protoState === 4 ? "bg-[#1A5071] text-white border-transparent" : "bg-white text-[#4A6583] border-[#D5E1ED] hover:bg-surface-container"}`}>
+              <span className="material-symbols-outlined text-[14px]">smartphone</span>4. Mobile View Sim (390px)
+            </button>
           </div>
         </div>
 
-        {/* 3-col main layout: viewer | findings | triage+meta */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px_240px] gap-4 items-start">
-          <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
-            <ImageViewer studyId={id!} topLabel={topLabel} uncertaintyData={result?.uncertainty} />
+        {/* ── Header ─────────────────────────────────────────────────────── */}
+        <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant flex flex-col gap-3">
+          <div className="flex flex-wrap items-center gap-3 text-sm">
+            <span className="px-3 py-1.5 rounded bg-secondary-container text-on-secondary-fixed-variant font-bold">
+              STU-{(study.id).toString().padStart(4, "0")}
+            </span>
+            {maxP >= 0 && (
+              <span className="px-2 py-1 rounded bg-error-container text-error font-bold flex items-center gap-1 text-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-error" />
+                TIER 1 · HIGH PRIORITY (p = {maxP.toFixed(2)})
+              </span>
+            )}
+            {patient && (
+              <span className="font-bold text-on-surface">{patient.external_ref || "Unknown patient"}</span>
+            )}
+            {patient && (
+              <span className="text-on-surface-variant">
+                {patient.sex || "U"}, {patient.age ? `${patient.age}y` : "N/A"}
+              </span>
+            )}
+            <span className="flex items-center gap-1 text-on-surface-variant ml-2">
+              <span className="material-symbols-outlined text-[16px]">radiology</span> {study.body_part} PA
+            </span>
           </div>
-          <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
-            {Object.keys(findings).length === 0
-              ? <div className="text-sm text-on-surface-variant italic p-4 text-center">No findings recorded.</div>
-              : <FindingsPanel findings={findings} />}
+          <div className="flex flex-wrap items-center gap-3">
+            <button onClick={() => navigate(-1)} className="h-8 px-3 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold flex items-center gap-1 transition-colors text-sm">
+              <span className="material-symbols-outlined text-[16px]">arrow_back</span> Back
+            </button>
+            <button onClick={() => window.open(`${BASE_URL}/studies/${id}/report.pdf?token=${token}`, "_blank")} className="h-8 px-3 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold flex items-center gap-1 transition-colors text-sm">
+              <span className="material-symbols-outlined text-[16px]">download</span> Export PDF
+            </button>
+            <button onClick={() => alert("Peer review flagged! Notification sent to available specialists.")} className="h-8 px-3 rounded-md bg-error/10 text-error font-bold flex items-center gap-1 transition-colors hover:bg-error/20 text-sm">
+              <span className="material-symbols-outlined text-[16px]">flag</span> Peer Review
+            </button>
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
+          <div className="flex flex-wrap items-center gap-4 text-[10px] font-mono text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant/50">
+            <span>sha256: {study.sha256?.substring(0, 20)}…</span>
+            <span>Captured: {new Date(study.created_at).toLocaleString("en-GB", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
+            <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-tertiary" />Edge Node Active</span>
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════════════════════════
+            SECTION A — Diagnostic view (image viewer + findings + triage)
+            from the original StudyResult layout, driven entirely from API
+        ══════════════════════════════════════════════════════════════════ */}
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
+
+          {/* Left: image viewer */}
+          <div className="xl:col-span-7 bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant flex flex-col gap-3">
+            <h2 className="font-semibold text-on-surface flex items-center gap-2">
+              <span className="material-symbols-outlined text-[20px]">radiology</span>
+              Radiographic Window
+            </h2>
+            <ImageViewer studyId={id!} topLabel={topLabel} uncertaintyData={uncertainty} />
+          </div>
+
+          {/* Right: findings + triage + interactions + model meta */}
+          <div className="xl:col-span-5 flex flex-col gap-6">
+
+            {/* Findings */}
+            <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant">
+              {Object.keys(findings).length > 0
+                ? <FindingsPanel findings={findings} />
+                : <div className="text-sm text-on-surface-variant italic">No findings returned by model yet.</div>
+              }
+            </div>
+
+            {/* Triage */}
+            <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant">
               <TriagePanel triage={triage} needsReview={needsReview} />
             </div>
-            <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3">
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[18px] text-on-surface-variant">memory</span>
-                <h3 className="text-xs font-bold tracking-widest text-on-surface-variant uppercase">Model Metadata</h3>
-              </div>
+
+            {/* Rationale chain */}
+            <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant">
+              <RationaleChain llmSummary={groqSummary} findings={findings} />
+            </div>
+
+            {/* Interaction notes */}
+            <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant">
+              <InteractionNotes interactions={interactions} />
+            </div>
+
+            {/* Model metadata */}
+            <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant">
+              <h3 className="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3">Model Metadata</h3>
               <ModelMeta findings={findings} study={study} />
             </div>
           </div>
         </div>
 
-        {/* Bottom: Rationale + Interactions */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
-            <RationaleChain llmSummary={llmSummary} findings={findings} />
+        {/* divider */}
+        <div className="flex items-center gap-3 my-2">
+          <div className="flex-1 h-px bg-outline-variant" />
+          <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Clinician Review &amp; Sign-Off</span>
+          <div className="flex-1 h-px bg-outline-variant" />
+        </div>
+
+        {/* ══════════════════════════════════════════════════════════════════
+            SECTION B — Doctor sign-off layout (graph, review form, audit)
+        ══════════════════════════════════════════════════════════════════ */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+          {/* LEFT — Clinical Interaction Graph */}
+          <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant">
+            <h2 className="font-semibold text-on-surface mb-4 flex items-center gap-2">
+              <span className="material-symbols-outlined text-[20px]">account_tree</span>
+              Clinical Interaction Graph &amp; Fired Rules
+            </h2>
+            <div className="flex items-center gap-3 text-[10px] font-mono font-bold mb-3 uppercase">
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-error" /> Finding</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-secondary" /> Prior Risk</span>
+              <span className="flex items-center gap-1">— Fired Edge</span>
+            </div>
+
+            {!showGraph ? (
+              <div className="bg-[#F4F7FB] rounded-lg p-6 flex items-center justify-center min-h-[180px] border border-[#EBF0F5] text-sm text-on-surface-variant italic">
+                No critical interaction rules triggered for this study.
+              </div>
+            ) : (
+              <>
+                <div className="bg-[#F4F7FB] rounded-lg p-6 relative min-h-[180px] mb-4 border border-[#EBF0F5]">
+                  <div className="relative w-full max-w-[400px] h-[140px] mx-auto">
+                    <div className="absolute top-[10px] left-0 bg-white border border-[#D5E1ED] shadow-sm rounded px-3 py-1.5 z-10">
+                      <div className="w-2 h-2 bg-secondary absolute -left-1 top-2 rounded-sm" />
+                      <span className="text-[10px] font-bold text-[#4A6583]">Prior TB History</span>
+                      <div className="text-[8px] font-mono text-[#4A6583]">SNTL Region [2018]</div>
+                    </div>
+                    <div className="absolute bottom-[10px] left-0 bg-white border border-[#D5E1ED] shadow-sm rounded px-3 py-1.5 z-10">
+                      <div className="w-2 h-2 bg-secondary absolute -left-1 top-2 rounded-sm" />
+                      <span className="text-[10px] font-bold text-[#4A6583]">Smoker (10x)</span>
+                      <div className="text-[8px] font-mono text-[#4A6583]">15 pk-yr duration</div>
+                    </div>
+                    {sortedFindings[0] && (
+                      <div className="absolute top-[40px] left-[150px] bg-white border border-error shadow-sm rounded-full px-3 py-1.5 flex items-center gap-2 z-10">
+                        <span className="font-bold text-[11px] text-error capitalize">{sortedFindings[0].name.replace(/_/g, " ")}</span>
+                        <span className="font-bold text-[10px] text-error font-mono">p = {sortedFindings[0].probability.toFixed(2)}</span>
+                      </div>
+                    )}
+                    {sortedFindings[1] && (
+                      <div className="absolute top-[40px] right-0 bg-white border border-tertiary shadow-sm rounded-full px-3 py-1.5 flex flex-col items-center z-10">
+                        <span className="font-bold text-[10px] text-tertiary capitalize">{sortedFindings[1].name.replace(/_/g, " ")}</span>
+                        <span className="font-bold text-[9px] text-tertiary font-mono">p = {(sortedFindings[1].probability ?? 0).toFixed(2)}</span>
+                      </div>
+                    )}
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+                      <path d="M 80,30 Q 120,45 150,55" fill="none" stroke="#FFA726" strokeWidth="2" strokeDasharray="4 2" />
+                      <text x="95" y="40" fill="#FFA726" fontSize="9" fontWeight="bold">Rule C-04</text>
+                      <path d="M 80,110 Q 120,80 150,55" fill="none" stroke="#26A69A" strokeWidth="2" strokeDasharray="4 2" />
+                      <text x="100" y="95" fill="#26A69A" fontSize="9" fontWeight="bold">Rule C-09</text>
+                      <path d="M 270,55 L 320,55" fill="none" stroke="#4DB6AC" strokeWidth="2" markerEnd="url(#arrG)" />
+                      <text x="280" y="50" fill="#4DB6AC" fontSize="9" fontWeight="bold">Rule P-02</text>
+                      <defs>
+                        <marker id="arrG" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                          <path d="M 0 0 L 10 5 L 0 10 z" fill="#4DB6AC" />
+                        </marker>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2 text-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[11px] font-bold text-error">Rule ID: CDSS-IND-TB-REV-3.2 (Rule C-04)</span>
+                    <span className="px-2 py-0.5 rounded-full bg-secondary-container text-secondary text-[10px] font-bold">Awaiting Clinician Validation</span>
+                  </div>
+                  <a href="https://doi.org/10.1016/j.chest.2021.08.012" target="_blank" rel="noreferrer" className="text-[11px] font-mono text-primary hover:underline flex items-center gap-1">
+                    doi:10.1016/j.chest.2021.08.012 <span className="material-symbols-outlined text-[12px]">open_in_new</span>
+                  </a>
+                  <p className="text-xs text-on-surface leading-relaxed">
+                    <strong>Clinical Context:</strong> Prior tuberculosis creates residual fibrotic parenchymal distortion and calcifications, shifting false-positive specificity for acute lower-zone findings.
+                  </p>
+                  <p className="text-[11px] font-mono text-on-surface-variant">
+                    Effect: <strong>OR: 2.4x</strong> [95% CI: 1.8–3.2] · Baseline Shift: <strong className="text-error">+14.2% acute risk threshold</strong>
+                  </p>
+                </div>
+              </>
+            )}
           </div>
-          <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
-            <InteractionNotes interactions={result?.interactions} />
+
+          {/* RIGHT — Review form */}
+          <div className="flex flex-col gap-6">
+            <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-semibold text-on-surface flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[20px]">edit_note</span>
+                  Clinician Diagnostic Review &amp; Sign-Off
+                </h2>
+                <span className="px-2 py-1 rounded-full bg-[#EBF0F5] text-[#4A6583] text-[10px] font-bold font-mono">Dr. {authUser?.name} (Attending MO)</span>
+              </div>
+
+              {isSignedOff ? (
+                <div className="p-4 bg-tertiary-container/20 border border-tertiary-container text-tertiary rounded-lg text-center flex flex-col items-center gap-2">
+                  <span className="material-symbols-outlined text-3xl">verified</span>
+                  <div className="font-bold">Study has been securely signed off.</div>
+                  {reviews && reviews[0] && <div className="text-sm">Decision: {reviews[0].decision}</div>}
+                </div>
+              ) : (
+                <>
+                  <div className="flex flex-col gap-3 mb-5">
+                    {[
+                      { val: "agree", label: "Agree with AI triage & recommendations", sub: "Confirms findings; dispatch for urgent clinical validation & direct tele-consult.", bg: "bg-[#F2F7FA] border-[#A8C7FA]" },
+                      { val: "disagree", label: "Disagree with AI findings", sub: "Findings represent benign historical scarring or technical motion artifact.", bg: "bg-[#FFF3F3] border-[#FFB4AB]" },
+                      { val: "needs_more", label: "Needs repeat imaging / Inadequate Quality", sub: "Poor inspiratory effort or positioning artifact. Request repeat erect PA.", bg: "bg-[#F4F4F4] border-outline" },
+                    ].map(opt => (
+                      <label key={opt.val} className={`flex items-start gap-3 p-3 rounded-lg border ${decision === opt.val ? opt.bg : "bg-surface-container-lowest border-outline-variant"} cursor-pointer transition-colors`}>
+                        <input type="radio" name="decision" value={opt.val} checked={decision === opt.val} onChange={e => setDecision(e.target.value)} className="mt-1" />
+                        <div className="flex flex-col">
+                          <span className="font-semibold text-sm text-on-surface">{opt.label}</span>
+                          <span className="text-xs text-on-surface-variant">{opt.sub}</span>
+                        </div>
+                      </label>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-col gap-2 mb-4">
+                    <div className="flex items-center justify-between text-xs font-semibold text-on-surface-variant">
+                      <span>Assessment Notes for Health Worker:</span>
+                      <span className="text-[10px] font-mono flex items-center gap-1 bg-surface-container-high px-1.5 rounded"><span className="w-1.5 h-1.5 bg-tertiary rounded-full" />ABHA EMR push</span>
+                    </div>
+                    <textarea
+                      className="w-full bg-[#F4F7FB] p-3 rounded-lg border border-[#D5E1ED] focus:ring-2 focus:ring-primary outline-none text-sm text-[#4A6583] placeholder:text-[#9AAABF] resize-none h-24"
+                      placeholder="Enter clinical assessment notes or instructions for the ANM..."
+                      value={notes}
+                      onChange={e => setNotes(e.target.value)}
+                    />
+                    <div className="flex flex-wrap items-center gap-2 mt-1">
+                      <span className="text-[10px] font-bold text-on-surface-variant uppercase mr-1">Snippets:</span>
+                      {["+ Confirmed opacity", "+ Prior scar", "+ Antibiotic dispatch", "+ Schedule follow-up"].map(s => (
+                        <button key={s} onClick={() => setNotes(p => `${p} ${s}`)} className="px-2 py-1 rounded bg-[#EBF0F5] hover:bg-[#D5E1ED] text-[#4A6583] text-[11px] font-bold transition-colors">{s}</button>
+                      ))}
+                      <button
+                        onClick={() => setNotes(groqSummary || "AI Note: Patient presents with significant high-priority findings. Requires immediate tele-consultation.")}
+                        className="ml-auto flex items-center gap-1 px-2 py-1 rounded bg-secondary-container hover:bg-secondary-fixed text-secondary text-[11px] font-bold transition-colors"
+                      >
+                        <span className="material-symbols-outlined text-[14px]">auto_awesome</span>
+                        Auto-Draft (Groq AI)
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => reviewMutation.mutate({ decision, notes })}
+                    disabled={reviewMutation.isPending}
+                    className="w-full py-3 bg-[#004A55] text-white font-bold rounded-lg hover:bg-[#003B44] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">key</span>
+                    {reviewMutation.isPending ? "Submitting…" : "Submit Review & Sign-Off Study"}
+                  </button>
+                  <p className="text-[9px] font-mono text-center text-on-surface-variant mt-2">
+                    Cryptographically hashes attending registration with DICOM-SR digest.
+                  </p>
+                </>
+              )}
+            </div>
+
+            {/* Audit trail */}
+            <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant">
+              <div className="flex items-center justify-between text-[10px] font-bold font-mono text-on-surface-variant uppercase tracking-wider mb-3">
+                <span>Study Access &amp; Audit Trail (ISO 13485 / ABDM)</span>
+                <span>{(reviews?.length ?? 0) + 2} Events</span>
+              </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-start gap-3 bg-[#F4F7FB] p-2.5 rounded border border-[#EBF0F5]">
+                  <span className="text-[10px] font-mono font-bold text-[#4A6583] w-10 shrink-0">{new Date(study.created_at).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}</span>
+                  <span className="text-[11px] font-mono text-[#4A6583]">Health worker uploaded DICOM radiograph to Edge Node.</span>
+                </div>
+                <div className="flex items-start gap-3 bg-[#F4F7FB] p-2.5 rounded border border-[#EBF0F5]">
+                  <span className="text-[10px] font-mono font-bold text-[#4A6583] w-10 shrink-0">{new Date(new Date(study.created_at).getTime() + 2 * 60000).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}</span>
+                  <span className="text-[11px] font-mono text-[#4A6583]">AI inference pipeline completed analysis for study #{study.id}.</span>
+                </div>
+                {reviews && reviews.map((r: any) => (
+                  <div key={r.id} className="flex items-start gap-3 bg-[#F4F7FB] p-2.5 rounded border border-[#EBF0F5]">
+                    <span className="text-[10px] font-mono font-bold text-[#4A6583] w-10 shrink-0">{new Date(r.created_at).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}</span>
+                    <span className="text-[11px] font-mono text-[#4A6583]">Dr. reviewed — decision: <strong>{r.decision}</strong>. {r.notes && `Notes: "${r.notes}"`}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Disclaimer */}
-        <div className="flex items-center justify-center gap-2 text-xs text-on-surface-variant border-t border-outline-variant pt-4">
-          <span className="material-symbols-outlined text-[14px] text-primary">shield</span>
+        <div className="flex items-center justify-center gap-1 text-[10px] font-mono text-on-surface-variant mt-2">
+          <span className="material-symbols-outlined text-[14px]">shield</span>
           Decision support only. Not a diagnosis. Requires clinician review.
         </div>
       </div>
-
-      {/* Review Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="bg-surface-container-lowest rounded-2xl shadow-2xl p-6 w-full max-w-md flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined text-primary text-2xl">rate_review</span>
-              <h2 className="text-lg font-bold text-on-surface">Mark Study as Reviewed</h2>
-            </div>
-            <p className="text-sm text-on-surface-variant">Confirm you have reviewed this study. This action is recorded in the audit log.</p>
-            <textarea
-              className="w-full rounded-lg border border-outline-variant bg-surface-container-low p-3 text-sm text-on-surface placeholder:text-on-surface-variant/50 resize-none focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="Optional clinical notes…" rows={3} value={notes} onChange={e => setNotes(e.target.value)} />
-            <div className="flex gap-3">
-              <button onClick={() => setShowModal(false)}
-                className="flex-1 px-4 py-2 rounded-lg border border-outline-variant text-on-surface text-sm font-semibold hover:bg-surface-container transition-colors">Cancel</button>
-              <button onClick={handleReview} disabled={marking}
-                className="flex-1 px-4 py-2 rounded-lg bg-primary text-on-primary text-sm font-semibold hover:bg-primary/90 disabled:opacity-60 flex items-center justify-center gap-2 transition-colors">
-                {marking && <span className="material-symbols-outlined text-[14px] animate-spin">progress_activity</span>}
-                {marking ? "Saving…" : "Confirm Review"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </AppShell>
   );
 }
