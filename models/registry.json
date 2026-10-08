@@ -18,5 +18,71 @@
     "metrics_file": "reports/lungseg_metrics.md",
     "training_date": "2026-10-08T16:18:54.715645",
     "mean_test_dice": 0.9618373359102136
+  },
+  "fracture_classifier": {
+    "sha256": "25f06d3a80e650265fb101a8c8530c2ac9df5e22e11d14224f69a8efd46e6bb9",
+    "metrics": {
+      "AUROC": {
+        "mean": 0.9011240881344053,
+        "ci_lower": 0.8672149111196015,
+        "ci_upper": 0.9333951604417121
+      },
+      "AUPRC": {
+        "mean": 0.7547435120950752,
+        "ci_lower": 0.6777119297602651,
+        "ci_upper": 0.8209603016444003
+      },
+      "Sensitivity": 0.6571428571365986,
+      "Specificity": 0.9448818897619196
+    }
+  },
+  "knee_classifier": {
+    "sha256": "6b2b7e8c4301e07079cd79ad6fe55fc53e8a3e3a28f62072d9f74e8ddb596ee6",
+    "metrics": {
+      "Macro_F1": {
+        "mean": 0.8228517714440061,
+        "ci_lower": 0.7041162227602906,
+        "ci_upper": 0.9342869095929381
+      },
+      "PerClassRecall": [
+        0.6956521739130435,
+        0.0,
+        0.9583333333333334
+      ],
+      "ConfusionMatrix": [
+        [
+          16,
+          0,
+          7
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          23
+        ]
+      ]
+    }
+  },
+  "tb_classifier": {
+    "sha256": "753390be38d019bb33f815b200f68b1a983e5f7ffd231dacbf0924f21a4831b9",
+    "metrics": {
+      "AUROC": {
+        "mean": 0.8062039772861136,
+        "ci_lower": 0.7170916259065611,
+        "ci_upper": 0.8851611990950226
+      },
+      "AUPRC": {
+        "mean": 0.8244011280865395,
+        "ci_lower": 0.7158544308230202,
+        "ci_upper": 0.9060223308577977
+      },
+      "Sensitivity": 0.7213114753980113,
+      "Specificity": 0.8166666666530557
+    }
   }
 }

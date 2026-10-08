@@ -11,7 +11,7 @@
 | 7 | Calibration + uncertainty | Done | | | |
 | 8 | Lung segmentation + zones | Done | | | |
 | 9 | Explainability | Done | | | |
-| 10 | Fracture/knee/TB models | Pending | | | |
+| 10 | Fracture/knee/TB models | Done | | | Trained efficiently using EfficientNetB0 |
 | 11 | Comorbidity research | Pending | | | |
 | 12 | Comorbidity engine | Pending | | | |
 | 13 | Longitudinal engine | Pending | | | |

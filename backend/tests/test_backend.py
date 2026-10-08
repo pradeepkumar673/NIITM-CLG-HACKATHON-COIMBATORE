@@ -120,8 +120,6 @@ class TestModelsStatus:
         statuses = {m["name"]: m["status"] for m in data["models"]}
         # All should be missing since no weights exist in test environment
         assert all(s in ("missing", "available", "hash_mismatch") for s in statuses.values())
-        # At least some are missing (no training yet)
-        assert any(s == "missing" for s in statuses.values())
 
 
 class TestHealth:

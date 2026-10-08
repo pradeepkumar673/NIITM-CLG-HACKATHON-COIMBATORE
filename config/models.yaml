@@ -1,35 +1,48 @@
 models:
   - name: chest_densenet121
-    filename: chest_densenet121.pt
+    filename: chest_densenet121/best.pt
     task: chest_classification
     labels: config/chest_labels.yaml
     description: "DenseNet121 trained on NIH ChestX-ray14, 14 findings"
     source: "NIH ChestX-ray14 / trained locally"
+    status: "validated-on-test"
 
   - name: gate_classifier
-    filename: gate_classifier.pt
+    filename: gate_classifier/best.pt
     task: quality_gate
     labels: ["xray", "mri", "natural"]
     description: "Quality gate model distinguishing X-ray / MRI / natural images"
     source: "FracAtlas + Knee + Chest + Brain MRI + Oxford Pets"
-
-  - name: fracture_classifier
-    filename: fracture_classifier.pt
-    task: fracture_classification
-    labels: ["fractured", "non_fractured"]
-    description: "Bone fracture binary classifier"
-    source: "FracAtlas dataset"
-
-  - name: knee_classifier
-    filename: knee_classifier.pt
-    task: knee_classification
-    labels: ["normal", "osteoporosis"]
-    description: "Knee osteoporosis binary classifier"
-    source: "Kaggle Knee Osteoporosis dataset"
-
+    status: "validated-on-test"
+    
   - name: lung_segmentor
-    filename: lung_segmentor.pt
+    filename: lungseg_unet/best.pt
     task: lung_segmentation
     labels: ["background", "lung"]
     description: "U-Net lung segmentation"
     source: "Montgomery + Shenzhen lung masks"
+    status: "validated-on-test"
+
+  - name: fracture_classifier
+    filename: fracture_efficientnet/best.pt
+    task: fracture_classification
+    labels: ["non_fractured", "fractured"]
+    description: "Bone fracture binary classifier"
+    source: "FracAtlas dataset"
+    status: "validated-on-test"
+
+  - name: knee_classifier
+    filename: knee_efficientnet/best.pt
+    task: knee_classification
+    labels: ["normal", "osteopenia", "osteoporosis"]
+    description: "Knee bone health 3-class classifier"
+    source: "Kaggle Knee Osteoporosis dataset"
+    status: "experimental"
+    
+  - name: tb_classifier
+    filename: tb_efficientnet/best.pt
+    task: tb_classification
+    labels: ["normal", "tb"]
+    description: "TB binary classifier on chest X-rays"
+    source: "Shenzhen + Montgomery datasets"
+    status: "experimental"

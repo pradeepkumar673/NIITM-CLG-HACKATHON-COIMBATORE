@@ -1,0 +1,12 @@
+# knee training config
+epochs: 15
+batch_size: 16
+lr: 0.0005
+weight_decay: 0.0005
+early_stopping_patience: 5
+dropout_p: 0.5
+num_workers: 0
+mixed_precision: true
+status: "experimental"
+nutrition_flags_enabled: false
+nutrition_flags_reason: "no validated public dataset"
