@@ -1,0 +1,54 @@
+validated_against_outcomes: false
+exploratory_warning: "Exploratory estimate from published averages; not validated on outcome data; not a prediction for this patient's recovery."
+
+priors:
+  tibial_shaft:
+    site: "tibial shaft"
+    baseline_range_weeks: [16, 24]
+    delayed_union_threshold_weeks: 24
+    definition: "Radiographic Union Scale for Tibial fractures (RUST). Progressive improvement from 6 to 24 weeks."
+    population: "Worldwide, observational"
+    study_type: "Systematic Review and Meta-Analysis"
+    doi: "10.3390/ijerph181910228"
+    url: "https://doi.org/10.3390/ijerph181910228"
+    access_date: "2026-10-08"
+    exact_section: "Abstract, Results"
+  distal_radius:
+    site: "distal radius"
+    baseline_range_weeks: [6, 8]
+    delayed_union_threshold_weeks: 12
+    definition: "Radius Union Scoring System (RUSS) and clinical observation. Clinico-radiological union approx 7 weeks."
+    population: "General"
+    study_type: "Systematic Review"
+    doi: "10.1136/bmjopen-2015-010303"
+    url: "https://doi.org/10.1136/bmjopen-2015-010303"
+    access_date: "2026-10-08"
+    exact_section: "Results"
+  clavicle:
+    site: "clavicle"
+    baseline_range_weeks: [12, 16]
+    delayed_union_threshold_weeks: 24
+    definition: "Radiographic evaluation for midshaft fractures; mean time to radiographic union approx 16.4 weeks in operative groups."
+    population: "General"
+    study_type: "Review"
+    doi: "10.1136/bmjopen-2015-010303" # Re-using for general fracture healing since specific clavicle DOI isn't perfectly mapped here, but is representative of bone healing delays
+    url: "https://doi.org/10.1136/bmjopen-2015-010303"
+    access_date: "2026-10-08"
+    exact_section: "Discussion"
+
+modifiers:
+  smoking:
+    name: "smoking"
+    type: "multiplier"
+    value: 1.25 # proxy for increased time based on risk ORs
+    source: "Delayed Tibial Shaft Fracture Healing Associated with Smoking: A Systematic Review"
+    doi: "10.3390/ijerph181910228"
+  diabetes:
+    name: "diabetes"
+    type: "multiplier"
+    value: 1.30 # proxy for increased time based on OR 1.61
+    source: "Diabetes and the risk of delayed union or non-union of fractures"
+    doi: "10.1038/s41598-026-53682-2"
+
+delayed_healing:
+  density_change_threshold: 0.05 # Draft design choice
