@@ -8,5 +8,15 @@
     "metrics_file": "reports/chest_metrics.json",
     "training_date": "2026-10-08T15:47:36.433161",
     "mean_test_auroc": 0.5523
+  },
+  "lungseg_unet": {
+    "name": "lungseg_unet",
+    "path": "models/lungseg_unet/best.pt",
+    "sha256": "2202a8d936e139e7796695be39d46c72c7d79970b4a4378dba14aed3f5af290d",
+    "git_commit": "9170e9b8bec01984a3ce05bcced92e3266804923",
+    "config_hash": "1b82d7c97100f8f60f78db3067e1db42eb530c88230091d645c4082355e61e84",
+    "metrics_file": "reports/lungseg_metrics.md",
+    "training_date": "2026-10-08T16:18:54.715645",
+    "mean_test_dice": 0.9618373359102136
   }
 }

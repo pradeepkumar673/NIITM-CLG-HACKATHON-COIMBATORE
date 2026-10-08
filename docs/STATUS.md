@@ -9,7 +9,7 @@
 | 5 | Train chest model | Done | | | |
 | 6 | Ingestion + quality gate | Done | | | |
 | 7 | Calibration + uncertainty | Done | | | |
-| 8 | Lung segmentation + zones | Pending | | | |
+| 8 | Lung segmentation + zones | Done | | | |
 | 9 | Explainability | Pending | | | |
 | 10 | Fracture/knee/TB models | Pending | | | |
 | 11 | Comorbidity research | Pending | | | |
