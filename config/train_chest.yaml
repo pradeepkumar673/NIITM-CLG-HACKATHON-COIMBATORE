@@ -1,0 +1,41 @@
+# Training config for chest DenseNet121
+# All tunable values live here (R3). Do NOT hardcode in Python code.
+
+model:
+  backbone: densenet121          # torchvision model name
+  pretrained: true               # load ImageNet weights
+  num_labels: 14
+  dropout_p: 0.3                 # MC-dropout rate — keep this for Step 7
+
+data:
+  manifest: data/processed/chest_manifest.csv
+  cache_dir: data/cache
+  image_size: 224
+  # Augmentation for training only
+  rotate_deg: 10
+  brightness: 0.2
+  contrast: 0.2
+  translation: 0.05             # fraction of image
+
+training:
+  batch_size: 32
+  grad_accum_steps: 1           # increase if OOM, effective_batch = batch * accum
+  num_workers: 4
+  persistent_workers: true      # required on Windows for DataLoader
+  pin_memory: true
+  epochs: 20
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  warmup_epochs: 1
+  amp_dtype: bfloat16           # bfloat16 or float16
+  channels_last: true
+  early_stopping_patience: 5
+  clip_grad_norm: 1.0
+
+checkpoint:
+  dir: models/chest_densenet121
+  save_every_epoch: true        # also saves "last.pt" rolling checkpoint
+
+logging:
+  log_file: logs/chest_train.log
+  log_interval_steps: 50        # print loss every N steps
