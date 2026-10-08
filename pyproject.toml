@@ -1,0 +1,47 @@
+[project]
+name = "xray-assistant"
+version = "0.1.0"
+description = "AI X-ray decision-support assistant"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "pydantic-settings",
+    "sqlalchemy",
+    "python-jose",
+    "passlib[bcrypt]",
+    "python-multipart",
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "scipy",
+    "opencv-python-headless",
+    "pillow",
+    "pydicom",
+    "grad-cam",
+    "segmentation-models-pytorch",
+    "timm",
+    "pyyaml",
+    "reportlab",
+    "matplotlib",
+    "pytest",
+    "httpx",
+    "ruff",
+    "kaggle",
+    "torch",
+    "torchvision"
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+
+[tool.ruff]
+line-length = 88
