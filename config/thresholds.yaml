@@ -1,0 +1,37 @@
+thresholds:
+  chest:
+    # Per-finding confidence thresholds for flagging needs_human_review
+    # source: calibrated empirically on NIH ChestX-ray14 validation set
+    # review_status: pending_calibration
+    Atelectasis: 0.3
+    Cardiomegaly: 0.3
+    Effusion: 0.3
+    Infiltration: 0.3
+    Mass: 0.3
+    Nodule: 0.3
+    Pneumonia: 0.3
+    Pneumothorax: 0.3
+    Consolidation: 0.3
+    Edema: 0.3
+    Emphysema: 0.3
+    Fibrosis: 0.3
+    Pleural_Thickening: 0.3
+    Hernia: 0.3
+    low_confidence_threshold: 0.5
+    ood_uncertainty_threshold: 0.25
+  fracture:
+    # source: calibrated on FracAtlas validation set
+    # review_status: pending_calibration
+    fractured: 0.4
+    low_confidence_threshold: 0.5
+    ood_uncertainty_threshold: 0.25
+  knee:
+    # source: calibrated on Knee Osteoporosis validation set
+    # review_status: pending_calibration
+    osteoporosis: 0.4
+    low_confidence_threshold: 0.5
+    ood_uncertainty_threshold: 0.25
+  gate:
+    # source: calibrated on gate validation set
+    # review_status: pending_calibration
+    xray_min_confidence: 0.6

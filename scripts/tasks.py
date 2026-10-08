@@ -1,32 +1,52 @@
-import sys
+"""Task runner: api, worker, etc."""
+from __future__ import annotations
+
 import subprocess
+import sys
+from pathlib import Path
 
-def run_cmd(cmd):
-    result = subprocess.run(cmd, shell=True)
-    if result.returncode != 0:
-        sys.exit(result.returncode)
+ROOT = Path(__file__).resolve().parent.parent
 
-def main():
-    if len(sys.argv) < 2:
-        print("Available commands: check, api, web, test, lint")
+COMMANDS = {
+    "api": [
+        sys.executable, "-m", "uvicorn",
+        "backend.app.main:app",
+        "--reload",
+        "--host", "0.0.0.0",
+    ],
+}
+
+
+def _get_port() -> int:
+    """Read API_PORT from .env or fall back to 8000."""
+    env_file = ROOT / ".env"
+    if env_file.exists():
+        for line in env_file.read_text().splitlines():
+            line = line.strip()
+            if line.startswith("API_PORT="):
+                return int(line.split("=", 1)[1].strip())
+    return 8000
+
+
+def main() -> None:
+    if len(sys.argv) < 2 or sys.argv[1] not in COMMANDS:
+        print(f"Usage: python scripts/tasks.py [{' | '.join(COMMANDS)}]")
         sys.exit(1)
-        
-    cmd = sys.argv[1]
-    
-    if cmd == "check":
-        run_cmd("python scripts/check_gpu.py")
-    elif cmd == "api":
-        run_cmd("uvicorn backend.app.main:app --reload --port 8000")
-    elif cmd == "web":
-        run_cmd("cd frontend && pnpm dev")
-    elif cmd == "test":
-        run_cmd("pytest tests/")
-    elif cmd == "lint":
-        run_cmd("ruff check .")
-        run_cmd("cd frontend && pnpm lint")
-    else:
-        print(f"Unknown command: {cmd}")
-        sys.exit(1)
+
+    task = sys.argv[1]
+    cmd = COMMANDS[task]
+
+    if task == "api":
+        port = _get_port()
+        cmd += ["--port", str(port)]
+
+    print(f"Starting: {' '.join(str(c) for c in cmd)}")
+    proc = subprocess.Popen(cmd, cwd=str(ROOT))
+    try:
+        proc.wait()
+    except KeyboardInterrupt:
+        proc.terminate()
+
 
 if __name__ == "__main__":
     main()
