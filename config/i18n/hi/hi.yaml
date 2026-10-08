@@ -1,0 +1,62 @@
+metadata:
+  language: hi
+  review_status: machine_drafted
+  reviewer: null
+disclaimer: केवल निर्णय समर्थन। निदान नहीं। चिकित्सक की समीक्षा आवश्यक है।
+findings:
+  Atelectasis: एटिलेक्टासिस
+  Cardiomegaly: कार्डियोमेगेली (हृदय का बढ़ना)
+  Effusion: इफ्यूजन
+  Infiltration: इनफिल्ट्रेशन
+  Mass: द्रव्यमान (Mass)
+  Nodule: गांठ (Nodule)
+  Pneumonia: निमोनिया
+  Pneumothorax: न्यूमोथोरैक्स
+  Consolidation: कंसोलिडेशन
+  Edema: एडिमा (सूजन)
+  Emphysema: एम्फिसीमा
+  Fibrosis: फाइब्रोसिस
+  Pleural_Thickening: फुफ्फुस का मोटा होना
+  Hernia: हर्निया
+  fracture: फ्रैक्चर (हड्डी टूटना)
+  knee_normal: घुटना (सामान्य)
+  knee_abnormal: घुटना (असामान्य)
+  tb: क्षय रोग (TB)
+anatomy:
+  hand_wrist: हाथ / कलाई
+  forearm: अग्रभुजा
+  upper_arm: ऊपरी बांह
+  leg_lower: निचली टांग
+  thigh: जांघ
+  foot_ankle: पैर / टखना
+  pelvis_hip: श्रोणि / कूल्हा
+  knee: घुटना
+  ribs_sternum: पसलियाँ / उरोस्थि
+  spine_thoracic: वक्षीय रीढ़
+  clavicle_shoulder: हंसली / कंधा
+  lung_right_upper: दाहिना फेफड़ा – ऊपरी क्षेत्र
+  lung_right_mid: दाहिना फेफड़ा – मध्य क्षेत्र
+  lung_right_lower: दाहिना फेफड़ा – निचला क्षेत्र
+  lung_left_upper: बायां फेफड़ा – ऊपरी क्षेत्र
+  lung_left_mid: बायां फेफड़ा – मध्य क्षेत्र
+  lung_left_lower: बायां फेफड़ा – निचला क्षेत்र
+  heart_mediastinum: हृदय / मध्यस्थानिका
+tiers:
+  high: उच्च
+  medium: मध्यम
+  low: निम्न
+  unreliable: अविश्वसनीय आर्टिफैक्ट
+review_banners:
+  needs_human_review: मानव समीक्षा की आवश्यकता है
+  machine_drafted: मशीन-ड्राफ्टेड अनुवाद; किसी चिकित्सक द्वारा समीक्षा नहीं की गई
+rationale:
+  template: ज़ोन {zone} में {p} संभावना और {conf}% विश्वास के आधार पर, {decision}।
+quality_warnings:
+  image_rejected: 'छवि अस्वीकृत: गुणवत्ता जांच विफल।'
+triage:
+  immediate: तत्काल
+  urgent: जरूरी
+  routine: नियमित
+labels:
+  exploratory: खोजपूर्ण (EXPLORATORY)
+  experimental: प्रायोगिक (EXPERIMENTAL)

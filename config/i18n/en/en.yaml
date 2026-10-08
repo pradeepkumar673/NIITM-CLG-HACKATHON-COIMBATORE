@@ -1,0 +1,62 @@
+metadata:
+  language: en
+  review_status: reviewed
+  reviewer: Dr. A. Sharma
+disclaimer: Decision support only. Not a diagnosis. Requires clinician review.
+findings:
+  Atelectasis: Atelectasis
+  Cardiomegaly: Cardiomegaly
+  Effusion: Effusion
+  Infiltration: Infiltration
+  Mass: Mass
+  Nodule: Nodule
+  Pneumonia: Pneumonia
+  Pneumothorax: Pneumothorax
+  Consolidation: Consolidation
+  Edema: Edema
+  Emphysema: Emphysema
+  Fibrosis: Fibrosis
+  Pleural_Thickening: Pleural Thickening
+  Hernia: Hernia
+  fracture: Fracture
+  knee_normal: Knee (Normal)
+  knee_abnormal: Knee (Abnormal)
+  tb: Tuberculosis
+anatomy:
+  hand_wrist: Hand / Wrist
+  forearm: Forearm (Radius / Ulna)
+  upper_arm: Upper Arm (Humerus)
+  leg_lower: Lower Leg (Tibia / Fibula)
+  thigh: Thigh (Femur)
+  foot_ankle: Foot / Ankle
+  pelvis_hip: Pelvis / Hip
+  knee: Knee (Patella / Condyles)
+  ribs_sternum: Ribs / Sternum
+  spine_thoracic: Thoracic Spine
+  clavicle_shoulder: Clavicle / Shoulder
+  lung_right_upper: Right Lung – Upper Zone
+  lung_right_mid: Right Lung – Middle Zone
+  lung_right_lower: Right Lung – Lower Zone
+  lung_left_upper: Left Lung – Upper Zone
+  lung_left_mid: Left Lung – Middle Zone
+  lung_left_lower: Left Lung – Lower Zone
+  heart_mediastinum: Heart / Mediastinum
+tiers:
+  high: High
+  medium: Medium
+  low: Low
+  unreliable: Unreliable Artifact
+review_banners:
+  needs_human_review: Needs human review
+  machine_drafted: Machine-drafted translation; not reviewed by a clinician
+rationale:
+  template: Based on {p} probability in zone {zone} with {conf}% confidence, {decision}.
+quality_warnings:
+  image_rejected: 'Image rejected: Quality check failed.'
+triage:
+  immediate: Immediate
+  urgent: Urgent
+  routine: Routine
+labels:
+  exploratory: EXPLORATORY
+  experimental: EXPERIMENTAL

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -11,6 +12,22 @@ interface AppShellProps {
 export function AppShell({ children, userRole, userName, clinicName }: AppShellProps) {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
+  const { t, i18n } = useTranslation();
+
+  const handleLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    i18n.changeLanguage(e.target.value);
+    localStorage.setItem('lang', e.target.value);
+  };
+
+  useEffect(() => {
+    if (i18n.language === 'ta') {
+      document.body.style.fontFamily = "'Noto Sans Tamil', 'Inter', sans-serif";
+    } else if (i18n.language === 'hi') {
+      document.body.style.fontFamily = "'Noto Sans Devanagari', 'Inter', sans-serif";
+    } else {
+      document.body.style.fontFamily = "'Inter', sans-serif";
+    }
+  }, [i18n.language]);
 
   return (
     <div className="bg-surface font-body-md text-body-md text-on-surface antialiased">
@@ -18,7 +35,7 @@ export function AppShell({ children, userRole, userName, clinicName }: AppShellP
         <div className="flex flex-col gap-space-md">
           <div className="px-space-md flex flex-col gap-space-xs">
             <div className="flex items-center justify-between">
-              <span className="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">XRAY-ASSISTANT</span>
+              <span className="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">{t('app.title', 'XRAY-ASSISTANT')}</span>
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>
                 Online
@@ -99,7 +116,7 @@ export function AppShell({ children, userRole, userName, clinicName }: AppShellP
           <div className="px-space-md pt-space-xs">
             <label className="block font-label-sm text-label-sm text-on-surface-variant mb-1">Language</label>
             <div className="relative">
-              <select className="w-full appearance-none bg-surface-container-lowest text-on-surface font-body-sm text-body-sm py-2 pl-3 pr-8 rounded-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-1 focus:ring-primary">
+              <select value={i18n.language} onChange={handleLangChange} className="w-full appearance-none bg-surface-container-lowest text-on-surface font-body-sm text-body-sm py-2 pl-3 pr-8 rounded-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-1 focus:ring-primary">
                 <option value="en">English</option>
                 <option value="ta">Tamil [machine-drafted]</option>
                 <option value="hi">Hindi [machine-drafted]</option>

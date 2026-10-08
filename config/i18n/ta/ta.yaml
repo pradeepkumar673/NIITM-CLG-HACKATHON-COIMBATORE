@@ -1,0 +1,63 @@
+metadata:
+  language: ta
+  review_status: machine_drafted
+  reviewer: null
+disclaimer: முடிவு ஆதரவு மட்டுமே. நோய் கண்டறிதல் அல்ல. மருத்துவர் ஆய்வு தேவை.
+findings:
+  Atelectasis: நுரையீரல் சுருக்கம் (Atelectasis)
+  Cardiomegaly: இதய வீக்கம் (Cardiomegaly)
+  Effusion: நீர் கோர்த்தல் (Effusion)
+  Infiltration: ஊடுருவல் (Infiltration)
+  Mass: கட்டி (Mass)
+  Nodule: சிறுகட்டி (Nodule)
+  Pneumonia: நிமோனியா
+  Pneumothorax: மார்பகக் காற்று (Pneumothorax)
+  Consolidation: கெட்டியாதல் (Consolidation)
+  Edema: நீர்க்கட்டு (Edema)
+  Emphysema: எம்பிசிமா
+  Fibrosis: நார்ச்சத்துக் கட்டிகள் (Fibrosis)
+  Pleural_Thickening: ப்ளூரல் தடிமன்
+  Hernia: குடலிறக்கம் (Hernia)
+  fracture: எலும்பு முறிவு
+  knee_normal: முழங்கால் (சாதாரண)
+  knee_abnormal: முழங்கால் (அசாதாரண)
+  tb: காசநோய் (TB)
+anatomy:
+  hand_wrist: கை / மணிக்கட்டு
+  forearm: முன்னங்கை
+  upper_arm: மேல் கை
+  leg_lower: கீழ் கால்
+  thigh: தொடை
+  foot_ankle: பாதம் / கணுக்கால்
+  pelvis_hip: இடுப்பு
+  knee: முழங்கால்
+  ribs_sternum: விலா எலும்புகள் / மார்பெலும்பு
+  spine_thoracic: மார்பு முதுகெலும்பு
+  clavicle_shoulder: இணைப்பு எலும்பு / தோள்
+  lung_right_upper: வலது நுரையீரல் – மேல் பகுதி
+  lung_right_mid: வலது நுரையீரல் – நடு பகுதி
+  lung_right_lower: வலது நுரையீரல் – கீழ் பகுதி
+  lung_left_upper: இடது நுரையீரல் – மேல் பகுதி
+  lung_left_mid: இடது நுரையீரல் – நடு பகுதி
+  lung_left_lower: இடது நுரையீரல் – கீழ் பகுதி
+  heart_mediastinum: இதயம் / மீடியஸ்டினம்
+tiers:
+  high: உயர்
+  medium: நடுத்தர
+  low: குறைந்த
+  unreliable: நம்பகமற்ற செயற்கைப் பொருள்
+review_banners:
+  needs_human_review: மனித ஆய்வு தேவை
+  machine_drafted: இயந்திரத்தால் வரைவு செய்யப்பட்ட மொழிபெயர்ப்பு; மருத்துவக் குழுவால்
+    மதிப்பாய்வு செய்யப்படவில்லை
+rationale:
+  template: '{zone} மண்டலத்தில் {p} நிகழ்தகவு மற்றும் {conf}% நம்பிக்கையுடன், {decision}.'
+quality_warnings:
+  image_rejected: 'படம் நிராகரிக்கப்பட்டது: தரச் சோதனை தோல்வியடைந்தது.'
+triage:
+  immediate: உடனடி
+  urgent: அவசரம்
+  routine: வழக்கமான
+labels:
+  exploratory: ஆராய்ச்சிக்குரிய (EXPLORATORY)
+  experimental: பரிசோதனைக்குரிய (EXPERIMENTAL)

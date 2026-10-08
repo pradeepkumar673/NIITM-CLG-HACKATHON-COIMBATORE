@@ -1,9 +1,12 @@
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Html, Bounds } from '@react-three/drei';
+import { OrbitControls, useGLTF, Bounds } from '@react-three/drei';
 import * as THREE from 'three';
 import { SKELETON_MESH_MAP } from '../config/skeleton_mesh_map';
 import { computeMeshStates, type Target } from '../utils/anatomyMapping';
+import { getSkeletonMapAnatomySkeletonMapGet } from '../client';
+import { useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 
 interface SkeletonViewerProps {
   anatomyData?: {
@@ -30,7 +33,6 @@ function SkeletonModel({
 }) {
   const { nodes } = useGLTF('/models/skeleton.glb', '/draco/', true) as any;
   const group = useRef<THREE.Group>(null);
-  const { camera } = useThree();
 
   // Create base materials that we will clone per-mesh so we can mutate safely and dispose later
   const baseMaterial = useMemo(() => new THREE.MeshStandardMaterial({
@@ -164,6 +166,15 @@ export function SkeletonViewer({ anatomyData, onBoneClick }: SkeletonViewerProps
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
   const [webglSupported, setWebglSupported] = useState(true);
   const controlsRef = useRef<any>(null);
+  const { i18n } = useTranslation();
+
+  const { data: skeletonMap } = useQuery({
+    queryKey: ['skeletonMap', i18n.language],
+    // @ts-ignore: query parameter lang added to backend but SDK not regenerated
+    queryFn: () => getSkeletonMapAnatomySkeletonMapGet({ query: { lang: i18n.language } }),
+  });
+  
+  const anatomyMap = skeletonMap?.data || {};
 
   useEffect(() => {
     try {
@@ -257,7 +268,7 @@ export function SkeletonViewer({ anatomyData, onBoneClick }: SkeletonViewerProps
         <div className="min-h-[40px]">
           {hoveredRegion && !showUncertain && (
             <div className="p-2 rounded bg-primary/10 border border-primary/20 text-primary text-xs font-bold capitalize">
-              {hoveredRegion.replace(/_/g, ' ')}
+              {(anatomyMap as Record<string, string>)[hoveredRegion] || hoveredRegion.replace(/_/g, ' ')}
             </div>
           )}
         </div>

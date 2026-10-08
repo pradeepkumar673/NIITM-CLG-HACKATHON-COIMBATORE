@@ -211,7 +211,7 @@ async def study_events(id: int, db: Session = Depends(get_db), user: User = Depe
     )
 
 @router.get("/{id}/result")
-def get_study_result(id: int, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+def get_study_result(id: int, lang: str = "en", db: Session = Depends(get_db), user: User = Depends(get_current_user)):
     study = db.query(Study).filter(Study.id == id).first()
     if not study:
         raise HTTPException(404, "Study not found")
@@ -220,6 +220,28 @@ def get_study_result(id: int, db: Session = Depends(get_db), user: User = Depend
     res = db.query(Result).filter(Result.study_id == id).first()
     reviews = db.query(Review).filter(Review.study_id == id).all()
     
+    from backend.app.services.i18n import translate_finding, translate_tier, translate
+    
+    findings_translated = None
+    if res and res.findings_json:
+        findings_translated = {}
+        for k, v in res.findings_json.items():
+            v_copy = dict(v) if isinstance(v, dict) else v
+            if isinstance(v_copy, dict):
+                v_copy["label"] = translate_finding(k, lang)
+                if "tier" in v_copy:
+                    v_copy["tier_label"] = translate_tier(v_copy["tier"], lang)
+            findings_translated[k] = v_copy
+            
+    interactions_translated = None
+    if res and res.interactions_json:
+        interactions_translated = dict(res.interactions_json)
+        # Translation of interaction statements could be added here if they were in the pack
+        
+    review_reasons_translated = None
+    if res and res.review_reasons_json:
+        review_reasons_translated = [translate(f"review_banners.{r}", lang) if r in ["needs_human_review"] else r for r in res.review_reasons_json]
+
     return {
         "study": {
             "id": study.id,
@@ -236,9 +258,9 @@ def get_study_result(id: int, db: Session = Depends(get_db), user: User = Depend
             "sex": patient.sex if patient else None
         } if patient else None,
         "result": {
-            "findings": res.findings_json if res else None,
-            "interactions": res.interactions_json if res else None,
-            "review_reasons": res.review_reasons_json if res else None,
+            "findings": findings_translated,
+            "interactions": interactions_translated,
+            "review_reasons": review_reasons_translated,
             "needs_human_review": res.needs_human_review if res else False,
             "model_versions": res.model_versions_json if res else None
         } if res else None,
@@ -252,6 +274,20 @@ def get_study_result(id: int, db: Session = Depends(get_db), user: User = Depend
             } for r in reviews
         ]
     }
+
+@router.get("/{id}/report.pdf")
+def get_study_report_pdf(id: int, lang: str = "en", db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+    study_data = get_study_result(id, lang=lang, db=db, user=user)
+    
+    from backend.app.services.pdf import generate_pdf_report
+    pdf_bytes = generate_pdf_report(study_data, lang=lang)
+    
+    from fastapi.responses import StreamingResponse
+    return StreamingResponse(
+        iter([pdf_bytes]),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f"attachment; filename=report_stu_{id}_{lang}.pdf"}
+    )
 
 @router.post("/{id}/compare/{other_id}")
 def compare_studies(id: int, other_id: int, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
