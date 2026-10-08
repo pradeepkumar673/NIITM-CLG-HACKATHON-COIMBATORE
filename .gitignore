@@ -14,3 +14,5 @@ dist
 kaggle.json
 logs/
 storage/
+models/*/*.pt
+models/*/*.pth
