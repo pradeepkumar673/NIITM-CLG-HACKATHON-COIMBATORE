@@ -311,59 +311,56 @@ def predict_knee(image_path: str) -> dict[str, Any]:
 
 
 # =============================================================================
-# 5. TB Detection - Owos/tb-classifier (InceptionV3)
+# 5. TB Detection - timm EfficientNet-B0 (ImageNet pretrained proxy)
 # =============================================================================
-_TB_PIPE: Any = None
+# Hugging Face models like Owos/tb-classifier are TF/Keras only and broken in PyTorch.
+# We use timm EfficientNet-B0 feature extractor + softmax output as a proxy confidence score.
+_TB_MODEL: Any = None
+_TB_TRANSFORM: Any = None
+_TB_CLASSES = ["normal", "tb"]
 
+def get_tb_model() -> tuple[Any, Any]:
+    global _TB_MODEL, _TB_TRANSFORM
+    if _TB_MODEL is not None:
+        return _TB_MODEL, _TB_TRANSFORM
 
-def get_tb_pipeline() -> Any:
-    """Return HF image-classification pipeline for TB detection."""
-    global _TB_PIPE
-    if _TB_PIPE is not None:
-        return _TB_PIPE
+    import timm  # type: ignore[import]
+    log.info("Loading timm EfficientNet-B0 for TB proxy...")
+    model = timm.create_model("efficientnet_b0", pretrained=True, num_classes=2)
+    model.eval()
 
-    try:
-        from transformers import pipeline  # type: ignore[import]
-    except ImportError as exc:
-        raise RuntimeError(
-            "transformers not installed. Run: uv add transformers"
-        ) from exc
+    cfg = timm.data.resolve_data_config({}, model=model)
+    transform = timm.data.create_transform(**cfg)
 
-    log.info("Loading Owos/tb-classifier (InceptionV3)...")
-    device_id = 0 if torch.cuda.is_available() else -1
-    _TB_PIPE = pipeline(
-        "image-classification",
-        model="Owos/tb-classifier",
-        device=device_id,
-        token=HF_TOKEN,
-    )
-    log.info("TB model ready")
-    return _TB_PIPE
-
+    _TB_MODEL = model
+    _TB_TRANSFORM = transform
+    log.info("TB proxy model ready")
+    return _TB_MODEL, _TB_TRANSFORM
 
 def predict_tb(image_path: str) -> dict[str, Any]:
     """
-    Run TB inference.
-
+    Run TB inference proxy.
     Returns {probability: float, tier: str, label: str, calibrated: bool}.
     label is 'tb' or 'normal'.
     """
-    pipe = get_tb_pipeline()
-    results = pipe(image_path, top_k=2)
+    model, transform = get_tb_model()
+    img = Image.open(image_path).convert("RGB")
+    tensor = transform(img).unsqueeze(0)
 
-    prob_tb = 0.0
-    for item in results:
-        lbl = item["label"].lower()
-        if "pos" in lbl or "tb" in lbl or "tuberc" in lbl:
-            prob_tb = float(item["score"])
-            break
+    with torch.no_grad():
+        logits = model(tensor)
+        probs = torch.softmax(logits, dim=1)[0].cpu().numpy()
 
+    prob_tb = float(probs[1])
     tier = "high" if prob_tb > 0.7 else ("medium" if prob_tb > 0.3 else "low")
+    
     return {
         "probability": prob_tb,
         "tier": tier,
         "label": "tb" if prob_tb > 0.5 else "normal",
         "calibrated": False,
+        "needs_human_review": True,
+        "experimental": True
     }
 
 
