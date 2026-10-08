@@ -38,15 +38,13 @@ def create_app() -> FastAPI:
     )
 
     # CORS
-    origins = settings.cors_origins_list()
-    if origins:
-        app.add_middleware(
-            CORSMiddleware,
-            allow_origins=origins,
-            allow_credentials=True,
-            allow_methods=["*"],
-            allow_headers=["*"],
-        )
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     # Request-ID middleware
     @app.middleware("http")

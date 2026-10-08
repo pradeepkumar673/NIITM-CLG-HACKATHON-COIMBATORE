@@ -77,6 +77,8 @@
         <button onclick="fetchResult()">Refresh Result JSON</button>
         <pre id="results-out"></pre>
         
+        <div id="llm-summary" style="display: none; margin-top: 20px;"></div>
+        
         <h3>Static Assets</h3>
         <button onclick="loadImages()">Load Images & Heatmaps</button>
         <div id="image-gallery" class="image-gallery"></div>
@@ -206,12 +208,20 @@
         async function fetchResult() {
             if (!currentStudyId) return;
             const out = document.getElementById("results-out");
+            const summaryDiv = document.getElementById("llm-summary");
             try {
                 const res = await fetch(`${API_BASE}/studies/${currentStudyId}/result`, {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
                 const data = await res.json();
                 out.innerText = JSON.stringify(data, null, 2);
+                
+                if (data.llm_summary) {
+                    summaryDiv.style.display = "block";
+                    summaryDiv.innerHTML = `<h3>AI Radiologist Summary (via Groq LLaMA)</h3><p style="background:#eef7ff; padding: 15px; border-left: 5px solid #0056b3; font-style: italic;">${data.llm_summary}</p>`;
+                } else {
+                    summaryDiv.style.display = "none";
+                }
             } catch (err) {
                 out.innerText = "Error: " + err.message;
             }
@@ -239,10 +249,18 @@
             // Original image
             await addImage(`${API_BASE}/studies/${currentStudyId}/image.png`, "Original Image");
             
-            // Try fetching common heatmaps based on potential findings
-            const labels = ["cardiomegaly", "fracture", "osteopenia", "tb_pattern"];
-            for (let label of labels) {
-                await addImage(`${API_BASE}/studies/${currentStudyId}/heatmap_${label}.png`, `Heatmap: ${label}`);
+            // Try fetching heatmaps for the findings
+            try {
+                const res = await fetch(`${API_BASE}/studies/${currentStudyId}/result`, { headers: { "Authorization": `Bearer ${token}` } });
+                const data = await res.json();
+                if (data && data.findings) {
+                    const labels = Object.keys(data.findings);
+                    for (let label of labels) {
+                        await addImage(`${API_BASE}/studies/${currentStudyId}/heatmap_${label}.png`, `Heatmap: ${label}`);
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to dynamically load heatmaps: ", err);
             }
         }
     </script>

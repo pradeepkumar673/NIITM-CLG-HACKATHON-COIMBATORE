@@ -11,7 +11,7 @@
 | 7 | Calibration + uncertainty | Done | | | |
 | 8 | Lung segmentation + zones | Done | | | |
 | 9 | Explainability | Done | | | |
-| 10 | Fracture/knee/TB models | Done | | | Trained efficiently using EfficientNetB0 |
+| 10 | Fracture/knee/TB models | Done | 2026-10-08 | | **Upgraded to HF pretrained**: fracture=Hemgg/bone-fracture-detection-using-xray (ViT), TB=Owos/tb-classifier (InceptionV3), chest=torchxrayvision densenet121-res224-all, lungseg=ianpan/chest-x-ray-basic; knee=timm EfficientNet-B0 ImageNet (experimental) |
 | 11 | Comorbidity research | Done | 2026-10-08 | | Rules verified with DOIs |
 | 12 | Comorbidity engine | Done | 2026-10-08 | | Live verified engine, graph, and triage |
 | 13 | Longitudinal engine | Done | 2026-10-08 | | Registration, diff maps, mismatch check, and caliper measures |

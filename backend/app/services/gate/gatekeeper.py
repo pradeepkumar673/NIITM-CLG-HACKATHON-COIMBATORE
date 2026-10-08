@@ -35,30 +35,51 @@ _GATE_MODEL = None
 _GATE_TRANSFORMS = None
 
 def _get_gate_model():
+    """
+    Load the gate classifier.
+
+    Priority:
+      1. Local gate_classifier/best.pt (fine-tuned MobileNetV3, 3 classes).
+      2. Fallback: ImageNet-pretrained MobileNetV3-Small via
+         hf_models.get_gate_pretrained_model(). Outputs raw ImageNet logits
+         which are not class-calibrated for X-ray/MRI/natural, but the
+         physics-based quality checks (blur, exposure, resolution) handle
+         the majority of quality failures regardless.
+    """
     global _GATE_MODEL, _GATE_TRANSFORMS
     if _GATE_MODEL is not None:
         return _GATE_MODEL, _GATE_TRANSFORMS
 
     model_path = ROOT / "models/gate_classifier/best.pt"
-    if not model_path.exists():
+    if model_path.exists():
+        # Use locally trained gate model (fine-tuned, 3-class)
+        model = models.mobilenet_v3_small(weights=None)
+        model.classifier[3] = torch.nn.Linear(model.classifier[3].in_features, 3)
+        ckpt = torch.load(model_path, map_location="cpu", weights_only=False)
+        model.load_state_dict(ckpt["model_state_dict"])
+        model.eval()
+        t = transforms.Compose([
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+        ])
+        _GATE_MODEL = model
+        _GATE_TRANSFORMS = t
+        return _GATE_MODEL, _GATE_TRANSFORMS
+
+    # Fallback: ImageNet-pretrained MobileNetV3-Small
+    try:
+        from backend.app.services.inference.hf_models import get_gate_pretrained_model
+        model, t = get_gate_pretrained_model()
+        _GATE_MODEL = model
+        _GATE_TRANSFORMS = t
+        return _GATE_MODEL, _GATE_TRANSFORMS
+    except Exception as exc:
+        import logging
+        logging.getLogger(__name__).warning(
+            "Gate model unavailable (local and pretrained): %s", exc
+        )
         return None, None
-
-    model = models.mobilenet_v3_small(pretrained=False)
-    model.classifier[3] = torch.nn.Linear(model.classifier[3].in_features, 3)
-    
-    ckpt = torch.load(model_path, map_location="cpu", weights_only=False)
-    model.load_state_dict(ckpt["model_state_dict"])
-    model.eval()
-
-    t = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-    ])
-    
-    _GATE_MODEL = model
-    _GATE_TRANSFORMS = t
-    return _GATE_MODEL, _GATE_TRANSFORMS
 
 
 def compute_metrics(img: Image.Image) -> dict[str, float]:

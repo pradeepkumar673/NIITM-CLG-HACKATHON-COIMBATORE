@@ -31,7 +31,10 @@ dependencies = [
     "ruff",
     "kaggle",
     "torch",
-    "torchvision"
+    "torchvision",
+    "torchxrayvision>=1.5.5",
+    "transformers>=5.19.0",
+    "email-validator>=2.3.0",
 ]
 
 [[tool.uv.index]]

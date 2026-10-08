@@ -48,6 +48,10 @@ class Settings(BaseSettings):
 
     # CORS
     cors_origins: str = ""
+    
+    # 3rd Party APIs
+    groq_api_key: str = ""
+    hf_api_token: str = ""
 
     @field_validator("jwt_secret")
     @classmethod

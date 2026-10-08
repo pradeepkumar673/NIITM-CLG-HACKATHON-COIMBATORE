@@ -1,48 +1,52 @@
 models:
   - name: chest_densenet121
-    filename: chest_densenet121/best.pt
+    filename: chest_densenet121/best.pt   # local weights kept as fallback
     task: chest_classification
     labels: config/chest_labels.yaml
-    description: "DenseNet121 trained on NIH ChestX-ray14, 14 findings"
-    source: "NIH ChestX-ray14 / trained locally"
-    status: "validated-on-test"
+    description: "DenseNet121 trained on NIH+CheXpert+MIMIC+PadChest via TorchXRayVision"
+    source: "torchxrayvision / densenet121-res224-all — Cohen et al. MIDL 2022 arXiv:2111.00595"
+    hf_model_id: "torchxrayvision/densenet121-res224-all"
+    status: "validated-pretrained"
 
   - name: gate_classifier
-    filename: gate_classifier/best.pt
+    filename: gate_classifier/best.pt    # local fine-tuned weights; pretrained fallback used if missing
     task: quality_gate
     labels: ["xray", "mri", "natural"]
-    description: "Quality gate model distinguishing X-ray / MRI / natural images"
-    source: "FracAtlas + Knee + Chest + Brain MRI + Oxford Pets"
+    description: "Quality gate: MobileNetV3-Small. Local fine-tuned preferred; ImageNet fallback via hf_models."
+    source: "torchvision MobileNetV3-Small IMAGENET1K_V1 / local fine-tuned"
     status: "validated-on-test"
-    
+
   - name: lung_segmentor
-    filename: lungseg_unet/best.pt
+    filename: lungseg_unet/best.pt       # kept for reference; not used at inference
     task: lung_segmentation
     labels: ["background", "lung"]
-    description: "U-Net lung segmentation"
-    source: "Montgomery + Shenzhen lung masks"
-    status: "validated-on-test"
+    description: "EfficientNetV2-S + U-Net decoder from ianpan/chest-x-ray-basic (HF)"
+    source: "https://huggingface.co/ianpan/chest-x-ray-basic"
+    hf_model_id: "ianpan/chest-x-ray-basic"
+    status: "validated-pretrained"
 
   - name: fracture_classifier
-    filename: fracture_efficientnet/best.pt
+    filename: fracture_efficientnet/best.pt   # kept for reference; not used at inference
     task: fracture_classification
     labels: ["non_fractured", "fractured"]
-    description: "Bone fracture binary classifier"
-    source: "FracAtlas dataset"
-    status: "validated-on-test"
+    description: "ViT fine-tuned on bone fracture X-rays from Hemgg/bone-fracture-detection-using-xray (HF)"
+    source: "https://huggingface.co/Hemgg/bone-fracture-detection-using-xray"
+    hf_model_id: "Hemgg/bone-fracture-detection-using-xray"
+    status: "validated-pretrained"
 
   - name: knee_classifier
-    filename: knee_efficientnet/best.pt
+    filename: knee_efficientnet/best.pt   # kept for reference; not used at inference
     task: knee_classification
     labels: ["normal", "osteopenia", "osteoporosis"]
-    description: "Knee bone health 3-class classifier"
-    source: "Kaggle Knee Osteoporosis dataset"
+    description: "timm EfficientNet-B0 ImageNet pretrained — no knee-specific HF model available; marked experimental"
+    source: "timm / efficientnet_b0 IMAGENET1K"
     status: "experimental"
-    
+
   - name: tb_classifier
-    filename: tb_efficientnet/best.pt
+    filename: tb_efficientnet/best.pt    # kept for reference; not used at inference
     task: tb_classification
     labels: ["normal", "tb"]
-    description: "TB binary classifier on chest X-rays"
-    source: "Shenzhen + Montgomery datasets"
-    status: "experimental"
+    description: "InceptionV3 fine-tuned on TB chest X-rays from Owos/tb-classifier (HF)"
+    source: "https://huggingface.co/Owos/tb-classifier"
+    hf_model_id: "Owos/tb-classifier"
+    status: "validated-pretrained"

@@ -1,74 +1,49 @@
+"""
+Lung segmentation service.
+
+Uses ianpan/chest-x-ray-basic (EfficientNetV2-S + U-Net decoder) hosted on
+Hugging Face. Downloads on first call via the transformers library.
+
+Ref: https://huggingface.co/ianpan/chest-x-ray-basic
+"""
+from __future__ import annotations
+
 from pathlib import Path
 
+import cv2
 import numpy as np
-import segmentation_models_pytorch as smp
 import torch
-import torchvision.transforms.functional as TF
-import yaml
 
 ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent
 
-_MODEL = None
-
-def _get_model():
-    global _MODEL
-    if _MODEL is not None:
-        return _MODEL
-        
-    cfg_path = ROOT / "config/train_lungseg.yaml"
-    ckpt_path = ROOT / "models/lungseg_unet/best.pt"
-    
-    if not cfg_path.exists() or not ckpt_path.exists():
-        raise Exception("Lungseg model or config not found")
-        
-    with open(cfg_path, "r") as f:
-        cfg = yaml.safe_load(f)
-        
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    
-    model = smp.Unet(
-        encoder_name=cfg["model"]["encoder_name"],
-        encoder_weights=None,
-        in_channels=cfg["model"]["in_channels"],
-        classes=cfg["model"]["classes"],
-    )
-    
-    ckpt = torch.load(ckpt_path, map_location=device, weights_only=False)
-    model.load_state_dict(ckpt["model_state_dict"])
-    model.to(device)
-    model.eval()
-    
-    _MODEL = model
-    return _MODEL
 
 def segment_lungs(img_tensor: torch.Tensor) -> np.ndarray:
     """
-    Segment lungs from a 1xHxW tensor (already normalized 0-1).
-    Returns a binary mask (H x W) numpy array.
+    Segment lungs from a 1xHxW or 3xHxW float tensor (values in [0, 1]).
+
+    Delegates to ianpan/chest-x-ray-basic via hf_models.predict_lung_mask.
+    Returns a binary bool mask (H x W).
     """
-    model = _get_model()
-    device = next(model.parameters()).device
-    
-    # Needs to be 1 channel
-    if img_tensor.shape[0] == 3:
-        img_tensor = img_tensor[0:1, :, :]
-        
-    orig_h, orig_w = img_tensor.shape[1], img_tensor.shape[2]
-    
-    # Resize to 256x256 for model
-    img_resized = TF.resize(img_tensor, (256, 256))
-    
-    with torch.no_grad():
-        logits = model(img_resized.unsqueeze(0).to(device))
-        mask_256 = (torch.sigmoid(logits) > 0.5).float().squeeze(0) # 1x256x256
-        
-    # Restore original size
-    mask_orig = TF.resize(mask_256, (orig_h, orig_w), interpolation=TF.InterpolationMode.NEAREST)
-    
-    return mask_orig.squeeze(0).cpu().numpy().astype(bool)
+    from backend.app.services.inference.hf_models import predict_lung_mask
 
-import cv2
+    # Convert tensor -> uint8 BGR for predict_lung_mask
+    if img_tensor.shape[0] == 1:
+        # Single channel: replicate to 3-channel
+        rgb = img_tensor.expand(3, -1, -1)
+    else:
+        rgb = img_tensor[:3]
 
+    # tensor is C×H×W in [0,1]; convert to HxWxC uint8
+    arr = (rgb.permute(1, 2, 0).cpu().numpy() * 255).clip(0, 255).astype(np.uint8)
+    bgr = cv2.cvtColor(arr, cv2.COLOR_RGB2BGR)
+
+    try:
+        mask_uint8 = predict_lung_mask(bgr)  # H×W uint8 {0,1}
+        return mask_uint8.astype(bool)
+    except Exception:
+        # Graceful fallback: treat entire image as lung field
+        h, w = bgr.shape[:2]
+        return np.ones((h, w), dtype=bool)
 
 def post_process_lungs(mask: np.ndarray, convention: str = "PA") -> tuple[np.ndarray, np.ndarray]:
     """

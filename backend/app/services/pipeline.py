@@ -107,32 +107,53 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                 return str(base_dir / f"heatmap_{label_name}.png")
             
             if study.body_part == BodyPart.chest:
-                # 1. Chest 14
+                # 1. Chest multi-label (torchxrayvision DenseNet121, densenet121-res224-all)
                 _notify(study_id, "stage", {"stage": "classification", "message": "Analyzing chest abnormalities..."})
-                reg = get_registry()
                 try:
-                    model = reg.get_model("chest_densenet121")
-                    res = {"cardiomegaly": {"probability": 0.8, "tier": "high", "std": 0.1, "calibrated": True}}
+                    import cv2
+                    import numpy as np
+                    from backend.app.services.inference.hf_models import (
+                        predict_chest,
+                        get_chest_xrv_model,
+                    )
+
+                    res = predict_chest(study.image_path)
                     result_json["findings"] = res
-                    _generate_heatmap("chest_densenet121", study.image_path, 0, get_hm_path("cardiomegaly"))
+
+                    # GradCAM on top finding
+                    xrv_model, pathologies = get_chest_xrv_model()
+                    import torchxrayvision as xrv
+                    import torchvision
+                    import torch
+                    from skimage.io import imread
+
+                    raw_img = imread(study.image_path)
+                    if raw_img.ndim == 3:
+                        raw_img = raw_img.mean(2)
+                    img_norm = xrv.datasets.normalize(raw_img, 255)[None, ...]
+                    transform = torchvision.transforms.Compose([
+                        xrv.datasets.XRayCenterCrop(),
+                        xrv.datasets.XRayResizer(224),
+                    ])
+                    img_tensor = torch.from_numpy(transform(img_norm)).unsqueeze(0).float()
+
+                    top_idx = int(np.argmax([res[k]["probability"] for k in res]))
+                    top_label = list(res.keys())[top_idx]
+
+                    try:
+                        from backend.app.services.explain.cam import generate_gradcam
+                        target_layer = xrv_model.features[-1]
+                        img_bgr = cv2.imread(study.image_path, cv2.IMREAD_COLOR)
+                        img_vis = cv2.resize(img_bgr, (224, 224)).astype(np.float32) / 255.0
+                        _, overlay = generate_gradcam(xrv_model, img_tensor, top_idx, target_layer, img_vis)
+                        out_path = get_hm_path(top_label)
+                        overlay_bgr = cv2.cvtColor((overlay * 255).astype(np.uint8), cv2.COLOR_RGB2BGR)
+                        cv2.imwrite(out_path, overlay_bgr)
+                    except Exception as cam_err:
+                        log.warning(f"GradCAM skipped: {cam_err}")
+
                 except Exception as e:
                     log.error(f"Chest inference error: {e}")
-                
-                # 2. Lung Seg
-                _notify(study_id, "stage", {"stage": "segmentation", "message": "Segmenting lung zones..."})
-                try:
-                    # just dummy for now
-                    result_json["lung_zones"] = {"left": {"area": 100}, "right": {"area": 120}}
-                except Exception as e:
-                    log.error(f"Lung seg error: {e}")
-                    
-                # 3. TB Screen
-                _notify(study_id, "stage", {"stage": "tb_screen", "message": "Screening for TB..."})
-                try:
-                    tb_model = get_registry().get_model("tb_efficientnet_b0")
-                    result_json["findings"]["tb_pattern"] = {"probability": 0.2, "tier": "low", "experimental": True}
-                except Exception as e:
-                    pass
                     
                 # 4. Rules
                 _notify(study_id, "stage", {"stage": "rules", "message": "Applying comorbidity rules..."})
@@ -146,23 +167,65 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                 t_cpu += (time.perf_counter() - t_cpu_start)
                     
             elif study.body_part == BodyPart.bone:
+                # Fracture: Hemgg/bone-fracture-detection-using-xray (ViT fine-tuned)
                 _notify(study_id, "stage", {"stage": "classification", "message": "Analyzing for fracture..."})
-                # Fracture model
-                reg = get_registry()
-                model = reg.get_model("frac_efficientnet_b0")
-                result_json["findings"]["fracture"] = {"probability": 0.7, "tier": "high"}
-                _generate_heatmap("frac_efficientnet_b0", study.image_path, 0, get_hm_path("fracture"))
-                
+                try:
+                    from backend.app.services.inference.hf_models import predict_fracture
+                    frac_result = predict_fracture(study.image_path)
+                    result_json["findings"]["fracture"] = {
+                        "probability": frac_result["probability"],
+                        "tier": frac_result["tier"],
+                        "label": frac_result["label"],
+                        "calibrated": False,
+                        "source": "Hemgg/bone-fracture-detection-using-xray",
+                    }
+                    result_json["needs_human_review"] = frac_result["probability"] < 0.4
+                except Exception as e:
+                    log.error(f"Fracture inference error: {e}")
+                    result_json["findings"]["fracture"] = {"error": str(e)}
+                _generate_heatmap("", study.image_path, 0, get_hm_path("fracture"))
+
             elif study.body_part == BodyPart.knee:
+                # Knee: timm EfficientNet-B0 ImageNet pretrained (no knee-specific HF model)
                 _notify(study_id, "stage", {"stage": "classification", "message": "Analyzing knee health..."})
-                # Knee model
-                reg = get_registry()
-                model = reg.get_model("knee_efficientnet_b0")
-                result_json["findings"]["osteopenia"] = {"probability": 0.6, "tier": "medium", "experimental": True}
-                _generate_heatmap("knee_efficientnet_b0", study.image_path, 0, get_hm_path("osteopenia"))
+                try:
+                    from backend.app.services.inference.hf_models import predict_knee
+                    knee_result = predict_knee(study.image_path)
+                    result_json["findings"].update({
+                        k: v for k, v in knee_result.items()
+                        if k not in ("needs_human_review", "experimental")
+                    })
+                    result_json["needs_human_review"] = True
+                    result_json["disclaimer"] = (
+                        "Knee bone health scores are from an ImageNet-pretrained backbone "
+                        "without knee-specific fine-tuning. Treat as decision support only. "
+                        "Human review required."
+                    )
+                except Exception as e:
+                    log.error(f"Knee inference error: {e}")
+                    result_json["findings"]["knee"] = {"error": str(e)}
+                _generate_heatmap("", study.image_path, 0, get_hm_path("osteopenia"))
+                
+            # 5. LLM Summary using Groq
+            _notify(study_id, "stage", {"stage": "summary", "message": "Generating LLM summary..."})
+            try:
+                import json
+                from groq import Groq
+                import os
+                groq_key = os.environ.get("GROQ_API_KEY")
+                if groq_key:
+                    client = Groq(api_key=groq_key)
+                    prompt = f"You are an AI radiologist assistant. Write a concise, 3-sentence summary report for this X-Ray based strictly on these findings and triage flags: {json.dumps(result_json)}. Do not invent findings. Keep it highly professional."
+                    chat_completion = client.chat.completions.create(
+                        messages=[{"role": "user", "content": prompt}],
+                        model=os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile"),
+                        max_tokens=200,
+                    )
+                    result_json["llm_summary"] = chat_completion.choices[0].message.content
+            except Exception as e:
+                log.error(f"LLM Summary error: {e}")
                 
             result_json["disclaimer"] = "Exploratory estimate; not validated on outcome data."
-            
             from backend.app.db.models import Result
             res_obj = Result(
                 study_id=study.id,
