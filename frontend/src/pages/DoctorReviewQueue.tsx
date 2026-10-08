@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getQueueSizeDashboardStudiesQueueGet, listStudiesStudiesGet, getTriageDistributionDashboardStudiesTriageGet } from '../client';
 import { AppShell } from '../components/AppShell';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuthUser } from '../utils/auth';
 
-export function DoctorReviewQueue() {
+
+export function DoctorReviewQueueContent() {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [size] = useState(10);
   const [status, setStatus] = useState('all'); 
@@ -70,7 +73,6 @@ export function DoctorReviewQueue() {
   };
 
   return (
-    <AppShell userRole="doctor" userName={localStorage.getItem('userName') || 'Doctor'}>
       <div className="flex flex-col w-full">
         <div className="w-full bg-surface-container-high/60 backdrop-blur-md px-space-lg py-2.5 rounded-xl shadow-sm mb-space-md flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
@@ -78,7 +80,7 @@ export function DoctorReviewQueue() {
             <span className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Prototype View State:</span>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
-            <button className="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-primary text-on-primary shadow-sm flex items-center gap-1.5" type="button">
+            <button className="px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all duration-200 bg-primary text-on-primary shadow-sm flex items-center gap-1.5 hover:bg-primary-container hover:text-on-primary-container cursor-pointer" type="button" onClick={() => alert('Queue prioritization options coming soon.')}>
               <span className="w-2 h-2 rounded-full bg-tertiary-fixed"></span>1. Prioritized Queue
             </button>
           </div>
@@ -87,7 +89,7 @@ export function DoctorReviewQueue() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md mb-space-lg">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2 font-mono-data-sm text-mono-data-sm text-on-surface-variant">
-              <span className="hover:text-primary cursor-pointer transition-colors">Triage Dashboard</span>
+              <span className="hover:text-primary cursor-pointer transition-colors" onClick={() => navigate('/dashboard')}>Triage Dashboard</span>
               <span className="text-outline-variant">/</span>
               <span className="text-primary font-medium">Clinical Review Queue</span>
               <span className="text-outline-variant">•</span>
@@ -104,7 +106,11 @@ export function DoctorReviewQueue() {
             </p>
           </div>
           <div className="flex items-center gap-2.5 flex-wrap">
-            <button className="h-11 px-4 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md font-semibold shadow-sm hover:bg-surface-container-low transition-all duration-150 flex items-center gap-2" type="button">
+            <button 
+              className="h-11 px-4 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md font-semibold shadow-sm hover:bg-surface-container-low transition-all duration-150 flex items-center gap-2" 
+              type="button"
+              onClick={() => alert('Batch sign-off requires selecting multiple studies first.')}
+            >
               <span className="material-symbols-outlined text-[18px]">rule_folder</span>
               <span>Batch Sign-off Eligible</span>
             </button>
@@ -204,7 +210,11 @@ export function DoctorReviewQueue() {
                       const tierInfo = getTierInfo(study);
                       const topFind = getTopFinding(study);
                       return (
-                        <tr key={study.id} className="hover:bg-surface-container-low/60 transition-colors">
+                        <tr 
+                          key={study.id} 
+                          className="hover:bg-surface-container-low/60 transition-colors cursor-pointer group"
+                          onClick={() => navigate(`/review/${study.id}`)}
+                        >
                           <td className="py-3.5 px-4">
                             <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-${tierInfo.color}-container text-${tierInfo.color} font-mono-data-sm font-bold`}>
                               {tierInfo.label}
@@ -216,7 +226,9 @@ export function DoctorReviewQueue() {
                           <td className="py-3.5 px-3">
                             <div className="flex flex-col">
                               <span className="font-mono-data-sm font-bold">{study.patient_ext_ref || 'Unknown'}</span>
-                              <span className="text-on-surface-variant font-label-sm">{study.patient_sex}, {study.patient_age}y</span>
+                              <span className="text-on-surface-variant font-label-sm">
+                                {[study.patient_sex, study.patient_age ? `${study.patient_age}y` : null].filter(Boolean).join(', ') || 'N/A'}
+                              </span>
                             </div>
                           </td>
                           <td className="py-3.5 px-3 capitalize">
@@ -247,12 +259,15 @@ export function DoctorReviewQueue() {
                             )}
                           </td>
                           <td className="py-3.5 px-3">
-                            <span className="font-mono-data-sm">{new Date(study.created_at).toLocaleTimeString()}</span>
+                            <span className="font-mono-data-sm">{new Date(study.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                           </td>
                           <td className="py-3.5 px-4 text-right">
-                            <Link to={`/review/${study.id}`} className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1">
+                            <button 
+                              className="h-9 px-3 rounded-md bg-primary text-on-primary font-label-sm font-semibold shadow-sm hover:bg-primary-container transition-all inline-flex items-center gap-1 group-hover:scale-105"
+                              onClick={(e) => { e.stopPropagation(); navigate(`/review/${study.id}`); }}
+                            >
                               Open <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
-                            </Link>
+                            </button>
                           </td>
                         </tr>
                       );
@@ -280,6 +295,14 @@ export function DoctorReviewQueue() {
 
         </div>
       </div>
+  );
+}
+
+export function DoctorReviewQueue() {
+  const authUser = getAuthUser();
+  return (
+    <AppShell userRole={authUser?.role} userName={authUser?.name}>
+      <DoctorReviewQueueContent />
     </AppShell>
   );
 }

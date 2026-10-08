@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getUsersClinicsDashboardUsersClinicsGet, getModelStatusDashboardModelsStatusGet } from '../client';
 import { AppShell } from '../components/AppShell';
+import { getAuthUser } from '../utils/auth';
 
-export function AdminDashboard() {
+export function AdminDashboardContent() {
   const { data: usersData, isLoading: isLoadingUsers } = useQuery({
     queryKey: ['adminUsers'],
     queryFn: () => getUsersClinicsDashboardUsersClinicsGet()
@@ -17,7 +18,6 @@ export function AdminDashboard() {
   const models = modelsData?.data || [];
 
   return (
-    <AppShell userRole="admin" userName="System Admin">
       <div className="flex flex-col w-full gap-8 pb-8">
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-bold text-on-surface tracking-tight">Admin Control Center</h1>
@@ -100,6 +100,14 @@ export function AdminDashboard() {
           </div>
         </div>
       </div>
+  );
+}
+
+export function AdminDashboard() {
+  const authUser = getAuthUser();
+  return (
+    <AppShell userRole={authUser?.role} userName={authUser?.name}>
+      <AdminDashboardContent />
     </AppShell>
   );
 }

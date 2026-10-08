@@ -49,9 +49,9 @@ export function AppShell({ children, userRole, userName, clinicName }: AppShellP
           
           <nav className="flex flex-col gap-1 px-space-sm">
             <Link 
-              to={userRole === 'admin' ? '/admin' : '/dashboard'} 
+              to="/dashboard" 
               className={`flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md transition-colors ${
-                isActive('/dashboard') || isActive('/admin')
+                isActive('/dashboard')
                   ? 'bg-primary text-on-primary shadow-[0_1px_8px_rgba(0,0,0,0.04)]' 
                   : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
               }`}
@@ -59,8 +59,6 @@ export function AppShell({ children, userRole, userName, clinicName }: AppShellP
               <span className="material-symbols-outlined text-[20px]">grid_view</span>
               Dashboard
             </Link>
-            {userRole === 'health_worker' && (
-              <>
                 <Link 
                   to="/studies/new" 
                   className={`flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md transition-colors ${
@@ -83,21 +81,6 @@ export function AppShell({ children, userRole, userName, clinicName }: AppShellP
                   <span className="material-symbols-outlined text-[20px]">folder_shared</span>
                   My studies
                 </Link>
-              </>
-            )}
-            {userRole === 'doctor' && (
-              <>
-                <Link 
-                  to="/queue" 
-                  className={`flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md transition-colors ${
-                    isActive('/queue')
-                      ? 'bg-primary text-on-primary shadow-[0_1px_8px_rgba(0,0,0,0.04)]' 
-                      : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-[20px]">checklist</span>
-                  Review queue
-                </Link>
                 <Link 
                   to="/compare" 
                   className={`flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md transition-colors ${
@@ -109,8 +92,6 @@ export function AppShell({ children, userRole, userName, clinicName }: AppShellP
                   <span className="material-symbols-outlined text-[20px]">compare</span>
                   Compare
                 </Link>
-              </>
-            )}
           </nav>
           
           <div className="px-space-md pt-space-xs">

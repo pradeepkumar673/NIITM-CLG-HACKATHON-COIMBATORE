@@ -52,7 +52,7 @@ class UserClinic(BaseModel):
     id: int
     name: str
     role: str
-    clinic_name: str # Since we don't have a clinics table, we'll return a static placeholder string or derived from user
+    clinic_name: str
 
 class ModelStatus(BaseModel):
     name: str
@@ -183,23 +183,37 @@ def get_recent_activity(db: Session = Depends(get_db), current_user: User = Depe
 @router.get("/users/clinics", response_model=List[UserClinic])
 def get_users_clinics(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     users = db.execute(select(User)).scalars().all()
+    import os
+    clinic = os.environ.get("CLINIC_NAME", "Primary Health Center")
     return [
         UserClinic(
             id=u.id,
             name=u.full_name,
             role=u.role.value,
-            clinic_name="Kashti PHC / District Cluster" # No clinic table exists, use requested stitch design name
+            clinic_name=clinic
         )
         for u in users
     ]
 
 @router.get("/models/status", response_model=List[ModelStatus])
 def get_model_status(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    # Read from config/models.yaml or just return static for now as we don't have a models table.
-    return [
-        ModelStatus(name="Chest-CAD", version="v4.2.1-RT", sha256="8f2a9c1b3e80", status="Active", metrics_link="/docs/metrics/chest"),
-        ModelStatus(name="Knee-BoneCAD", version="v0.8.2-Alpha", sha256="4d8a1e2f9801", status="Quarantined", metrics_link="/docs/metrics/knee")
-    ]
+    import yaml
+    from pathlib import Path
+    try:
+        with open(Path("config/models.yaml"), "r") as f:
+            cfg = yaml.safe_load(f)
+        models = []
+        for m in cfg.get("models", []):
+            models.append(ModelStatus(
+                name=m.get("name", "Unknown"),
+                version=m.get("version", "1.0"),
+                sha256=m.get("sha256", "pending"),
+                status="Active",
+                metrics_link=m.get("source", "")
+            ))
+        return models
+    except:
+        return []
 
 @router.get("/studies/latency", response_model=LatencyStatsResponse)
 def get_latency_stats(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):

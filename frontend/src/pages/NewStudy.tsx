@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createStudyStudiesPost } from '../client';
 import { AppShell } from '../components/AppShell';
+import { getAuthUser } from '../utils/auth';
 
 export function NewStudy() {
   const [file, setFile] = useState<File | null>(null);
@@ -17,6 +18,7 @@ export function NewStudy() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const authUser = getAuthUser();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -80,7 +82,7 @@ export function NewStudy() {
   };
 
   return (
-    <AppShell userRole="health_worker" userName="Sister Lakshmi Devi">
+    <AppShell userRole={authUser?.role} userName={authUser?.name}>
       <div className="w-full flex justify-center transition-all duration-300">
         <div className="w-full max-w-[1440px] flex flex-col gap-space-md" id="layout-inner-container">
           
@@ -117,36 +119,64 @@ export function NewStudy() {
 
               {state === 'resting' && (
                 <div className="flex flex-col gap-space-md">
-                  <div className="relative bg-surface p-space-lg rounded-xl text-center flex flex-col items-center justify-center gap-space-md min-h-[340px] shadow-sm hover:bg-surface-container-low transition-all cursor-pointer group" onClick={() => fileInputRef.current?.click()}>
+                  <label
+                    htmlFor="file-input-browse"
+                    className="relative bg-surface p-space-lg rounded-xl text-center flex flex-col items-center justify-center gap-space-md min-h-[340px] shadow-sm hover:bg-surface-container-low transition-all cursor-pointer group"
+                  >
                     <div className="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-primary group-hover:scale-105 transition-transform shadow-sm">
                       <span className="material-symbols-outlined text-[34px]">cloud_upload</span>
                     </div>
                     <div className="flex flex-col gap-1 max-w-md">
                       <h2 className="font-headline-sm text-headline-sm text-on-surface font-semibold">
-                        Drag an X-ray here (DICOM, JPEG or PNG)
+                        Click or drag an X-ray here (DICOM, JPEG or PNG)
                       </h2>
                       <p className="font-body-sm text-body-sm text-on-surface-variant">
                         Supports optical lightbox transfers, CR phosphor plate dumps, and standard PACs bundles up to 120 MB.
                       </p>
                     </div>
-                    <div className="flex flex-wrap items-center justify-center gap-space-sm pt-space-xs">
-                      <input type="file" className="hidden" ref={fileInputRef} accept="image/*,.dcm" onChange={handleFileChange} />
-                      <input type="file" className="hidden" ref={cameraInputRef} accept="image/*" capture="environment" onChange={handleFileChange} />
-                      
-                      <button className="min-h-[44px] px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors shadow-sm flex items-center gap-2" type="button" onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}>
+                    <div className="flex flex-wrap items-center justify-center gap-space-sm pt-space-xs" onClick={(e) => e.stopPropagation()}>
+                      {/* Hidden file inputs – linked via htmlFor/id, NOT programmatic .click() */}
+                      <input
+                        type="file"
+                        id="file-input-browse"
+                        className="hidden"
+                        ref={fileInputRef}
+                        accept="image/*,.dcm"
+                        onChange={handleFileChange}
+                      />
+                      <input
+                        type="file"
+                        id="file-input-camera"
+                        className="hidden"
+                        ref={cameraInputRef}
+                        accept="image/*"
+                        capture="environment"
+                        onChange={handleFileChange}
+                      />
+
+                      {/* Browse button – label wraps a span styled as a button */}
+                      <label
+                        htmlFor="file-input-browse"
+                        className="min-h-[44px] px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors shadow-sm flex items-center gap-2 cursor-pointer"
+                      >
                         <span className="material-symbols-outlined text-[18px]">file_open</span>
                         Browse local files
-                      </button>
-                      <button className="min-h-[44px] px-space-md py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2" type="button" onClick={(e) => { e.stopPropagation(); cameraInputRef.current?.click(); }}>
+                      </label>
+
+                      {/* Camera button – separate label */}
+                      <label
+                        htmlFor="file-input-camera"
+                        className="min-h-[44px] px-space-md py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2 cursor-pointer"
+                      >
                         <span className="material-symbols-outlined text-[18px]">photo_camera</span>
                         Take photo with camera
-                      </button>
+                      </label>
                     </div>
                     <div className="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm pt-space-xs">
                       <span className="material-symbols-outlined text-[16px] text-primary">info</span>
                       <span>Phone photos of illuminated film are accepted; the system checks image quality first.</span>
                     </div>
-                  </div>
+                  </label>
                   
                   <div className="bg-surface-container-low p-space-md rounded-xl flex flex-wrap items-center justify-between gap-space-sm">
                     <div className="flex flex-wrap items-center gap-1.5 font-mono-data-sm text-mono-data-sm text-on-surface-variant">

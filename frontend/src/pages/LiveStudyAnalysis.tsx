@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AppShell } from '../components/AppShell';
+import { getAuthUser } from '../utils/auth';
 
 export function LiveStudyAnalysis() {
   const { id } = useParams<{ id: string }>();
+  const authUser = getAuthUser();
   const navigate = useNavigate();
   
   const [stage, setStage] = useState<string>('running'); // running, completed, rejected, unavailable
@@ -48,13 +50,19 @@ export function LiveStudyAnalysis() {
             setProgress(30);
           } else if (s === 'classification') {
             setPipelineState({ 1: 'completed', 2: 'completed', 3: 'running', 4: 'pending', 5: 'pending' });
-            setProgress(50);
-          } else if (s === 'anatomy' || s === 'summary') {
+            setProgress(45);
+          } else if (s === 'heatmap') {
             setPipelineState({ 1: 'completed', 2: 'completed', 3: 'completed', 4: 'running', 5: 'pending' });
-            setProgress(70);
+            setProgress(60);
+          } else if (s === 'uncertainty') {
+            setPipelineState({ 1: 'completed', 2: 'completed', 3: 'completed', 4: 'completed', 5: 'running' });
+            setProgress(80);
           } else if (s === 'rules') {
             setPipelineState({ 1: 'completed', 2: 'completed', 3: 'completed', 4: 'completed', 5: 'running' });
             setProgress(90);
+          } else if (s === 'summary' || s === 'anatomy') {
+            setPipelineState({ 1: 'completed', 2: 'completed', 3: 'completed', 4: 'completed', 5: 'completed' });
+            setProgress(95);
           } else if (s === 'failed') {
             setStage('rejected');
             eventSource.close();
@@ -158,7 +166,7 @@ export function LiveStudyAnalysis() {
   };
 
   return (
-    <AppShell userRole="health_worker" userName="Sister Lakshmi Devi">
+    <AppShell userRole={authUser?.role} userName={authUser?.name}>
       <div className="w-full flex justify-center transition-all duration-300 pb-space-lg pt-space-md">
         <div className="w-full max-w-[720px] flex flex-col gap-space-md">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-md">

@@ -156,8 +156,7 @@ def evaluate_gate(img: Image.Image) -> dict[str, Any]:
             reasons.append(f"Not an X-ray (detected as {class_name} with prob {probs[pred_class]:.2f})")
         else:
             # We don't have a body part classifier yet, so default to unknown
-            # unless we add it later
-            body_part_guess = "chest" # Just a placeholder assumption if it passes
+            body_part_guess = "unknown"
     
     return {
         "is_xray": is_xray,

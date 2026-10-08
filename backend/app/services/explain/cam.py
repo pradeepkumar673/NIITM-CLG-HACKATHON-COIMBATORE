@@ -117,15 +117,27 @@ def generate_spatial_uncertainty(
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
     Generates a spatial uncertainty map by running GradCAM++ across multiple
-    dropout passes.
+    stochastic passes with dropout layers in training mode.
+
+    Works with any model – calls ``enable_mc_dropout`` if available, otherwise
+    sets all Dropout layers to training mode directly.
 
     Returns
     -------
-    std_map:      float32 (H × W) normalised std of CAM activations.
-    visualization: uint8 (H × W × 3) RGB overlay.
-    downsampled:  float32 (64 × 64) std map for JSON transport.
+    std_map:       float32 (H × W) normalised std of CAM activations.
+    visualization: uint8  (H × W × 3) RGB overlay.
+    downsampled:   float32 (64 × 64) std map for JSON transport.
     """
-    model.enable_mc_dropout()
+    # Enable stochastic dropout for MC sampling
+    if hasattr(model, "enable_mc_dropout"):
+        model.enable_mc_dropout()
+    else:
+        # Generic fallback: set all Dropout / Dropout2d layers to train mode
+        # so they sample randomly, while keeping BN in eval mode.
+        for module in model.modules():
+            if isinstance(module, (torch.nn.Dropout, torch.nn.Dropout2d, torch.nn.AlphaDropout)):
+                module.train()
+
     cam_gen = GradCAMPlusPlus(model=model, target_layers=[target_layer])
     targets = [ClassifierOutputTarget(target_class)]
 
@@ -134,12 +146,15 @@ def generate_spatial_uncertainty(
         grayscale_cam = cam_gen(input_tensor=img_tensor, targets=targets)
         cams.append(grayscale_cam[0, :])
 
+    # Restore eval mode after MC sampling
+    model.eval()
+
     stacked = np.stack(cams, axis=0)
     std_map = np.std(stacked, axis=0)
 
     # Normalise
     if std_map.max() > 0:
-        std_map = std_map / std_map.max()
+        std_map = (std_map / std_map.max()).astype(np.float32)
 
     orig_h, orig_w = img_rgb.shape[:2]
     if std_map.shape != (orig_h, orig_w):

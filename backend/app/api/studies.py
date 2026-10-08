@@ -124,17 +124,33 @@ async def create_study(
     body_part: Optional[str] = Form(None),
     age: Optional[int] = Form(None),
     sex: Optional[str] = Form(None),
-    history_flags: Optional[str] = Form("{}"),
+    history_flags: Optional[str] = Form("[]"),
     db: Session = Depends(get_db),
     user: User = Depends(get_current_user)
 ):
-    flags = json.loads(history_flags)
+    # Normalise history_flags: backend always expects a list[str]
+    try:
+        parsed = json.loads(history_flags or "[]")
+    except (json.JSONDecodeError, TypeError):
+        parsed = []
+    if isinstance(parsed, dict):
+        # Legacy: if sent as a JSON object, take keys where value is truthy
+        flags: list[str] = [k for k, v in parsed.items() if v]
+    elif isinstance(parsed, list):
+        flags = [str(x) for x in parsed]
+    else:
+        flags = []
     
-    # Save file
-    safe_name = file.filename.replace(" ", "_")
+    # Safe filename (filename may be None for some clients)
+    raw_name = file.filename or "upload"
+    safe_name = raw_name.replace(" ", "_")
     image_path = STORAGE_DIR / safe_name
     with open(image_path, "wb") as f:
-        f.write(await file.read())
+        file_bytes = await file.read()
+        f.write(file_bytes)
+        
+    import hashlib
+    file_hash = hashlib.sha256(file_bytes).hexdigest()
         
     from PIL import Image
     from backend.app.services.gate.gatekeeper import evaluate_gate
@@ -146,7 +162,7 @@ async def create_study(
         uploaded_by=user.id,
         original_filename=file.filename,
         image_path=str(image_path),
-        sha256="dummy_sha" # simplified for now
+        sha256=file_hash
     )
     
     if gate_res["action"] == "reject":
@@ -185,7 +201,7 @@ async def study_events(id: int, db: Session = Depends(get_db), user: User = Depe
         raise HTTPException(404)
         
     async def event_generator():
-        if study.status == StudyStatus.completed:
+        if study.status == StudyStatus.done:
             yield f"data: {json.dumps({'event': 'complete'})}\n\n"
             await asyncio.sleep(0.1)
             return
@@ -242,6 +258,18 @@ def get_study_result(id: int, lang: str = "en", db: Session = Depends(get_db), u
     if res and res.review_reasons_json:
         review_reasons_translated = [translate(f"review_banners.{r}", lang) if r in ["needs_human_review"] else r for r in res.review_reasons_json]
 
+    # Unpack interactions_json: may be the new {interactions, graph} dict or legacy list
+    interactions_list = []
+    interaction_graph = {"nodes": [], "edges": []}
+    if res and res.interactions_json:
+        raw = res.interactions_json
+        if isinstance(raw, dict) and "interactions" in raw:
+            interactions_list = raw.get("interactions", [])
+            interaction_graph = raw.get("graph", {"nodes": [], "edges": []})
+        elif isinstance(raw, list):
+            # Legacy: stored as plain list
+            interactions_list = raw
+
     return {
         "study": {
             "id": study.id,
@@ -259,10 +287,17 @@ def get_study_result(id: int, lang: str = "en", db: Session = Depends(get_db), u
         } if patient else None,
         "result": {
             "findings": findings_translated,
-            "interactions": interactions_translated,
+            "interactions": interactions_list,
+            "interaction_graph": interaction_graph,
+            "triage": res.review_reasons_json if res else {"level": "routine", "reasons": []},
             "review_reasons": review_reasons_translated,
             "needs_human_review": res.needs_human_review if res else False,
-            "model_versions": res.model_versions_json if res else None
+            "model_versions": res.model_versions_json if res else None,
+            "llm_summary": (res.explanation_json or {}).get("llm_summary") if res else None,
+            "disclaimer": (res.explanation_json or {}).get("disclaimer") if res else None,
+            "experimental": (res.explanation_json or {}).get("experimental", False) if res else False,
+            "anatomy": (res.explanation_json or {}).get("anatomy") if res else None,
+            "uncertainty": res.uncertainty_json if res else None,
         } if res else None,
         "reviews": [
             {
@@ -274,6 +309,7 @@ def get_study_result(id: int, lang: str = "en", db: Session = Depends(get_db), u
             } for r in reviews
         ]
     }
+
 
 @router.get("/{id}/report.pdf")
 def get_study_report_pdf(id: int, lang: str = "en", db: Session = Depends(get_db), user: User = Depends(get_current_user)):
@@ -328,6 +364,20 @@ def get_heatmap(id: int, label: str, db: Session = Depends(get_db), user: User =
     if not hm_path.exists():
         raise HTTPException(404)
     return FileResponse(str(hm_path))
+
+@router.get("/{id}/uncertainty.png")
+def get_uncertainty_map(id: int, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+    """Serve the MC-dropout spatial uncertainty map image generated during analysis."""
+    study = db.query(Study).filter(Study.id == id).first()
+    if not study:
+        raise HTTPException(404)
+    if study.uploaded_by != user.id and user.role not in ["admin", "doctor"]:
+        raise HTTPException(403)
+    
+    unc_path = Path(study.image_path).parent / f"study_{study.id}_heatmaps" / "uncertainty.png"
+    if not unc_path.exists():
+        raise HTTPException(404, "Uncertainty map not generated for this study")
+    return FileResponse(str(unc_path))
 
 from pydantic import BaseModel
 class ReviewRequest(BaseModel):

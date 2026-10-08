@@ -37,9 +37,7 @@ export function Login() {
         }).join(''));
         const payload = JSON.parse(jsonPayload);
         
-        if (payload.role === 'admin') navigate('/admin');
-        else if (payload.role === 'doctor') navigate('/queue');
-        else navigate('/dashboard');
+        navigate('/dashboard');
       } else if (response.error) {
         setErrorMsg('Email or password is incorrect.');
       }

@@ -1,8 +1,16 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getStudyCountsDashboardStudiesCountsGet, getQueueSizeDashboardStudiesQueueGet, getLatencyStatsDashboardStudiesLatencyGet } from '../client';
 import { AppShell } from '../components/AppShell';
+import { getAuthUser } from '../utils/auth';
+import { DoctorReviewQueueContent } from './DoctorReviewQueue';
+import { AdminDashboardContent } from './AdminDashboard';
 
 export function Dashboard() {
+  const navigate = useNavigate();
+  const authUser = getAuthUser();
+  const [activeTab, setActiveTab] = useState('overview');
   const { data: countsData, isLoading: isLoadingCounts } = useQuery({
     queryKey: ['studyCounts'],
     queryFn: () => getStudyCountsDashboardStudiesCountsGet()
@@ -28,11 +36,47 @@ export function Dashboard() {
   const awaitingDoctor = queueData?.data?.awaiting_sign_off ?? 0;
   const avgResponseTime = latencyData?.data?.average_ms ? Math.round(latencyData.data.average_ms / 60000) : 0; // Convert ms to mins
 
+  const dailyCounts = countsData?.data?.daily || [];
+  const maxCount = Math.max(1, ...dailyCounts.map(d => d.count));
+  const points = dailyCounts.map((d, i) => {
+    const x = (i / Math.max(1, dailyCounts.length - 1)) * 240;
+    const y = 28 - (d.count / maxCount) * 24;
+    return `${x},${y}`;
+  });
+  const pathD = points.length > 0 ? `M${points[0]} ` + points.slice(1).map(p => `L${p}`).join(' ') : 'M0,28 L240,28';
+  const lastY = points.length > 0 ? 28 - (dailyCounts[dailyCounts.length - 1].count / maxCount) * 24 : 28;
+
   return (
-    <AppShell userRole="health_worker" userName="Sister Lakshmi Devi">
+    <AppShell userRole={authUser?.role} userName={authUser?.name} clinicName={authUser?.clinicName}>
       <div className="flex flex-col w-full">
-        {/* Top Viewport & Dynamic State Controls */}
-        <section className="flex flex-col gap-space-md mb-space-lg">
+        {/* Unified Dashboard Navigation Tabs */}
+        <div className="flex items-center gap-space-sm mb-space-lg border-b border-outline-variant pb-2">
+          <button 
+            className={`px-4 py-2 font-label-md text-label-md font-semibold transition-colors rounded-t-lg ${activeTab === 'overview' ? 'text-primary border-b-2 border-primary' : 'text-on-surface-variant hover:text-on-surface'}`}
+            onClick={() => setActiveTab('overview')}
+          >
+            Overview
+          </button>
+          <button 
+            className={`px-4 py-2 font-label-md text-label-md font-semibold transition-colors rounded-t-lg ${activeTab === 'queue' ? 'text-primary border-b-2 border-primary' : 'text-on-surface-variant hover:text-on-surface'}`}
+            onClick={() => setActiveTab('queue')}
+          >
+            Review Queue
+          </button>
+          <button 
+            className={`px-4 py-2 font-label-md text-label-md font-semibold transition-colors rounded-t-lg ${activeTab === 'admin' ? 'text-primary border-b-2 border-primary' : 'text-on-surface-variant hover:text-on-surface'}`}
+            onClick={() => setActiveTab('admin')}
+          >
+            Admin Panel
+          </button>
+        </div>
+
+        {activeTab === 'queue' && <DoctorReviewQueueContent />}
+        {activeTab === 'admin' && <AdminDashboardContent />}
+        
+        {activeTab === 'overview' && (
+          <>
+            <section className="flex flex-col gap-space-md mb-space-lg">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
             <div>
               <div className="flex items-center gap-space-sm mb-1">
@@ -103,7 +147,7 @@ export function Dashboard() {
                   <span className="px-2 py-0.5 rounded-full bg-surface text-primary font-mono-data-sm text-mono-data-sm font-medium">95% CI Calibrated</span>
                 </div>
                 <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                  Local inference enabled on Edge Node edge server. Studies flagged "High" will trigger an automated SMS notification to {localStorage.getItem('userName') || 'Doctor'} (District Hospital Tele-radiology Unit).
+                  Local inference enabled on Edge Node edge server. Studies flagged "High" will trigger an automated SMS notification to {authUser?.name || 'Doctor'} (District Hospital Tele-radiology Unit).
                 </p>
               </div>
             </div>
@@ -127,11 +171,11 @@ export function Dashboard() {
                 {/* Micro sparkline chart */}
                 <div className="mt-space-md pt-space-xs">
                   <div className="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-[10px] mb-1">
-                    <span>08:00</span><span>11:00</span><span>NOW</span>
+                    <span>7d ago</span><span>3d ago</span><span>Today</span>
                   </div>
                   <svg className="w-full h-8 overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 240 32">
-                    <path className="text-primary-container" d="M0,28 L30,24 L60,18 L90,26 L120,12 L150,15 L180,8 L210,14 L240,4" stroke="currentColor" strokeLinecap="round" strokeWidth="2"></path>
-                    <circle className="text-primary" cx="240" cy="4" fill="currentColor" r="3"></circle>
+                    <path className="text-primary-container" d={pathD} stroke="currentColor" strokeLinecap="round" strokeWidth="2"></path>
+                    <circle className="text-primary" cx="240" cy={lastY} fill="currentColor" r="3"></circle>
                   </svg>
                 </div>
               </div>
@@ -167,7 +211,7 @@ export function Dashboard() {
                 <div className="flex items-baseline justify-between mt-space-md">
                   <span className="font-mono-data-lg text-[2.5rem] leading-none text-on-surface font-bold">{awaitingDoctor < 10 ? `0${awaitingDoctor}` : awaitingDoctor}</span>
                   <div className="flex flex-col items-end">
-                    <span className="font-label-sm text-label-sm text-primary font-semibold">{localStorage.getItem('userName') || 'Doctor'}</span>
+                    <span className="font-label-sm text-label-sm text-primary font-semibold">{authUser?.name || 'Doctor'}</span>
                     <span className="font-body-sm text-body-sm text-on-surface-variant">Tele-radiology cluster</span>
                   </div>
                 </div>
@@ -178,9 +222,12 @@ export function Dashboard() {
               </div>
             </div>
             {/* Primary CTA: Analyse a new X-ray */}
-            <div className="bg-surface-container-lowest p-space-lg rounded-xl shadow-md flex flex-col lg:flex-row items-center justify-between gap-space-lg">
+            <div 
+              onClick={() => navigate('/studies/new')}
+              className="bg-surface-container-lowest p-space-lg rounded-xl shadow-md flex flex-col lg:flex-row items-center justify-between gap-space-lg cursor-pointer transition-all hover:shadow-lg hover:-translate-y-0.5 group"
+            >
               <div className="flex items-start gap-space-md max-w-2xl">
-                <div className="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0">
+                <div className="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0 group-hover:bg-primary-container transition-colors">
                   <span className="material-symbols-outlined text-primary text-[32px]">upload_file</span>
                 </div>
                 <div>
@@ -202,13 +249,12 @@ export function Dashboard() {
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-space-sm w-full lg:w-auto">
-                <div className="p-space-sm rounded-lg bg-surface-container-low text-center w-full lg:w-48 shadow-sm">
+                <div className="p-space-sm rounded-lg bg-surface-container-low text-center w-full lg:w-48 shadow-sm group-hover:bg-surface-container transition-colors">
                   <span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant block">Drag & Drop DICOM</span>
                   <span className="font-label-sm text-label-sm text-primary font-semibold">Up to 120 MB</span>
                 </div>
                 <button 
-                  onClick={() => window.location.href = '/studies/new'}
-                  className="w-full sm:w-auto h-12 min-h-[48px] px-space-lg rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold transition-all shadow-md flex items-center justify-center gap-2 shrink-0" type="button"
+                  className="w-full sm:w-auto h-12 min-h-[48px] px-space-lg rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold transition-all shadow-md flex items-center justify-center gap-2 shrink-0 group-hover:scale-105" type="button"
                 >
                   <span className="material-symbols-outlined text-[20px]">add_circle</span>
                   <span>New study</span>
@@ -216,9 +262,10 @@ export function Dashboard() {
                 </button>
               </div>
             </div>
-            
             {/* NO RECENT STUDIES ENDPOINT - REMOVED PER R1 */}
           </div>
+        )}
+        </>
         )}
       </div>
     </AppShell>

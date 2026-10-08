@@ -24,8 +24,10 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-i18next": "^17.0.16",
+    "react-markdown": "^10.1.0",
     "react-router-dom": "^7.18.4",
-    "three": "^0.186.1"
+    "remark-gfm": "^4.0.1",
+    "three": "0.167.1"
   },
   "devDependencies": {
     "@hey-api/client-fetch": "^0.13.1",
@@ -50,5 +52,8 @@
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
     "vitest": "^5.0.3"
+  },
+  "overrides": {
+    "three": "0.167.1"
   }
 }

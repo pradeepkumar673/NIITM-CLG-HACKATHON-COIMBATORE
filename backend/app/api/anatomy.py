@@ -1,10 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from backend.app.services.anatomy import load_anatomy_config
+from backend.app.api.auth import get_current_user
 
 router = APIRouter(prefix="/anatomy", tags=["anatomy"])
 
 @router.get("/skeleton-map")
-def get_skeleton_map(lang: str = "en"):
+def get_skeleton_map(lang: str = "en", current_user = Depends(get_current_user)):
     """
     Returns the validated config (ids, labels per language, parent/child grouping, review_status)
     so the frontend never hardcodes a bone list.

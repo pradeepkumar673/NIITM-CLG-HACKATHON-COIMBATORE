@@ -68,7 +68,14 @@ def login(body: LoginRequest, request: Request, db: Session = Depends(get_db)) -
             detail={"error": {"code": "invalid_credentials", "message": "Invalid email or password"}},
         )
 
-    token = create_access_token({"sub": str(user.id), "role": user.role.value})
+    import os
+    token = create_access_token({
+        "sub": str(user.id),
+        "role": user.role.value,
+        "name": user.full_name,
+        "email": user.email,
+        "clinic_name": os.environ.get("CLINIC_NAME", "Primary Health Center")
+    })
 
     # Audit log — do NOT log email or password (R10)
     audit = AuditLog(

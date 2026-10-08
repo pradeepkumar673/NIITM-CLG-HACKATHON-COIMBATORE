@@ -3,10 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { getStudyResultStudiesIdResultGet, listStudiesStudiesGet, compareStudiesStudiesIdCompareOtherIdPost } from '../client';
 import { AppShell } from '../components/AppShell';
+import { getAuthUser } from '../utils/auth';
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export function LongitudinalComparison() {
+  const authUser = getAuthUser();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -41,7 +43,7 @@ export function LongitudinalComparison() {
   };
 
   return (
-    <AppShell userRole="doctor" userName={localStorage.getItem('userName') || 'Doctor'}>
+    <AppShell userRole={authUser?.role} userName={authUser?.name}>
       <div className="flex flex-col w-full gap-4 pb-8">
         <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex flex-col gap-1">
