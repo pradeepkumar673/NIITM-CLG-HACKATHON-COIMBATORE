@@ -2,12 +2,12 @@
 
 | Step | Title | Status | Date | SHA | Notes |
 |---|---|---|---|---|---|
-| 1 | Bootstrap | Pending | | | |
-| 2 | NIH chest data | Pending | | | |
-| 3 | Other datasets, gate negatives, manifests, cache | Pending | | | |
-| 4 | Backend skeleton + auth | Pending | | | |
-| 5 | Train chest model | Pending | | | |
-| 6 | Ingestion + quality gate | Pending | | | |
+| 1 | Bootstrap | Done | | | |
+| 2 | NIH chest data | Done | | | |
+| 3 | Other datasets, gate negatives, manifests, cache | Done | | | |
+| 4 | Backend skeleton + auth | Done | | | |
+| 5 | Train chest model | Done | | | |
+| 6 | Ingestion + quality gate | Done | | | |
 | 7 | Calibration + uncertainty | Pending | | | |
 | 8 | Lung segmentation + zones | Pending | | | |
 | 9 | Explainability | Pending | | | |

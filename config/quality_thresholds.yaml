@@ -1,0 +1,11 @@
+source: calibrated on chest dataset, n=11027
+thresholds:
+  blur:
+  - 15.022095052558871
+  - 390.0556717517575
+  exposure:
+  - 88.67784763336182
+  - 182.70181077957153
+  resolution:
+  - 1048576.0
+  - 1048576.0
