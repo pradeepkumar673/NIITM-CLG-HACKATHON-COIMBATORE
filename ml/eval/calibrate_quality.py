@@ -1,13 +1,14 @@
 """Compute handcrafted quality thresholds based on the real dataset."""
 
 import json
+import sys
 from pathlib import Path
+
+import cv2
 import numpy as np
 import yaml
-import cv2
 from PIL import Image
 from tqdm import tqdm
-import sys
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))

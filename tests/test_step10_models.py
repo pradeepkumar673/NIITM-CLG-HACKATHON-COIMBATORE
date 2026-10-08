@@ -1,12 +1,14 @@
-import pytest
-import torch
 import sys
 from pathlib import Path
+
+import pytest
+import torch
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from backend.app.services.inference.registry import UnifiedModelRegistry, ModelNotAvailable
+from backend.app.services.inference.registry import UnifiedModelRegistry
+
 
 @pytest.fixture(scope="module")
 def registry():

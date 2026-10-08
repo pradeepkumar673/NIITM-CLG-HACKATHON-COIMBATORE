@@ -12,16 +12,15 @@ from __future__ import annotations
 
 import argparse
 import math
-import os
 import sys
 import time
 from pathlib import Path
 
 import numpy as np
 import torch
-import torch.nn as nn
 import yaml
 from sklearn.metrics import roc_auc_score
+from torch import nn
 from torch.utils.data import DataLoader, Subset
 
 ROOT = Path(__file__).resolve().parent.parent.parent
@@ -29,7 +28,6 @@ sys.path.insert(0, str(ROOT))
 
 from ml.train.chest_dataset import ChestCacheDataset
 from ml.train.model import ChestDenseNet121
-
 
 # ---------------------------------------------------------------------------
 # Helpers

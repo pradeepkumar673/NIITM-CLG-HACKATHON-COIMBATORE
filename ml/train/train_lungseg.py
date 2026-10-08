@@ -1,20 +1,19 @@
-import os
-import sys
-import yaml
-import json
-import hashlib
 import datetime
+import hashlib
+import json
+import random
 import subprocess
 from pathlib import Path
+
 import numpy as np
 import pandas as pd
-import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader, Dataset
-from PIL import Image
-import torchvision.transforms.functional as TF
-import random
 import segmentation_models_pytorch as smp
+import torch
+import torchvision.transforms.functional as TF
+import yaml
+from PIL import Image
+from torch import nn
+from torch.utils.data import DataLoader, Dataset
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 

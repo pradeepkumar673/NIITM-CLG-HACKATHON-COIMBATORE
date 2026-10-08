@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import enum
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from sqlalchemy import (
     JSON,
@@ -18,7 +18,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 def _utcnow() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class Base(DeclarativeBase):
@@ -60,9 +60,9 @@ class User(Base):
         DateTime(timezone=True), default=_utcnow, nullable=False
     )
 
-    studies: Mapped[list["Study"]] = relationship("Study", back_populates="uploader")
-    reviews: Mapped[list["Review"]] = relationship("Review", back_populates="doctor")
-    audit_logs: Mapped[list["AuditLog"]] = relationship("AuditLog", back_populates="user")
+    studies: Mapped[list[Study]] = relationship("Study", back_populates="uploader")
+    reviews: Mapped[list[Review]] = relationship("Review", back_populates="doctor")
+    audit_logs: Mapped[list[AuditLog]] = relationship("AuditLog", back_populates="user")
 
 
 class Patient(Base):
@@ -77,7 +77,7 @@ class Patient(Base):
         DateTime(timezone=True), default=_utcnow, nullable=False
     )
 
-    studies: Mapped[list["Study"]] = relationship("Study", back_populates="patient")
+    studies: Mapped[list[Study]] = relationship("Study", back_populates="patient")
 
 
 class Study(Base):
@@ -107,14 +107,14 @@ class Study(Base):
         DateTime(timezone=True), default=_utcnow, nullable=False
     )
 
-    patient: Mapped["Patient | None"] = relationship("Patient", back_populates="studies")
-    uploader: Mapped["User"] = relationship("User", back_populates="studies")
-    results: Mapped[list["Result"]] = relationship("Result", back_populates="study")
-    reviews: Mapped[list["Review"]] = relationship("Review", back_populates="study")
-    comparisons_a: Mapped[list["Comparison"]] = relationship(
+    patient: Mapped[Patient | None] = relationship("Patient", back_populates="studies")
+    uploader: Mapped[User] = relationship("User", back_populates="studies")
+    results: Mapped[list[Result]] = relationship("Result", back_populates="study")
+    reviews: Mapped[list[Review]] = relationship("Review", back_populates="study")
+    comparisons_a: Mapped[list[Comparison]] = relationship(
         "Comparison", foreign_keys="Comparison.study_a", back_populates="study_a_ref"
     )
-    comparisons_b: Mapped[list["Comparison"]] = relationship(
+    comparisons_b: Mapped[list[Comparison]] = relationship(
         "Comparison", foreign_keys="Comparison.study_b", back_populates="study_b_ref"
     )
 
@@ -135,7 +135,7 @@ class Result(Base):
         DateTime(timezone=True), default=_utcnow, nullable=False
     )
 
-    study: Mapped["Study"] = relationship("Study", back_populates="results")
+    study: Mapped[Study] = relationship("Study", back_populates="results")
 
 
 class Comparison(Base):
@@ -153,10 +153,10 @@ class Comparison(Base):
         DateTime(timezone=True), default=_utcnow, nullable=False
     )
 
-    study_a_ref: Mapped["Study"] = relationship(
+    study_a_ref: Mapped[Study] = relationship(
         "Study", foreign_keys=[study_a], back_populates="comparisons_a"
     )
-    study_b_ref: Mapped["Study"] = relationship(
+    study_b_ref: Mapped[Study] = relationship(
         "Study", foreign_keys=[study_b], back_populates="comparisons_b"
     )
 
@@ -173,8 +173,8 @@ class Review(Base):
         DateTime(timezone=True), default=_utcnow, nullable=False
     )
 
-    study: Mapped["Study"] = relationship("Study", back_populates="reviews")
-    doctor: Mapped["User"] = relationship("User", back_populates="reviews")
+    study: Mapped[Study] = relationship("Study", back_populates="reviews")
+    doctor: Mapped[User] = relationship("User", back_populates="reviews")
 
 
 class AuditLog(Base):
@@ -192,4 +192,4 @@ class AuditLog(Base):
         DateTime(timezone=True), default=_utcnow, nullable=False
     )
 
-    user: Mapped["User | None"] = relationship("User", back_populates="audit_logs")
+    user: Mapped[User | None] = relationship("User", back_populates="audit_logs")

@@ -10,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from backend.app.core.security import hash_password
 from backend.app.db.models import UserRole
-from backend.app.db.session import init_db, get_db
+from backend.app.db.session import get_db, init_db
 
 
 def main() -> None:
@@ -48,8 +48,8 @@ def main() -> None:
     init_db()
     db = next(get_db())
     try:
+
         from backend.app.db.models import User
-        from sqlalchemy.exc import IntegrityError
 
         existing = db.query(User).filter(User.email == email).first()
         if existing:

@@ -1,3 +1,3 @@
-from .lungseg import segment_lungs, get_lung_zones
+from .lungseg import get_lung_zones, segment_lungs
 
-__all__ = ["segment_lungs", "get_lung_zones"]
+__all__ = ["get_lung_zones", "segment_lungs"]

@@ -1,14 +1,14 @@
 """Chest X-ray dataset reading from numpy cache (Step 3)."""
 from __future__ import annotations
 
+import random
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import torch
-from pathlib import Path
-from torch.utils.data import Dataset
 import torchvision.transforms.functional as TF
-import random
-import math
+from torch.utils.data import Dataset
 
 
 class ChestCacheDataset(Dataset):

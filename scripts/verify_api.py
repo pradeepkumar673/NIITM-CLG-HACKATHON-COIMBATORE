@@ -1,10 +1,18 @@
 import json
+import os
+import sys
 import urllib.request
+
+email = os.environ.get("VERIFY_EMAIL")
+password = os.environ.get("VERIFY_PASSWORD")
+if not email or not password:
+    print("ERROR: VERIFY_EMAIL and VERIFY_PASSWORD environment variables must be set.")
+    sys.exit(1)
 
 # 1. Login
 req = urllib.request.Request(
     'http://localhost:8000/auth/login',
-    data=json.dumps({'email': 'pradeepkumar24wr@gmail.com', 'password': 'Demo@1234'}).encode(),
+    data=json.dumps({'email': email, 'password': password}).encode(),
     headers={'Content-Type': 'application/json'},
     method='POST'
 )

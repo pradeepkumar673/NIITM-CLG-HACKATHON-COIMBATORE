@@ -1,26 +1,31 @@
 """Step 7: Calibration, Uncertainty, and Evaluation."""
-import os
-import sys
 import json
-import yaml
-import torch
+import sys
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
-from pathlib import Path
-from torch.utils.data import DataLoader
-from sklearn.metrics import roc_auc_score, precision_score
+import torch
+import yaml
 from PIL import Image, ImageFilter
-import torchvision.transforms.functional as TF
+from sklearn.metrics import precision_score, roc_auc_score
+from torch.utils.data import DataLoader
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
 from backend.app.services.calibration.core import (
-    fit_temperatures, fit_tiers, fit_rule_out, fit_ood_energy,
-    compute_ece, compute_brier, analyse_image, ModelNotAvailable
+    analyse_image,
+    compute_brier,
+    compute_ece,
+    fit_ood_energy,
+    fit_rule_out,
+    fit_temperatures,
+    fit_tiers,
 )
-from ml.train.model import ChestDenseNet121
 from ml.train.chest_dataset import ChestCacheDataset
+from ml.train.model import ChestDenseNet121
+
 
 def load_yaml(path):
     with open(path, "r") as f:

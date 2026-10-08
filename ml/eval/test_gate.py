@@ -2,13 +2,15 @@
 
 import sys
 from pathlib import Path
-from PIL import Image, ImageFilter
+
 import pandas as pd
+from PIL import Image, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
 from backend.app.services.gate.gatekeeper import evaluate_gate
+
 
 def get_samples(manifest_path: Path, label: str, n: int = 5):
     if not manifest_path.exists():
@@ -53,7 +55,7 @@ def main():
             img = Image.open(path)
             res = evaluate_gate(img)
             flags = ", ".join(res["reasons"]) if res["reasons"] else "None"
-            print(f"{img_type:<10} | {res['action']:<20} | {str(res['is_xray']):<10} | {flags}")
+            print(f"{img_type:<10} | {res['action']:<20} | {res['is_xray']!s:<10} | {flags}")
         except Exception as e:
             print(f"{img_type:<10} | ERROR: {e}")
             
@@ -63,7 +65,7 @@ def main():
         blurry_img = img.filter(ImageFilter.GaussianBlur(radius=5)) # Test-only transformation
         res = evaluate_gate(blurry_img)
         flags = ", ".join(res["reasons"]) if res["reasons"] else "None"
-        print(f"{'Blur-XRay':<10} | {res['action']:<20} | {str(res['is_xray']):<10} | {flags}")
+        print(f"{'Blur-XRay':<10} | {res['action']:<20} | {res['is_xray']!s:<10} | {flags}")
         
     test_corrupt()
     print("\nNote: ML classifier predictions (MRI/Natural) might fallback to heuristic if 'models/gate_classifier/best.pt' is missing.")

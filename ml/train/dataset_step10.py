@@ -1,10 +1,12 @@
+import random
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import torch
-from pathlib import Path
-from torch.utils.data import Dataset
 import torchvision.transforms.functional as TF
-import random
+from torch.utils.data import Dataset
+
 
 class Step10CacheDataset(Dataset):
     """Generic dataset reader for Step 10 numpy caches."""
@@ -46,8 +48,8 @@ class Step10CacheDataset(Dataset):
                 img = img.unsqueeze(0)
         else:
             # fallback
-            from PIL import Image
             import torchvision.transforms as T
+            from PIL import Image
             try:
                 img_pil = Image.open(img_path).convert("L")
                 img = T.ToTensor()(img_pil)

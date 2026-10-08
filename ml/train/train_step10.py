@@ -1,20 +1,21 @@
 import argparse
 import time
-import os
 from pathlib import Path
-import yaml
-import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader
-from sklearn.metrics import roc_auc_score, f1_score
+
 import numpy as np
+import torch
+import yaml
+from sklearn.metrics import f1_score, roc_auc_score
+from torch import nn
+from torch.utils.data import DataLoader
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 import sys
+
 sys.path.insert(0, str(ROOT))
 
-from ml.train.model import GenericEfficientNetB0
 from ml.train.dataset_step10 import Step10CacheDataset
+from ml.train.model import GenericEfficientNetB0
 
 TASKS = {
     "fracture": {

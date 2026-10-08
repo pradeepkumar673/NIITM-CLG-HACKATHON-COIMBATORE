@@ -1,8 +1,8 @@
-import torch
-import torch.nn as nn
 import numpy as np
-from sklearn.metrics import precision_score, roc_curve, brier_score_loss
-import torch.optim as optim
+import torch
+from sklearn.metrics import brier_score_loss, precision_score, roc_curve
+from torch import nn, optim
+
 
 def fit_temperatures(logits: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
     """Fit one temperature per label using LBFGS to minimize NLL."""
@@ -138,9 +138,10 @@ def compute_brier(y_true: np.ndarray, y_prob: np.ndarray):
     return brier / y_true.shape[1]
 
 def apply_mc_dropout_tta(model, img_tensor: torch.Tensor, n_passes: int, tta_k: int, aug_cfg: dict):
-    import torchvision.transforms.functional as TF
     import random
     import time
+
+    import torchvision.transforms.functional as TF
     
     start_time = time.time()
     

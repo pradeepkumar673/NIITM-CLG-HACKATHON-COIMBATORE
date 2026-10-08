@@ -1,7 +1,7 @@
 """JWT + bcrypt auth utilities."""
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import bcrypt
@@ -21,7 +21,7 @@ def verify_password(plain: str, hashed: str) -> bool:
 def create_access_token(data: dict[str, Any]) -> str:
     s = get_settings()
     to_encode = data.copy()
-    expire = datetime.now(timezone.utc) + timedelta(minutes=s.jwt_expire_minutes)
+    expire = datetime.now(UTC) + timedelta(minutes=s.jwt_expire_minutes)
     to_encode["exp"] = expire
     return jwt.encode(to_encode, s.jwt_secret, algorithm=s.jwt_algorithm)
 

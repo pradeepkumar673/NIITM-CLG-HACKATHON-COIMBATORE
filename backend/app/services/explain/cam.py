@@ -1,9 +1,10 @@
-import torch
-import numpy as np
 import cv2
+import numpy as np
+import torch
 from pytorch_grad_cam import GradCAMPlusPlus
-from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 from pytorch_grad_cam.utils.image import show_cam_on_image
+from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
+
 
 def generate_gradcam(model, img_tensor: torch.Tensor, target_class: int, target_layer, img_rgb: np.ndarray, colormap: int = cv2.COLORMAP_JET) -> tuple[np.ndarray, np.ndarray]:
     """

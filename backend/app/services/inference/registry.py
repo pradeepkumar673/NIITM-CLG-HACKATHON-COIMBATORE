@@ -1,13 +1,12 @@
-import yaml
-import torch
-from pathlib import Path
-from typing import Dict, Any, Optional
 from collections import OrderedDict
-import importlib
+from pathlib import Path
+
+import torch
+import yaml
+
 
 class ModelNotAvailable(Exception):
     """Raised when model weights are missing or the model cannot be loaded."""
-    pass
 
 class UnifiedModelRegistry:
     def __init__(self, models_yaml_path: str, models_dir: str, max_resident: int = 2):
@@ -91,7 +90,7 @@ class UnifiedModelRegistry:
             self.resident_models[name] = model
             return model
         except Exception as e:
-            raise ModelNotAvailable(f"Failed to load model {name}: {str(e)}")
+            raise ModelNotAvailable(f"Failed to load model {name}: {e!s}")
 
     def get_status(self) -> dict:
         import hashlib

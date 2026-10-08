@@ -8,8 +8,8 @@
 from __future__ import annotations
 
 import torch
-import torch.nn as nn
 import torchvision.models as tv_models
+from torch import nn
 
 
 class ChestDenseNet121(nn.Module):

@@ -1,15 +1,14 @@
 """Train the gate classifier (xray vs mri vs natural)."""
 
-import os
-import sys
 from pathlib import Path
-import yaml
+
 import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader, Dataset
-import torchvision.models as models
-from torchvision import transforms
+import yaml
 from PIL import Image, ImageFile
+from torch import nn
+from torch.utils.data import DataLoader, Dataset
+from torchvision import models, transforms
+
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 import pandas as pd
 

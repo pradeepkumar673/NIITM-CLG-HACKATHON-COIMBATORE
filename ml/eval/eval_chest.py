@@ -1,24 +1,25 @@
 """Evaluate chest DenseNet121 model."""
 
-import json
-import yaml
 import hashlib
-from pathlib import Path
-import numpy as np
-import pandas as pd
-import torch
-import matplotlib.pyplot as plt
-from sklearn.metrics import roc_auc_score, average_precision_score, roc_curve
-from torch.utils.data import DataLoader
+import json
 import subprocess
-from datetime import datetime
-
 import sys
+from datetime import datetime
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import numpy as np
+import torch
+import yaml
+from sklearn.metrics import average_precision_score, roc_auc_score, roc_curve
+from torch.utils.data import DataLoader
+
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
 from ml.train.chest_dataset import ChestCacheDataset
 from ml.train.model import ChestDenseNet121
+
 
 def _load_config():
     with open(ROOT / "config/train_chest.yaml", "r") as f:

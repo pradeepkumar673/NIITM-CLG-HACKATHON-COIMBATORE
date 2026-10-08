@@ -1,6 +1,7 @@
 from fastapi import APIRouter
-from backend.app.services.inference.registry import UnifiedModelRegistry
+
 from backend.app.core.config import get_settings
+from backend.app.services.inference.registry import UnifiedModelRegistry
 
 router = APIRouter(prefix="/models", tags=["models"])
 

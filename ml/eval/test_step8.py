@@ -1,19 +1,26 @@
 """Step 8 Evaluation on NIH dataset and Zone lookups."""
 import sys
 from pathlib import Path
-import yaml
-import numpy as np
-import pandas as pd
-import torch
-import torchvision.transforms.functional as TF
-from PIL import Image
+
 import cv2
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import torchvision.transforms.functional as TF
+import yaml
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
-from backend.app.services.lungseg.lungseg import segment_lungs, post_process_lungs, get_lung_zones, lookup_zone, compute_asymmetry
+from backend.app.services.lungseg.lungseg import (
+    compute_asymmetry,
+    get_lung_zones,
+    lookup_zone,
+    post_process_lungs,
+    segment_lungs,
+)
+
 
 def main():
     cfg_path = ROOT / "config/train_lungseg.yaml"

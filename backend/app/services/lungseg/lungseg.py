@@ -1,9 +1,9 @@
-import torch
-import numpy as np
 from pathlib import Path
-from PIL import Image
-import torchvision.transforms.functional as TF
+
+import numpy as np
 import segmentation_models_pytorch as smp
+import torch
+import torchvision.transforms.functional as TF
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent
@@ -68,6 +68,7 @@ def segment_lungs(img_tensor: torch.Tensor) -> np.ndarray:
     return mask_orig.squeeze(0).cpu().numpy().astype(bool)
 
 import cv2
+
 
 def post_process_lungs(mask: np.ndarray, convention: str = "PA") -> tuple[np.ndarray, np.ndarray]:
     """

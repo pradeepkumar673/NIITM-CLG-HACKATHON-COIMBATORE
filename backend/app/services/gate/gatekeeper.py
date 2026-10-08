@@ -1,15 +1,14 @@
 """Quality gate and image routing service."""
 
-import json
 from pathlib import Path
-from typing import Dict, Any, Tuple
-import yaml
-import numpy as np
+from typing import Any
+
 import cv2
-from PIL import Image
+import numpy as np
 import torch
-import torchvision.models as models
-from torchvision import transforms
+import yaml
+from PIL import Image
+from torchvision import models, transforms
 
 ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent
 
@@ -62,7 +61,7 @@ def _get_gate_model():
     return _GATE_MODEL, _GATE_TRANSFORMS
 
 
-def compute_metrics(img: Image.Image) -> Dict[str, float]:
+def compute_metrics(img: Image.Image) -> dict[str, float]:
     arr = np.array(img.convert('L'))
     
     # Blur (variance of laplacian)
@@ -90,7 +89,7 @@ def compute_metrics(img: Image.Image) -> Dict[str, float]:
     }
 
 
-def evaluate_gate(img: Image.Image) -> Dict[str, Any]:
+def evaluate_gate(img: Image.Image) -> dict[str, Any]:
     """Evaluate image against quality checks and classifier."""
     thresholds = _load_quality_thresholds()
     gate_cfg = _load_gate_config()

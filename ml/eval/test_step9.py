@@ -1,24 +1,33 @@
 """Step 9: Explainability Evaluation and Verification."""
-import sys
-import yaml
 import json
-import torch
+import sys
+from pathlib import Path
+
+import cv2
 import numpy as np
 import pandas as pd
-import cv2
-from pathlib import Path
-from PIL import Image, ImageFilter
+import torch
 import torchvision.transforms.functional as TF
+import yaml
+from PIL import Image, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
 from backend.app.services.calibration.core import analyse_image
-from ml.train.model import ChestDenseNet121
-from ml.train.chest_dataset import ChestCacheDataset
-from backend.app.services.explain.cam import generate_gradcam, generate_spatial_uncertainty
+from backend.app.services.explain.cam import (
+    generate_gradcam,
+    generate_spatial_uncertainty,
+)
 from backend.app.services.explain.rationale import generate_rationale
-from backend.app.services.lungseg.lungseg import segment_lungs, post_process_lungs, get_lung_zones, lookup_zone
+from backend.app.services.lungseg.lungseg import (
+    get_lung_zones,
+    lookup_zone,
+    post_process_lungs,
+    segment_lungs,
+)
+from ml.train.model import ChestDenseNet121
+
 
 def get_peak_zone(heatmap: np.ndarray, zone_masks: dict) -> str:
     y_max, x_max = np.unravel_index(heatmap.argmax(), heatmap.shape)

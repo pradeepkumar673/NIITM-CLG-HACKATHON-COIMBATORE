@@ -1,7 +1,7 @@
-import os
-import pytest
-import pandas as pd
 from pathlib import Path
+
+import pandas as pd
+
 
 def test_manifest_properties():
     base_dir = Path(__file__).resolve().parent.parent
@@ -33,7 +33,7 @@ def test_manifest_properties():
     for label in labels:
         assert set(df[label].unique()).issubset({0, 1}), f"Label {label} is not binary."
         
-    # Check image paths exist
-    # Only check first 100 to save time in tests
-    for path_str in df["image_path"].head(100):
+    # Check image paths exist for test split
+    test_df = df[df["split"] == "test"]
+    for path_str in test_df["image_path"]:
         assert Path(path_str).exists(), f"Image does not exist: {path_str}"

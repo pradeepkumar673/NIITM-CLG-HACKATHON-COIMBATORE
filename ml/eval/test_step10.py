@@ -1,19 +1,23 @@
-import argparse
 import json
-import torch
-import torch.nn as nn
-from pathlib import Path
-import pandas as pd
-import numpy as np
-from sklearn.metrics import roc_auc_score, average_precision_score, f1_score, confusion_matrix, recall_score
-from scipy.optimize import minimize
 import sys
+from pathlib import Path
+
+import numpy as np
+import torch
+from scipy.optimize import minimize
+from sklearn.metrics import (
+    average_precision_score,
+    confusion_matrix,
+    f1_score,
+    recall_score,
+    roc_auc_score,
+)
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
-from ml.train.model import GenericEfficientNetB0
 from ml.train.dataset_step10 import Step10CacheDataset
+from ml.train.model import GenericEfficientNetB0
 
 TASKS = {
     "fracture": {
@@ -159,7 +163,7 @@ def eval_task(task_name):
             plt.figure(figsize=(6, 5))
             plt.matshow(cm, cmap="Blues")
             for (i, j), z in np.ndenumerate(cm):
-                plt.text(j, i, '{:d}'.format(z), ha='center', va='center')
+                plt.text(j, i, f'{z:d}', ha='center', va='center')
             plt.title("Knee Bone Health Confusion Matrix")
             plt.colorbar()
             plt.xlabel("Predicted")

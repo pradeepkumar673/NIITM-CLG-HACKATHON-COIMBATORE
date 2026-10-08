@@ -1,8 +1,9 @@
-import pandas as pd
-import matplotlib.pyplot as plt
-from PIL import Image
 from pathlib import Path
-import os
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from PIL import Image
+
 
 def generate_grid(manifest_name, grid_name, label_col):
     base_dir = Path(__file__).resolve().parent.parent

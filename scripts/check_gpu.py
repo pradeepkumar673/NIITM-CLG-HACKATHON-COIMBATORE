@@ -1,6 +1,8 @@
-import torch
-import time
 import sys
+import time
+
+import torch
+
 
 def check_gpu():
     print(f"PyTorch Version: {torch.__version__}")
@@ -34,7 +36,7 @@ def check_gpu():
     
     print("\nRunning DenseNet121 test...")
     try:
-        import torchvision.models as models
+        from torchvision import models
         model = models.densenet121(weights=None).cuda()
         # autocast at batch 8, 224x224
         x = torch.randn(8, 3, 224, 224, device="cuda")

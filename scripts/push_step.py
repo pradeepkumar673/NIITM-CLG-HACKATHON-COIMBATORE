@@ -1,8 +1,9 @@
-import sys
-import subprocess
 import os
 import re
+import subprocess
+import sys
 from pathlib import Path
+
 
 def run_cmd(cmd):
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
@@ -101,8 +102,7 @@ def main():
     
     # get remote url
     remote_url = run_cmd("git config --get remote.origin.url")
-    if remote_url.endswith(".git"):
-        remote_url = remote_url[:-4]
+    remote_url = remote_url.removesuffix(".git")
     
     commit_url = f"{remote_url}/commit/{sha}"
     print(f"\nCommit URL: {commit_url}")

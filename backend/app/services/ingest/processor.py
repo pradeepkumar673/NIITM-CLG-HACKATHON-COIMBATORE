@@ -1,14 +1,14 @@
 """Ingestion service for processing and validating images."""
 import hashlib
 import io
-import os
-import pydicom
-from pydicom.pixel_data_handlers.util import apply_voi_lut
-import numpy as np
-from PIL import Image, ImageOps
-import yaml
 from pathlib import Path
-from typing import Dict, Any, Tuple
+from typing import Any
+
+import numpy as np
+import pydicom
+import yaml
+from PIL import Image, ImageOps
+from pydicom.pixel_data_handlers.util import apply_voi_lut
 
 ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent
 
@@ -42,7 +42,7 @@ def validate_magic_bytes(file_bytes: bytes) -> str:
 def compute_sha256(file_bytes: bytes) -> str:
     return hashlib.sha256(file_bytes).hexdigest()
 
-def process_dicom(file_bytes: bytes) -> Tuple[Image.Image, dict]:
+def process_dicom(file_bytes: bytes) -> tuple[Image.Image, dict]:
     """Extract pixels and metadata from DICOM, removing PHI."""
     try:
         ds = pydicom.dcmread(io.BytesIO(file_bytes))
@@ -91,7 +91,7 @@ def process_photo(file_bytes: bytes) -> Image.Image:
     except Exception as e:
         raise IngestError(f"Failed to process image: {e}")
 
-def process_upload(study_id: str, file_bytes: bytes) -> Dict[str, Any]:
+def process_upload(study_id: str, file_bytes: bytes) -> dict[str, Any]:
     """Main ingestion entrypoint."""
     cfg = _load_ingest_config()
     

@@ -1,6 +1,5 @@
-import os
-import shutil
 from pathlib import Path
+
 
 def main():
     root = Path(__file__).parent.parent

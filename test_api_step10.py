@@ -1,7 +1,7 @@
-import requests
-import time
 import subprocess
-import os
+import time
+
+import requests
 
 print("Starting FastAPI backend...")
 proc = subprocess.Popen(["uvicorn", "backend.app.main:app", "--port", "8000"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
