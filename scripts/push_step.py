@@ -36,8 +36,8 @@ def check_files():
             sys.exit(1)
             
         if file.startswith("models/") or file.startswith("models\\"):
-            if "registry.json" not in file:
-                print(f"Error: {file} is in models/. Only models/registry.json is allowed.")
+            if "registry.json" not in file and "calibration.json" not in file:
+                print(f"Error: {file} is in models/. Only models/registry.json and calibration.json are allowed.")
                 sys.exit(1)
 
 def update_status(step, message, sha):
