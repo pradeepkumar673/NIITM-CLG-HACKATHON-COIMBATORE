@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>X-Ray Assistant API Tester</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background: #f5f7fa; color: #333; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h1, h2, h3 { margin-top: 0; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], input[type="password"], input[type="number"], select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { background: #0066cc; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background: #0052a3; }
+        button:disabled { background: #cccccc; cursor: not-allowed; }
+        pre { background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 4px; overflow-x: auto; white-space: pre-wrap; font-size: 13px; }
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; background: #eee; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .image-gallery { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; }
+        .image-card { border: 1px solid #ddd; padding: 10px; border-radius: 4px; text-align: center; background: #fff; width: 250px; }
+        .image-card img { max-width: 100%; height: auto; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>API Tester Dashboard</h1>
+    <div id="status-bar" class="card" style="padding: 10px;">Status: <span id="auth-status" class="badge error">Not Authenticated</span></div>
+
+    <!-- Login Section -->
+    <div class="card" id="login-section">
+        <h2>1. Authentication</h2>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" id="email" value="admin@example.com">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" value="adminpass">
+        </div>
+        <button onclick="login()">Login</button>
+        <pre id="login-out" style="display:none;"></pre>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="card" id="upload-section" style="opacity: 0.5; pointer-events: none;">
+        <h2>2. Submit Study</h2>
+        <div class="form-group">
+            <label>Image File (PNG/JPG)</label>
+            <input type="file" id="image-file" accept="image/*">
+        </div>
+        <div class="form-group">
+            <label>Body Part (Optional)</label>
+            <select id="body-part">
+                <option value="">Auto-detect</option>
+                <option value="chest">Chest</option>
+                <option value="bone">Bone (Fracture)</option>
+                <option value="knee">Knee</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Age</label>
+            <input type="number" id="age" value="45">
+        </div>
+        <button id="btn-upload" onclick="uploadStudy()">Upload & Analyze</button>
+        <pre id="upload-out" style="display:none;"></pre>
+    </div>
+
+    <!-- Events Section -->
+    <div class="card" id="events-section" style="display: none;">
+        <h2>3. Processing Status (SSE)</h2>
+        <pre id="events-out"></pre>
+    </div>
+
+    <!-- Results Section -->
+    <div class="card" id="results-section" style="display: none;">
+        <h2>4. Results</h2>
+        <button onclick="fetchResult()">Refresh Result JSON</button>
+        <pre id="results-out"></pre>
+        
+        <h3>Static Assets</h3>
+        <button onclick="loadImages()">Load Images & Heatmaps</button>
+        <div id="image-gallery" class="image-gallery"></div>
+    </div>
+
+    <script>
+        const API_BASE = "http://127.0.0.1:8000";
+        let token = "";
+        let currentStudyId = null;
+        let eventSource = null;
+
+        async function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const out = document.getElementById("login-out");
+            
+            try {
+                const res = await fetch(`${API_BASE}/auth/login`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await res.json();
+                out.style.display = "block";
+                out.innerText = JSON.stringify(data, null, 2);
+                
+                if (res.ok) {
+                    token = data.access_token;
+                    document.getElementById("auth-status").innerText = "Authenticated as " + data.role;
+                    document.getElementById("auth-status").className = "badge success";
+                    document.getElementById("upload-section").style = "";
+                }
+            } catch (err) {
+                out.style.display = "block";
+                out.innerText = "Error: " + err.message;
+            }
+        }
+
+        async function uploadStudy() {
+            if (!token) return alert("Please login first");
+            const fileInput = document.getElementById("image-file");
+            if (!fileInput.files[0]) return alert("Please select an image");
+
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+            
+            const bp = document.getElementById("body-part").value;
+            if (bp) formData.append("body_part", bp);
+            formData.append("age", document.getElementById("age").value);
+            
+            // Dummy history flags for testing rules
+            formData.append("history_flags", JSON.stringify({
+                "diabetes": true,
+                "smoker": false
+            }));
+
+            const out = document.getElementById("upload-out");
+            document.getElementById("btn-upload").disabled = true;
+            document.getElementById("btn-upload").innerText = "Uploading...";
+
+            try {
+                const res = await fetch(`${API_BASE}/studies`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${token}` },
+                    body: formData
+                });
+                
+                const data = await res.json();
+                out.style.display = "block";
+                out.innerText = JSON.stringify(data, null, 2);
+                
+                if (res.ok) {
+                    currentStudyId = data.id;
+                    document.getElementById("events-section").style.display = "block";
+                    document.getElementById("results-section").style.display = "block";
+                    document.getElementById("events-out").innerText = "";
+                    document.getElementById("image-gallery").innerHTML = "";
+                    startSSE(data.id);
+                }
+            } catch (err) {
+                out.style.display = "block";
+                out.innerText = "Error: " + err.message;
+            } finally {
+                document.getElementById("btn-upload").disabled = false;
+                document.getElementById("btn-upload").innerText = "Upload & Analyze";
+            }
+        }
+
+        function startSSE(studyId) {
+            if (eventSource) eventSource.close();
+            
+            const out = document.getElementById("events-out");
+            // SSE doesn't support headers in browser standard API natively easily without polyfills,
+            // but our backend auth might block it if not handled via cookie or query param.
+            // For testing, if GET /studies/{id}/events requires Bearer, we might hit a 401 if we just use EventSource.
+            // As a quick workaround, we can just poll the result endpoint, or if your backend allows URL token:
+            // Since we didn't implement query token in backend, we'll try fetch streaming.
+            
+            out.innerText += "Connecting to SSE stream...\n";
+            fetch(`${API_BASE}/studies/${studyId}/events`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            }).then(response => {
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                
+                function read() {
+                    reader.read().then(({done, value}) => {
+                        if (done) {
+                            out.innerText += "Stream closed.\n";
+                            fetchResult();
+                            return;
+                        }
+                        const chunk = decoder.decode(value);
+                        out.innerText += chunk;
+                        read();
+                    }).catch(err => {
+                        out.innerText += "Stream error: " + err.message + "\n";
+                    });
+                }
+                read();
+            }).catch(err => {
+                out.innerText += "Fetch error: " + err.message + "\n";
+            });
+        }
+
+        async function fetchResult() {
+            if (!currentStudyId) return;
+            const out = document.getElementById("results-out");
+            try {
+                const res = await fetch(`${API_BASE}/studies/${currentStudyId}/result`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                const data = await res.json();
+                out.innerText = JSON.stringify(data, null, 2);
+            } catch (err) {
+                out.innerText = "Error: " + err.message;
+            }
+        }
+
+        async function loadImages() {
+            if (!currentStudyId) return;
+            const gallery = document.getElementById("image-gallery");
+            gallery.innerHTML = "";
+            
+            async function addImage(url, title) {
+                try {
+                    const res = await fetch(url, { headers: { "Authorization": `Bearer ${token}` } });
+                    if (!res.ok) return;
+                    const blob = await res.blob();
+                    const objUrl = URL.createObjectURL(blob);
+                    
+                    const div = document.createElement("div");
+                    div.className = "image-card";
+                    div.innerHTML = `<h4>${title}</h4><img src="${objUrl}" />`;
+                    gallery.appendChild(div);
+                } catch (e) { console.error(e); }
+            }
+
+            // Original image
+            await addImage(`${API_BASE}/studies/${currentStudyId}/image.png`, "Original Image");
+            
+            // Try fetching common heatmaps based on potential findings
+            const labels = ["cardiomegaly", "fracture", "osteopenia", "tb_pattern"];
+            for (let label of labels) {
+                await addImage(`${API_BASE}/studies/${currentStudyId}/heatmap_${label}.png`, `Heatmap: ${label}`);
+            }
+        }
+    </script>
+</body>
+</html>
