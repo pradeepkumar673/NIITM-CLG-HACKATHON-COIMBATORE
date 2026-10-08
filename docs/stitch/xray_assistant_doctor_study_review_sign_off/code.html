@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#004e5a", "secondary-fixed": "#d6e3fb", "surface-tint": "#1e6774", "surface-dim": "#d1daeb", "outline-variant": "#bfc8cb", "error": "#ba1a1a", "on-primary-container": "#93d5e4", "on-secondary-fixed-variant": "#3b485a", "on-background": "#131c28", "surface-container": "#e5eeff", "secondary-fixed-dim": "#bac7de", "secondary-container": "#d6e3fb", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#98f6bb", "on-error-container": "#93000a", "inverse-primary": "#8fd1e0", "on-secondary": "#ffffff", "on-surface-variant": "#3f484b", "primary": "#004550", "on-secondary-fixed": "#0f1c2d", "surface-variant": "#dae3f4", "tertiary-container": "#00633a", "on-primary-fixed": "#001f25", "outline": "#6f797b", "on-secondary-container": "#586579", "on-tertiary-fixed-variant": "#00522f", "tertiary-fixed-dim": "#7cd9a1", "on-tertiary": "#ffffff", "surface-bright": "#f8f9ff", "surface": "#f8f9ff", "inverse-surface": "#28313d", "surface-container-high": "#e0e9f9", "secondary": "#525f73", "inverse-on-surface": "#eaf1ff", "surface-container-highest": "#dae3f4", "background": "#f8f9ff", "tertiary": "#004929", "on-surface": "#131c28", "on-primary": "#ffffff", "primary-fixed": "#abedfc", "on-error": "#ffffff", "primary-fixed-dim": "#8fd1e0", "on-tertiary-container": "#81dea5", "on-tertiary-fixed": "#002110", "error-container": "#ffdad6", "surface-container-low": "#eff4ff", "primary-container": "#0f5e6b" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "margin": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-md": "1rem", "gutter": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-sm": [ "Inter" ], "mono-data-lg": [ "JetBrains Mono" ], "body-lg": [ "Inter" ], "label-sm": [ "Inter" ], "label-md": [ "Inter" ], "headline-xl": [ "Inter" ], "mono-data-md": [ "JetBrains Mono" ], "headline-md": [ "Inter" ], "body-md": [ "Inter" ], "mono-data-sm": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Inter" ], "headline-lg": [ "Inter" ], "headline-lg-mobile": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "600" } ], "mono-data-lg": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "500" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-xl": [ "2rem", { "lineHeight": "2.5rem", "fontWeight": "700" } ], "mono-data-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-md": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-md": [ "1rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "mono-data-sm": [ "0.75rem", { "lineHeight": "1rem", "fontWeight": "400" } ], "headline-xl-mobile": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "700" } ], "headline-lg": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-60 bg-surface-container-low z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">XRAY-ASSISTANT</span><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>Online</span></div><div class="flex items-center gap-1 text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="material-symbols-outlined text-[14px]">wifi</span><span>Sync: Local Edge</span></div></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-primary text-on-primary font-label-md text-label-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="dashboard" href="#"><span>Dashboard</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="review-queue" href="#"><span>Review queue</span><span class="px-1.5 py-0.5 rounded-full bg-error text-on-error font-mono-data-sm text-mono-data-sm font-semibold leading-none">07</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="studies" href="#"><span>Studies</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-study" href="#"><span>Ingest / New study</span></a></nav><div class="px-space-md pt-space-xs"><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Language</label><div class="relative"><select class="w-full appearance-none bg-surface-container-lowest text-on-surface font-body-sm text-body-sm py-2 pl-3 pr-8 rounded-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-1 focus:ring-primary"><option value="en">English</option><option value="ta">Tamil [machine-drafted]</option><option value="hi">Hindi [machine-drafted]</option></select><span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span></div></div></div><div class="px-space-md flex flex-col gap-space-sm"><div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col gap-1"><div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">dns</span>Edge Node</span><span class="font-medium text-on-surface">Active</span></div><div class="font-mono-data-sm text-mono-data-sm text-primary font-semibold">KASHTI-PHC-04</div></div><button class="w-full flex items-center justify-center gap-space-sm py-2 px-space-md rounded-lg text-error hover:bg-error-container hover:text-on-error-container font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">logout</span>Sign out</button></div></aside><div class="pl-60 min-h-screen flex flex-col justify-between"><div class="w-full"><header class="fixed top-0 left-60 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold">Kashti PHC / District Cluster</span><span class="font-body-sm text-body-sm text-on-surface-variant">District Ahmadnagar • Rural Health Cluster 2</span></div><div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="font-mono-data-sm text-mono-data-sm">ABHA Network Connected</span></div></div><div class="flex items-center gap-space-md"><div class="text-right hidden sm:flex flex-col"><span class="font-label-md text-label-md text-on-surface font-medium">Dr. Arti Sharma</span><span class="font-body-sm text-body-sm text-on-surface-variant">MO / Tele-radiologist</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-space-lg py-space-md bg-surface"><div class="flex flex-col w-full">
+<!-- Interactive State Controller Ribbon (Clinical Simulation Environment) -->
+<div class="w-full bg-surface-container-high px-space-md py-space-xs rounded-lg shadow-sm mb-space-md flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">tune</span>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Prototype Viewport &amp; State Controller:</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5" id="state-ribbon">
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary font-mono-data-sm text-mono-data-sm transition-all shadow-sm" id="btn-state-default" onclick="setState('default')" type="button">
+        1. In Review (Default)
+      </button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-mono-data-sm text-mono-data-sm hover:bg-surface-container transition-all shadow-sm" id="btn-state-signed" onclick="setState('signed')" type="button">
+        2. Sign-off Submitted
+      </button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-mono-data-sm text-mono-data-sm hover:bg-surface-container transition-all shadow-sm" id="btn-state-no-rules" onclick="setState('no-rules')" type="button">
+        3. Graph: No Rules Fired
+      </button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-mono-data-sm text-mono-data-sm hover:bg-surface-container transition-all shadow-sm flex items-center gap-1" id="btn-toggle-mobile" onclick="toggleMobileSim()" type="button">
+<span class="material-symbols-outlined text-[14px]">smartphone</span>
+<span id="mobile-toggle-text">4. Mobile View Sim (390px)</span>
+</button>
+</div>
+</div>
+<!-- Signed-Off Banner (Conditional State: Hidden by default) -->
+<div class="hidden w-full bg-tertiary-container/10 px-space-md py-2.5 rounded-lg shadow-sm mb-space-md flex flex-wrap items-center justify-between gap-space-sm" id="signed-banner">
+<div class="flex items-center gap-2 text-tertiary-container">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Study Signed-off • Digital Authentication Complete</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Signature: DR_ARTI_SHARMA#ABDM-9102 • Consensus: Concordant Tier 1 Decision • Signed: 24 Oct 2024, 14:48:12 IST</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-mono-data-sm text-mono-data-sm font-semibold">IMMUTABLE DICOM-SR GENERATED</span>
+<button class="px-2 py-1 rounded text-primary hover:bg-surface-container-high font-label-sm text-label-sm" onclick="setState('default')">Edit Assessment</button>
+</div>
+</div>
+<!-- Top Clinical Summary Bar (Header Details & Model Provenance) -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-md flex flex-col gap-space-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<!-- Left Demographic block -->
+<div class="flex flex-wrap items-center gap-space-md">
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 rounded bg-secondary-container font-mono-data-md text-mono-data-md text-on-secondary-fixed font-semibold tracking-tight">STU-2024-0984</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-mono-data-sm text-mono-data-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+            TIER 1 • HIGH PRIORITY (p = 0.84)
+          </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface">Ramesh Patil</span>
+<span class="text-on-surface-variant font-mono-data-sm text-mono-data-sm">M, 48y</span>
+<span class="text-on-surface-variant">•</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-mono-data-sm text-mono-data-sm">ABHA: 91-8201-9481-22</span>
+<span class="material-symbols-outlined text-tertiary text-[16px]" title="ABHA Identity Validated">check_circle</span>
+</div>
+<div class="hidden md:flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">radiology</span>
+<span>Chest PA (Erect)</span>
+</div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span class="hidden sm:inline">Back to Queue</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span class="hidden sm:inline">Export DICOM/PDF</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-error font-label-md text-label-md transition-colors flex items-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">flag</span>
+<span class="hidden sm:inline">Peer Review</span>
+</button>
+</div>
+</div>
+<!-- Sub-row: Provenance and Machine Ingest Details -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-2 bg-surface-container-low px-3 py-1.5 rounded-lg">
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+<span><strong class="text-on-surface font-medium">Model:</strong> Chest-CAD-v4.2.1-RT</span>
+<span class="hidden lg:inline"><strong class="text-on-surface font-medium">Checksum:</strong> sha256:8f2a9c1b3e80...</span>
+<span><strong class="text-on-surface font-medium">Latency:</strong> 1,420ms (Edge TensorRT)</span>
+<span class="hidden sm:inline"><strong class="text-on-surface font-medium">Capture:</strong> 24 Oct 2024 14:12 IST</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+<span>Local Ingest Kashti PHC Edge #04</span>
+</div>
+</div>
+</div>
+<!-- MAIN CONTAINER (Desktop Layout or Simulated Mobile Frame) -->
+<div class="w-full" id="desktop-view-container">
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md items-start">
+<!-- LEFT COLUMN: Dual Radiograph Inspection & 14-Finding Calibration Table (Approx 46% - 5.5 cols) -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<!-- Synchronized Radiograph Viewer Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<!-- Viewer Top Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Radiographic Window</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-mono-data-sm text-mono-data-sm font-semibold">Sync: 100%</span>
+</div>
+<!-- Tool controls -->
+<div class="flex items-center gap-1 bg-surface-container p-0.5 rounded-lg">
+<button class="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors" id="btn-toggle-invert" onclick="toggleInvert()" title="Invert LUT" type="button">
+<span class="material-symbols-outlined text-[18px]">contrast</span>
+</button>
+<button class="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors" onclick="adjustZoom(1.1)" title="Zoom In" type="button">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+<button class="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors" onclick="adjustZoom(0.9)" title="Zoom Out" type="button">
+<span class="material-symbols-outlined text-[18px]">zoom_out</span>
+</button>
+<button class="p-1 rounded text-on-surface hover:bg-surface-container-lowest transition-colors" onclick="resetViewer()" title="Reset View" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+</div>
+<!-- Heatmap Blend Opacity Slider -->
+<div class="flex items-center gap-3 bg-surface-container-low px-3 py-1.5 rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">local_fire_department</span>
+              Heatmap Blend:
+            </span>
+<input class="w-32 h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-primary" id="opacity-slider" max="100" min="0" oninput="updateHeatmapOpacity(this.value)" type="range" value="70"/>
+<span class="font-mono-data-sm text-mono-data-sm text-primary font-semibold" id="opacity-val">70%</span>
+</div>
+<!-- Dual Canvases Container (Side-by-Side Encapsulation) -->
+<div class="grid grid-cols-2 gap-2 bg-[#090D14] p-2 rounded-lg relative overflow-hidden">
+<!-- Left Pane: Original Grayscale Radiograph -->
+<div class="relative bg-black rounded flex flex-col overflow-hidden aspect-[4/5] justify-between p-2 select-none" id="viewport-original">
+<div class="flex justify-between items-start z-10">
+<span class="px-1.5 py-0.5 rounded bg-black/60 text-white font-mono-data-sm text-mono-data-sm backdrop-blur-sm">DICOM PA Original</span>
+<span class="font-mono-data-sm text-mono-data-sm text-white/60">R</span>
+</div>
+<!-- High-Contrast SVG Chest Radiograph Anatomy Representation -->
+<div class="absolute inset-0 flex items-center justify-center p-2 viewer-canvas transition-transform duration-100" id="canvas-left">
+<svg class="w-full h-full object-contain filter contrast-125" id="svg-xray-left" viewbox="0 0 400 500">
+<!-- Dark thoracic cavity -->
+<rect fill="#0c1117" height="500" width="400" x="0" y="0"></rect>
+<!-- Soft tissue and mediastinum silhouette -->
+<path d="M170,40 Q200,30 230,40 L230,120 Q240,160 250,220 Q260,300 230,380 L170,380 Q140,300 150,220 Q160,160 170,120 Z" fill="#2d3748" opacity="0.85"></path>
+<!-- Cardiac Silhouette (Left enlarged apex) -->
+<path d="M190,200 Q220,200 240,250 Q260,310 200,340 Q170,330 175,280 Q180,220 190,200 Z" fill="#4a5568" opacity="0.8"></path>
+<!-- Trachea & main bronchi -->
+<line stroke="#1a202c" stroke-linecap="round" stroke-width="8" x1="200" x2="200" y1="40" y2="150"></line>
+<line stroke="#1a202c" stroke-width="5" x1="200" x2="160" y1="150" y2="190"></line>
+<line stroke="#1a202c" stroke-width="5" x1="200" x2="240" y1="150" y2="195"></line>
+<!-- Clavicles -->
+<path d="M50,90 Q120,70 190,95" fill="none" opacity="0.7" stroke="#cbd5e1" stroke-linecap="round" stroke-width="7"></path>
+<path d="M350,90 Q280,70 210,95" fill="none" opacity="0.7" stroke="#cbd5e1" stroke-linecap="round" stroke-width="7"></path>
+<!-- Rib cage contours (Subtle anatomical shadows) -->
+<g fill="none" opacity="0.4" stroke="#94a3b8" stroke-linecap="round" stroke-width="4.5">
+<path d="M70,120 Q120,110 180,130"></path>
+<path d="M330,120 Q280,110 220,130"></path>
+<path d="M60,160 Q120,150 175,175"></path>
+<path d="M340,160 Q280,150 225,175"></path>
+<path d="M55,210 Q120,195 170,225"></path>
+<path d="M345,210 Q280,195 230,225"></path>
+<path d="M55,260 Q120,245 165,280"></path>
+<path d="M345,260 Q280,245 235,280"></path>
+<path d="M60,315 Q120,300 170,335"></path>
+<path d="M340,315 Q280,300 230,335"></path>
+<path d="M70,370 Q120,355 175,385"></path>
+<path d="M330,370 Q280,355 225,385"></path>
+</g>
+<!-- Diaphragm domes -->
+<path d="M40,410 Q110,360 180,385" fill="#1e293b" opacity="0.8" stroke="#e2e8f0" stroke-width="5"></path>
+<path d="M360,420 Q290,380 220,390" fill="#1e293b" opacity="0.8" stroke="#e2e8f0" stroke-width="5"></path>
+<!-- RLZ Pathological Consolidation Area (Faint Radiopaque Infiltrate) -->
+<ellipse cx="125" cy="340" fill="#e2e8f0" filter="blur(4px)" opacity="0.45" rx="36" ry="26"></ellipse>
+<ellipse cx="140" cy="325" fill="#ffffff" filter="blur(3px)" opacity="0.55" rx="22" ry="18"></ellipse>
+</svg>
+</div>
+<div class="flex justify-between items-end z-10">
+<span class="font-mono-data-sm text-mono-data-sm text-white/50 text-[10px]">W: 1800 L: -400</span>
+<span class="font-mono-data-sm text-mono-data-sm text-white/50 text-[10px]">100%</span>
+</div>
+</div>
+<!-- Right Pane: Heatmap Overlay (Grad-CAM Saliency) -->
+<div class="relative bg-black rounded flex flex-col overflow-hidden aspect-[4/5] justify-between p-2 select-none" id="viewport-heatmap">
+<div class="flex justify-between items-start z-10">
+<span class="px-1.5 py-0.5 rounded bg-black/60 text-primary-fixed font-mono-data-sm text-mono-data-sm backdrop-blur-sm">Grad-CAM Overlay</span>
+<span class="font-mono-data-sm text-mono-data-sm text-white/60">L</span>
+</div>
+<!-- Base Radiograph + Grad-CAM Heatmap Layer -->
+<div class="absolute inset-0 flex items-center justify-center p-2 viewer-canvas transition-transform duration-100" id="canvas-right">
+<svg class="w-full h-full object-contain filter contrast-125" id="svg-xray-right" viewbox="0 0 400 500">
+<!-- Identical base radiograph structures -->
+<rect fill="#0c1117" height="500" width="400" x="0" y="0"></rect>
+<path d="M170,40 Q200,30 230,40 L230,120 Q240,160 250,220 Q260,300 230,380 L170,380 Q140,300 150,220 Q160,160 170,120 Z" fill="#2d3748" opacity="0.85"></path>
+<path d="M190,200 Q220,200 240,250 Q260,310 200,340 Q170,330 175,280 Q180,220 190,200 Z" fill="#4a5568" opacity="0.8"></path>
+<line stroke="#1a202c" stroke-linecap="round" stroke-width="8" x1="200" x2="200" y1="40" y2="150"></line>
+<line stroke="#1a202c" stroke-width="5" x1="200" x2="160" y1="150" y2="190"></line>
+<line stroke="#1a202c" stroke-width="5" x1="200" x2="240" y1="150" y2="195"></line>
+<path d="M50,90 Q120,70 190,95" fill="none" opacity="0.7" stroke="#cbd5e1" stroke-linecap="round" stroke-width="7"></path>
+<path d="M350,90 Q280,70 210,95" fill="none" opacity="0.7" stroke="#cbd5e1" stroke-linecap="round" stroke-width="7"></path>
+<g fill="none" opacity="0.4" stroke="#94a3b8" stroke-linecap="round" stroke-width="4.5">
+<path d="M70,120 Q120,110 180,130"></path>
+<path d="M330,120 Q280,110 220,130"></path>
+<path d="M60,160 Q120,150 175,175"></path>
+<path d="M340,160 Q280,150 225,175"></path>
+<path d="M55,210 Q120,195 170,225"></path>
+<path d="M345,210 Q280,195 230,225"></path>
+<path d="M55,260 Q120,245 165,280"></path>
+<path d="M345,260 Q280,245 235,280"></path>
+<path d="M60,315 Q120,300 170,335"></path>
+<path d="M340,315 Q280,300 230,335"></path>
+<path d="M70,370 Q120,355 175,385"></path>
+<path d="M330,370 Q280,355 225,385"></path>
+</g>
+<path d="M40,410 Q110,360 180,385" fill="#1e293b" opacity="0.8" stroke="#e2e8f0" stroke-width="5"></path>
+<path d="M360,420 Q290,380 220,390" fill="#1e293b" opacity="0.8" stroke="#e2e8f0" stroke-width="5"></path>
+<!-- Saliency Heatmap Group with adjustable opacity -->
+<g id="heatmap-layer" opacity="0.7">
+<!-- Outermost warm halo (blue-cyan transition) -->
+<ellipse cx="130" cy="335" fill="#0284c7" filter="blur(14px)" opacity="0.35" rx="65" ry="48"></ellipse>
+<!-- Mid yellow/amber ring -->
+<ellipse cx="130" cy="335" fill="#eab308" filter="blur(10px)" opacity="0.55" rx="44" ry="32"></ellipse>
+<!-- Core high-density red peak -->
+<ellipse cx="135" cy="330" fill="#ef4444" filter="blur(6px)" opacity="0.8" rx="28" ry="20"></ellipse>
+<!-- White-hot focal apex -->
+<circle cx="136" cy="328" fill="#fef08a" filter="blur(2px)" opacity="0.9" r="9"></circle>
+<!-- Calibrated isolines / isocontours -->
+<ellipse cx="130" cy="335" fill="none" opacity="0.75" rx="50" ry="36" stroke="#f59e0b" stroke-dasharray="3,3" stroke-width="1"></ellipse>
+<ellipse cx="132" cy="332" fill="none" opacity="0.9" rx="32" ry="22" stroke="#ef4444" stroke-width="1.2"></ellipse>
+</g>
+</svg>
+</div>
+<!-- Reticle indicator marker -->
+<div class="absolute left-[34%] top-[65%] w-7 h-7 -translate-x-1/2 -translate-y-1/2 pointer-events-none border border-error rounded-full flex items-center justify-center animate-pulse">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+</div>
+<div class="flex justify-between items-end z-10">
+<span class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-mono-data-sm text-mono-data-sm font-semibold text-[10px]">Peak Saliency: 0.93</span>
+<span class="font-mono-data-sm text-mono-data-sm text-white/50 text-[10px]">p=0.84</span>
+</div>
+</div>
+</div>
+<!-- Bottom Status Line -->
+<div class="flex flex-wrap items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm px-1 pt-1 border-t-0">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">my_location</span>
+              Focus: Right Lower Zone [x: 642, y: 780]
+            </span>
+<span>Epistemic Var: <strong class="text-on-surface">±0.06 σ_mc</strong></span>
+</div>
+</div>
+<!-- Compact 14-Finding Calibrated Pathologies Table -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex flex-wrap items-center justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface">Differential Findings</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-mono-data-sm text-mono-data-sm text-on-surface-variant font-medium">14 Evaluated</span>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Ranked by p(calibrated)</span>
+</div>
+<!-- Scrollable Table Container -->
+<div class="overflow-x-auto max-h-[380px] overflow-y-auto">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-low z-10 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<tr>
+<th class="py-2 px-2.5">Pathology Finding</th>
+<th class="py-2 px-2.5 text-right">Probability</th>
+<th class="py-2 px-2.5 text-center">95% CI</th>
+<th class="py-2 px-2.5 text-center">Tier</th>
+<th class="py-2 px-2.5 text-right">Cohort Metric</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface font-body-sm text-body-sm">
+<!-- Finding 1 -->
+<tr class="bg-error-container/20 hover:bg-error-container/30 transition-colors">
+<td class="py-2 px-2.5 font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>RLZ Consolidation</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-error font-bold">
+<div class="flex items-center justify-end gap-1.5">
+<div class="w-12 h-1.5 rounded-full bg-outline-variant overflow-hidden hidden sm:block">
+<div class="h-full bg-error rounded-full" style="width: 84%"></div>
+</div>
+<span>0.84</span>
+</div>
+</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.79–0.89]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-mono-data-sm text-mono-data-sm font-bold">TIER 1</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">PPV: 91.4%</td>
+</tr>
+<!-- Finding 2 -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
+<td class="py-2 px-2.5 font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#B54708]"></span>
+<span>Pleural Effusion (Right)</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-[#B54708] font-bold">
+<div class="flex items-center justify-end gap-1.5">
+<div class="w-12 h-1.5 rounded-full bg-outline-variant overflow-hidden hidden sm:block">
+<div class="h-full bg-[#B54708] rounded-full" style="width: 58%"></div>
+</div>
+<span>0.58</span>
+</div>
+</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.49–0.67]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-[#FFFAEB] text-[#B54708] font-mono-data-sm text-mono-data-sm font-semibold">TIER 2</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">PPV: 82.0%</td>
+</tr>
+<!-- Finding 3 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5 font-medium">Cardiomegaly</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface font-semibold">
+<div class="flex items-center justify-end gap-1.5">
+<div class="w-12 h-1.5 rounded-full bg-outline-variant overflow-hidden hidden sm:block">
+<div class="h-full bg-secondary rounded-full" style="width: 44%"></div>
+</div>
+<span>0.44</span>
+</div>
+</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.38–0.51]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-[#FFFAEB] text-[#B54708] font-mono-data-sm text-mono-data-sm font-semibold">TIER 2</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">PPV: 78.5%</td>
+</tr>
+<!-- Finding 4 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5 font-medium">Interstitial Opacity / Fibrosis</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface font-semibold">
+<div class="flex items-center justify-end gap-1.5">
+<div class="w-12 h-1.5 rounded-full bg-outline-variant overflow-hidden hidden sm:block">
+<div class="h-full bg-secondary rounded-full" style="width: 38%"></div>
+</div>
+<span>0.38</span>
+</div>
+</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.31–0.46]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-[#FFFAEB] text-[#B54708] font-mono-data-sm text-mono-data-sm font-semibold">TIER 2</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">PPV: 80.1%</td>
+</tr>
+<!-- Finding 5 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5">Atelectasis</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface-variant">0.28</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.22–0.34]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm">TIER 3</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">PPV: 76.2%</td>
+</tr>
+<!-- Finding 6 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5">Bronchial Wall Thickening</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface-variant">0.24</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.18–0.30]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm">TIER 3</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">PPV: 74.5%</td>
+</tr>
+<!-- Finding 7 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5">Hilar Lymphadenopathy</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface-variant">0.15</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.10–0.21]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm">TIER 3</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">PPV: 81.0%</td>
+</tr>
+<!-- Finding 8 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5">Left Tension Pneumothorax</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface-variant">0.12</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.08–0.16]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm">TIER 3</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">Rule-out: 98.6%</td>
+</tr>
+<!-- Finding 9 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5">Cavitary Lesion</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface-variant">0.06</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.03–0.10]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm">TIER 3</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">Rule-out: 98.1%</td>
+</tr>
+<!-- Finding 10 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5">Pulmonary Edema</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface-variant">0.05</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.02–0.09]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm">TIER 3</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">Rule-out: 97.9%</td>
+</tr>
+<!-- Finding 11 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5">Unremarkable Lung Apices</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface-variant">0.04</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.01–0.08]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm">TIER 3</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">Spec: 96.0%</td>
+</tr>
+<!-- Finding 12 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5">Rib Fracture (Healed/Acute)</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface-variant">0.03</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.01–0.06]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm">TIER 3</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">Spec: 97.4%</td>
+</tr>
+<!-- Finding 13 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5">Subcutaneous Emphysema</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface-variant">0.02</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.00–0.05]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm">TIER 3</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">Rule-out: 99.2%</td>
+</tr>
+<!-- Finding 14 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-2 px-2.5">Pneumoperitoneum</td>
+<td class="py-2 px-2.5 text-right font-mono-data-md text-mono-data-md text-on-surface-variant">0.01</td>
+<td class="py-2 px-2.5 text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">[0.00–0.03]</td>
+<td class="py-2 px-2.5 text-center">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm">TIER 3</span>
+</td>
+<td class="py-2 px-2.5 text-right font-mono-data-sm text-mono-data-sm text-on-surface-variant">Rule-out: 99.8%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Interaction Graph + Rule Inspection Drawer + Clinical Sign-off + Audit Trail (Approx 54% - 7 cols) -->
+<div class="xl:col-span-7 flex flex-col gap-space-md">
+<!-- TOP HALF: Clinical Interaction Graph & Rule Inspection Drawer Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm" id="graph-panel-container">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">account_tree</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Clinical Interaction Graph &amp; Fired Rules</span>
+</div>
+<!-- Graph Legend -->
+<div class="flex items-center gap-3 text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-error"></span>Finding</span>
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#B54708]"></span>Prior Risk</span>
+<span class="flex items-center gap-1"><span class="w-3 h-0.5 bg-primary"></span>Fired Edge</span>
+</div>
+</div>
+<!-- Interaction Graph Canvas Container -->
+<div class="relative w-full h-[260px] bg-surface-container-low rounded-lg overflow-hidden p-2 flex items-center justify-center" id="graph-viewport">
+<!-- Default Active Graph State with Fired Rules SVG -->
+<div class="w-full h-full relative" id="graph-active-state">
+<svg class="w-full h-full" viewbox="0 0 700 240">
+<!-- Defs for markers and gradients -->
+<defs>
+<marker id="arrow" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#0F5E6B"></path>
+</marker>
+<marker id="arrow-amber" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#B54708"></path>
+</marker>
+</defs>
+<!-- Edge 1: Prior TB -> RLZ Consolidation (Active/Selected) -->
+<g class="cursor-pointer group" onclick="selectRule('rule-c04')">
+<path class="group-hover:stroke-width-3 transition-all" d="M 170 65 L 340 120" marker-end="url(#arrow-amber)" stroke="#B54708" stroke-dasharray="4,3" stroke-width="2.5"></path>
+<rect fill="#FFFAEB" height="20" rx="4" stroke="#FEDF89" stroke-width="1" width="94" x="210" y="78"></rect>
+<text fill="#B54708" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="257" y="92">Rule C-04 [TB Scar]</text>
+</g>
+<!-- Edge 2: Smoker -> RLZ Consolidation -->
+<g class="cursor-pointer group" onclick="selectRule('rule-c09')">
+<path class="group-hover:stroke-width-3 transition-all" d="M 170 175 L 340 125" marker-end="url(#arrow)" stroke="#0F5E6B" stroke-width="2"></path>
+<rect fill="#E6F4F6" height="20" rx="4" stroke="#B2DFE6" stroke-width="1" width="102" x="205" y="148"></rect>
+<text fill="#0F5E6B" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="256" y="162">Rule C-09 [Smoker]</text>
+</g>
+<!-- Edge 3: RLZ Consolidation -> Pleural Effusion -->
+<g class="cursor-pointer group" onclick="selectRule('rule-p02')">
+<path class="group-hover:stroke-width-3 transition-all" d="M 450 120 L 550 120" marker-end="url(#arrow)" stroke="#0F5E6B" stroke-width="2"></path>
+<rect fill="#E6F4F6" height="20" rx="4" stroke="#B2DFE6" stroke-width="1" width="70" x="468" y="100"></rect>
+<text fill="#0F5E6B" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="503" y="114">Rule P-02</text>
+</g>
+<!-- Node 2: Square - Prior TB History -->
+<g class="cursor-pointer" transform="translate(60, 40)">
+<rect fill="#ffffff" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.06))" height="46" rx="6" stroke="#FEDF89" stroke-width="1.5" width="115"></rect>
+<rect fill="#B54708" height="34" rx="2" width="6" x="6" y="6"></rect>
+<text fill="#131c28" font-family="Inter" font-size="11" font-weight="600" x="20" y="22">Prior TB History</text>
+<text fill="#586579" font-family="JetBrains Mono" font-size="9" x="20" y="36">DOTS Regimen (2018)</text>
+</g>
+<!-- Node 3: Square - Smoker / Bidi Use -->
+<g class="cursor-pointer" transform="translate(60, 150)">
+<rect fill="#ffffff" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.06))" height="46" rx="6" stroke="#D0D5DD" stroke-width="1.5" width="115"></rect>
+<rect fill="#525f73" height="34" rx="2" width="6" x="6" y="6"></rect>
+<text fill="#131c28" font-family="Inter" font-size="11" font-weight="600" x="20" y="22">Smoker / Bidi</text>
+<text fill="#586579" font-family="JetBrains Mono" font-size="9" x="20" y="36">15 pk-yr duration</text>
+</g>
+<!-- Node 1: Circle - RLZ Consolidation (Primary High Finding) -->
+<g class="cursor-pointer" transform="translate(340, 90)">
+<rect fill="#FEF3F2" filter="drop-shadow(0 2px 4px rgba(180,35,24,0.1))" height="58" rx="29" stroke="#FECDCA" stroke-width="2" width="120"></rect>
+<text fill="#B42318" font-family="Inter" font-size="11" font-weight="700" text-anchor="middle" x="60" y="25">RLZ Consolidation</text>
+<text fill="#B42318" font-family="JetBrains Mono" font-size="11" font-weight="700" text-anchor="middle" x="60" y="42">p = 0.84</text>
+</g>
+<!-- Node 4: Circle - Pleural Effusion (Secondary Finding) -->
+<g class="cursor-pointer" transform="translate(545, 95)">
+<rect fill="#ffffff" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.06))" height="50" rx="25" stroke="#B2DFE6" stroke-width="1.5" width="115"></rect>
+<text fill="#004550" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle" x="57" y="22">Pleural Effusion</text>
+<text fill="#525f73" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="57" y="38">p = 0.58</text>
+</g>
+</svg>
+</div>
+<!-- Empty State for Variation 3: No Rules Fired (Hidden by default) -->
+<div class="hidden w-full h-full flex flex-col items-center justify-center text-center p-space-md" id="graph-empty-state">
+<span class="material-symbols-outlined text-outline text-[44px] mb-2">schema</span>
+<span class="font-headline-sm text-headline-sm text-on-surface mb-1">No interaction rules fired for this study</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+                Edge CAD evaluated all 14 findings in statistical isolation. No comorbid interactions or prior history synergy thresholds (p &gt; 0.60) were met.
+              </p>
+</div>
+</div>
+<!-- Fired Rule Inspection Drawer / Detailed Subcard -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col gap-2" id="rule-drawer-card">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#FFFAEB] text-[#B54708] font-mono-data-sm text-mono-data-sm font-bold">Rule ID: CDSS-IND-TB-REV-3.2 (Rule C-04)</span>
+<span class="px-2 py-0.5 rounded-full bg-[#FFFAEB] text-[#B54708] font-mono-data-sm text-mono-data-sm">Awaiting Clinician Validation</span>
+</div>
+<a class="inline-flex items-center gap-1 font-mono-data-sm text-mono-data-sm text-primary hover:underline" href="#">
+<span>doi:10.1016/j.chest.2021.08.012</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+<strong>Clinical Context:</strong> Prior pulmonary tuberculosis creates residual fibrotic parenchymal distortion and calcifications, shifting false-positive specificity for acute lower-zone consolidation.
+            </p>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono-data-sm text-mono-data-sm text-on-surface-variant pt-1 border-t-0">
+<span>Effect: <strong class="text-on-surface">Odds Ratio OR: 2.4x</strong> [95% CI: 1.8 – 3.2]</span>
+<span>•</span>
+<span>Baseline Shift: <strong class="text-error">+14.2% acute risk threshold</strong></span>
+</div>
+</div>
+</div>
+<!-- BOTTOM HALF: Clinician Diagnostic Review & Sign-Off Panel -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-md" id="signoff-panel">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">draw</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Clinician Diagnostic Review &amp; Sign-Off</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm">Dr. Arti Sharma (Attending MO)</span>
+</div>
+<!-- Primary Decision Radio Options -->
+<div class="flex flex-col gap-2" id="decision-radio-group">
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors border-0">
+<input checked="" class="mt-1 w-4 h-4 text-primary focus:ring-primary accent-primary" name="signoff_choice" type="radio" value="agree"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Agree with AI triage &amp; recommendations</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Confirms Tier 1 consolidation; dispatch for urgent sputum GeneXpert/microscopy &amp; direct tele-consult.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors border-0">
+<input class="mt-1 w-4 h-4 text-primary focus:ring-primary accent-primary" name="signoff_choice" type="radio" value="disagree"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Disagree with AI findings (Discordant Discordance)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Findings represent benign fibrotic scarring or technical motion artifact rather than acute consolidation.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors border-0">
+<input class="mt-1 w-4 h-4 text-primary focus:ring-primary accent-primary" name="signoff_choice" type="radio" value="repeat"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Needs repeat imaging / Inadequate Quality</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Poor inspiratory effort or positioning artifact. Request repeat erect PA or lateral view.</span>
+</div>
+</label>
+</div>
+<!-- Clinician Notes & Quick Clinical Snippets -->
+<div class="flex flex-col gap-1.5" id="notes-group">
+<label class="font-label-md text-label-md font-medium text-on-surface flex items-center justify-between">
+<span>Assessment Notes &amp; Guidance for Kashti PHC Health Worker:</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Supports ABHA EMR push</span>
+</label>
+<textarea class="w-full rounded-lg bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/70 p-3 font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary" id="clinician-notes" placeholder="Enter clinical assessment notes, discordant rationale, or direct instructions for sister ANM..." rows="3"></textarea>
+<!-- Quick Clinical Snippet Pills -->
+<div class="flex flex-wrap items-center gap-1.5 pt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Insert Snippet:</span>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors" onclick="insertSnippet('Confirmed RLZ dense alveolar consolidation. Immediate sputum sample required.')" type="button">+ Confirmed RLZ opacity</button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors" onclick="insertSnippet('Consistent with prior inactive TB residual calcification. No acute flare.')" type="button">+ Prior scar</button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors" onclick="insertSnippet('Advise oral amoxicillin-clavulanate + urgent tele-consult in 48h.')" type="button">+ Antibiotic dispatch</button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-[12px] transition-colors" onclick="insertSnippet('Schedule 2-week follow-up chest radiograph.')" type="button">+ Schedule follow-up</button>
+</div>
+</div>
+<!-- Primary Submit CTA & Safeguard Note -->
+<div class="flex flex-col gap-2 pt-1" id="submit-action-group">
+<button class="w-full py-3 px-space-md rounded-lg bg-primary hover:bg-[#0B4A54] text-on-primary font-label-md text-label-md font-semibold transition-all shadow-md flex items-center justify-center gap-2" id="btn-submit-signoff" onclick="submitSignoff()" type="button">
+<span class="material-symbols-outlined text-[20px]">vpn_key</span>
+<span>Submit review &amp; Sign-off study (ABHA Secure Key)</span>
+</button>
+<p class="text-center font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+              Cryptographically hashes attending registration #MH-MED-82194 with DICOM-SR digest.
+            </p>
+</div>
+<!-- Locked View for Signed State (Hidden by default) -->
+<div class="hidden bg-surface-container-low rounded-lg p-space-md flex flex-col gap-2" id="signed-locked-box">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined text-[22px]">lock</span>
+<span class="font-headline-sm text-headline-sm">Record Locked &amp; Signed</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">
+              Dr. Arti Sharma affirmed Concordant Tier 1 consolidation on 24 Oct 2024 at 14:48:12 IST. Tele-consult dispatch notification transmitted to Sister Lakshmi Devi (Kashti PHC Node #04).
+            </p>
+</div>
+<!-- Audit Trail & Longitudinal Provenance List -->
+<div class="flex flex-col gap-2 pt-2 border-t-0">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Study Access &amp; Audit Trail (ISO 13485 / ABDM Compliance)</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">5 Events Logged</span>
+</div>
+<div class="flex flex-col gap-1.5 font-mono-data-sm text-mono-data-sm text-on-surface-variant max-h-36 overflow-y-auto">
+<div class="flex items-start gap-2 bg-surface-container-low p-2 rounded">
+<span class="font-semibold text-primary">14:12 IST</span>
+<span>Sister Lakshmi Devi (ANM) uploaded DICOM radiograph at Kashti PHC Edge Node #04.</span>
+</div>
+<div class="flex items-start gap-2 bg-surface-container-low p-2 rounded">
+<span class="font-semibold text-primary">14:14 IST</span>
+<span>Edge TensorRT CAD-v4.2.1 completed 14-pathology inferencing &amp; Monte Carlo dropout analysis (1,420 ms).</span>
+</div>
+<div class="flex items-start gap-2 bg-surface-container-low p-2 rounded">
+<span class="font-semibold text-primary">14:28 IST</span>
+<span>Automated ABDM health locker verification succeeded (Patient ABHA linked).</span>
+</div>
+<div class="flex items-start gap-2 bg-surface-container-low p-2 rounded">
+<span class="font-semibold text-primary">14:35 IST</span>
+<span>Dr. Arti Sharma (Attending MO) viewed DICOM viewer &amp; calibrated heatmaps.</span>
+</div>
+<div class="flex items-start gap-2 bg-surface-container-high p-2 rounded text-on-surface font-medium" id="audit-trail-pending">
+<span class="font-semibold text-[#B54708]">14:42 IST</span>
+<span>Review session active • Awaiting digital signature sign-off.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SIMULATED MOBILE ARCHITECTURE (390px Viewport Frame) -->
+<!-- Initially hidden, toggled via prototype controller -->
+<div class="hidden w-full flex justify-center py-space-sm" id="mobile-sim-container">
+<div class="w-[390px] bg-surface-container-lowest rounded-2xl shadow-xl flex flex-col overflow-hidden">
+<!-- Mobile Device Header Mock -->
+<div class="bg-primary text-on-primary p-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">medical_services</span>
+<span class="font-label-md text-label-md font-semibold">STU-2024-0984</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-mono-data-sm text-mono-data-sm font-bold">p=0.84</span>
+</div>
+<!-- Mobile 4-Tab Navigation Bar -->
+<div class="flex border-b-0 bg-surface-container">
+<button class="flex-1 py-2.5 text-center font-label-md text-label-md text-primary font-bold bg-surface-container-lowest border-b-2 border-primary" id="btn-m-tab-image" onclick="switchMobileTab('m-tab-image')" type="button">
+          Image
+        </button>
+<button class="flex-1 py-2.5 text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface" id="btn-m-tab-findings" onclick="switchMobileTab('m-tab-findings')" type="button">
+          Findings
+        </button>
+<button class="flex-1 py-2.5 text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface" id="btn-m-tab-graph" onclick="switchMobileTab('m-tab-graph')" type="button">
+          Graph
+        </button>
+<button class="flex-1 py-2.5 text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface" id="btn-m-tab-signoff" onclick="switchMobileTab('m-tab-signoff')" type="button">
+          Sign-off
+        </button>
+</div>
+<!-- Mobile Tab 1: Image Viewer -->
+<div class="p-3 flex flex-col gap-2" id="m-tab-image">
+<div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span>Ramesh Patil (48y/M)</span>
+<span>Chest PA (Erect)</span>
+</div>
+<!-- Toggle Overlay button on mobile -->
+<div class="flex items-center justify-between bg-surface-container-low p-2 rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface">Show Grad-CAM Heatmap:</span>
+<input checked="" class="w-4 h-4 accent-primary" onchange="toggleMobileHeatmap(this.checked)" type="checkbox"/>
+</div>
+<div class="relative bg-black rounded-lg aspect-[4/5] flex items-center justify-center overflow-hidden">
+<svg class="w-full h-full object-contain" viewbox="0 0 400 500">
+<rect fill="#0c1117" height="500" width="400" x="0" y="0"></rect>
+<path d="M170,40 Q200,30 230,40 L230,120 Q240,160 250,220 Q260,300 230,380 L170,380 Q140,300 150,220 Q160,160 170,120 Z" fill="#2d3748" opacity="0.85"></path>
+<path d="M190,200 Q220,200 240,250 Q260,310 200,340 Q170,330 175,280 Q180,220 190,200 Z" fill="#4a5568" opacity="0.8"></path>
+<path d="M50,90 Q120,70 190,95" fill="none" opacity="0.7" stroke="#cbd5e1" stroke-width="7"></path>
+<path d="M350,90 Q280,70 210,95" fill="none" opacity="0.7" stroke="#cbd5e1" stroke-width="7"></path>
+<g id="m-heatmap-layer" opacity="0.75">
+<ellipse cx="130" cy="335" fill="#0284c7" filter="blur(14px)" opacity="0.35" rx="65" ry="48"></ellipse>
+<ellipse cx="130" cy="335" fill="#eab308" filter="blur(10px)" opacity="0.55" rx="44" ry="32"></ellipse>
+<ellipse cx="135" cy="330" fill="#ef4444" filter="blur(6px)" opacity="0.8" rx="28" ry="20"></ellipse>
+</g>
+</svg>
+<div class="absolute bottom-2 left-2 bg-black/60 px-2 py-0.5 rounded text-white font-mono-data-sm text-mono-data-sm text-[11px]">RLZ Focus (p=0.84)</div>
+</div>
+<p class="font-mono-data-sm text-mono-data-sm text-on-surface-variant text-center">Pinch-to-zoom simulated. Tap findings tab for metrics.</p>
+</div>
+<!-- Mobile Tab 2: Findings List -->
+<div class="hidden p-3 flex flex-col gap-2 max-h-[460px] overflow-y-auto" id="m-tab-findings">
+<span class="font-label-md text-label-md font-bold text-on-surface">Top Differential Pathologies</span>
+<div class="flex flex-col gap-1.5 font-body-sm text-body-sm">
+<div class="p-2.5 rounded-lg bg-error-container/20 flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<strong class="text-error font-medium">1. RLZ Consolidation</strong>
+<span class="font-mono-data-md text-mono-data-md font-bold text-error">0.84</span>
+</div>
+<div class="flex justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span>CI: [0.79–0.89]</span>
+<span>PPV: 91.4% (Rural)</span>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<strong class="text-on-surface font-medium">2. Pleural Effusion (Right)</strong>
+<span class="font-mono-data-md text-mono-data-md font-bold text-[#B54708]">0.58</span>
+</div>
+<div class="flex justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span>CI: [0.49–0.67]</span>
+<span>PPV: 82.0%</span>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<span class="text-on-surface">3. Cardiomegaly</span>
+<span class="font-mono-data-md text-mono-data-md text-on-surface-variant">0.44</span>
+</div>
+<div class="flex justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span>CI: [0.38–0.51]</span>
+<span>PPV: 78.5%</span>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<span class="text-on-surface">4. Interstitial Opacity</span>
+<span class="font-mono-data-md text-mono-data-md text-on-surface-variant">0.38</span>
+</div>
+<div class="flex justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span>CI: [0.31–0.46]</span>
+<span>PPV: 80.1%</span>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<span class="text-on-surface">5. Atelectasis</span>
+<span class="font-mono-data-md text-mono-data-md text-on-surface-variant">0.28</span>
+</div>
+<div class="flex justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span>CI: [0.22–0.34]</span>
+<span>PPV: 76.2%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Mobile Tab 3: Graph & Rules -->
+<div class="hidden p-3 flex flex-col gap-2 max-h-[460px] overflow-y-auto" id="m-tab-graph">
+<span class="font-label-md text-label-md font-bold text-on-surface">Fired Rule Insights</span>
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex justify-between items-center">
+<span class="px-2 py-0.5 rounded bg-[#FFFAEB] text-[#B54708] font-mono-data-sm text-mono-data-sm font-bold">Rule C-04</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">OR: 2.4x</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">
+            Prior TB scar distortion shifts false-positive baseline for active lower-zone consolidation.
+          </p>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex justify-between items-center">
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-mono-data-sm text-mono-data-sm font-bold">Rule C-09</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">OR: 1.6x</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">
+            15 pk-yr smoking increases baseline chronic peribronchial thickening.
+          </p>
+</div>
+</div>
+<!-- Mobile Tab 4: Sign-off -->
+<div class="hidden p-3 flex flex-col gap-3 max-h-[460px] overflow-y-auto" id="m-tab-signoff">
+<span class="font-label-md text-label-md font-bold text-on-surface">Clinical Decision</span>
+<div class="flex flex-col gap-1.5">
+<label class="flex items-center gap-2 p-2 rounded bg-surface-container-low">
+<input checked="" class="accent-primary" name="m_signoff" type="radio"/>
+<span class="font-body-sm text-body-sm font-medium">Agree with Tier 1 AI Triage</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-surface-container-low">
+<input class="accent-primary" name="m_signoff" type="radio"/>
+<span class="font-body-sm text-body-sm font-medium">Disagree (Discordant Finding)</span>
+</label>
+</div>
+<textarea class="w-full rounded bg-surface-container-low p-2 font-body-sm text-body-sm" placeholder="Quick clinical notes..." rows="2"></textarea>
+<button class="w-full py-2.5 rounded bg-primary text-on-primary font-label-md text-label-md font-semibold" onclick="submitSignoff()" type="button">
+          Submit &amp; Sign-off Study
+        </button>
+</div>
+<!-- Mobile Regulatory Footer Micro -->
+<div class="bg-surface-container-high p-2 text-center text-on-surface-variant font-mono-data-sm text-mono-data-sm text-[10px]">
+        Decision support only. Requires clinician sign-off.
+      </div>
+</div>
+</div>
+<!-- Interactive Client-side Scripting for Clinical Micro-interactions -->
+<script>
+    let currentZoom = 1.0;
+    let isInverted = false;
+
+    function toggleInvert() {
+      isInverted = !isInverted;
+      const svgLeft = document.getElementById('svg-xray-left');
+      const svgRight = document.getElementById('svg-xray-right');
+      if (isInverted) {
+        svgLeft.classList.add('invert');
+        svgRight.classList.add('invert');
+        document.getElementById('btn-toggle-invert').classList.add('bg-primary', 'text-on-primary');
+      } else {
+        svgLeft.classList.remove('invert');
+        svgRight.classList.remove('invert');
+        document.getElementById('btn-toggle-invert').classList.remove('bg-primary', 'text-on-primary');
+      }
+    }
+
+    function adjustZoom(factor) {
+      currentZoom = Math.min(Math.max(currentZoom * factor, 0.8), 2.2);
+      applyTransform();
+    }
+
+    function resetViewer() {
+      currentZoom = 1.0;
+      applyTransform();
+    }
+
+    function applyTransform() {
+      const left = document.getElementById('canvas-left');
+      const right = document.getElementById('canvas-right');
+      if (left && right) {
+        left.style.transform = `scale(${currentZoom})`;
+        right.style.transform = `scale(${currentZoom})`;
+      }
+    }
+
+    function updateHeatmapOpacity(val) {
+      document.getElementById('opacity-val').textContent = val + '%';
+      const layer = document.getElementById('heatmap-layer');
+      if (layer) {
+        layer.setAttribute('opacity', (val / 100).toString());
+      }
+    }
+
+    function toggleMobileHeatmap(show) {
+      const layer = document.getElementById('m-heatmap-layer');
+      if (layer) {
+        layer.style.display = show ? 'block' : 'none';
+      }
+    }
+
+    function insertSnippet(text) {
+      const textarea = document.getElementById('clinician-notes');
+      if (textarea) {
+        if (textarea.value) {
+          textarea.value += ' ' + text;
+        } else {
+          textarea.value = text;
+        }
+        textarea.focus();
+      }
+    }
+
+    function selectRule(ruleId) {
+      const drawer = document.getElementById('rule-drawer-card');
+      if (!drawer) return;
+      if (ruleId === 'rule-c04') {
+        drawer.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-space-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-[#FFFAEB] text-[#B54708] font-mono-data-sm text-mono-data-sm font-bold">Rule ID: CDSS-IND-TB-REV-3.2 (Rule C-04)</span>
+              <span class="px-2 py-0.5 rounded-full bg-[#FFFAEB] text-[#B54708] font-mono-data-sm text-mono-data-sm">Awaiting Clinician Validation</span>
+            </div>
+            <a href="#" class="inline-flex items-center gap-1 font-mono-data-sm text-mono-data-sm text-primary hover:underline">
+              <span>doi:10.1016/j.chest.2021.08.012</span>
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+            <strong>Clinical Context:</strong> Prior pulmonary tuberculosis creates residual fibrotic parenchymal distortion and calcifications, shifting false-positive specificity for acute lower-zone consolidation.
+          </p>
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono-data-sm text-mono-data-sm text-on-surface-variant pt-1">
+            <span>Effect: <strong class="text-on-surface">Odds Ratio OR: 2.4x</strong> [95% CI: 1.8 – 3.2]</span>
+            <span>•</span>
+            <span>Baseline Shift: <strong class="text-error">+14.2% acute risk threshold</strong></span>
+          </div>
+        `;
+      } else if (ruleId === 'rule-c09') {
+        drawer.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-space-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-surface-container text-primary font-mono-data-sm text-mono-data-sm font-bold">Rule ID: CDSS-TOB-COPD-1.4 (Rule C-09)</span>
+              <span class="px-2 py-0.5 rounded-full bg-surface-container text-primary font-mono-data-sm text-mono-data-sm">Validated In Rural Cohort</span>
+            </div>
+            <a href="#" class="inline-flex items-center gap-1 font-mono-data-sm text-mono-data-sm text-primary hover:underline">
+              <span>doi:10.1016/j.rmed.2020.106208</span>
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+            <strong>Clinical Context:</strong> Heavy bidi tobacco exposure increases baseline interstitial density and bronchial cuffing, potentially elevating low-attenuation false alerts in lung bases.
+          </p>
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono-data-sm text-mono-data-sm text-on-surface-variant pt-1">
+            <span>Effect: <strong class="text-on-surface">Odds Ratio OR: 1.6x</strong> [95% CI: 1.2 – 2.0]</span>
+            <span>•</span>
+            <span>Diagnostic Adjustment: <strong class="text-primary">-6.4% background specificity correction</strong></span>
+          </div>
+        `;
+      } else if (ruleId === 'rule-p02') {
+        drawer.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-space-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-surface-container text-primary font-mono-data-sm text-mono-data-sm font-bold">Rule ID: CDSS-EFF-PARAPNEUM-2.1 (Rule P-02)</span>
+              <span class="px-2 py-0.5 rounded-full bg-surface-container text-primary font-mono-data-sm text-mono-data-sm">Co-occurrence Fired</span>
+            </div>
+            <a href="#" class="inline-flex items-center gap-1 font-mono-data-sm text-mono-data-sm text-primary hover:underline">
+              <span>doi:10.1164/rccm.2019-04-eff</span>
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+            <strong>Clinical Context:</strong> Dense lower zone consolidation accompanied by blunted right costophrenic angle indicates high probability parapneumonic effusion requiring ultrasound confirmation.
+          </p>
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono-data-sm text-mono-data-sm text-on-surface-variant pt-1">
+            <span>Synergy Factor: <strong class="text-on-surface">Mutual Info Gain: 0.32 bits</strong></span>
+            <span>•</span>
+            <span>Clinical Recommendation: <strong class="text-error">Suggest bed-side thoracic ultrasound</strong></span>
+          </div>
+        `;
+      }
+    }
+
+    function submitSignoff() {
+      setState('signed');
+    }
+
+    function setState(state) {
+      const banner = document.getElementById('signed-banner');
+      const radioGroup = document.getElementById('decision-radio-group');
+      const notesGroup = document.getElementById('notes-group');
+      const submitActionGroup = document.getElementById('submit-action-group');
+      const lockedBox = document.getElementById('signed-locked-box');
+      const graphActive = document.getElementById('graph-active-state');
+      const graphEmpty = document.getElementById('graph-empty-state');
+      const auditPending = document.getElementById('audit-trail-pending');
+      const ruleDrawer = document.getElementById('rule-drawer-card');
+
+      // Update Top Ribbon Buttons
+      const btnDefault = document.getElementById('btn-state-default');
+      const btnSigned = document.getElementById('btn-state-signed');
+      const btnNoRules = document.getElementById('btn-state-no-rules');
+
+      [btnDefault, btnSigned, btnNoRules].forEach(b => {
+        b.className = 'px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-mono-data-sm text-mono-data-sm hover:bg-surface-container transition-all shadow-sm';
+      });
+
+      if (state === 'default') {
+        btnDefault.className = 'px-2.5 py-1 rounded bg-primary text-on-primary font-mono-data-sm text-mono-data-sm transition-all shadow-sm';
+        banner.classList.add('hidden');
+        radioGroup.classList.remove('opacity-50', 'pointer-events-none');
+        notesGroup.classList.remove('opacity-50', 'pointer-events-none');
+        submitActionGroup.classList.remove('hidden');
+        lockedBox.classList.add('hidden');
+        graphActive.classList.remove('hidden');
+        graphEmpty.classList.add('hidden');
+        ruleDrawer.classList.remove('hidden');
+        auditPending.innerHTML = '<span class="font-semibold text-[#B54708]">14:42 IST</span><span>Review session active • Awaiting digital signature sign-off.</span>';
+      } else if (state === 'signed') {
+        btnSigned.className = 'px-2.5 py-1 rounded bg-primary text-on-primary font-mono-data-sm text-mono-data-sm transition-all shadow-sm';
+        banner.classList.remove('hidden');
+        radioGroup.classList.add('opacity-50', 'pointer-events-none');
+        notesGroup.classList.add('opacity-50', 'pointer-events-none');
+        submitActionGroup.classList.add('hidden');
+        lockedBox.classList.remove('hidden');
+        graphActive.classList.remove('hidden');
+        graphEmpty.classList.add('hidden');
+        ruleDrawer.classList.remove('hidden');
+        auditPending.innerHTML = '<span class="font-semibold text-tertiary">14:48 IST</span><span>Dr. Arti Sharma completed cryptographic sign-off [ABDM-MH-9102].</span>';
+      } else if (state === 'no-rules') {
+        btnNoRules.className = 'px-2.5 py-1 rounded bg-primary text-on-primary font-mono-data-sm text-mono-data-sm transition-all shadow-sm';
+        banner.classList.add('hidden');
+        radioGroup.classList.remove('opacity-50', 'pointer-events-none');
+        notesGroup.classList.remove('opacity-50', 'pointer-events-none');
+        submitActionGroup.classList.remove('hidden');
+        lockedBox.classList.add('hidden');
+        graphActive.classList.add('hidden');
+        graphEmpty.classList.remove('hidden');
+        ruleDrawer.classList.add('hidden');
+        auditPending.innerHTML = '<span class="font-semibold text-[#B54708]">14:42 IST</span><span>Rules evaluated: isolated single-pathology triage.</span>';
+      }
+    }
+
+    function toggleMobileSim() {
+      const desktop = document.getElementById('desktop-view-container');
+      const mobile = document.getElementById('mobile-sim-container');
+      const btn = document.getElementById('btn-toggle-mobile');
+      const label = document.getElementById('mobile-toggle-text');
+
+      if (mobile.classList.contains('hidden')) {
+        mobile.classList.remove('hidden');
+        desktop.classList.add('hidden');
+        btn.classList.add('bg-primary', 'text-on-primary');
+        label.textContent = 'Desktop 1440px View';
+      } else {
+        mobile.classList.add('hidden');
+        desktop.classList.remove('hidden');
+        btn.classList.remove('bg-primary', 'text-on-primary');
+        label.textContent = '4. Mobile View Sim (390px)';
+      }
+    }
+
+    function switchMobileTab(tabId) {
+      ['m-tab-image', 'm-tab-findings', 'm-tab-graph', 'm-tab-signoff'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+        const b = document.getElementById('btn-' + id);
+        if (b) {
+          b.className = 'flex-1 py-2.5 text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface';
+        }
+      });
+      document.getElementById(tabId).classList.remove('hidden');
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.className = 'flex-1 py-2.5 text-center font-label-md text-label-md text-primary font-bold bg-surface-container-lowest border-b-2 border-primary';
+      }
+    }
+  </script>
+</div></main></div><footer class="w-full bg-surface-container-low py-space-xs px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-center gap-2 text-center text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[16px]">verified_user</span><span>Decision support only. Not a diagnosis. Requires clinician review.</span></div></footer></div></body></html>

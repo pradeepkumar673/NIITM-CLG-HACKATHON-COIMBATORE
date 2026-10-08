@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#004e5a", "secondary-fixed": "#d6e3fb", "surface-tint": "#1e6774", "surface-dim": "#d1daeb", "outline-variant": "#bfc8cb", "error": "#ba1a1a", "on-primary-container": "#93d5e4", "on-secondary-fixed-variant": "#3b485a", "on-background": "#131c28", "surface-container": "#e5eeff", "secondary-fixed-dim": "#bac7de", "secondary-container": "#d6e3fb", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#98f6bb", "on-error-container": "#93000a", "inverse-primary": "#8fd1e0", "on-secondary": "#ffffff", "on-surface-variant": "#3f484b", "primary": "#004550", "on-secondary-fixed": "#0f1c2d", "surface-variant": "#dae3f4", "tertiary-container": "#00633a", "on-primary-fixed": "#001f25", "outline": "#6f797b", "on-secondary-container": "#586579", "on-tertiary-fixed-variant": "#00522f", "tertiary-fixed-dim": "#7cd9a1", "on-tertiary": "#ffffff", "surface-bright": "#f8f9ff", "surface": "#f8f9ff", "inverse-surface": "#28313d", "surface-container-high": "#e0e9f9", "secondary": "#525f73", "inverse-on-surface": "#eaf1ff", "surface-container-highest": "#dae3f4", "background": "#f8f9ff", "tertiary": "#004929", "on-surface": "#131c28", "on-primary": "#ffffff", "primary-fixed": "#abedfc", "on-error": "#ffffff", "primary-fixed-dim": "#8fd1e0", "on-tertiary-container": "#81dea5", "on-tertiary-fixed": "#002110", "error-container": "#ffdad6", "surface-container-low": "#eff4ff", "primary-container": "#0f5e6b" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "margin": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-md": "1rem", "gutter": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-sm": [ "Inter" ], "mono-data-lg": [ "JetBrains Mono" ], "body-lg": [ "Inter" ], "label-sm": [ "Inter" ], "label-md": [ "Inter" ], "headline-xl": [ "Inter" ], "mono-data-md": [ "JetBrains Mono" ], "headline-md": [ "Inter" ], "body-md": [ "Inter" ], "mono-data-sm": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Inter" ], "headline-lg": [ "Inter" ], "headline-lg-mobile": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "600" } ], "mono-data-lg": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "500" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-xl": [ "2rem", { "lineHeight": "2.5rem", "fontWeight": "700" } ], "mono-data-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-md": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-md": [ "1rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "mono-data-sm": [ "0.75rem", { "lineHeight": "1rem", "fontWeight": "400" } ], "headline-xl-mobile": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "700" } ], "headline-lg": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-60 bg-surface-container-low z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">XRAY-ASSISTANT</span><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>Online</span></div><div class="flex items-center gap-1 text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="material-symbols-outlined text-[14px]">wifi</span><span>Sync: Local Edge</span></div></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-primary text-on-primary font-label-md text-label-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="dashboard" href="#"><span>Dashboard</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="review-queue" href="#"><span>Review queue</span><span class="px-1.5 py-0.5 rounded-full bg-error text-on-error font-mono-data-sm text-mono-data-sm font-semibold leading-none">07</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="studies" href="#"><span>Studies</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-study" href="#"><span>Ingest / New study</span></a></nav><div class="px-space-md pt-space-xs"><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Language</label><div class="relative"><select class="w-full appearance-none bg-surface-container-lowest text-on-surface font-body-sm text-body-sm py-2 pl-3 pr-8 rounded-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-1 focus:ring-primary"><option value="en">English</option><option value="ta">Tamil [machine-drafted]</option><option value="hi">Hindi [machine-drafted]</option></select><span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span></div></div></div><div class="px-space-md flex flex-col gap-space-sm"><div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col gap-1"><div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">dns</span>Edge Node</span><span class="font-medium text-on-surface">Active</span></div><div class="font-mono-data-sm text-mono-data-sm text-primary font-semibold">KASHTI-PHC-04</div></div><button class="w-full flex items-center justify-center gap-space-sm py-2 px-space-md rounded-lg text-error hover:bg-error-container hover:text-on-error-container font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">logout</span>Sign out</button></div></aside><div class="pl-60 min-h-screen flex flex-col justify-between"><div class="w-full"><header class="fixed top-0 left-60 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold">Kashti PHC / District Cluster</span><span class="font-body-sm text-body-sm text-on-surface-variant">District Ahmadnagar • Rural Health Cluster 2</span></div><div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="font-mono-data-sm text-mono-data-sm">ABHA Network Connected</span></div></div><div class="flex items-center gap-space-md"><div class="text-right hidden sm:flex flex-col"><span class="font-label-md text-label-md text-on-surface font-medium">Dr. Arti Sharma</span><span class="font-body-sm text-body-sm text-on-surface-variant">MO / Tele-radiologist</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-space-lg py-space-md bg-surface"><div class="flex flex-col w-full">
+<!-- Interactive State Controller & Prototype Viewport Banner -->
+<div class="bg-surface-container-low px-space-md py-space-sm rounded-xl mb-space-md shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-container text-on-primary font-mono-data-sm text-mono-data-sm font-medium">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></span>
+          STATE SIMULATOR
+        </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm hidden sm:inline">Active Mode:</span>
+</div>
+<!-- State switcher pill tabs -->
+<div class="flex flex-wrap items-center gap-1 bg-surface-container-high p-1 rounded-lg" id="state-tab-container">
+<button class="px-3 py-1.5 rounded text-on-surface font-label-sm text-label-sm transition-all bg-surface shadow-sm font-semibold text-primary" id="btn-state-complete" onclick="switchState('complete')" type="button">
+          1. Complete Comparison
+        </button>
+<button class="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-state-low-reg" onclick="switchState('low-reg')" type="button">
+          2. Low Registration (&lt;0.65)
+        </button>
+<button class="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-state-uncalibrated" onclick="switchState('uncalibrated')" type="button">
+          3. Calibration Required
+        </button>
+<button class="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="btn-state-mismatch" onclick="switchState('mismatch')" type="button">
+          4. Mismatched Patient ID
+        </button>
+<button class="px-2.5 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all flex items-center gap-1" id="btn-state-mobile" onclick="toggleMobileViewport()" title="Simulate 390px Mobile Viewport" type="button">
+<span class="material-symbols-outlined text-[15px]">smartphone</span>
+<span id="mobile-toggle-text">Mobile Sim</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dynamic Global Warning Banners Container -->
+<div class="space-y-space-sm mb-space-md" id="dynamic-alerts-container">
+<!-- State 4: Mismatched Patient Banner -->
+<div class="hidden bg-error-container p-space-md rounded-xl shadow-sm flex items-start gap-space-md transition-all" id="alert-mismatched-patient">
+<span class="material-symbols-outlined text-error text-[24px] mt-0.5 shrink-0">emergency_home</span>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-error-container font-bold">SAFETY CRITICAL: Patient Identifier Mismatch</span>
+<span class="px-2 py-0.5 rounded-full bg-error text-on-error font-mono-data-sm text-mono-data-sm font-bold">BLOCKING INTERLOCK</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-error-container mt-1">
+          Earlier study references <strong>IND-MH-65129 (Ramesh Patil, M, 28y)</strong> while Later study references <strong>IND-MH-88402 (Devdas Shinde, M, 31y)</strong>.
+          Longitudinal alignment and subtraction calculation are strictly inhibited to prevent cross-patient misattribution.
+        </p>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-error font-label-sm text-label-sm font-semibold hover:bg-surface-dim transition-colors" onclick="dismissMismatchAlert()" type="button">
+        Override Interlock (Audit Logged)
+      </button>
+</div>
+<!-- State 2: Low Registration Banner -->
+<div class="hidden bg-error-container p-space-md rounded-xl shadow-sm flex items-start gap-space-md transition-all" id="alert-low-registration">
+<span class="material-symbols-outlined text-error text-[24px] mt-0.5 shrink-0">warning</span>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-error-container font-bold">Low Anatomical Registration Match (Similarity: 0.58 &lt; 0.65)</span>
+<span class="px-2 py-0.5 rounded-full bg-error text-on-error font-mono-data-sm text-mono-data-sm font-semibold">HIGH TIER WARNING</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-error-container mt-1">
+          Images may not show the same anatomy or projection angle differs significantly (tilt discrepancy &gt; 8.4°). <strong>Do not rely on automated density subtraction or volume estimates.</strong> Manual caliper re-verification required.
+        </p>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-dim transition-colors" onclick="resetAlignmentManual()" type="button">
+        Recalculate Landmark Fit
+      </button>
+</div>
+<!-- State 3: Calibration Required Banner -->
+<div class="hidden bg-secondary-container p-space-md rounded-xl shadow-sm flex items-start gap-space-md transition-all" id="alert-calibration-required">
+<span class="material-symbols-outlined text-primary text-[24px] mt-0.5 shrink-0">straighten</span>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-secondary-fixed font-bold">Spatial Calibration Required for Later Study</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-lowest text-primary font-mono-data-sm text-mono-data-sm font-semibold">ACTION NEEDED</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-secondary-fixed-variant mt-1">
+          Pixel pitch metadata absent in DICOM tag (0028,0030). Select two distinct cortical margins or a reference coin/marker on the radiograph to calibrate millimetric metrics.
+        </p>
+</div>
+<button class="px-3.5 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-colors shadow-sm" onclick="activateCalibrationMode()" type="button">
+        Launch Caliper Calibration Tool
+      </button>
+</div>
+</div>
+<!-- Main Viewport Container (Handles Responsive Mobile Simulator Wrap) -->
+<div class="w-full transition-all duration-300" id="main-viewport-frame">
+<!-- Study Selector Strip / Patient Concordance Bar -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl mb-space-md shadow-sm">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Earlier Study Selector Pill -->
+<div class="flex-1 bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-mono-data-sm text-mono-data-sm font-semibold">T-0 Baseline</span>
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface truncate" id="patient-id-earlier">IND-MH-65129</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate" id="patient-name-earlier">Ramesh Patil • M/28y</div>
+<div class="text-on-surface-variant font-body-sm text-body-sm flex items-center gap-1">
+<span>12 Sep 2024 (6.0 wks ago)</span>
+<span>•</span>
+<span class="font-mono-data-sm text-mono-data-sm text-primary font-medium">STU-2024-0812</span>
+</div>
+</div>
+</div>
+<span class="px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-mono-data-sm text-mono-data-sm text-right shrink-0 hidden sm:block">
+            Tibia/Fibula AP<br/>75 kVp • 4.2 mAs
+          </span>
+</div>
+<!-- Longitudinal Interval Nexus Hub -->
+<div class="flex lg:flex-col items-center justify-center shrink-0 px-space-sm py-1 bg-surface-container rounded-lg">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]">timelapse</span>
+<span class="font-mono-data-md text-mono-data-md font-bold">42 Days Interval</span>
+</div>
+<div class="text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+            Δ 6.0 Weeks Follow-up
+          </div>
+</div>
+<!-- Later Study Selector Pill -->
+<div class="flex-1 bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">update</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded bg-tertiary-container text-on-tertiary font-mono-data-sm text-mono-data-sm font-semibold">T-1 Current</span>
+<span class="font-mono-data-sm text-mono-data-sm font-bold text-on-surface truncate" id="patient-id-later">IND-MH-65129</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate" id="patient-name-later">Ramesh Patil • M/28y</div>
+<div class="text-on-surface-variant font-body-sm text-body-sm flex items-center gap-1">
+<span>24 Oct 2024 (Today)</span>
+<span>•</span>
+<span class="font-mono-data-sm text-mono-data-sm text-primary font-medium">STU-2024-0975</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 hidden sm:flex">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-semibold">
+              ABHA Verified
+            </span>
+<span class="text-on-surface-variant font-mono-data-sm text-mono-data-sm mt-0.5">
+              Tibia/Fibula AP • 76 kVp
+            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Comparative Grid Engine -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-start">
+<!-- Left & Center: DICOM Inspection Canvas & Difference Map (Col 1-8) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<!-- Clinical Floating / Sticky Radiographic Toolbar -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0 w-full sm:w-auto">
+<button class="px-3 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 hover:bg-surface-dim transition-colors" id="tool-calibrate" onclick="toggleTool('calibrate')" title="Calibrate scale against cortical thickness" type="button">
+<span class="material-symbols-outlined text-[18px]">square_foot</span>
+<span>Calibrate Scale</span>
+</button>
+<button class="px-3 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center gap-1.5 hover:bg-primary-container transition-colors shadow-sm" id="tool-roi" onclick="toggleTool('roi')" type="button">
+<span class="material-symbols-outlined text-[18px]">polyline</span>
+<span>Fracture ROI</span>
+</button>
+<button class="px-3 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 hover:bg-surface-dim transition-colors" id="tool-ref" onclick="toggleTool('ref')" type="button">
+<span class="material-symbols-outlined text-[18px]">crop_free</span>
+<span>Ref Bone ROI</span>
+</button>
+<button class="px-3 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 hover:bg-surface-dim transition-colors" id="tool-caliper" onclick="toggleTool('caliper')" type="button">
+<span class="material-symbols-outlined text-[18px]">linear_scale</span>
+<span>Caliper (Gap)</span>
+</button>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-between sm:justify-end">
+<!-- Calibrated indicator token -->
+<div class="px-2.5 py-1 rounded-md bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm flex items-center gap-1" id="calibration-indicator-badge">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container">check_circle</span>
+<span id="calibrated-ratio-text">1 px = 0.142 mm</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" onclick="toggleInvertLut()" title="Invert Grayscale LUT" type="button">
+<span class="material-symbols-outlined text-[20px]">invert_colors</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container-high text-primary hover:bg-surface-dim transition-colors" id="btn-sync-toggle" onclick="toggleSyncPanZoom()" title="Sync Pan/Zoom between views" type="button">
+<span class="material-symbols-outlined text-[20px]">sync_alt</span>
+</button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" onclick="resetCanvasTransform()" title="Reset Frame and Zoom" type="button">
+<span class="material-symbols-outlined text-[20px]">fit_screen</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dual Inspection Core Canvas -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-md">
+<!-- Pane 1: Before/After Interactive Split Slider Radiograph -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col">
+<div class="flex items-center justify-between pb-space-xs px-space-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">compare</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Interactive Split Radiograph</span>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Midshaft Tibia (AP)</span>
+</div>
+<!-- Radiograph Viewport (Dark Encapsulation Container) -->
+<div class="relative w-full h-[460px] bg-black rounded-lg overflow-hidden select-none cursor-ew-resize mt-space-xs" id="slider-viewport">
+<!-- Later Image (Bottom full canvas - 24 Oct) -->
+<div class="absolute inset-0 w-full h-full flex items-center justify-center bg-[#070b10]">
+<!-- High-fidelity Synthetic DICOM SVG (Later with Callus Bridging) -->
+<svg class="w-full h-full object-contain pointer-events-none opacity-90" viewbox="0 0 400 520">
+<defs>
+<radialgradient cx="50%" cy="50%" id="boneGlowLater" r="50%">
+<stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"></stop>
+<stop offset="45%" stop-color="#b8c6d4" stop-opacity="0.8"></stop>
+<stop offset="85%" stop-color="#3d4955" stop-opacity="0.4"></stop>
+<stop offset="100%" stop-color="#070b10" stop-opacity="0"></stop>
+</radialgradient>
+<filter id="softXray">
+<fegaussianblur result="blur" stddeviation="1.2"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+</filter>
+</defs>
+<!-- Soft Tissue Shadow Envelope -->
+<path d="M120 10 C130 180, 125 360, 115 510 L300 510 C290 350, 285 170, 295 10 Z" fill="#141c24" opacity="0.6"></path>
+<!-- Fibula Shaft (Slender) -->
+<path d="M150 10 Q145 250 148 510" fill="none" opacity="0.75" stroke="#a0afbe" stroke-linecap="round" stroke-width="16"></path>
+<path d="M150 10 Q145 250 148 510" fill="none" opacity="0.6" stroke="#ffffff" stroke-linecap="round" stroke-width="7"></path>
+<!-- Tibia Main Shaft (Broad) -->
+<path d="M245 10 L242 220 L243 510" fill="none" opacity="0.8" stroke="#b4c2ce" stroke-linecap="round" stroke-width="48"></path>
+<path d="M245 10 L242 220 L243 510" fill="none" opacity="0.9" stroke="#f0f5fa" stroke-linecap="round" stroke-width="26"></path>
+<!-- Tibial Medullary Canal Shadow -->
+<path d="M245 20 L242 220 L243 500" fill="none" opacity="0.6" stroke="#687887" stroke-linecap="round" stroke-width="14"></path>
+<!-- LATER: Bridging Mineralized Periosteal Callus Mass -->
+<ellipse cx="242" cy="255" fill="#d2e0ec" filter="url(#softXray)" opacity="0.68" rx="36" ry="24"></ellipse>
+<path d="M216 244 Q228 255 218 268 M262 242 Q254 256 264 270" fill="none" opacity="0.75" stroke="#ffffff" stroke-width="8"></path>
+<!-- Narrowing Fracture Gap Line (2.1mm equivalent) -->
+<path d="M228 253 Q242 256 256 254" fill="none" opacity="0.7" stroke="#25303a" stroke-dasharray="3,1" stroke-width="2.5"></path>
+<!-- Callus measurement point overlay -->
+<circle cx="242" cy="254" fill="#00e5ff" r="3"></circle>
+</svg>
+<span class="absolute top-3 right-3 px-2 py-1 rounded bg-surface/90 text-on-surface font-mono-data-sm text-mono-data-sm font-semibold shadow-sm backdrop-blur">
+                  Later: 24 Oct 2024
+                </span>
+</div>
+<!-- Earlier Image (Top clipped layer - 12 Sep) -->
+<div class="absolute inset-0 h-full overflow-hidden border-r-2 border-primary-fixed" id="slider-earlier-clipper" style="width: 52%;">
+<div class="absolute inset-0 w-[460px] sm:w-[480px] md:w-full h-full flex items-center justify-center bg-[#05080c]">
+<!-- High-fidelity Synthetic DICOM SVG (Earlier: Fresh Acute Lucency) -->
+<svg class="w-full h-full object-contain pointer-events-none opacity-90" viewbox="0 0 400 520">
+<!-- Soft Tissue Shadow Envelope -->
+<path d="M120 10 C130 180, 125 360, 115 510 L300 510 C290 350, 285 170, 295 10 Z" fill="#141c24" opacity="0.5"></path>
+<!-- Fibula Shaft -->
+<path d="M150 10 Q145 250 148 510" fill="none" opacity="0.7" stroke="#909fae" stroke-linecap="round" stroke-width="16"></path>
+<path d="M150 10 Q145 250 148 510" fill="none" opacity="0.5" stroke="#f1f5f9" stroke-linecap="round" stroke-width="6"></path>
+<!-- Tibia Main Shaft -->
+<path d="M245 10 L242 220 L243 510" fill="none" opacity="0.8" stroke="#aab7c3" stroke-linecap="round" stroke-width="48"></path>
+<path d="M245 10 L242 220 L243 510" fill="none" opacity="0.88" stroke="#f5f8fb" stroke-linecap="round" stroke-width="26"></path>
+<path d="M245 20 L242 220 L243 500" fill="none" opacity="0.65" stroke="#5d6c7b" stroke-linecap="round" stroke-width="14"></path>
+<!-- EARLIER: Sharp Oblique Lucent Fracture Line (4.8mm gap, no callus) -->
+<path d="M214 246 L269 262" fill="none" stroke="#05080c" stroke-linecap="round" stroke-width="6"></path>
+<path d="M215 244 L240 252" fill="none" stroke="#000000" stroke-linecap="round" stroke-width="4"></path>
+<!-- Cortical step-off / offset -->
+<path d="M217 240 L219 252" fill="none" stroke="#ffffff" stroke-width="3"></path>
+<path d="M266 256 L268 268" fill="none" stroke="#ffffff" stroke-width="3"></path>
+</svg>
+<span class="absolute top-3 left-3 px-2 py-1 rounded bg-inverse-surface/90 text-inverse-on-surface font-mono-data-sm text-mono-data-sm font-semibold shadow-sm backdrop-blur">
+                    Earlier: 12 Sep 2024
+                  </span>
+</div>
+</div>
+<!-- Overlaid Interactive Caliper & ROI Marks -->
+<div class="absolute inset-0 pointer-events-none">
+<!-- Caliper Overlay Line -->
+<div class="absolute top-[236px] left-[52%] -translate-x-1/2 flex flex-col items-center">
+<div class="px-2 py-0.5 rounded bg-primary text-on-primary font-mono-data-sm text-mono-data-sm font-semibold shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">straighten</span>
+<span>Callus Gap: 2.1 mm</span>
+</div>
+<div class="w-16 h-0.5 bg-primary-fixed mt-1 flex items-center justify-between">
+<div class="w-1.5 h-3 bg-primary-fixed -mt-1"></div>
+<div class="w-1.5 h-3 bg-primary-fixed -mt-1"></div>
+</div>
+</div>
+<!-- ROI Reference Annotation Box -->
+<div class="absolute top-[80px] right-[24%] w-16 h-12 rounded bg-tertiary/20 flex items-start justify-end p-1">
+<span class="text-[9px] font-mono-data-sm text-tertiary-fixed font-bold bg-tertiary px-1 rounded">ROI-Ref</span>
+</div>
+</div>
+<!-- Draggable Divider Handle Line -->
+<div class="absolute top-0 bottom-0 w-1 bg-primary-fixed cursor-ew-resize z-20" id="slider-handle" style="left: 52%;">
+<div class="absolute top-1/2 -translate-y-1/2 -left-3.5 w-8 h-8 rounded-full bg-primary text-on-primary shadow-md flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">drag_indicator</span>
+</div>
+</div>
+</div>
+<!-- Slider Help Hint -->
+<div class="flex items-center justify-between pt-space-xs text-on-surface-variant font-mono-data-sm text-mono-data-sm px-1">
+<span>Drag handle left/right to compare periosteal healing</span>
+<span>Zoom: 1.00x • Pan: [0, 0]</span>
+</div>
+</div>
+<!-- Pane 2: Automated Rigid/Affine Difference Map -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col">
+<div class="flex items-center justify-between pb-space-xs px-space-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container text-[18px]">difference</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Radiographic Subtraction Map</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed-dim text-on-tertiary-fixed font-mono-data-sm text-mono-data-sm font-semibold">
+                Rigid + Affine Reg
+              </span>
+</div>
+<!-- Difference Map Viewport -->
+<div class="relative w-full h-[460px] bg-[#03060a] rounded-lg overflow-hidden select-none mt-space-xs flex items-center justify-center" onmouseleave="hideDiffCoordinate()" onmousemove="handleDiffMapHover(event)">
+<!-- Subtraction Heatmap Composition -->
+<svg class="w-full h-full object-contain pointer-events-none" viewbox="0 0 400 520">
+<defs>
+<filter height="140%" id="diffGlow" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="4"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+</filter>
+</defs>
+<!-- Anatomical Neutral Basemap (Subtracted Grey Bones) -->
+<path d="M120 10 C130 180, 125 360, 115 510 L300 510 C290 350, 285 170, 295 10 Z" fill="#0d141b" opacity="0.4"></path>
+<path d="M150 10 Q145 250 148 510" fill="none" opacity="0.7" stroke="#1f2933" stroke-width="12"></path>
+<path d="M245 10 L242 220 L243 510" fill="none" opacity="0.7" stroke="#253240" stroke-width="36"></path>
+<!-- Blue Zones: Minor Resorption / Remodeling at fracture edges (-22% HU eq) -->
+<path d="M226 238 Q234 246 226 254" fill="none" filter="url(#diffGlow)" opacity="0.85" stroke="#0284c7" stroke-width="8"></path>
+<circle cx="230" cy="246" fill="#0369a1" opacity="0.6" r="6"></circle>
+<!-- Coral/Vivid Red Zones: Intense Mineralized Callus Density Gain (+48% HU eq) -->
+<ellipse cx="254" cy="254" fill="#ea580c" filter="url(#diffGlow)" opacity="0.8" rx="28" ry="18"></ellipse>
+<ellipse cx="252" cy="254" fill="#f97316" opacity="0.95" rx="16" ry="10"></ellipse>
+<circle cx="250" cy="253" fill="#fef08a" opacity="0.9" r="5"></circle>
+<!-- Periosteal Bridging Wings Density Gain -->
+<path d="M216 252 Q212 264 220 272" fill="none" filter="url(#diffGlow)" opacity="0.75" stroke="#ea580c" stroke-width="7"></path>
+<path d="M266 244 Q274 256 268 268" fill="none" filter="url(#diffGlow)" opacity="0.75" stroke="#ea580c" stroke-width="7"></path>
+<!-- Live Pointer Ring Anchor -->
+<circle class="transition-all duration-75" cx="252" cy="254" fill="none" id="diff-crosshair-dot" r="6" stroke="#ffffff" stroke-width="1.5"></circle>
+</svg>
+<!-- Floating Live Hover Coordinate Readout Card -->
+<div class="absolute bottom-3 left-3 right-3 bg-surface-container-lowest/95 backdrop-blur-md p-space-xs px-space-sm rounded-lg shadow-md flex items-center justify-between text-on-surface" id="diff-hover-badge">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error shrink-0"></span>
+<span class="font-mono-data-sm text-mono-data-sm font-bold" id="diff-coord-title">ROI [x: 252, y: 254]</span>
+<span class="text-on-surface-variant font-mono-data-sm text-mono-data-sm">|</span>
+<span class="font-mono-data-sm text-mono-data-sm text-primary font-semibold" id="diff-density-value">Density Shift: +34.8% (Mineralized Callus)</span>
+</div>
+<div class="font-mono-data-sm text-mono-data-sm text-on-surface-variant hidden md:block">
+                  Epistemic Uncertainty: ±0.032
+                </div>
+</div>
+</div>
+<!-- High-Contrast Diverging Color Legend Bar -->
+<div class="pt-space-sm px-1 flex flex-col gap-1">
+<div class="h-3 w-full rounded-full bg-gradient-to-r from-sky-600 via-slate-800 to-amber-500 shadow-inner"></div>
+<div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span class="flex items-center gap-1 text-sky-700">
+<span class="w-2 h-2 rounded-full bg-sky-600"></span>
+                  -35% HU (Resorption)
+                </span>
+<span class="text-on-surface-variant font-medium">0% Stable</span>
+<span class="flex items-center gap-1 text-amber-800 font-semibold">
+                  +48% HU (Callus Deposition)
+                  <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Stacked Analytical & Outcome Cards (380px to 420px) (Col 9-12) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Card 1: Registration Quality -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm" id="card-registration-metric">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">center_focus_strong</span>
+              Registration Quality
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-mono-data-sm text-mono-data-sm font-bold" id="badge-similarity-status">
+              0.89 MI (Concordant)
+            </span>
+</div>
+<!-- Micro bar score -->
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-500" id="bar-similarity-progress" style="width: 89%;"></div>
+</div>
+<!-- Sub-metrics Grid -->
+<div class="grid grid-cols-2 gap-2 pt-1 font-mono-data-sm text-mono-data-sm">
+<div class="bg-surface-container-low p-2 rounded-lg">
+<span class="text-on-surface-variant block text-[11px]">Axis Rotation</span>
+<span class="font-bold text-on-surface" id="metric-axis-tilt">-1.8° [AP Tilt OK]</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg">
+<span class="text-on-surface-variant block text-[11px]">Magnification Scale</span>
+<span class="font-bold text-on-surface" id="metric-mag-scale">1.02x [Matched]</span>
+</div>
+</div>
+<div class="hidden text-error font-body-sm text-body-sm bg-error-container p-2 rounded-lg" id="card-reg-warning-text">
+            Rotational error exceeds safety limit (8.4°). Automated difference map suppressed.
+          </div>
+</div>
+<!-- Card 2: Normalised Density Change Value -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">stacked_line_chart</span>
+              Normalized Callus Density
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-medium">
+              Ref-Indexed
+            </span>
+</div>
+<div class="flex items-baseline gap-2 pt-1">
+<span class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight" id="val-net-density">+28.6%</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Net Radiopacity</span>
+</div>
+<!-- Mathematical Index Formula Box -->
+<div class="bg-surface-container-low p-2.5 rounded-lg flex items-center justify-between font-mono-data-sm text-mono-data-sm">
+<span class="text-on-surface-variant">Ratio (ΔROI_fx / ΔROI_ref)</span>
+<span class="font-bold text-on-surface">1.34</span>
+</div>
+<!-- Uncertainty & Confidence Interval Indicator -->
+<div class="flex flex-col gap-1 pt-1">
+<div class="flex items-center justify-between font-mono-data-sm text-mono-data-sm">
+<span class="text-on-surface-variant">95% Confidence Band</span>
+<span class="font-bold text-primary">[+24.1% to +33.2%]</span>
+</div>
+<!-- Horizontal Micro-range Bar -->
+<div class="relative w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="absolute left-[54%] w-[20%] h-full bg-primary-container/80 rounded-sm"></div>
+<div class="absolute left-[64%] w-1 h-full bg-primary"></div>
+</div>
+</div>
+</div>
+<!-- Card 3: Caliper Gap Progression & Inline Sparkline -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">show_chart</span>
+              Fracture Gap Progression
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed-dim text-on-tertiary-fixed font-mono-data-sm text-mono-data-sm font-semibold">
+              Gap Closes -56%
+            </span>
+</div>
+<!-- Mini Inline SVG Line Chart (Callus Gap Downward Trajectory) -->
+<div class="w-full h-24 bg-surface-container-low rounded-lg p-2 flex flex-col justify-between">
+<div class="flex items-center justify-between text-[11px] font-mono-data-sm text-on-surface-variant px-1">
+<span>Baseline: 4.8 mm</span>
+<span class="text-tertiary-container font-semibold">Target Union: &lt;1.0 mm</span>
+</div>
+<svg class="w-full h-14 overflow-visible" viewbox="0 0 280 60">
+<!-- Threshold guideline (<1.0 mm union) -->
+<line stroke="#94a3b8" stroke-dasharray="3 3" stroke-width="1" x1="10" x2="270" y1="50" y2="50"></line>
+<!-- Trajectory Gradient Area -->
+<defs>
+<lineargradient id="curveFill" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#0f5e6b" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#0f5e6b" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<path d="M 20 12 L 140 28 L 260 41 L 260 55 L 20 55 Z" fill="url(#curveFill)"></path>
+<!-- Trajectory Line -->
+<path d="M 20 12 L 140 28 L 260 41" fill="none" stroke="#0f5e6b" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Markers -->
+<circle cx="20" cy="12" fill="#004550" r="4"></circle>
+<circle cx="140" cy="28" fill="#004550" r="4"></circle>
+<circle cx="260" cy="41" fill="#00633a" r="5" stroke="#ffffff" stroke-width="1.5"></circle>
+<!-- Value tags -->
+<text fill="#131c28" font-family="JetBrains Mono" font-size="9" text-anchor="middle" x="20" y="8">4.8</text>
+<text fill="#131c28" font-family="JetBrains Mono" font-size="9" text-anchor="middle" x="140" y="24">3.6</text>
+<text fill="#00633a" font-family="JetBrains Mono" font-size="9" font-weight="bold" text-anchor="middle" x="260" y="36">2.1</text>
+</svg>
+</div>
+<!-- Structured Caliper Metric Table -->
+<div class="overflow-hidden rounded-lg">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">
+<tr>
+<th class="py-1.5 px-2">Timeline</th>
+<th class="py-1.5 px-2">Date</th>
+<th class="py-1.5 px-2 text-right">Cortical Gap</th>
+</tr>
+</thead>
+<tbody class="font-mono-data-sm text-mono-data-sm text-on-surface divide-y-0">
+<tr class="bg-surface-container-lowest">
+<td class="py-1.5 px-2">Week 0 (Base)</td>
+<td class="py-1.5 px-2 text-on-surface-variant">12 Sep 2024</td>
+<td class="py-1.5 px-2 text-right font-bold">4.8 mm</td>
+</tr>
+<tr class="bg-surface-container-low">
+<td class="py-1.5 px-2">Week 3 (F/U 1)</td>
+<td class="py-1.5 px-2 text-on-surface-variant">03 Oct 2024</td>
+<td class="py-1.5 px-2 text-right font-bold">3.6 mm</td>
+</tr>
+<tr class="bg-tertiary-fixed/30 font-semibold">
+<td class="py-1.5 px-2 text-tertiary-container">Week 6 (Current)</td>
+<td class="py-1.5 px-2 text-on-surface-variant">24 Oct 2024</td>
+<td class="py-1.5 px-2 text-right font-bold text-tertiary-container">2.1 mm</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Card 4: Healing Estimate (EXPLORATORY) -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">biotech</span>
+              Healing Trajectory
+            </span>
+<!-- Prominent Violet EXPLORATORY badge -->
+<span class="px-2.5 py-0.5 rounded-full bg-[#f9f5ff] text-[#6941c6] font-mono-data-sm text-mono-data-sm font-bold shadow-sm">
+              EXPLORATORY
+            </span>
+</div>
+<!-- Verbatim Mandatory Literature Priors Disclaimer -->
+<div class="bg-surface-container-low p-2.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm leading-snug">
+<p class="italic text-[12px]">
+              "Exploratory estimate based on published literature priors. Not validated on patient outcomes."
+            </p>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-body-md text-body-md text-on-surface font-medium">Callus Bridging Index</span>
+<span class="font-mono-data-md text-mono-data-md font-bold text-tertiary-container">68%</span>
+</div>
+<div class="text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+            Expected Range: 60% – 75% at 6 weeks post-injury
+          </div>
+<!-- Trajectory Flag State -->
+<div class="p-2.5 rounded-lg bg-tertiary-fixed/40 flex items-center justify-between" id="trajectory-status-chip">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container text-[18px]">check_circle</span>
+<span class="font-label-md text-label-md font-bold text-tertiary-container">Normal Trajectory</span>
+</div>
+<span class="text-on-surface-variant font-mono-data-sm text-mono-data-sm">Priors: Tibial Shaft</span>
+</div>
+<!-- Cited Priors With DOI Links -->
+<div class="flex flex-col gap-1.5 pt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Literature Priors Cited:</span>
+<a class="text-[11px] font-mono-data-sm text-primary hover:underline leading-tight flex items-center justify-between" href="https://doi.org/10.1302/0301-620X.60B4.363261" rel="noopener noreferrer" target="_blank">
+<span>McKibbin B. Biology of fracture healing in long bones. JBJS Br.</span>
+<span class="material-symbols-outlined text-[13px] shrink-0">open_in_new</span>
+</a>
+<a class="text-[11px] font-mono-data-sm text-primary hover:underline leading-tight flex items-center justify-between" href="https://doi.org/10.1097/00003086-199810001-00003" rel="noopener noreferrer" target="_blank">
+<span>Marsh D. Concepts of fracture union. Clin Orthop Relat Res.</span>
+<span class="material-symbols-outlined text-[13px] shrink-0">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Card 5: Clinician-Confirmed Outcome Form -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">assignment_turned_in</span>
+              Record Clinician Confirmation
+            </span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">ABHA Sync</span>
+</div>
+<form class="flex flex-col gap-space-sm" onsubmit="handleOutcomeSubmit(event)">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Assessment Date</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" type="date" value="2024-10-24"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Outcome Classification</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low text-on-surface font-body-sm text-body-sm py-2 pl-3 pr-8 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" id="outcome-classification-select">
+<option selected="" value="progressing">Progressing toward union</option>
+<option value="delayed">Delayed union</option>
+<option value="non-union">Non-union suspected</option>
+<option value="complete">Complete radiographic union</option>
+<option value="inconclusive">Inconclusive / Repeat view required</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Clinical Assessment Notes</label>
+<textarea class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary shadow-sm resize-none" placeholder="Enter longitudinal observations, weight-bearing guidance, or immobilisation updates..." rows="3">Cortical bridging evident at posteromedial border. Caliper gap narrowed to 2.1mm. Patient advised partial progressive weight-bearing (50%) with patellar-tendon-bearing brace. Follow-up at 10 weeks.</textarea>
+</div>
+<button class="w-full py-2.5 px-space-md rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-all shadow-sm flex items-center justify-center gap-2 mt-1" type="submit">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Save Outcome &amp; Push to ABHA</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Caliper Calibration Modal (Hidden by Default, Activated via Tool/State) -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden items-center justify-center p-space-md" id="calibration-modal">
+<div class="bg-surface-container-lowest max-w-md w-full rounded-2xl shadow-xl p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[24px]">straighten</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Spatial Calibration</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg" onclick="closeCalibrationModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        To calculate millimeter-accurate cortical gaps and healing metrics, establish a known reference baseline across two landmark points on the cortical bone shaft or calibration marker.
+      </p>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between font-mono-data-sm text-mono-data-sm">
+<span class="text-on-surface-variant">Selected Pixel Span:</span>
+<span class="font-bold text-on-surface" id="calib-pixel-count">70.42 px</span>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface font-semibold mb-1">Physical Known Distance (mm)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low text-on-surface font-mono-data-md text-mono-data-md p-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" id="input-calib-mm" step="0.1" type="number" value="10.0"/>
+<span class="absolute right-3 top-2.5 font-mono-data-sm text-mono-data-sm text-on-surface-variant">mm</span>
+</div>
+<span class="text-[11px] text-on-surface-variant font-body-sm block mt-1">Default: 10.0 mm reference cortical diameter</span>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-4 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold hover:bg-surface-dim transition-colors" onclick="closeCalibrationModal()" type="button">
+          Cancel
+        </button>
+<button class="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors shadow-sm flex items-center gap-1.5" onclick="applyCalibration()" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Apply Calibration</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Toast Notification System -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="toast-notification">
+<div class="bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-xl shadow-lg flex items-center gap-space-sm font-label-md text-label-md">
+<span class="material-symbols-outlined text-tertiary-fixed text-[20px]" id="toast-icon">check_circle</span>
+<span id="toast-message">Outcome record written and queued to ABHA network</span>
+</div>
+</div>
+</div>
+<script>
+  // DOM Elements
+  let activeState = 'complete';
+  let isMobileSim = false;
+  let isDraggingSlider = false;
+
+  const sliderViewport = document.getElementById('slider-viewport');
+  const sliderEarlierClipper = document.getElementById('slider-earlier-clipper');
+  const sliderHandle = document.getElementById('slider-handle');
+
+  // Interactive Slider Logic
+  function setSliderPosition(clientX) {
+    if (!sliderViewport) return;
+    const rect = sliderViewport.getBoundingClientRect();
+    let offsetX = clientX - rect.left;
+    if (offsetX < 0) offsetX = 0;
+    if (offsetX > rect.width) offsetX = rect.width;
+    const percent = (offsetX / rect.width) * 100;
+    sliderEarlierClipper.style.width = percent + '%';
+    sliderHandle.style.left = percent + '%';
+  }
+
+  if (sliderViewport) {
+    sliderViewport.addEventListener('mousedown', (e) => {
+      isDraggingSlider = true;
+      setSliderPosition(e.clientX);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isDraggingSlider) {
+        setSliderPosition(e.clientX);
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDraggingSlider = false;
+    });
+
+    // Touch support for mobile simulation
+    sliderViewport.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) {
+        isDraggingSlider = true;
+        setSliderPosition(e.touches[0].clientX);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (isDraggingSlider && e.touches.length > 0) {
+        setSliderPosition(e.touches[0].clientX);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      isDraggingSlider = false;
+    });
+  }
+
+  // Difference Map Hover Coordinate Readout
+  function handleDiffMapHover(e) {
+    const crosshair = document.getElementById('diff-crosshair-dot');
+    const coordTitle = document.getElementById('diff-coord-title');
+    const densityVal = document.getElementById('diff-density-value');
+    if (!crosshair || !coordTitle || !densityVal) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const xRatio = (e.clientX - rect.left) / rect.width;
+    const yRatio = (e.clientY - rect.top) / rect.height;
+
+    const svgX = Math.round(xRatio * 400);
+    const svgY = Math.round(yRatio * 520);
+
+    crosshair.setAttribute('cx', svgX);
+    crosshair.setAttribute('cy', svgY);
+
+    coordTitle.innerText = `ROI [x: ${svgX}, y: ${svgY}]`;
+    
+    // Proximity to callus region (near 250, 254)
+    const distToCallus = Math.hypot(svgX - 250, svgY - 254);
+    if (distToCallus < 45) {
+      densityVal.innerText = 'Density Shift: +' + (48 - Math.round(distToCallus * 0.4)).toFixed(1) + '% (Mineralized Callus)';
+      densityVal.className = 'font-mono-data-sm text-mono-data-sm text-primary font-semibold';
+    } else if (distToCallus < 90) {
+      densityVal.innerText = 'Density Shift: -14.2% (Resorptive Margin)';
+      densityVal.className = 'font-mono-data-sm text-mono-data-sm text-sky-700 font-semibold';
+    } else {
+      densityVal.innerText = 'Density Shift: ±1.2% (Static Cortical Matrix)';
+      densityVal.className = 'font-mono-data-sm text-mono-data-sm text-on-surface-variant font-medium';
+    }
+  }
+
+  function hideDiffCoordinate() {
+    const coordTitle = document.getElementById('diff-coord-title');
+    if (coordTitle) {
+      coordTitle.innerText = 'ROI [Resting Position: Midshaft]';
+    }
+  }
+
+  // State Switching Engine
+  function switchState(stateKey) {
+    activeState = stateKey;
+    
+    // Reset tabs appearance
+    ['complete', 'low-reg', 'uncalibrated', 'mismatch'].forEach((key) => {
+      const btn = document.getElementById(`btn-state-${key}`);
+      if (btn) {
+        btn.className = 'px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all';
+      }
+    });
+
+    const activeBtn = document.getElementById(`btn-state-${stateKey}`);
+    if (activeBtn) {
+      activeBtn.className = 'px-3 py-1.5 rounded text-on-surface font-label-sm text-label-sm transition-all bg-surface shadow-sm font-semibold text-primary';
+    }
+
+    // Hide all dynamic banners first
+    document.getElementById('alert-low-registration')?.classList.add('hidden');
+    document.getElementById('alert-calibration-required')?.classList.add('hidden');
+    document.getElementById('alert-mismatched-patient')?.classList.add('hidden');
+
+    // Default card values
+    const simBadge = document.getElementById('badge-similarity-status');
+    const simBar = document.getElementById('bar-similarity-progress');
+    const tiltMetric = document.getElementById('metric-axis-tilt');
+    const regWarning = document.getElementById('card-reg-warning-text');
+    const calibBadge = document.getElementById('calibration-indicator-badge');
+    const calibText = document.getElementById('calibrated-ratio-text');
+
+    const patientIdLater = document.getElementById('patient-id-later');
+    const patientNameLater = document.getElementById('patient-name-later');
+
+    // Revert patient identity
+    if (patientIdLater && patientNameLater) {
+      patientIdLater.innerText = 'IND-MH-65129';
+      patientNameLater.innerText = 'Ramesh Patil • M/28y';
+    }
+
+    if (stateKey === 'complete') {
+      if (simBadge) {
+        simBadge.innerText = '0.89 MI (Concordant)';
+        simBadge.className = 'px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-mono-data-sm text-mono-data-sm font-bold';
+      }
+      if (simBar) simBar.style.width = '89%';
+      if (tiltMetric) tiltMetric.innerText = '-1.8° [AP Tilt OK]';
+      if (regWarning) regWarning.classList.add('hidden');
+      if (calibBadge) calibBadge.className = 'px-2.5 py-1 rounded-md bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm flex items-center gap-1';
+      if (calibText) calibText.innerText = '1 px = 0.142 mm';
+
+    } else if (stateKey === 'low-reg') {
+      document.getElementById('alert-low-registration')?.classList.remove('hidden');
+      if (simBadge) {
+        simBadge.innerText = '0.58 MI (Low Quality)';
+        simBadge.className = 'px-2 py-0.5 rounded-full bg-error text-on-error font-mono-data-sm text-mono-data-sm font-bold';
+      }
+      if (simBar) simBar.style.width = '58%';
+      if (tiltMetric) tiltMetric.innerText = '+9.2° [Tilt Significant]';
+      if (regWarning) regWarning.classList.remove('hidden');
+
+    } else if (stateKey === 'uncalibrated') {
+      document.getElementById('alert-calibration-required')?.classList.remove('hidden');
+      if (calibBadge) calibBadge.className = 'px-2.5 py-1 rounded-md bg-error-container text-on-error-container font-mono-data-sm text-mono-data-sm flex items-center gap-1 animate-pulse';
+      if (calibText) calibText.innerText = 'Calibration Unset (px only)';
+
+    } else if (stateKey === 'mismatch') {
+      document.getElementById('alert-mismatched-patient')?.classList.remove('hidden');
+      if (patientIdLater && patientNameLater) {
+        patientIdLater.innerText = 'IND-MH-88402 (MISMATCH)';
+        patientNameLater.innerText = 'Devdas Shinde • M/31y';
+      }
+    }
+  }
+
+  // Mobile Viewport Simulation Toggle
+  function toggleMobileViewport() {
+    const frame = document.getElementById('main-viewport-frame');
+    const toggleBtnText = document.getElementById('mobile-toggle-text');
+    isMobileSim = !isMobileSim;
+
+    if (isMobileSim) {
+      frame.classList.add('max-w-[410px]', 'mx-auto', 'border', 'border-surface-dim', 'p-2', 'rounded-2xl', 'shadow-2xl');
+      toggleBtnText.innerText = 'Exit Mobile';
+      showToast('Switched to 390px Mobile Responsive Sandbox');
+    } else {
+      frame.classList.remove('max-w-[410px]', 'mx-auto', 'border', 'border-surface-dim', 'p-2', 'rounded-2xl', 'shadow-2xl');
+      toggleBtnText.innerText = 'Mobile Sim';
+      showToast('Restored standard clinical desktop viewport');
+    }
+  }
+
+  // Interactive Tools Toggling
+  function toggleTool(toolName) {
+    if (toolName === 'calibrate') {
+      activateCalibrationMode();
+    } else {
+      showToast(`Selected tool: ${toolName.toUpperCase()} active on inspect canvas`);
+    }
+  }
+
+  function activateCalibrationMode() {
+    const modal = document.getElementById('calibration-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+  }
+
+  function closeCalibrationModal() {
+    const modal = document.getElementById('calibration-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  function applyCalibration() {
+    const mmInput = document.getElementById('input-calib-mm');
+    const val = parseFloat(mmInput ? mmInput.value : '10.0');
+    const px = 70.42;
+    const ratio = (val / px).toFixed(3);
+    
+    const calibBadge = document.getElementById('calibration-indicator-badge');
+    const calibText = document.getElementById('calibrated-ratio-text');
+    if (calibBadge && calibText) {
+      calibBadge.className = 'px-2.5 py-1 rounded-md bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm flex items-center gap-1';
+      calibText.innerText = `1 px = ${ratio} mm`;
+    }
+
+    closeCalibrationModal();
+    document.getElementById('alert-calibration-required')?.classList.add('hidden');
+    showToast(`Spatial scale calibrated: 1 px = ${ratio} mm`);
+  }
+
+  function dismissMismatchAlert() {
+    document.getElementById('alert-mismatched-patient')?.classList.add('hidden');
+    showToast('Patient mismatch override logged to audit trail');
+  }
+
+  function resetAlignmentManual() {
+    showToast('Recalculating affine landmark optimization...');
+    setTimeout(() => {
+      switchState('complete');
+      showToast('Rigid registration corrected (Score: 0.88 MI)');
+    }, 900);
+  }
+
+  function toggleInvertLut() {
+    showToast('Radiograph LUT inversion toggled');
+  }
+
+  function toggleSyncPanZoom() {
+    const btn = document.getElementById('btn-sync-toggle');
+    if (btn) {
+      btn.classList.toggle('bg-primary-container');
+      btn.classList.toggle('text-on-primary');
+    }
+    showToast('Dual viewport Pan & Zoom synchronized');
+  }
+
+  function resetCanvasTransform() {
+    if (sliderEarlierClipper && sliderHandle) {
+      sliderEarlierClipper.style.width = '50%';
+      sliderHandle.style.left = '50%';
+    }
+    showToast('Radiograph canvas reset to standard 100% zoom');
+  }
+
+  function handleOutcomeSubmit(e) {
+    e.preventDefault();
+    const select = document.getElementById('outcome-classification-select');
+    const choice = select ? select.options[select.selectedIndex].text : 'Progressing';
+    showToast(`Outcome recorded: "${choice}" synced to ABHA record.`);
+  }
+
+  // Toast Notification
+  function showToast(message) {
+    const toast = document.getElementById('toast-notification');
+    const msgElem = document.getElementById('toast-message');
+    if (!toast || !msgElem) return;
+
+    msgElem.innerText = message;
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-24', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3200);
+  }
+</script></main></div><footer class="w-full bg-surface-container-low py-space-xs px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-center gap-2 text-center text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[16px]">verified_user</span><span>Decision support only. Not a diagnosis. Requires clinician review.</span></div></footer></div></body></html>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#004e5a", "secondary-fixed": "#d6e3fb", "surface-tint": "#1e6774", "surface-dim": "#d1daeb", "outline-variant": "#bfc8cb", "error": "#ba1a1a", "on-primary-container": "#93d5e4", "on-secondary-fixed-variant": "#3b485a", "on-background": "#131c28", "surface-container": "#e5eeff", "secondary-fixed-dim": "#bac7de", "secondary-container": "#d6e3fb", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#98f6bb", "on-error-container": "#93000a", "inverse-primary": "#8fd1e0", "on-secondary": "#ffffff", "on-surface-variant": "#3f484b", "primary": "#004550", "on-secondary-fixed": "#0f1c2d", "surface-variant": "#dae3f4", "tertiary-container": "#00633a", "on-primary-fixed": "#001f25", "outline": "#6f797b", "on-secondary-container": "#586579", "on-tertiary-fixed-variant": "#00522f", "tertiary-fixed-dim": "#7cd9a1", "on-tertiary": "#ffffff", "surface-bright": "#f8f9ff", "surface": "#f8f9ff", "inverse-surface": "#28313d", "surface-container-high": "#e0e9f9", "secondary": "#525f73", "inverse-on-surface": "#eaf1ff", "surface-container-highest": "#dae3f4", "background": "#f8f9ff", "tertiary": "#004929", "on-surface": "#131c28", "on-primary": "#ffffff", "primary-fixed": "#abedfc", "on-error": "#ffffff", "primary-fixed-dim": "#8fd1e0", "on-tertiary-container": "#81dea5", "on-tertiary-fixed": "#002110", "error-container": "#ffdad6", "surface-container-low": "#eff4ff", "primary-container": "#0f5e6b" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "margin": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-md": "1rem", "gutter": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-sm": [ "Inter" ], "mono-data-lg": [ "JetBrains Mono" ], "body-lg": [ "Inter" ], "label-sm": [ "Inter" ], "label-md": [ "Inter" ], "headline-xl": [ "Inter" ], "mono-data-md": [ "JetBrains Mono" ], "headline-md": [ "Inter" ], "body-md": [ "Inter" ], "mono-data-sm": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Inter" ], "headline-lg": [ "Inter" ], "headline-lg-mobile": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "600" } ], "mono-data-lg": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "500" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-xl": [ "2rem", { "lineHeight": "2.5rem", "fontWeight": "700" } ], "mono-data-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-md": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-md": [ "1rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "mono-data-sm": [ "0.75rem", { "lineHeight": "1rem", "fontWeight": "400" } ], "headline-xl-mobile": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "700" } ], "headline-lg": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-60 bg-surface-container-low z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">XRAY-ASSISTANT</span><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>Online</span></div><div class="flex items-center gap-1 text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="material-symbols-outlined text-[14px]">wifi</span><span>Sync: Local Edge</span></div></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-primary text-on-primary font-label-md text-label-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="dashboard" href="#"><span>Dashboard</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="review-queue" href="#"><span>Review queue</span><span class="px-1.5 py-0.5 rounded-full bg-error text-on-error font-mono-data-sm text-mono-data-sm font-semibold leading-none">07</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="studies" href="#"><span>Studies</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-study" href="#"><span>Ingest / New study</span></a></nav><div class="px-space-md pt-space-xs"><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Language</label><div class="relative"><select class="w-full appearance-none bg-surface-container-lowest text-on-surface font-body-sm text-body-sm py-2 pl-3 pr-8 rounded-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-1 focus:ring-primary"><option value="en">English</option><option value="ta">Tamil [machine-drafted]</option><option value="hi">Hindi [machine-drafted]</option></select><span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span></div></div></div><div class="px-space-md flex flex-col gap-space-sm"><div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col gap-1"><div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">dns</span>Edge Node</span><span class="font-medium text-on-surface">Active</span></div><div class="font-mono-data-sm text-mono-data-sm text-primary font-semibold">KASHTI-PHC-04</div></div><button class="w-full flex items-center justify-center gap-space-sm py-2 px-space-md rounded-lg text-error hover:bg-error-container hover:text-on-error-container font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">logout</span>Sign out</button></div></aside><div class="pl-60 min-h-screen flex flex-col justify-between"><div class="w-full"><header class="fixed top-0 left-60 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold">Kashti PHC / District Cluster</span><span class="font-body-sm text-body-sm text-on-surface-variant">District Ahmadnagar • Rural Health Cluster 2</span></div><div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="font-mono-data-sm text-mono-data-sm">ABHA Network Connected</span></div></div><div class="flex items-center gap-space-md"><div class="text-right hidden sm:flex flex-col"><span class="font-label-md text-label-md text-on-surface font-medium">Dr. Arti Sharma</span><span class="font-body-sm text-body-sm text-on-surface-variant">MO / Tele-radiologist</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-space-lg py-space-md bg-surface"><div class="flex flex-col w-full">
+<!-- Interactive Prototype Scenario Switcher -->
+<div class="mb-space-md p-space-sm bg-surface-container-high rounded-xl flex flex-wrap items-center justify-between gap-space-sm shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">tune</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">State Simulator:</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5" id="scenario-selector">
+<button class="px-3 py-1.5 rounded-lg font-mono-data-sm text-mono-data-sm transition-all bg-primary text-on-primary shadow-sm font-semibold flex items-center gap-1" id="btn-s1" onclick="switchScenario('s1')" type="button">
+<span>1. Review Needed (Default)</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg font-mono-data-sm text-mono-data-sm transition-all bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm flex items-center gap-1" id="btn-s2" onclick="switchScenario('s2')" type="button">
+<span>2. Clear / Normal Screen</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg font-mono-data-sm text-mono-data-sm transition-all bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm flex items-center gap-1" id="btn-s3" onclick="switchScenario('s3')" type="button">
+<span>3. Osteoporosis Pattern</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg font-mono-data-sm text-mono-data-sm transition-all bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed shadow-sm flex items-center gap-1" id="btn-mobile-toggle" onclick="toggleMobileViewport()" type="button">
+<span class="material-symbols-outlined text-[15px]">smartphone</span>
+<span id="mobile-toggle-label">4. Mobile Viewport (390px)</span>
+</button>
+</div>
+</div>
+<!-- Primary Wrapper (Supports 390px Mobile Constrained Simulation) -->
+<div class="w-full flex flex-col gap-space-md transition-all duration-300" id="screening-viewport-container">
+<!-- Header & Permanent Experimental Framing Card -->
+<div class="bg-surface-container-lowest p-space-md lg:p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-wrap items-start justify-between gap-space-md">
+<div class="flex flex-col gap-1 min-w-0">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-mono-data-lg text-mono-data-lg font-bold text-primary tracking-tight">STU-2024-0963</span>
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">
+              Bilateral AP (Weight-bearing)
+            </span>
+<!-- Permanent Violet Badge -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f9f5ff] text-[#6941c6] font-mono-data-sm text-mono-data-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[16px]">science</span>
+              EXPERIMENTAL — CLINICAL INVESTIGATION ONLY
+            </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="text-on-surface font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">person</span>
+              Savitribai Shinde, F, 63y
+            </span>
+<span>•</span>
+<span class="font-mono-data-sm text-mono-data-sm">ABHA ID: 91-3829-4110-88</span>
+<span>•</span>
+<span class="font-mono-data-sm text-mono-data-sm">Ingested: 24 Oct 2024, 13:06 IST</span>
+<span>•</span>
+<span class="text-tertiary font-medium">Kashti PHC Edge Cache</span>
+</div>
+</div>
+<div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+<button class="h-11 px-4 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Back to Queue</span>
+</button>
+<button class="h-11 px-4 rounded-lg bg-primary hover:bg-[#0b4a54] text-on-primary font-label-md text-label-md transition-colors flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">download_for_offline</span>
+<span>Export Screening PDF</span>
+</button>
+</div>
+</div>
+<!-- Provenance Meta Stripe -->
+<div class="bg-surface-container p-2.5 rounded-lg flex flex-wrap items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm gap-2">
+<span class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span>Model: Knee-BoneCAD-v0.8.2-Alpha</span>
+<span class="text-secondary font-mono-data-sm">• sha256:4d8a1e2f9801...</span>
+</span>
+<div class="flex items-center gap-3">
+<span>Cohort: N=712 rural Indian validation</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface font-semibold">Target: Screening Aid Only</span>
+</div>
+</div>
+</div>
+<!-- Persistent Full-Width Info Banner -->
+<div class="bg-[#eff8ff] p-space-md rounded-xl shadow-sm flex items-start gap-space-md text-[#175cd3]">
+<span class="material-symbols-outlined text-[24px] shrink-0 text-[#175cd3] mt-0.5">info</span>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm font-semibold tracking-tight">
+          This is a screening aid for clinician review. It is not a bone density measurement.
+        </span>
+<p class="font-body-sm text-body-sm text-[#1849a9] leading-relaxed">
+          Calculated from plain AP knee radiographs via trabecular texture &amp; cortical thickness surrogate features. Does NOT measure areal Bone Mineral Density (aBMD) or T-scores. Dual-energy X-ray Absorptiometry (DXA) remains the clinical gold standard for definitive diagnosis.
+        </p>
+</div>
+</div>
+<!-- Needs-Human-Review Amber Banner (Dynamically Controlled by Simulator) -->
+<div class="bg-[#fffbeb] p-space-md rounded-xl shadow-sm flex items-start gap-space-md text-[#b54708]" id="needs-review-banner">
+<span class="material-symbols-outlined text-[24px] shrink-0 text-[#b54708] mt-0.5">warning</span>
+<div class="flex flex-col gap-1.5 w-full">
+<div class="flex items-center justify-between flex-wrap gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-[#b54708]">Needs Clinician Review (2 Flagged Reasons)</span>
+<span class="px-2.5 py-0.5 rounded-full bg-[#fef0c7] text-[#b54708] font-mono-data-sm text-mono-data-sm font-bold">Priority Triage Flag</span>
+</div>
+<ul class="flex flex-col gap-1 font-body-sm text-body-sm text-[#93370d]">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+<span>1. Epistemic uncertainty interval crosses Osteopenia / Osteoporosis decision threshold (<span class="font-mono-data-sm font-semibold">σ_mc = ±0.082</span>).</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">history_edu</span>
+<span>2. Patient age ≥ 60y with prior distal radius fragility fracture history noted in intake records.</span>
+</li>
+</ul>
+<span class="font-label-sm text-label-sm font-semibold text-[#b54708] pt-1">
+          Requires clinical review by Medical Officer before sharing screening impression.
+        </span>
+</div>
+</div>
+<!-- High Alert Banner (Scenario 3 - initially hidden) -->
+<div class="hidden bg-[#fef3f2] p-space-md rounded-xl shadow-sm flex items-start gap-space-md text-[#b42318]" id="high-alert-banner">
+<span class="material-symbols-outlined text-[24px] shrink-0 text-[#b42318] mt-0.5">crisis_alert</span>
+<div class="flex flex-col gap-1.5 w-full">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm font-bold text-[#b42318]">High Risk: Osteoporosis Texture Dominant</span>
+<span class="px-2.5 py-0.5 rounded-full bg-[#fee4e2] text-[#b42318] font-mono-data-sm text-mono-data-sm font-bold">Urgent Action</span>
+</div>
+<p class="font-body-sm text-body-sm text-[#912018]">
+          Trabecular density shows advanced attenuation (<span class="font-mono-data-sm font-bold">P=0.74</span>). Recommended: Immediate fracture-risk tele-consult with District Orthopaedics Unit and secondary fall-prevention advisory.
+        </p>
+</div>
+</div>
+<!-- Main Two-Column Clinical Workplace Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN (~48% desktop / 6 cols of 12): Radiograph & Heatmap Inspection -->
+<div class="lg:col-span-6 flex flex-col gap-space-md">
+<!-- Viewer Control Panel & Segments -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">radiology</span>
+              DICOM Radiographic Inspector
+            </span>
+<!-- Segmented Control Toggle -->
+<div class="inline-flex p-1 bg-surface-container rounded-lg font-label-sm text-label-sm">
+<button class="px-3 py-1 rounded font-medium transition-colors text-on-surface hover:text-primary" id="btn-view-rad" onclick="setViewerMode('radiograph')" type="button">
+                Radiograph
+              </button>
+<button class="px-3 py-1 rounded font-medium transition-colors text-on-surface hover:text-primary" id="btn-view-heat" onclick="setViewerMode('heatmap')" type="button">
+                Heatmap
+              </button>
+<button class="px-3 py-1 rounded bg-surface-container-lowest text-primary shadow-sm font-semibold" id="btn-view-split" onclick="setViewerMode('overlay')" type="button">
+                Split / Overlay
+              </button>
+</div>
+</div>
+<!-- Radiograph Viewer Screen Frame (Dark encapsulated DICOM canvas) -->
+<div class="relative w-full aspect-[4/5] bg-[#0c1117] rounded-xl overflow-hidden shadow-inner flex items-center justify-center select-none group">
+<!-- Radiograph Realistic Anatomical SVG Artwork (Bilateral / Unilateral Knee AP) -->
+<svg class="w-full h-full object-contain filter contrast-125" id="svg-radiograph" viewbox="0 0 600 750" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<!-- Grayscale X-ray bone gradients -->
+<radialgradient cx="50%" cy="30%" id="femurBone" r="55%">
+<stop offset="0%" stop-color="#bccad6" stop-opacity="0.95"></stop>
+<stop offset="60%" stop-color="#7a8b99" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#3d4955" stop-opacity="0.4"></stop>
+</radialgradient>
+<radialgradient cx="50%" cy="70%" id="tibiaBone" r="60%">
+<stop offset="0%" stop-color="#c2d1dd" stop-opacity="0.95"></stop>
+<stop offset="55%" stop-color="#8092a1" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#3b4855" stop-opacity="0.45"></stop>
+</radialgradient>
+<lineargradient id="corticalEdge" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"></stop>
+<stop offset="15%" stop-color="#9fb0bf" stop-opacity="0.6"></stop>
+<stop offset="85%" stop-color="#9fb0bf" stop-opacity="0.6"></stop>
+<stop offset="100%" stop-color="#ffffff" stop-opacity="0.9"></stop>
+</lineargradient>
+<!-- Trabecular texture noise representation -->
+<filter id="boneTrabecularNoise">
+<feturbulence basefrequency="0.04" numoctaves="4" result="noise" type="fractalNoise"></feturbulence>
+<fecolormatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.18 0"></fecolormatrix>
+<fecomposite in="gl" in2="SourceGraphic" operator="in"></fecomposite>
+</filter>
+</defs>
+<!-- Dark radiograph vignette background -->
+<rect fill="#090d12" height="750" width="600"></rect>
+<!-- Soft tissue envelope shadow -->
+<ellipse cx="300" cy="370" fill="#141c24" opacity="0.4" rx="240" ry="340"></ellipse>
+<!-- Femur (Distal Shaft & Condyles) -->
+<g id="femur-structure">
+<!-- Distal Shaft -->
+<path d="M 230,0 L 230,220 C 230,280 180,310 170,350 C 160,390 190,410 240,410 C 275,410 285,385 300,385 C 315,385 325,410 360,410 C 410,410 440,390 430,350 C 420,310 370,280 370,220 L 370,0 Z" fill="url(#femurBone)"></path>
+<!-- Medial and Lateral Epicondyle Cortices -->
+<path d="M 230,0 L 230,220 C 230,280 180,310 170,350 C 160,390 190,410 240,410 C 275,410 285,385 300,385 C 315,385 325,410 360,410 C 410,410 440,390 430,350 C 420,310 370,280 370,220 L 370,0 Z" fill="none" opacity="0.75" stroke="url(#corticalEdge)" stroke-width="4"></path>
+<!-- Patellar outline projection shadow -->
+<ellipse cx="300" cy="330" fill="#a4b4c2" opacity="0.35" rx="55" ry="65"></ellipse>
+</g>
+<!-- Joint Space Gap (Radiographic Radiolucency) -->
+<!-- Tibial Plateau & Proximal Tibia -->
+<g id="tibia-structure">
+<!-- Tibial Spines / Intercondylar Eminence -->
+<path d="M 270,432 L 285,415 L 295,432 L 305,432 L 315,415 L 330,432 Z" fill="#d9e5ee" opacity="0.9"></path>
+<!-- Tibial Body -->
+<path d="M 180,435 C 220,430 270,433 300,433 C 330,433 380,430 420,435 C 430,460 410,480 380,510 C 365,525 360,560 360,750 L 240,750 C 240,560 235,525 220,510 C 190,480 170,460 180,435 Z" fill="url(#tibiaBone)"></path>
+<!-- Cortical Boundary -->
+<path d="M 180,435 C 220,430 270,433 300,433 C 330,433 380,430 420,435 C 430,460 410,480 380,510 C 365,525 360,560 360,750 L 240,750 C 240,560 235,525 220,510 C 190,480 170,460 180,435 Z" fill="none" opacity="0.8" stroke="url(#corticalEdge)" stroke-width="4.5"></path>
+<!-- Subchondral Trabecular Zone Striae -->
+<path d="M 195,450 Q 300,465 405,450 M 205,465 Q 300,480 395,465 M 215,482 Q 300,496 385,482" opacity="0.4" stroke="#ffffff" stroke-dasharray="3,2" stroke-width="1.5"></path>
+</g>
+<!-- Fibula (Lateral Anatomy) -->
+<g id="fibula-structure">
+<path d="M 155,470 C 170,470 178,485 178,505 C 178,530 168,555 165,750 L 140,750 C 140,555 135,525 140,495 C 142,475 148,470 155,470 Z" fill="#748492" opacity="0.8"></path>
+<path d="M 155,470 C 170,470 178,485 178,505 C 178,530 168,555 165,750 L 140,750 C 140,555 135,525 140,495 C 142,475 148,470 155,470 Z" fill="none" opacity="0.6" stroke="#cfdce6" stroke-width="2.5"></path>
+</g>
+<!-- Anatomical Markers (Right Knee AP) -->
+<text fill="#ffffff" font-family="JetBrains Mono" font-size="28" font-weight="bold" opacity="0.6" x="40" y="70">R</text>
+<text fill="#ffffff" font-family="Inter" font-size="12" opacity="0.4" x="40" y="100">WEIGHT BEARING AP</text>
+<text fill="#ffffff" font-family="JetBrains Mono" font-size="11" opacity="0.4" x="40" y="118">FOV: 24cm • EXP: 62kVp 4mAs</text>
+<!-- Caliper Measurement Demonstration Line -->
+<g id="caliper-overlay" opacity="0.85">
+<line stroke="#00ffff" stroke-width="2" x1="225" x2="245" y1="520" y2="520"></line>
+<circle cx="225" cy="520" fill="#00ffff" r="3"></circle>
+<circle cx="245" cy="520" fill="#00ffff" r="3"></circle>
+<text fill="#00ffff" font-family="JetBrains Mono" font-size="11" x="250" y="524">Cortex: 3.4mm</text>
+</g>
+</svg>
+<!-- Grad-CAM Trabecular Attention Heatmap Layer (Overlay) -->
+<div class="absolute inset-0 pointer-events-none transition-opacity duration-200" id="heatmap-layer" style="opacity: 0.70;">
+<svg class="w-full h-full object-contain" viewbox="0 0 600 750" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<!-- Hotspot Radials -->
+<radialgradient cx="42%" cy="64%" id="heatTibialMetaphysis" r="22%">
+<stop offset="0%" stop-color="#e11d48" stop-opacity="0.9"></stop>
+<stop offset="35%" stop-color="#f97316" stop-opacity="0.75"></stop>
+<stop offset="70%" stop-color="#eab308" stop-opacity="0.5"></stop>
+<stop offset="90%" stop-color="#06b6d4" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#06b6d4" stop-opacity="0"></stop>
+</radialgradient>
+<radialgradient cx="62%" cy="47%" id="heatFemoralMedial" r="18%">
+<stop offset="0%" stop-color="#f43f5e" stop-opacity="0.85"></stop>
+<stop offset="40%" stop-color="#fb923c" stop-opacity="0.6"></stop>
+<stop offset="75%" stop-color="#facc15" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#10b981" stop-opacity="0"></stop>
+</radialgradient>
+<radialgradient cx="30%" cy="58%" id="heatLateralPlateau" r="14%">
+<stop offset="0%" stop-color="#facc15" stop-opacity="0.5"></stop>
+<stop offset="60%" stop-color="#06b6d4" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#06b6d4" stop-opacity="0"></stop>
+</radialgradient>
+</defs>
+<!-- High Attention Zone: Proximal Medial Tibial Metaphysis -->
+<circle cx="260" cy="485" fill="url(#heatTibialMetaphysis)" r="110"></circle>
+<!-- Secondary Attention: Medial Femoral Condyle -->
+<circle cx="370" cy="360" fill="url(#heatFemoralMedial)" r="95"></circle>
+<!-- Minor Attention: Lateral Plateau Border -->
+<circle cx="205" cy="445" fill="url(#heatLateralPlateau)" r="70"></circle>
+<!-- Bounding Box Annotation on Subchondral Trabecular ROI -->
+<rect fill="none" height="90" rx="4" stroke="#facc15" stroke-dasharray="4,3" stroke-width="1.5" width="120" x="210" y="440"></rect>
+<text fill="#facc15" font-family="JetBrains Mono" font-size="10" font-weight="bold" x="214" y="435">ROI: Metaphyseal Trabeculae</text>
+</svg>
+</div>
+<!-- On-Image Tool Floating Shelf -->
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-auto bg-[#001f25]/80 backdrop-blur-md px-3 py-2 rounded-lg text-on-primary">
+<div class="flex items-center gap-2">
+<button class="p-1.5 hover:bg-white/10 rounded transition-colors" onclick="alert('Caliper calibrated (0.12 mm/pixel)')" title="Caliper Measurement" type="button">
+<span class="material-symbols-outlined text-[18px]">straighten</span>
+</button>
+<button class="p-1.5 hover:bg-white/10 rounded transition-colors" onclick="toggleInvert()" title="Invert Grayscale LUT" type="button">
+<span class="material-symbols-outlined text-[18px]">contrast</span>
+</button>
+<button class="p-1.5 hover:bg-white/10 rounded transition-colors" onclick="alert('Zoom 1:1 DICOM native matrix view reset')" title="Zoom 1:1" type="button">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+</div>
+<!-- Saliency Grad-CAM Intensity Scale -->
+<div class="flex items-center gap-2">
+<span class="font-mono-data-sm text-mono-data-sm text-white/70">Saliency:</span>
+<div class="w-24 h-2 rounded bg-gradient-to-r from-cyan-400 via-amber-400 to-rose-600"></div>
+<span class="font-mono-data-sm text-mono-data-sm text-white/90">Peak 1.0</span>
+</div>
+</div>
+</div>
+<!-- Opacity Slider & Metrology Caption -->
+<div class="flex flex-col gap-2 pt-1">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">opacity</span>
+                Heatmap Blend Opacity
+              </span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold" id="opacity-val">70%</span>
+</div>
+<input class="w-full accent-primary h-2 bg-surface-container rounded-lg cursor-pointer" id="opacity-slider" max="100" min="0" oninput="updateOpacity(this.value)" type="range" value="70"/>
+<div class="p-2 bg-surface-container-low rounded-lg text-on-surface-variant font-mono-data-sm text-mono-data-sm flex items-center justify-between flex-wrap gap-1">
+<span>Focus: Proximal Medial Tibial Metaphysis</span>
+<span class="text-primary font-medium">Trabecular attenuation variance: 0.142</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN (~52% desktop / 6 cols of 12): Three-Class Result, Nutrition Lock, Clinician Review -->
+<div class="lg:col-span-6 flex flex-col gap-space-md">
+<!-- CARD A: Three-Class Bone-Health Result Card -->
+<div class="bg-surface-container-lowest p-space-md lg:p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-2">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[22px]">blur_on</span>
+                Trabecular Texture Screening Pattern
+              </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                Surrogate probability estimate based on knee trabecular architecture
+              </span>
+</div>
+<div class="group relative cursor-pointer">
+<span class="material-symbols-outlined text-outline text-[20px]">help</span>
+<div class="absolute right-0 top-6 w-64 p-2 bg-surface-container-lowest shadow-md rounded-lg text-on-surface font-body-sm text-body-sm text-xs hidden group-hover:block z-10">
+                Priors derived from 2D structural entropy, lacunarity, and subchondral radiodensity patterns.
+              </div>
+</div>
+</div>
+<!-- Class 1: Osteopenia-pattern (Dominant in Default State) -->
+<div class="p-space-md bg-surface-container-low rounded-xl transition-all flex flex-col gap-2" id="card-class-osteopenia">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#b54708]"></span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Osteopenia-pattern</span>
+<span class="px-2 py-0.5 rounded-full bg-[#fef0c7] text-[#b54708] font-mono-data-sm text-mono-data-sm font-semibold" id="badge-dominant">
+                  Dominant Call
+                </span>
+</div>
+<span class="font-mono-data-lg text-mono-data-lg font-bold text-primary" id="prob-osteopenia">0.62</span>
+</div>
+<!-- Progress Confidence Track -->
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-500" id="bar-osteopenia" style="width: 62%;"></div>
+</div>
+<div class="flex flex-wrap items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm pt-0.5">
+<span id="ci-osteopenia">95% CI: [0.54 – 0.70] • σ_mc: ±0.048 (Moderate epistemic spread)</span>
+<span class="text-on-surface font-medium">Prior Concordance: 76%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Trabecular thinning detected in proximal tibial subchondral zone.
+            </p>
+</div>
+<!-- Class 2: Osteoporosis-pattern -->
+<div class="p-space-md bg-surface-container-low rounded-xl transition-all flex flex-col gap-2" id="card-class-osteoporosis">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Osteoporosis-pattern</span>
+<span class="hidden px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-mono-data-sm text-mono-data-sm font-bold" id="badge-osteoporosis">
+                  Dominant Alert
+                </span>
+</div>
+<span class="font-mono-data-md text-mono-data-md font-bold text-on-surface" id="prob-osteoporosis">0.26</span>
+</div>
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full transition-all duration-500" id="bar-osteoporosis" style="width: 26%;"></div>
+</div>
+<div class="flex flex-wrap items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm pt-0.5">
+<span id="ci-osteoporosis">95% CI: [0.18 – 0.35] • σ_mc: ±0.061</span>
+<span class="text-on-surface font-medium">Prior Concordance: 31%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Cortical thinning flagged at medial tibial margin.
+            </p>
+</div>
+<!-- Class 3: Normal Bone-pattern -->
+<div class="p-space-md bg-surface-container-low rounded-xl transition-all flex flex-col gap-2" id="card-class-normal">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary"></span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Normal Bone-pattern</span>
+<span class="hidden px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-mono-data-sm text-mono-data-sm font-bold" id="badge-normal">
+                  Dominant
+                </span>
+</div>
+<span class="font-mono-data-md text-mono-data-md font-bold text-on-surface" id="prob-normal">0.12</span>
+</div>
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full transition-all duration-500" id="bar-normal" style="width: 12%;"></div>
+</div>
+<div class="flex flex-wrap items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm pt-0.5">
+<span id="ci-normal">95% CI: [0.06 – 0.19] • σ_mc: ±0.034</span>
+<span class="text-on-surface font-medium">Prior Concordance: 14%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Low concordance with healthy young adult bone priors.
+            </p>
+</div>
+<!-- Overall Calibrated Summary Note -->
+<div class="p-3 bg-secondary-container rounded-lg flex items-start gap-2.5 text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">assignment_turned_in</span>
+<div class="font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface">Overall screening classification:</span>
+<span id="summary-classification-text">Suggestive of Osteopenia-pattern (Class 2).</span>
+<span class="block mt-0.5 text-secondary">Recommendation: Advise clinical risk assessment (FRAX score) and clinical DXA referral where accessible.</span>
+</div>
+</div>
+</div>
+<!-- CARD B: "Nutrition" Section (Unmistakably Disabled / Locked Card) -->
+<div class="relative bg-surface-container-high p-space-md lg:p-space-lg rounded-xl opacity-60 shadow-sm overflow-hidden select-none cursor-not-allowed">
+<!-- Distinct Diagonal Safety Stripe Watermark Overlay -->
+<div class="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0.02)_25%,transparent_25%,transparent_50%,rgba(0,0,0,0.02)_50%,rgba(0,0,0,0.02)_75%,transparent_75%,transparent)] bg-[length:24px_24px] pointer-events-none"></div>
+<div class="relative flex flex-col items-center text-center gap-space-sm py-4">
+<!-- Large Centered Lock / Shield Icon -->
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-outline shadow-sm">
+<span class="material-symbols-outlined text-[36px]">lock</span>
+</div>
+<!-- Distinct Mandatory Disclaimer Stamp -->
+<span class="px-3 py-1 rounded bg-surface-variant text-on-surface-variant font-mono-data-sm text-mono-data-sm font-bold tracking-wider">
+              FEATURE DISABLED BY CDSS SAFETY GOVERNANCE
+            </span>
+<div class="flex flex-col gap-1 max-w-md">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">
+                Not available: no validated dataset yet.
+              </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Nutritional correlation algorithms (e.g. Dietary Calcium, Serum Vitamin D3 inference, FRAX nutrition adjustments) have NOT completed prospective validation in rural Indian cohorts. This experimental module is deactivated under CDSCO &amp; MoHFW clinical safety guidelines.
+              </p>
+</div>
+<!-- Fake Inactive Form Mock (Visibly Unusable) -->
+<div class="w-full max-w-sm mt-2 flex flex-col gap-2 pointer-events-none">
+<div class="h-9 bg-surface-dim rounded-lg flex items-center px-3 text-on-surface-variant/40 font-body-sm text-body-sm justify-between">
+<span>Dietary Calcium Intake Model</span>
+<span class="material-symbols-outlined text-[16px]">lock</span>
+</div>
+<div class="h-9 bg-surface-dim rounded-lg flex items-center px-3 text-on-surface-variant/40 font-body-sm text-body-sm justify-between">
+<span>Serum 25-OH-D3 Risk Correlator</span>
+<span class="material-symbols-outlined text-[16px]">block</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD C: Clinician Review & Documentation Actions -->
+<div class="bg-surface-container-lowest p-space-md lg:p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">rate_review</span>
+              Clinician Assessment &amp; ABHA Push
+            </span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Reviewer: Dr. Arti Sharma</span>
+</div>
+<!-- Radio Options -->
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 p-3 bg-surface-container-low hover:bg-surface-container rounded-lg cursor-pointer transition-colors">
+<input checked="" class="accent-primary w-4 h-4 cursor-pointer" name="clinical-opinion" type="radio"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Agree with screening indication (Order lab profile &amp; dietary consult)</span>
+</label>
+<label class="flex items-center gap-3 p-3 bg-surface-container-low hover:bg-surface-container rounded-lg cursor-pointer transition-colors">
+<input class="accent-primary w-4 h-4 cursor-pointer" name="clinical-opinion" type="radio"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Discordant / Inconclusive (Artifacts or severe subchondral sclerosis)</span>
+</label>
+<label class="flex items-center gap-3 p-3 bg-surface-container-low hover:bg-surface-container rounded-lg cursor-pointer transition-colors">
+<input class="accent-primary w-4 h-4 cursor-pointer" name="clinical-opinion" type="radio"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Refer to Orthopaedic / Central DXA Unit (Ahmadnagar Civil Hospital)</span>
+</label>
+</div>
+<!-- Quick Textarea Chips -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Clinical Impression &amp; Triage Orders:</label>
+<div class="flex items-center gap-1">
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-mono-data-sm text-mono-data-sm transition-colors" onclick="insertChip('+ Verified trabecular thinning')" type="button">
+                  + Verified trabecular thinning
+                </button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-mono-data-sm text-mono-data-sm transition-colors" onclick="insertChip('+ Advised Calcium/Vit D test')" type="button">
+                  + Advised Calcium/Vit D
+                </button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-mono-data-sm text-mono-data-sm transition-colors" onclick="insertChip('+ Refer DXA')" type="button">
+                  + Refer DXA
+                </button>
+</div>
+</div>
+<textarea class="w-full p-3 bg-surface-container-lowest rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="clinician-notes" placeholder="Enter findings or append quick chips..." rows="3">Proximal tibia demonstrates localized trabecular thinning; patient intake confirms fragility risk factor. Recommended serum baseline and follow-up at next PHC camp.</textarea>
+</div>
+<!-- Final Push Action -->
+<div class="flex items-center justify-between pt-2">
+<span class="text-tertiary flex items-center gap-1 font-mono-data-sm text-mono-data-sm font-medium">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+              ABHA M2/M3 Sync Ready
+            </span>
+<button class="h-11 px-5 rounded-lg bg-primary hover:bg-[#0b4a54] text-on-primary font-label-md text-label-md font-semibold transition-all shadow-sm flex items-center gap-2" onclick="handleSaveAction()" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+<span>Save Review &amp; Push to ABHA Health Locker</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Mandatory Regulatory Footer Bar -->
+<div class="mt-space-md p-space-md bg-surface-container-low rounded-xl shadow-sm flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">shield</span>
+<span>Decision support only. Not a diagnosis. Requires clinician review. Plain radiograph texture analysis is not a bone mineral density (BMD) measurement.</span>
+</div>
+<div class="flex items-center gap-3 font-mono-data-sm text-mono-data-sm text-secondary">
+<span>ISO 13485:2016 Certified Pipeline</span>
+<span>•</span>
+<span>ABDM / NDHM Gateway v3.1 Compliant</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Prototype Scenario State Management
+  function switchScenario(scenarioId) {
+    // Reset buttons
+    const btns = ['btn-s1', 'btn-s2', 'btn-s3'];
+    btns.forEach(b => {
+      const el = document.getElementById(b);
+      el.className = "px-3 py-1.5 rounded-lg font-mono-data-sm text-mono-data-sm transition-all bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm flex items-center gap-1";
+    });
+
+    const activeBtn = document.getElementById('btn-' + scenarioId);
+    activeBtn.className = "px-3 py-1.5 rounded-lg font-mono-data-sm text-mono-data-sm transition-all bg-primary text-on-primary shadow-sm font-semibold flex items-center gap-1";
+
+    const bannerReview = document.getElementById('needs-review-banner');
+    const bannerAlert = document.getElementById('high-alert-banner');
+    const summaryText = document.getElementById('summary-classification-text');
+
+    const probOsteo = document.getElementById('prob-osteopenia');
+    const probPorosis = document.getElementById('prob-osteoporosis');
+    const probNorm = document.getElementById('prob-normal');
+
+    const barOsteo = document.getElementById('bar-osteopenia');
+    const barPorosis = document.getElementById('bar-osteoporosis');
+    const barNorm = document.getElementById('bar-normal');
+
+    const badgeDominant = document.getElementById('badge-dominant');
+    const badgePorosis = document.getElementById('badge-osteoporosis');
+    const badgeNorm = document.getElementById('badge-normal');
+
+    if (scenarioId === 's1') {
+      // Default: Review Needed (Osteopenia Dominant)
+      bannerReview.classList.remove('hidden');
+      bannerAlert.classList.add('hidden');
+      probOsteo.innerText = '0.62';
+      probPorosis.innerText = '0.26';
+      probNorm.innerText = '0.12';
+
+      barOsteo.style.width = '62%';
+      barPorosis.style.width = '26%';
+      barNorm.style.width = '12%';
+
+      badgeDominant.classList.remove('hidden');
+      badgePorosis.classList.add('hidden');
+      badgeNorm.classList.add('hidden');
+
+      summaryText.innerText = 'Suggestive of Osteopenia-pattern (Class 2).';
+    } else if (scenarioId === 's2') {
+      // Scenario 2: Clear / Normal Bone Pattern
+      bannerReview.classList.add('hidden');
+      bannerAlert.classList.add('hidden');
+      probOsteo.innerText = '0.14';
+      probPorosis.innerText = '0.04';
+      probNorm.innerText = '0.82';
+
+      barOsteo.style.width = '14%';
+      barPorosis.style.width = '4%';
+      barNorm.style.width = '82%';
+
+      badgeDominant.classList.add('hidden');
+      badgePorosis.classList.add('hidden');
+      badgeNorm.classList.remove('hidden');
+
+      summaryText.innerText = 'Normal Bone Architecture Dominant (Class 1). No alert triggers.';
+    } else if (scenarioId === 's3') {
+      // Scenario 3: High Alert Osteoporosis Pattern
+      bannerReview.classList.add('hidden');
+      bannerAlert.classList.remove('hidden');
+      probOsteo.innerText = '0.21';
+      probPorosis.innerText = '0.74';
+      probNorm.innerText = '0.05';
+
+      barOsteo.style.width = '21%';
+      barPorosis.style.width = '74%';
+      barNorm.style.width = '5%';
+
+      badgeDominant.classList.add('hidden');
+      badgePorosis.classList.remove('hidden');
+      badgeNorm.classList.add('hidden');
+
+      summaryText.innerText = 'Osteoporosis-pattern Dominant (Class 3). Urgent tele-consult advised.';
+    }
+  }
+
+  // Mobile 390px Viewport Simulation Toggle
+  let isMobileSimulated = false;
+  function toggleMobileViewport() {
+    const container = document.getElementById('screening-viewport-container');
+    const label = document.getElementById('mobile-toggle-label');
+    const toggleBtn = document.getElementById('btn-mobile-toggle');
+
+    if (!isMobileSimulated) {
+      container.style.maxWidth = '390px';
+      container.style.margin = '0 auto';
+      label.innerText = 'Reset Desktop View';
+      toggleBtn.classList.remove('bg-secondary-container');
+      toggleBtn.classList.add('bg-primary', 'text-on-primary');
+      isMobileSimulated = true;
+    } else {
+      container.style.maxWidth = '100%';
+      container.style.margin = '0';
+      label.innerText = '4. Mobile Viewport (390px)';
+      toggleBtn.classList.remove('bg-primary', 'text-on-primary');
+      toggleBtn.classList.add('bg-secondary-container');
+      isMobileSimulated = false;
+    }
+  }
+
+  // Heatmap View Controls
+  function setViewerMode(mode) {
+    const heat = document.getElementById('heatmap-layer');
+    const btnRad = document.getElementById('btn-view-rad');
+    const btnHeat = document.getElementById('btn-view-heat');
+    const btnSplit = document.getElementById('btn-view-split');
+    const slider = document.getElementById('opacity-slider');
+    const valText = document.getElementById('opacity-val');
+
+    [btnRad, btnHeat, btnSplit].forEach(btn => {
+      btn.className = "px-3 py-1 rounded font-medium transition-colors text-on-surface hover:text-primary";
+    });
+
+    if (mode === 'radiograph') {
+      heat.style.opacity = '0';
+      btnRad.className = "px-3 py-1 rounded bg-surface-container-lowest text-primary shadow-sm font-semibold";
+      slider.value = 0;
+      valText.innerText = '0%';
+    } else if (mode === 'heatmap') {
+      heat.style.opacity = '1';
+      btnHeat.className = "px-3 py-1 rounded bg-surface-container-lowest text-primary shadow-sm font-semibold";
+      slider.value = 100;
+      valText.innerText = '100%';
+    } else {
+      heat.style.opacity = '0.7';
+      btnSplit.className = "px-3 py-1 rounded bg-surface-container-lowest text-primary shadow-sm font-semibold";
+      slider.value = 70;
+      valText.innerText = '70%';
+    }
+  }
+
+  function updateOpacity(val) {
+    const heat = document.getElementById('heatmap-layer');
+    const valText = document.getElementById('opacity-val');
+    heat.style.opacity = val / 100;
+    valText.innerText = val + '%';
+  }
+
+  // LUT Invert Toggle
+  let isInverted = false;
+  function toggleInvert() {
+    const rad = document.getElementById('svg-radiograph');
+    isInverted = !isInverted;
+    if (isInverted) {
+      rad.style.filter = "invert(1) contrast(130%)";
+    } else {
+      rad.style.filter = "contrast(125%)";
+    }
+  }
+
+  // Quick notes append
+  function insertChip(text) {
+    const ta = document.getElementById('clinician-notes');
+    if (ta.value) {
+      ta.value += "\n" + text;
+    } else {
+      ta.value = text;
+    }
+    ta.focus();
+  }
+
+  function handleSaveAction() {
+    alert("Review validated by Medical Officer. Screening impression successfully bundled and pushed to ABHA Health Locker ID: 91-3829-4110-88.");
+  }
+</script></main></div><footer class="w-full bg-surface-container-low py-space-xs px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-center gap-2 text-center text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[16px]">verified_user</span><span>Decision support only. Not a diagnosis. Requires clinician review.</span></div></footer></div></body></html>

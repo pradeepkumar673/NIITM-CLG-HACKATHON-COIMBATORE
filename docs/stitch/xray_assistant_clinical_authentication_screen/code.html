@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XRAY-ASSISTANT — Clinical Access Authentication</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#0F5E6B',
+              hover: '#0B4A54',
+              tint: '#E6F4F6',
+              dark: '#083840'
+            },
+            clinical: {
+              bg: '#F7F9FB',
+              surface: '#FFFFFF',
+              text: '#1B2430',
+              muted: '#475467',
+              border: '#D0D5DD',
+              error: '#B42318',
+              errorBg: '#FEF3F2',
+              errorBorder: '#FECDCA',
+              amber: '#B54708',
+              amberBg: '#FFFAEB',
+              amberBorder: '#FEDF89',
+              success: '#067647',
+              successBg: '#ECFDF3'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"IBM Plex Mono"', 'monospace']
+          },
+          borderRadius: {
+            clinical: '12px'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* WCAG AA compliance styles */
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #1B2430;
+      background-color: #F7F9FB;
+      -webkit-font-smoothing: antialiased;
+    }
+    .mono-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-feature-settings: "tnum" 1, "zero" 1;
+    }
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    /* Subtle dot grid pattern on teal panel */
+    .teal-grid {
+      background-color: #0F5E6B;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+    }
+    /* State tabs toggle */
+    .state-tab.active {
+      background-color: #FFFFFF;
+      color: #0F5E6B;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#E6F4F6] selection:text-[#0F5E6B]">
+
+  <!-- Top State Switcher Bar (Clinical Spec QA Tool for Reviewers) -->
+  <header class="bg-white border-b border-[#D0D5DD] px-4 py-2 text-xs flex flex-wrap items-center justify-between gap-3 shadow-sm z-30">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-[#0F5E6B] text-white">XRAY-ASSISTANT</span>
+      <span class="text-[#475467] font-medium hidden sm:inline">Screen Spec: Clinical Authentication & Form States</span>
+      <span class="font-mono text-[11px] bg-[#F2F4F7] text-[#344054] px-1.5 py-0.5 rounded">v2.4-SEC</span>
+    </div>
+
+    <!-- Interactive State Switcher for default, focused, error, loading -->
+    <div class="flex items-center gap-1.5 bg-[#F2F4F7] p-1 rounded-lg">
+      <span class="text-[11px] font-medium text-[#475467] px-2">Interactive State:</span>
+      <button type="button" onclick="setFormState('default')" id="btn-default" class="state-tab active px-2.5 py-1 rounded text-xs transition-colors">Default</button>
+      <button type="button" onclick="setFormState('focused')" id="btn-focused" class="state-tab px-2.5 py-1 rounded text-xs text-[#475467] transition-colors">Focused</button>
+      <button type="button" onclick="setFormState('error')" id="btn-error" class="state-tab px-2.5 py-1 rounded text-xs text-[#475467] transition-colors">Error State</button>
+      <button type="button" onclick="setFormState('loading')" id="btn-loading" class="state-tab px-2.5 py-1 rounded text-xs text-[#475467] transition-colors">Loading (48px Spinner)</button>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <div class="hidden md:flex items-center gap-1.5 text-xs text-[#475467]">
+        <span class="w-2 h-2 rounded-full bg-[#067647]"></span>
+        <span>Local Edge Node Online: <span class="font-mono text-[#1B2430]">KASHTI-PHC-04</span></span>
+      </div>
+      <a href="#responsive-preview" class="text-[12px] text-[#0F5E6B] font-medium hover:underline flex items-center gap-1">
+        <span>View Mobile Layout (390px)</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Dual-Pane Desktop Layout (1440px target, fully responsive down to mobile) -->
+  <main class="flex-1 flex flex-col lg:flex-row w-full min-h-[calc(100vh-84px)]">
+    
+    <!-- LEFT HALF: Calm Deep Teal Panel (#0F5E6B) -->
+    <!-- On desktop: takes 50% split. On mobile: slim header with logo and tagline -->
+    <section class="lg:w-1/2 teal-grid text-white p-6 sm:p-10 lg:p-16 flex flex-col justify-between relative overflow-hidden transition-all duration-300">
+      <!-- Ambient clinical graphic watermark (Chest outline geometry) -->
+      <div class="absolute -right-16 -bottom-16 w-96 h-96 opacity-10 pointer-events-none">
+        <svg viewBox="0 0 400 400" fill="none" stroke="#FFFFFF" stroke-width="2.5">
+          <circle cx="200" cy="200" r="160" stroke-dasharray="8 8" />
+          <path d="M200 40 L200 360" />
+          <path d="M110 130 C130 90 270 90 290 130 C310 180 300 270 260 310 C220 340 180 340 140 310 C100 270 90 180 110 130 Z" />
+          <path d="M150 150 C170 170 230 170 250 150" />
+          <path d="M140 200 C170 220 230 220 260 200" />
+          <path d="M150 250 C175 265 225 265 250 250" />
+        </svg>
+      </div>
+
+      <!-- Top brand lockup -->
+      <div class="relative z-10">
+        <!-- Clinic Network Header -->
+        <div class="flex items-center gap-2 mb-6 sm:mb-10">
+          <div class="w-10 h-10 rounded-lg bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center text-white font-bold text-lg shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+          </div>
+          <div>
+            <span class="text-xs uppercase tracking-wider text-teal-100 font-semibold block">National Rural Tele-Radiology Network</span>
+            <span class="text-[13px] text-white/80">Ayushman Bharat Digital Mission (ABDM) Compatible</span>
+          </div>
+        </div>
+
+        <!-- Primary Requested Hero Typography -->
+        <div class="space-y-4 max-w-lg">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-xs text-teal-50 font-medium">
+            <span class="w-2 h-2 rounded-full bg-[#FEDF89] animate-pulse"></span>
+            <span>Local Offline Inference Ready</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
+            XRAY-ASSISTANT
+          </h1>
+          
+          <p class="text-lg sm:text-xl text-teal-50 font-normal leading-relaxed">
+            AI-assisted X-ray decision support for clinics
+          </p>
+
+          <p class="text-sm text-teal-100/90 leading-normal pt-2 font-normal max-w-md hidden sm:block">
+            Engineered specifically for Medical Officers, Radiographers, and Auxiliary Nurse Midwives in Primary Health Centres (PHCs) and Community Health Centres (CHCs).
+          </p>
+        </div>
+      </div>
+
+      <!-- Left Bottom Facility & Quality Indicators (Calm & Trustworthy) -->
+      <div class="relative z-10 pt-8 mt-8 border-t border-white/15 space-y-4 hidden sm:block">
+        <div class="grid grid-cols-2 gap-4 text-xs">
+          <div class="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+            <span class="text-teal-200 block text-[11px] font-medium">Supported Modalities</span>
+            <span class="font-medium text-white text-xs mt-0.5 block">Chest AP/PA, Knee Bilateral, Bone Trauma</span>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+            <span class="text-teal-200 block text-[11px] font-medium">Model Calibration Rule</span>
+            <span class="font-mono text-white text-xs mt-0.5 block">Platt-scaled 95% CI</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] text-teal-200">
+          <span>Security Protocol: ISO 27799 / DISHA Compliant</span>
+          <span class="font-mono text-white/80">Edge ID: IND-MH-821</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT HALF: Centred Login Card (max width 420px) -->
+    <section class="lg:w-1/2 flex items-center justify-center p-4 sm:p-8 lg:p-12 bg-[#F7F9FB]">
+      <div class="w-full max-w-[420px]">
+        
+        <!-- Mobile-only compact brand pill if viewed on small screen -->
+        <div class="lg:hidden flex items-center justify-between mb-4 pb-3 border-b border-[#D0D5DD]">
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-[#0F5E6B] text-base">XRAY-ASSISTANT</span>
+            <span class="text-xs bg-[#E6F4F6] text-[#0F5E6B] px-2 py-0.5 rounded font-medium">Primary Care</span>
+          </div>
+          <span class="text-xs text-[#475467] font-mono">390px Mobile View</span>
+        </div>
+
+        <!-- Login Card (12px radius, clean clinical white surface) -->
+        <div class="bg-white rounded-[12px] border border-[#D0D5DD] shadow-sm p-6 sm:p-8 relative">
+          
+          <!-- Card Header -->
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-2">
+              <h2 class="text-xl sm:text-2xl font-bold text-[#1B2430] tracking-tight">Clinician Sign in</h2>
+              <span class="inline-flex items-center gap-1 text-[11px] font-mono font-medium text-[#0F5E6B] bg-[#E6F4F6] px-2 py-0.5 rounded border border-[#0F5E6B]/20">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                ABHA / Clinic ID
+              </span>
+            </div>
+            <p class="text-sm text-[#475467] leading-relaxed">
+              Enter your clinical credentials or Government Health ID to access the triage queue.
+            </p>
+          </div>
+
+          <!-- Login Form -->
+          <form id="clinical-login-form" onsubmit="event.preventDefault(); triggerSubmitState();" class="space-y-5" novalidate>
+            
+            <!-- Email / Healthcare ID Field -->
+            <div class="space-y-1.5" id="field-group-email">
+              <label for="email-input" class="block text-sm font-semibold text-[#1B2430]">
+                Email address or Health Worker ID <span class="text-[#B42318]">*</span>
+              </label>
+              <div class="relative">
+                <input
+                  type="email"
+                  id="email-input"
+                  name="email"
+                  value="dr.artisharma@district-health.gov.in"
+                  placeholder="name@clinic.gov.in or ABHA ID"
+                  class="w-full px-3.5 py-2.5 rounded-lg border border-[#D0D5DD] bg-white text-[#1B2430] text-sm placeholder-[#98A2B3] focus:outline-none focus:border-[#0F5E6B] focus:ring-2 focus:ring-[#0F5E6B]/20 transition-all touch-target"
+                  autocomplete="username"
+                  required
+                />
+                <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[#98A2B3]" id="email-icon-status">
+                  <svg class="w-4 h-4 text-[#067647]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+              <p class="text-xs text-[#475467]" id="email-help-text">Standard email format or 14-digit ABHA number</p>
+            </div>
+
+            <!-- Password Field with Show/Hide Toggle -->
+            <div class="space-y-1.5" id="field-group-password">
+              <div class="flex items-center justify-between">
+                <label for="password-input" class="block text-sm font-semibold text-[#1B2430]">
+                  Password <span class="text-[#B42318]">*</span>
+                </label>
+                <span class="text-[11px] font-mono text-[#475467]">Min. 8 characters</span>
+              </div>
+
+              <div class="relative">
+                <input
+                  type="password"
+                  id="password-input"
+                  name="password"
+                  value="••••••••••••"
+                  placeholder="Enter your security password"
+                  class="w-full px-3.5 py-2.5 pr-12 rounded-lg border border-[#D0D5DD] bg-white text-[#1B2430] text-sm placeholder-[#98A2B3] focus:outline-none focus:border-[#0F5E6B] focus:ring-2 focus:ring-[#0F5E6B]/20 transition-all touch-target"
+                  autocomplete="current-password"
+                  required
+                />
+                
+                <!-- Show / Hide Password Button (min touch target >= 44px) -->
+                <button
+                  type="button"
+                  id="btn-toggle-password"
+                  onclick="togglePasswordVisibility()"
+                  class="absolute inset-y-0 right-0 pr-3 pl-3 flex items-center text-[#475467] hover:text-[#1B2430] focus:outline-none focus:text-[#0F5E6B] touch-target"
+                  title="Toggle password visibility"
+                  aria-label="Show or hide password"
+                >
+                  <!-- Eye Icon (visible state) -->
+                  <svg id="eye-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <!-- Eye-Off Icon (hidden by default) -->
+                  <svg id="eye-icon-closed" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Keep me signed in on this station + Facility Token -->
+            <div class="flex items-center justify-between text-xs pt-1">
+              <label class="inline-flex items-center gap-2 cursor-pointer text-[#475467]">
+                <input type="checkbox" checked class="w-4 h-4 rounded text-[#0F5E6B] border-[#D0D5DD] focus:ring-[#0F5E6B]">
+                <span>Remember this local terminal</span>
+              </label>
+              <span class="text-[#067647] font-medium flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#067647]"></span>
+                Encrypted Session
+              </span>
+            </div>
+
+            <!-- INLINE ERROR STATE BANNER (Shown per request: "Email or password is incorrect.") -->
+            <div id="inline-error-banner" class="hidden rounded-lg bg-[#FEF3F2] border border-[#FECDCA] p-3 text-[#B42318] flex items-start gap-2.5 transition-all duration-200">
+              <svg class="w-5 h-5 text-[#B42318] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+              <div class="text-xs">
+                <span class="font-semibold block" id="error-title">Authentication Failed</span>
+                <span class="text-[#B42318]/90" id="error-message">Email or password is incorrect.</span>
+              </div>
+            </div>
+
+            <!-- Primary Action Button ("Sign in", full width, exactly 48px tall) -->
+            <div class="pt-2">
+              <button
+                type="submit"
+                id="btn-submit"
+                class="w-full h-[48px] bg-[#0F5E6B] hover:bg-[#0B4A54] active:bg-[#083840] text-white font-semibold text-sm rounded-lg transition-all duration-150 flex items-center justify-center gap-2 shadow-sm focus:outline-none focus:ring-4 focus:ring-[#0F5E6B]/30 touch-target disabled:opacity-75 disabled:cursor-not-allowed"
+              >
+                <!-- Default text & arrow -->
+                <span id="btn-text" class="flex items-center gap-2">
+                  <span>Sign in</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </span>
+
+                <!-- Loading Spinner element (Toggled in loading state) -->
+                <span id="btn-spinner" class="hidden items-center gap-2.5">
+                  <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span>Authenticating clinician credentials...</span>
+                </span>
+              </button>
+            </div>
+
+            <!-- Small requested text link: "Forgot password? Contact your clinic administrator" -->
+            <div class="text-center pt-2">
+              <p class="text-xs text-[#475467] leading-relaxed">
+                Forgot password? 
+                <a href="#admin-help" onclick="alert('Please contact your District Medical Officer (DMO) or PHC Administrator to reset your security key.'); return false;" class="text-[#0F5E6B] font-semibold hover:underline inline-block py-1 touch-target">
+                  Contact your clinic administrator
+                </a>
+              </p>
+            </div>
+
+            <!-- Clinical Support Note -->
+            <div class="pt-3 border-t border-[#F2F4F7] text-center">
+              <span class="inline-flex items-center gap-1.5 text-[11px] text-[#475467]">
+                <svg class="w-3.5 h-3.5 text-[#067647]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                <span>Role-based access: Medical Officer, ANM, Radiographer</span>
+              </span>
+            </div>
+
+          </form>
+
+        </div>
+
+        <!-- Offline / Edge Inference Notice -->
+        <div class="mt-4 p-3 bg-white rounded-lg border border-[#D0D5DD] flex items-center justify-between text-xs text-[#475467]">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#067647]"></span>
+            <span>Edge AI Sync: <span class="font-mono text-[#1B2430] font-medium">Synced 3m ago</span></span>
+          </div>
+          <span class="font-mono text-[11px] text-[#0F5E6B]">v2.4-PROD</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- COMPONENT STATES & MOBILE (390px) SPECIFICATION SECTION        -->
+  <!-- Demonstrating exact states requested in prompt                  -->
+  <!-- ============================================================== -->
+  <section id="responsive-preview" class="border-t border-[#D0D5DD] bg-white py-10 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto space-y-8">
+      
+      <!-- Section Title -->
+      <div class="border-b border-[#D0D5DD] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#0F5E6B]">Clinical Design System Reference</span>
+          <h3 class="text-lg font-bold text-[#1B2430]">All 4 Form States & Mobile 390px Viewport Architecture</h3>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-[#475467]">
+          <span class="bg-[#F2F4F7] px-2 py-1 rounded font-mono">1440px Split Desktop ↔ 390px Slim Mobile</span>
+        </div>
+      </div>
+
+      <!-- Grid of Form States (Default, Focused, Error, Loading) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- State 1: Default -->
+        <div class="bg-[#F7F9FB] p-4 rounded-xl border border-[#D0D5DD] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#1B2430]">State 1: Default</span>
+            <span class="text-[11px] bg-white text-[#475467] px-2 py-0.5 rounded border border-[#D0D5DD]">Resting</span>
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-medium text-[#1B2430]">Password</label>
+            <div class="bg-white border border-[#D0D5DD] rounded-lg px-3 py-2 text-xs text-[#98A2B3] flex justify-between items-center">
+              <span>••••••••••••</span>
+              <svg class="w-4 h-4 text-[#98A2B3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </div>
+          </div>
+          <button class="w-full h-[48px] bg-[#0F5E6B] text-white text-xs font-semibold rounded-lg">Sign in</button>
+          <p class="text-[11px] text-[#475467]">WCAG AA contrast compliant (7.8:1 ratio).</p>
+        </div>
+
+        <!-- State 2: Focused -->
+        <div class="bg-[#F7F9FB] p-4 rounded-xl border border-[#0F5E6B]/30 ring-1 ring-[#0F5E6B]/20 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#0F5E6B]">State 2: Focused</span>
+            <span class="text-[11px] bg-[#E6F4F6] text-[#0F5E6B] px-2 py-0.5 rounded font-medium">Active Focus</span>
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-medium text-[#1B2430]">Password</label>
+            <div class="bg-white border-2 border-[#0F5E6B] ring-2 ring-[#0F5E6B]/20 rounded-lg px-3 py-2 text-xs text-[#1B2430] flex justify-between items-center">
+              <span>clinician_key_2024|</span>
+              <svg class="w-4 h-4 text-[#0F5E6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </div>
+          </div>
+          <button class="w-full h-[48px] bg-[#0B4A54] text-white text-xs font-semibold rounded-lg shadow-sm">Sign in</button>
+          <p class="text-[11px] text-[#475467]">Clear accessible outline ring for keyboard navigation.</p>
+        </div>
+
+        <!-- State 3: Error State -->
+        <div class="bg-[#FEF3F2]/50 p-4 rounded-xl border border-[#FECDCA] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#B42318]">State 3: Error State</span>
+            <span class="text-[11px] bg-[#FEF3F2] text-[#B42318] px-2 py-0.5 rounded font-medium border border-[#FECDCA]">Failed</span>
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-medium text-[#B42318]">Password</label>
+            <div class="bg-white border border-[#B42318] ring-1 ring-[#B42318]/20 rounded-lg px-3 py-2 text-xs text-[#1B2430] flex justify-between items-center">
+              <span>••••••••••••</span>
+              <svg class="w-4 h-4 text-[#B42318]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+            </div>
+          </div>
+          <div class="p-2 bg-[#FEF3F2] rounded border border-[#FECDCA] text-[11px] text-[#B42318] font-medium">
+            Email or password is incorrect.
+          </div>
+          <button class="w-full h-[48px] bg-[#0F5E6B] text-white text-xs font-semibold rounded-lg">Sign in</button>
+        </div>
+
+        <!-- State 4: Loading State -->
+        <div class="bg-[#F7F9FB] p-4 rounded-xl border border-[#D0D5DD] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#0F5E6B]">State 4: Loading (48px)</span>
+            <span class="text-[11px] bg-[#E6F4F6] text-[#0F5E6B] px-2 py-0.5 rounded font-medium">Inference Call</span>
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-medium text-[#475467]">Password</label>
+            <div class="bg-[#F2F4F7] border border-[#D0D5DD] rounded-lg px-3 py-2 text-xs text-[#475467] flex justify-between items-center opacity-75">
+              <span>••••••••••••</span>
+              <svg class="w-4 h-4 text-[#98A2B3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+          </div>
+          <button disabled class="w-full h-[48px] bg-[#0F5E6B] opacity-80 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-2 cursor-wait">
+            <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <span>Verifying...</span>
+          </button>
+          <p class="text-[11px] text-[#475467]">Buttons disabled during pending auth call.</p>
+        </div>
+
+      </div>
+
+      <!-- Direct Mobile (390px) Viewport Specimen Card -->
+      <div class="pt-6 border-t border-[#D0D5DD]">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h4 class="text-sm font-bold text-[#1B2430]">Direct Mobile Viewport Representation (390px Width Device Mockup)</h4>
+            <p class="text-xs text-[#475467]">Illustrates how the desktop teal panel collapses into a slim header with the logo, while the form spans full width with 16px padding.</p>
+          </div>
+          <span class="font-mono text-xs text-[#0F5E6B] bg-[#E6F4F6] px-2.5 py-1 rounded border border-[#0F5E6B]/20">Width: 390px</span>
+        </div>
+
+        <div class="flex justify-center">
+          <!-- 390px Mockup Container -->
+          <div class="w-[390px] bg-[#F7F9FB] rounded-[24px] border-4 border-[#1B2430] shadow-xl overflow-hidden flex flex-col min-h-[640px]">
+            
+            <!-- Mobile Top Status Bar -->
+            <div class="bg-[#0F5E6B] text-white px-5 pt-3 pb-2 flex justify-between items-center text-[11px] font-mono">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <span>4G/Edge</span>
+                <span class="w-2 h-2 rounded-full bg-[#067647]"></span>
+              </div>
+            </div>
+
+            <!-- COLLAPSED SLIM TEAL HEADER (per specification) -->
+            <div class="bg-[#0F5E6B] text-white px-4 py-3 flex items-center justify-between shadow-sm">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded bg-white/10 flex items-center justify-center font-bold text-xs">X</div>
+                <div>
+                  <span class="font-bold text-sm tracking-tight block">XRAY-ASSISTANT</span>
+                  <span class="text-[10px] text-teal-100 block -mt-0.5">AI decision support</span>
+                </div>
+              </div>
+              <span class="text-[10px] bg-white/15 px-2 py-0.5 rounded text-white font-mono">PHC Mode</span>
+            </div>
+
+            <!-- Mobile Form: Full width with 16px horizontal padding (px-4 = 16px) -->
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div class="bg-white rounded-[12px] border border-[#D0D5DD] p-4 shadow-sm space-y-4">
+                <div>
+                  <h5 class="font-bold text-base text-[#1B2430]">Clinician Sign In</h5>
+                  <p class="text-xs text-[#475467]">Rural Health Center Portal</p>
+                </div>
+
+                <div class="space-y-1">
+                  <label class="text-xs font-semibold text-[#1B2430]">Email or ABHA ID</label>
+                  <input type="text" readonly value="dr.sharma@phc.gov.in" class="w-full px-3 py-2 border border-[#D0D5DD] rounded-lg text-xs bg-white text-[#1B2430] touch-target">
+                </div>
+
+                <div class="space-y-1">
+                  <label class="text-xs font-semibold text-[#1B2430]">Password</label>
+                  <div class="relative">
+                    <input type="password" readonly value="••••••••" class="w-full px-3 py-2 pr-10 border border-[#D0D5DD] rounded-lg text-xs bg-white text-[#1B2430] touch-target">
+                    <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-[#475467]">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Error Notice Specimen in Mobile -->
+                <div class="p-2.5 bg-[#FEF3F2] border border-[#FECDCA] rounded-lg text-[11px] text-[#B42318] flex items-center gap-2">
+                  <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                  <span>Email or password is incorrect.</span>
+                </div>
+
+                <!-- Full width 48px button with touch target -->
+                <button class="w-full h-[48px] bg-[#0F5E6B] text-white font-semibold text-xs rounded-lg flex items-center justify-center gap-1.5 touch-target shadow-sm">
+                  <span>Sign in</span>
+                </button>
+
+                <p class="text-[11px] text-center text-[#475467]">
+                  Forgot password? <span class="text-[#0F5E6B] font-semibold underline">Contact clinic admin</span>
+                </p>
+              </div>
+
+              <!-- Mobile Persistent Footer -->
+              <div class="py-3 text-center border-t border-[#D0D5DD] mt-3">
+                <p class="text-[10px] text-[#475467] font-medium leading-tight">
+                  Decision support only. Not a diagnosis. Requires clinician review.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- MANDATORY PERSISTENT FOOTER DISCLAIMER                         -->
+  <!-- "Decision support only. Not a diagnosis. Requires clinician review." -->
+  <!-- ============================================================== -->
+  <footer class="w-full bg-white border-t border-[#D0D5DD] py-2.5 px-4 text-center z-20 shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-xs text-[#475467]">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-[#0F5E6B]"></span>
+        <p class="font-medium text-[#1B2430]">
+          Decision support only. Not a diagnosis. Requires clinician review.
+        </p>
+      </div>
+      <div class="flex items-center gap-4 text-[11px] text-[#475467]">
+        <span class="hidden md:inline">Protocol: IN-RURAL-CDS-2024</span>
+        <span class="font-mono">WCAG 2.1 AA Compliant</span>
+        <span class="font-mono">Min Touch Target: 44px</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript handling password visibility and state simulation -->
+  <script>
+    // Password visibility toggle
+    function togglePasswordVisibility() {
+      const input = document.getElementById('password-input');
+      const openIcon = document.getElementById('eye-icon-open');
+      const closedIcon = document.getElementById('eye-icon-closed');
+      
+      if (input.type === 'password') {
+        input.type = 'text';
+        openIcon.classList.add('hidden');
+        closedIcon.classList.remove('hidden');
+      } else {
+        input.type = 'password';
+        openIcon.classList.remove('hidden');
+        closedIcon.classList.add('hidden');
+      }
+    }
+
+    // Interactive State Manager for Spec Inspection
+    function setFormState(state) {
+      // Update tab buttons
+      const tabs = ['default', 'focused', 'error', 'loading'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`btn-${t}`);
+        if (btn) {
+          if (t === state) {
+            btn.className = 'state-tab active px-2.5 py-1 rounded text-xs transition-colors';
+          } else {
+            btn.className = 'state-tab px-2.5 py-1 rounded text-xs text-[#475467] hover:text-[#1B2430] transition-colors';
+          }
+        }
+      });
+
+      const emailInput = document.getElementById('email-input');
+      const passwordInput = document.getElementById('password-input');
+      const errorBanner = document.getElementById('inline-error-banner');
+      const submitBtn = document.getElementById('btn-submit');
+      const btnText = document.getElementById('btn-text');
+      const btnSpinner = document.getElementById('btn-spinner');
+
+      // Reset base classes
+      emailInput.className = 'w-full px-3.5 py-2.5 rounded-lg border border-[#D0D5DD] bg-white text-[#1B2430] text-sm placeholder-[#98A2B3] focus:outline-none focus:border-[#0F5E6B] focus:ring-2 focus:ring-[#0F5E6B]/20 transition-all touch-target';
+      passwordInput.className = 'w-full px-3.5 py-2.5 pr-12 rounded-lg border border-[#D0D5DD] bg-white text-[#1B2430] text-sm placeholder-[#98A2B3] focus:outline-none focus:border-[#0F5E6B] focus:ring-2 focus:ring-[#0F5E6B]/20 transition-all touch-target';
+      errorBanner.classList.add('hidden');
+      submitBtn.disabled = false;
+      btnText.classList.remove('hidden');
+      btnText.classList.add('flex');
+      btnSpinner.classList.add('hidden');
+      btnSpinner.classList.remove('flex');
+
+      if (state === 'default') {
+        passwordInput.value = '••••••••••••';
+      } else if (state === 'focused') {
+        passwordInput.focus();
+        passwordInput.className = 'w-full px-3.5 py-2.5 pr-12 rounded-lg border-2 border-[#0F5E6B] ring-2 ring-[#0F5E6B]/20 bg-white text-[#1B2430] text-sm placeholder-[#98A2B3] focus:outline-none transition-all touch-target';
+      } else if (state === 'error') {
+        emailInput.className = 'w-full px-3.5 py-2.5 rounded-lg border border-[#B42318] ring-1 ring-[#B42318]/20 bg-white text-[#1B2430] text-sm placeholder-[#98A2B3] focus:outline-none transition-all touch-target';
+        passwordInput.className = 'w-full px-3.5 py-2.5 pr-12 rounded-lg border border-[#B42318] ring-1 ring-[#B42318]/20 bg-white text-[#1B2430] text-sm placeholder-[#98A2B3] focus:outline-none transition-all touch-target';
+        errorBanner.classList.remove('hidden');
+      } else if (state === 'loading') {
+        submitBtn.disabled = true;
+        btnText.classList.add('hidden');
+        btnText.classList.remove('flex');
+        btnSpinner.classList.remove('hidden');
+        btnSpinner.classList.add('flex');
+      }
+    }
+
+    // Trigger state when user clicks submit in the live preview
+    function triggerSubmitState() {
+      setFormState('loading');
+      setTimeout(() => {
+        setFormState('error');
+      }, 1500);
+    }
+  </script>
+</body>
+</html>

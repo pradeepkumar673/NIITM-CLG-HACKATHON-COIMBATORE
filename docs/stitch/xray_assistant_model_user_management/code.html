@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#004e5a", "secondary-fixed": "#d6e3fb", "surface-tint": "#1e6774", "surface-dim": "#d1daeb", "outline-variant": "#bfc8cb", "error": "#ba1a1a", "on-primary-container": "#93d5e4", "on-secondary-fixed-variant": "#3b485a", "on-background": "#131c28", "surface-container": "#e5eeff", "secondary-fixed-dim": "#bac7de", "secondary-container": "#d6e3fb", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#98f6bb", "on-error-container": "#93000a", "inverse-primary": "#8fd1e0", "on-secondary": "#ffffff", "on-surface-variant": "#3f484b", "primary": "#004550", "on-secondary-fixed": "#0f1c2d", "surface-variant": "#dae3f4", "tertiary-container": "#00633a", "on-primary-fixed": "#001f25", "outline": "#6f797b", "on-secondary-container": "#586579", "on-tertiary-fixed-variant": "#00522f", "tertiary-fixed-dim": "#7cd9a1", "on-tertiary": "#ffffff", "surface-bright": "#f8f9ff", "surface": "#f8f9ff", "inverse-surface": "#28313d", "surface-container-high": "#e0e9f9", "secondary": "#525f73", "inverse-on-surface": "#eaf1ff", "surface-container-highest": "#dae3f4", "background": "#f8f9ff", "tertiary": "#004929", "on-surface": "#131c28", "on-primary": "#ffffff", "primary-fixed": "#abedfc", "on-error": "#ffffff", "primary-fixed-dim": "#8fd1e0", "on-tertiary-container": "#81dea5", "on-tertiary-fixed": "#002110", "error-container": "#ffdad6", "surface-container-low": "#eff4ff", "primary-container": "#0f5e6b" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "margin": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-md": "1rem", "gutter": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-sm": [ "Inter" ], "mono-data-lg": [ "JetBrains Mono" ], "body-lg": [ "Inter" ], "label-sm": [ "Inter" ], "label-md": [ "Inter" ], "headline-xl": [ "Inter" ], "mono-data-md": [ "JetBrains Mono" ], "headline-md": [ "Inter" ], "body-md": [ "Inter" ], "mono-data-sm": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Inter" ], "headline-lg": [ "Inter" ], "headline-lg-mobile": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "600" } ], "mono-data-lg": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "500" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-xl": [ "2rem", { "lineHeight": "2.5rem", "fontWeight": "700" } ], "mono-data-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-md": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-md": [ "1rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "mono-data-sm": [ "0.75rem", { "lineHeight": "1rem", "fontWeight": "400" } ], "headline-xl-mobile": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "700" } ], "headline-lg": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-60 bg-surface-container-low z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">XRAY-ASSISTANT</span><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>Online</span></div><div class="flex items-center gap-1 text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="material-symbols-outlined text-[14px]">wifi</span><span>Sync: Local Edge</span></div></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-primary text-on-primary font-label-md text-label-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="dashboard" href="#"><span>Dashboard</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="review-queue" href="#"><span>Review queue</span><span class="px-1.5 py-0.5 rounded-full bg-error text-on-error font-mono-data-sm text-mono-data-sm font-semibold leading-none">07</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="studies" href="#"><span>Studies</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-study" href="#"><span>Ingest / New study</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="admin-and-system" href="#"><span>Admin &amp; System</span></a></nav><div class="px-space-md pt-space-xs"><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Language</label><div class="relative"><select class="w-full appearance-none bg-surface-container-lowest text-on-surface font-body-sm text-body-sm py-2 pl-3 pr-8 rounded-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-1 focus:ring-primary"><option value="en">English</option><option value="ta">Tamil [machine-drafted]</option><option value="hi">Hindi [machine-drafted]</option></select><span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span></div></div></div><div class="px-space-md flex flex-col gap-space-sm"><div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col gap-1"><div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">dns</span>Edge Node</span><span class="font-medium text-on-surface">Active</span></div><div class="font-mono-data-sm text-mono-data-sm text-primary font-semibold">KASHTI-PHC-04</div></div><button class="w-full flex items-center justify-center gap-space-sm py-2 px-space-md rounded-lg text-error hover:bg-error-container hover:text-on-error-container font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">logout</span>Sign out</button></div></aside><div class="pl-60 min-h-screen flex flex-col justify-between"><div class="w-full"><header class="fixed top-0 left-60 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold">Kashti PHC / District Cluster</span><span class="font-body-sm text-body-sm text-on-surface-variant">District Ahmadnagar • Rural Health Cluster 2</span></div><div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="font-mono-data-sm text-mono-data-sm">ABHA Network Connected</span></div></div><div class="flex items-center gap-space-md"><div class="text-right hidden sm:flex flex-col"><span class="font-label-md text-label-md text-on-surface font-medium">Dr. Rajesh Kulkarni</span><span class="font-body-sm text-body-sm text-on-surface-variant">Lead Clinical &amp; System Admin</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-on-primary text-[18px]">admin_panel_settings</span></div></div></header><main class="w-full pt-16 px-space-lg py-space-md bg-surface"><div class="flex flex-col w-full">
+<!-- Prototype State Controller Bar -->
+<div class="mb-space-lg p-space-sm bg-surface-container-high rounded-xl shadow-sm flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">tune</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant uppercase tracking-wider font-semibold">Interactive Prototype State</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5" id="prototype-states">
+<button class="state-btn px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold transition-all shadow-sm" data-state-btn="default" onclick="setAppState('default')" type="button">
+        1. Full Management (Default)
+      </button>
+<button class="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="mismatch-focused" onclick="setAppState('mismatch-focused')" type="button">
+        2. Checksum Mismatch Alert Focused
+      </button>
+<button class="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="empty" onclick="setAppState('empty')" type="button">
+        3. Empty States (No Models / No Users)
+      </button>
+<button class="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="loading" onclick="setAppState('loading')" type="button">
+        4. Loading Skeletons
+      </button>
+<button class="state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm" data-state-btn="mobile" onclick="setAppState('mobile')" type="button">
+        5. Mobile Simulation (390px)
+      </button>
+</div>
+</div>
+<!-- Main Administrative Viewport Container -->
+<div class="w-full transition-all duration-300 flex flex-col gap-space-xl" id="canvas-container">
+<!-- Screen Header Section -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pb-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-md bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm font-medium">ABDM NODE: KASHTI-PHC-04</span>
+<span class="text-on-surface-variant font-mono-data-sm text-mono-data-sm">•</span>
+<span class="text-on-surface-variant font-mono-data-sm text-mono-data-sm">CDSCO CLASS-B CDSS</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Model &amp; User Management</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+          Clinical AI Governance, Edge Inference Nodes &amp; User Access Control • Kashti PHC Cluster #04
+        </p>
+</div>
+<!-- Primary Action Buttons -->
+<div class="flex flex-wrap items-center gap-space-sm self-start lg:self-center">
+<button class="h-11 px-4 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-medium shadow-sm transition-all flex items-center gap-2" onclick="syncWithCentralRegistry()" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary" id="sync-icon">sync</span>
+<span>Sync Central Registry</span>
+</button>
+<button class="h-11 px-4 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-medium shadow-sm transition-all flex items-center gap-2" onclick="verifyAllChecksums()" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary-container" id="verify-icon">verified_user</span>
+<span>Verify All Checksums</span>
+</button>
+<button class="h-11 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-2" onclick="openCreateUserModal()" type="button">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>+ Create user</span>
+</button>
+</div>
+</div>
+<!-- Edge Health Status Ribbon -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase font-semibold">Active Models</span>
+<span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">4</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">/ 5 Registered</span>
+</div>
+<span class="mt-1 font-body-sm text-body-sm text-tertiary-container flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+          NVIDIA TensorRT 8.6 Edge Engine
+        </span>
+</div>
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase font-semibold">Integrity State</span>
+<span class="material-symbols-outlined text-error text-[20px]">warning</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-error">1 Warning</span>
+<span class="font-mono-data-sm text-mono-data-sm text-error">SHA-256 Drift</span>
+</div>
+<span class="mt-1 font-body-sm text-body-sm text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">block</span>
+          Quarantine auto-enforced
+        </span>
+</div>
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase font-semibold">Authorized Staff</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">groups</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">8</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Clinicians &amp; ANMs</span>
+</div>
+<span class="mt-1 font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">badge</span>
+          MCI/NMC ID Verified
+        </span>
+</div>
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase font-semibold">CDSCO Cloud Sync</span>
+<span class="material-symbols-outlined text-primary text-[20px]">cloud_sync</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-mono-data-lg text-mono-data-lg font-semibold text-on-surface">08:30 IST</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Today</span>
+</div>
+<span class="mt-1 font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+          Air-gapped sync buffer 100% OK
+        </span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- SECTION 1: AI MODEL GOVERNANCE & INTEGRITY -->
+<!-- ========================================== -->
+<section class="flex flex-col gap-space-md" id="models-section">
+<!-- Section Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-center gap-3">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Registered Clinical Inference Models</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-mono-data-sm text-mono-data-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+            4 Active • 1 Integrity Warning
+          </span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">CDSCO/MoHFW Certified Baseline</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">verified</span>
+</div>
+</div>
+<!-- Persistent Quarantined Alert Strip (Mismatch Row Callout) -->
+<div class="p-space-md rounded-xl bg-error-container shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-space-md transition-all" id="mismatch-banner">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-error text-[24px]">gpp_maybe</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-error-container font-bold flex items-center gap-2">
+<span>Checksum mismatch detected in active edge runtime</span>
+<span class="px-2 py-0.2 rounded bg-error text-on-error font-mono-data-sm text-mono-data-sm">QUARANTINE ACTIVE</span>
+</span>
+<p class="font-body-sm text-body-sm text-on-error-container mt-0.5">
+              Local binary for <strong class="font-semibold">Knee-BoneCAD-v0.8.2-Alpha</strong> differs from the Central CDSCO/MoHFW Certified Registry hash. Automatic inference quarantined until re-verified.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<button class="h-10 px-4 rounded-lg bg-error hover:bg-on-error-container text-on-error font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-1.5" onclick="resolveMismatchModal()" type="button">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span>Force Replace Binary</span>
+</button>
+<button class="h-10 px-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-error-container font-label-md text-label-md font-medium transition-all" onclick="inspectMismatchDigest()" type="button">
+            Inspect Digest
+          </button>
+</div>
+</div>
+<!-- Models Table Container (Desktop / Default) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden" id="models-table-view">
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<tr>
+<th class="py-3 px-4">Model &amp; Pipeline</th>
+<th class="py-3 px-4">Anatomy</th>
+<th class="py-3 px-4">Runtime Engine</th>
+<th class="py-3 px-4">SHA-256 Digest</th>
+<th class="py-3 px-4">Integrity Status</th>
+<th class="py-3 px-4 text-right">Validation</th>
+<th class="py-3 px-4">Sync Timestamp</th>
+<th class="py-3 px-4 text-center">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container text-body-sm font-body-sm" id="models-table-body">
+<!-- ROW 1: Chest CAD (VERIFIED) -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Chest-CAD-v4.2.1-RT</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Triage &amp; Multi-pathology (TB, Pneumonia, Effusion)</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-medium">
+                    Chest PA/AP
+                  </span>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-surface-container text-on-surface font-mono-data-sm text-mono-data-sm font-medium">
+                    v4.2.1-RT (TensorRT FP16)
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-on-surface">
+<div class="flex items-center gap-1.5">
+<span class="bg-surface-container px-2 py-0.5 rounded">sha256:8f2a9c1b...3e80</span>
+<button class="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onclick="copyHash('sha256:8f2a9c1b984711d5f309a4b37012ef490c29a8f33194be08412ec708913e3e80', this)" title="Copy SHA-256" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-tertiary-container/15 text-tertiary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">verified</span>
+<span>Loaded &amp; Verified</span>
+</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<a class="font-mono-data-md text-mono-data-md text-primary font-semibold hover:underline inline-flex items-center gap-0.5" href="#">
+<span>AUROC 0.942</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</td>
+<td class="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-on-surface-variant whitespace-nowrap">
+                  24 Oct 2024, 08:30 IST
+                </td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onclick="reverifyModel('Chest-CAD')" title="Re-verify Hash" type="button">
+<span class="material-symbols-outlined text-[18px]">rule</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Model Diagnostics" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 2: Knee CAD (MISMATCH - QUARANTINED) -->
+<tr class="bg-error-container/20 hover:bg-error-container/30 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md font-bold text-error">Knee-BoneCAD-v0.8.2-Alpha</span>
+<span class="material-symbols-outlined text-error text-[18px]" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Trabecular Density &amp; Cortical Texture</span>
+<!-- Expandable Context Pill -->
+<div class="mt-1.5 p-2 rounded bg-surface-container-lowest text-error font-body-sm text-body-sm shadow-sm">
+<span class="font-semibold">Verification Failure:</span> Local SHA-256 does not match Central Registry sha256:7c9e0a81... Expected digest failed verification. Inference quarantined to prevent unvalidated predictions.
+                    </div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-medium">
+                    Knee Bilateral
+                  </span>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-surface-container text-on-surface font-mono-data-sm text-mono-data-sm font-medium">
+                    v0.8.2-Alpha (ONNX-CPU)
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-error font-semibold">
+<div class="flex items-center gap-1.5">
+<span class="bg-error-container px-2 py-0.5 rounded line-through text-error">sha256:4d12c0aa...1f99</span>
+<button class="p-1 rounded text-error hover:bg-error/10 transition-colors" onclick="copyHash('sha256:4d12c0aa48209bb9910d5402fe091c33a2908811d7c9e0a8110b991f99c011a0', this)" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error text-on-error font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[16px]">dangerous</span>
+<span>MISMATCH - QUARANTINED</span>
+</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<span class="font-mono-data-md text-mono-data-md text-on-surface-variant line-through">
+                    AUROC 0.884
+                  </span>
+<div class="font-label-sm text-label-sm text-error">Audit Blocked</div>
+</td>
+<td class="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-on-surface-variant whitespace-nowrap">
+                  12 Sep 2024, 11:20 IST
+                </td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-1.5">
+<button class="px-2.5 py-1 rounded-md bg-error hover:bg-on-error-container text-on-error font-label-sm text-label-sm font-semibold transition-colors flex items-center gap-1" onclick="resolveMismatchModal()" type="button">
+<span class="material-symbols-outlined text-[14px]">refresh</span>
+<span>Replace</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3: Fracture RegNet (VERIFIED) -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Fracture-RegNet-v2.0</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Longitudinal Rigid+Affine Alignment &amp; Callus Density</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-medium">
+                    Tibia / Fibula
+                  </span>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-surface-container text-on-surface font-mono-data-sm text-mono-data-sm font-medium">
+                    v2.0-Prod (TensorRT)
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-on-surface">
+<div class="flex items-center gap-1.5">
+<span class="bg-surface-container px-2 py-0.5 rounded">sha256:3a71fe90...11bc</span>
+<button class="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onclick="copyHash('sha256:3a71fe904092bba40194883ef028c614bca881773099acfe14088211bc901a55', this)" title="Copy SHA-256" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-tertiary-container/15 text-tertiary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">verified</span>
+<span>Loaded &amp; Verified</span>
+</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<a class="font-mono-data-md text-mono-data-md text-primary font-semibold hover:underline inline-flex items-center gap-0.5" href="#">
+<span>AUROC 0.918</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</td>
+<td class="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-on-surface-variant whitespace-nowrap">
+                  18 Oct 2024, 14:05 IST
+                </td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onclick="reverifyModel('Fracture-RegNet')" title="Re-verify Hash" type="button">
+<span class="material-symbols-outlined text-[18px]">rule</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Model Diagnostics" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4: Spine Alignment (STAGING) -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Spine-Alignment-v1.1</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Vertebral Landmark &amp; Cobb Angle Quantometry</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-medium">
+                    Spine Lumbar
+                  </span>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-surface-container text-on-surface font-mono-data-sm text-mono-data-sm font-medium">
+                    v1.1-Staging (PyTorch Edge)
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-on-surface">
+<div class="flex items-center gap-1.5">
+<span class="bg-surface-container px-2 py-0.5 rounded">sha256:0d91ca82...99ee</span>
+<button class="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onclick="copyHash('sha256:0d91ca824419aa400199fba67198bba108422ca1108842199eef091a182904bc', this)" title="Copy SHA-256" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span>Loaded (Staging)</span>
+</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<a class="font-mono-data-md text-mono-data-md text-primary font-semibold hover:underline inline-flex items-center gap-0.5" href="#">
+<span>AUROC 0.892</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</td>
+<td class="py-3.5 px-4 font-mono-data-sm text-mono-data-sm text-on-surface-variant whitespace-nowrap">
+                  21 Oct 2024, 09:12 IST
+                </td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onclick="reverifyModel('Spine-Alignment')" title="Promote to Production" type="button">
+<span class="material-symbols-outlined text-[18px]">publish</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Model Diagnostics" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Models Mobile Cards Representation (Shown during mobile state or small viewports) -->
+<div class="hidden flex-col gap-space-sm" id="models-mobile-view">
+<!-- Mobile Card 1: Chest CAD -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md font-bold text-on-surface block">Chest-CAD-v4.2.1-RT</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Triage &amp; Multi-pathology</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-container/15 text-tertiary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+              Verified
+            </span>
+</div>
+<div class="flex flex-wrap gap-1 mt-1">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm">Chest PA/AP</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-mono-data-sm text-mono-data-sm">TensorRT FP16</span>
+</div>
+<div class="p-2 bg-surface-container-low rounded flex items-center justify-between text-mono-data-sm font-mono-data-sm mt-1">
+<span class="text-on-surface-variant truncate">sha256:8f2a9c1b...3e80</span>
+<button class="text-primary ml-2 flex items-center gap-0.5" onclick="copyHash('sha256:8f2a9c1b...3e80', this)" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy</span>
+</button>
+</div>
+<div class="flex items-center justify-between pt-1 font-body-sm text-body-sm">
+<a class="text-primary font-mono-data-sm text-mono-data-sm font-semibold flex items-center gap-0.5" href="#">
+              AUROC 0.942 [Report ↗]
+            </a>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">24 Oct, 08:30</span>
+</div>
+</div>
+<!-- Mobile Card 2: Knee CAD (Mismatch) -->
+<div class="p-space-md bg-error-container/20 rounded-xl shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md font-bold text-error block">Knee-BoneCAD-v0.8.2-Alpha</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Trabecular Density &amp; Cortical</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error text-on-error font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">dangerous</span>
+              Quarantined
+            </span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest text-error font-body-sm text-body-sm">
+            Local SHA-256 mismatch vs central registry. Quarantined.
+          </div>
+<div class="flex items-center justify-between pt-1">
+<button class="w-full py-2 px-3 rounded-lg bg-error text-on-error font-label-md text-label-md font-semibold text-center" onclick="resolveMismatchModal()" type="button">
+              Force Replace Binary
+            </button>
+</div>
+</div>
+<!-- Mobile Card 3: Fracture RegNet -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md font-bold text-on-surface block">Fracture-RegNet-v2.0</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Callus Density Alignment</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-container/15 text-tertiary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+              Verified
+            </span>
+</div>
+<div class="flex flex-wrap gap-1 mt-1">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm">Tibia / Fibula</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-mono-data-sm text-mono-data-sm">TensorRT Prod</span>
+</div>
+<div class="flex items-center justify-between pt-1 font-body-sm text-body-sm">
+<a class="text-primary font-mono-data-sm text-mono-data-sm font-semibold flex items-center gap-0.5" href="#">
+              AUROC 0.918 [Report ↗]
+            </a>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">18 Oct, 14:05</span>
+</div>
+</div>
+</div>
+<!-- Models Empty State (Used for State 3) -->
+<div class="hidden p-space-xl bg-surface-container-lowest rounded-xl shadow-sm flex-col items-center justify-center text-center gap-space-md" id="models-empty-state">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[32px]">deployed_code</span>
+</div>
+<div class="max-w-md flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">No Models Deployed on Edge Node</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            No AI models deployed on this edge node. Upload or sync models from Central Health Cloud registry to enable local CDSS inference.
+          </p>
+</div>
+<button class="h-11 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-2" onclick="deployNewModel()" type="button">
+<span class="material-symbols-outlined text-[18px]">add_box</span>
+<span>+ Deploy model</span>
+</button>
+</div>
+<!-- Models Skeleton Loading (Used for State 4) -->
+<div class="hidden bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden p-space-md flex-col gap-space-md animate-pulse" id="models-skeleton-state">
+<div class="h-8 bg-surface-container-high rounded w-1/4"></div>
+<div class="space-y-3">
+<div class="h-12 bg-surface-container rounded-lg"></div>
+<div class="h-12 bg-surface-container rounded-lg"></div>
+<div class="h-12 bg-surface-container rounded-lg"></div>
+<div class="h-12 bg-surface-container rounded-lg"></div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- SECTION 2: CLINICAL USERS & ACCESS CONTROL -->
+<!-- ========================================== -->
+<section class="flex flex-col gap-space-md" id="users-section">
+<!-- Section Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-center gap-3">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Clinical Users &amp; Access Permissions</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface font-mono-data-sm text-mono-data-sm font-semibold">
+            8 Active Users • Kashti PHC &amp; Tele-Cluster
+          </span>
+</div>
+<div class="flex items-center gap-2">
+<div class="relative">
+<input class="h-9 pl-8 pr-3 bg-surface-container-lowest rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant shadow-sm focus:outline-none focus:ring-1 focus:ring-primary w-64" placeholder="Search clinician name, NMC/State ID..." type="text"/>
+<span class="material-symbols-outlined absolute left-2 top-2 text-[16px] text-on-surface-variant pointer-events-none">search</span>
+</div>
+<button class="h-9 px-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm flex items-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+<span>Filter</span>
+</button>
+</div>
+</div>
+<!-- Users Table View (Desktop / Default) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden" id="users-table-view">
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<tr>
+<th class="py-3 px-4">Clinical User &amp; Registration</th>
+<th class="py-3 px-4">Role Tier</th>
+<th class="py-3 px-4">Facility / Edge Node</th>
+<th class="py-3 px-4">Last Activity</th>
+<th class="py-3 px-4 text-center">Inference Access</th>
+<th class="py-3 px-4 text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container text-body-sm font-body-sm" id="users-table-body">
+<!-- USER 1: Dr. Arti Sharma -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-[13px] shrink-0">
+                      AS
+                    </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Dr. Arti Sharma</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">MO / Tele-radiologist • <span class="font-mono-data-sm text-mono-data-sm font-medium">#MH-MED-82194</span></span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<!-- Doctor Badge: Purple / Blue tone -->
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">stethoscope</span>
+<span>Doctor</span>
+</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Ahmadnagar Tele-Radiology Hub</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Cluster Tele-Node #01</span>
+</div>
+</td>
+<td class="py-3 px-4 font-mono-data-sm text-mono-data-sm text-on-surface-variant whitespace-nowrap">
+<span class="text-tertiary-container font-semibold">12m ago</span> • 24 Oct 14:18
+                </td>
+<td class="py-3 px-4 text-center">
+<button aria-checked="true" class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container transition-colors duration-200 ease-in-out focus:outline-none" onclick="toggleUserAccess(this)" role="switch" type="button">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-tertiary shadow ring-0 transition duration-200 ease-in-out mt-0.5 ml-0.5"></span>
+</button>
+</td>
+<td class="py-3 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onclick="editUser('Dr. Arti Sharma')" title="Edit permissions" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- USER 2: Sister Lakshmi Devi -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-[13px] shrink-0">
+                      LD
+                    </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Sister Lakshmi Devi</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">ANM / Radiographer • <span class="font-mono-data-sm text-mono-data-sm font-medium">#MH-NUR-4012</span></span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<!-- Health Worker Badge: Teal tone -->
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">volunteer_activism</span>
+<span>Health worker</span>
+</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Kashti Primary Health Centre</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Rural Health Cluster 2</span>
+</div>
+</td>
+<td class="py-3 px-4 font-mono-data-sm text-mono-data-sm text-on-surface-variant whitespace-nowrap">
+                  Today, 09:15 IST
+                </td>
+<td class="py-3 px-4 text-center">
+<button aria-checked="true" class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container transition-colors duration-200 ease-in-out focus:outline-none" onclick="toggleUserAccess(this)" role="switch" type="button">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-tertiary shadow ring-0 transition duration-200 ease-in-out mt-0.5 ml-0.5"></span>
+</button>
+</td>
+<td class="py-3 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onclick="editUser('Sister Lakshmi Devi')" title="Edit permissions" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- USER 3: Dr. Rajesh Kulkarni -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-[13px] shrink-0">
+                      RK
+                    </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Dr. Rajesh Kulkarni</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lead Medical Officer / Admin • <span class="font-mono-data-sm text-mono-data-sm font-medium">#MH-MED-10928</span></span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<!-- Admin Badge: Amber/Navy tone -->
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">admin_panel_settings</span>
+<span>Admin</span>
+</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Kashti PHC / District Cluster</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Edge Host Administrator</span>
+</div>
+</td>
+<td class="py-3 px-4 font-mono-data-sm text-mono-data-sm text-on-surface-variant whitespace-nowrap">
+                  Active Now • Session Active
+                </td>
+<td class="py-3 px-4 text-center">
+<button aria-checked="true" class="relative inline-flex h-6 w-11 shrink-0 cursor-not-allowed opacity-80 rounded-full bg-tertiary-container transition-colors" disabled="" role="switch" title="Admin lock" type="button">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-tertiary shadow mt-0.5 ml-0.5"></span>
+</button>
+</td>
+<td class="py-3 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onclick="editUser('Dr. Rajesh Kulkarni')" title="Edit permissions" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- USER 4: Babu Rao -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-bold text-[13px] shrink-0">
+                      BR
+                    </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Babu Rao</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Edge IT / Cluster Technician • <span class="font-mono-data-sm text-mono-data-sm font-medium">#TECH-KASHTI-09</span></span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">terminal</span>
+<span>Admin</span>
+</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Kashti Primary Health Centre</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Local Hardware Custodian</span>
+</div>
+</td>
+<td class="py-3 px-4 font-mono-data-sm text-mono-data-sm text-on-surface-variant whitespace-nowrap">
+                  Yesterday, 17:40 IST
+                </td>
+<td class="py-3 px-4 text-center">
+<button aria-checked="false" class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-surface-container-high transition-colors duration-200 ease-in-out focus:outline-none" onclick="toggleUserAccess(this)" role="switch" type="button">
+<span class="translate-x-0.5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-surface-container-lowest shadow ring-0 transition duration-200 ease-in-out mt-0.5 ml-0.5"></span>
+</button>
+</td>
+<td class="py-3 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" onclick="editUser('Babu Rao')" title="Edit permissions" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Users Mobile Cards Representation (Shown during mobile state or small viewports) -->
+<div class="hidden flex-col gap-space-sm" id="users-mobile-view">
+<!-- User Card 1 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-[12px]">
+                AS
+              </div>
+<div>
+<span class="font-label-md text-label-md font-bold text-on-surface block">Dr. Arti Sharma</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">#MH-MED-82194</span>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">
+              Doctor
+            </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ahmadnagar Tele-Radiology Hub</span>
+<div class="flex items-center justify-between pt-2">
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Active: 12m ago</span>
+<div class="flex items-center gap-3">
+<button class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container" onclick="toggleUserAccess(this)" role="switch" type="button">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-tertiary mt-0.5 ml-0.5"></span>
+</button>
+<button class="p-1 text-primary" onclick="editUser('Dr. Arti Sharma')" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- User Card 2 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-[12px]">
+                LD
+              </div>
+<div>
+<span class="font-label-md text-label-md font-bold text-on-surface block">Sister Lakshmi Devi</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">#MH-NUR-4012</span>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-semibold">
+              Health worker
+            </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kashti Primary Health Centre</span>
+<div class="flex items-center justify-between pt-2">
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Active: Today, 09:15</span>
+<div class="flex items-center gap-3">
+<button class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container" onclick="toggleUserAccess(this)" role="switch" type="button">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-tertiary mt-0.5 ml-0.5"></span>
+</button>
+<button class="p-1 text-primary" onclick="editUser('Sister Lakshmi Devi')" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Users Empty State (Used for State 3) -->
+<div class="hidden p-space-xl bg-surface-container-lowest rounded-xl shadow-sm flex-col items-center justify-center text-center gap-space-md" id="users-empty-state">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[32px]">person_off</span>
+</div>
+<div class="max-w-md flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">No Clinical Users Found</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            No users found matching current filters or facility node permissions. Create new clinical operator accounts to grant access.
+          </p>
+</div>
+<button class="h-11 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-2" onclick="openCreateUserModal()" type="button">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>+ Invite user</span>
+</button>
+</div>
+<!-- Users Skeleton Loading (Used for State 4) -->
+<div class="hidden bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden p-space-md flex-col gap-space-md animate-pulse" id="users-skeleton-state">
+<div class="h-8 bg-surface-container-high rounded w-1/3"></div>
+<div class="space-y-3">
+<div class="h-12 bg-surface-container rounded-lg"></div>
+<div class="h-12 bg-surface-container rounded-lg"></div>
+<div class="h-12 bg-surface-container rounded-lg"></div>
+<div class="h-12 bg-surface-container rounded-lg"></div>
+</div>
+</div>
+</section>
+<!-- Administrative Audit & Security Metadata Card -->
+<div class="p-space-md bg-surface-container-low rounded-xl shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">encrypted</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Automated Binary Signature Attestation</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+            TPM 2.0 Hardware root of trust enabled. Model execution rejected if hash mismatches certified manifests.
+          </span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Attestation Log ID: #ATT-2024-9981</span>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold shadow-sm transition-colors flex items-center gap-1" onclick="exportAuditManifest()" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Export Manifest</span>
+</button>
+</div>
+</div>
+<!-- Regulatory Governance Technical Footer -->
+<div class="pt-space-md flex flex-col items-center justify-center text-center gap-1">
+<div class="flex flex-wrap items-center justify-center gap-2 text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span>Clinical Decision Support System (CDSS) Administration</span>
+<span>•</span>
+<span>Edge Node ID: <strong class="text-on-surface">KASHTI-PHC-04</strong></span>
+<span>•</span>
+<span>Compliant with ISO 13485:2016, ABDM M2/M3 &amp; CDSCO Digital Health Governance Guidelines</span>
+</div>
+<div class="font-label-sm text-label-sm text-secondary font-medium mt-0.5">
+        Permanent Regulatory Notice: Decision support only. Not a diagnosis. Requires clinician review.
+      </div>
+</div>
+</div>
+<!-- Interactive Modal: Create User -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden items-center justify-center p-4" id="modal-create-user">
+<div class="bg-surface-container-lowest rounded-2xl shadow-xl max-w-lg w-full p-space-lg flex flex-col gap-space-md animate-in fade-in zoom-in-95">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Create Clinical Operator</h3>
+</div>
+<button class="p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container" onclick="closeCreateUserModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-space-sm" onsubmit="handleUserSubmit(event)">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Full Legal Name</label>
+<input class="w-full h-10 px-3 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Dr. / Sister / Shri..." required="" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Role Classification</label>
+<select class="w-full h-10 px-3 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary">
+<option value="doctor">Doctor (Medical Officer)</option>
+<option value="worker">Health Worker (ANM/Tech)</option>
+<option value="admin">Admin / System Lead</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Council Registration #</label>
+<input class="w-full h-10 px-3 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" placeholder="MH-MED-XXXX" required="" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Assigned Facility Node</label>
+<input class="w-full h-10 px-3 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" type="text" value="Kashti Primary Health Centre (Cluster #04)"/>
+</div>
+<div class="p-3 bg-surface-container rounded-lg flex items-center justify-between mt-1">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Grant Inference Execution</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Allows triggering AI pipelines on radiographs</span>
+</div>
+<input checked="" class="w-4 h-4 accent-primary rounded" type="checkbox"/>
+</div>
+<div class="flex items-center justify-end gap-2 pt-space-xs mt-2">
+<button class="h-10 px-4 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-label-md text-label-md font-medium" onclick="closeCreateUserModal()" type="button">
+            Cancel
+          </button>
+<button class="h-10 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm" type="submit">
+            Save &amp; Issue Credentials
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Interactive Modal: Replace Quarantined Binary -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden items-center justify-center p-4" id="modal-replace-binary">
+<div class="bg-surface-container-lowest rounded-2xl shadow-xl max-w-lg w-full p-space-lg flex flex-col gap-space-md animate-in fade-in zoom-in-95">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">system_update_alt</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Resolve Mismatch: Knee-BoneCAD</h3>
+</div>
+<button class="p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container" onclick="closeReplaceModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-3 font-body-sm text-body-sm text-on-surface-variant">
+<p>The local weight tensor failed CDSCO certification check. Selecting pull will overwrite the corrupted edge artifact with the authenticated package from the Ahmadnagar central server.</p>
+<div class="p-3 bg-surface-container-low rounded-lg font-mono-data-sm text-mono-data-sm flex flex-col gap-1">
+<div class="flex justify-between">
+<span class="text-error font-semibold">Active Local:</span>
+<span class="text-on-surface line-through">sha256:4d12c0aa...</span>
+</div>
+<div class="flex justify-between">
+<span class="text-tertiary-container font-semibold">Certified Target:</span>
+<span class="text-on-surface font-bold">sha256:7c9e0a81...</span>
+</div>
+</div>
+<div class="hidden flex-col gap-1.5 pt-2" id="download-progress-bar">
+<div class="flex justify-between font-mono-data-sm text-mono-data-sm text-on-surface">
+<span>Pulling from Central Cloud...</span>
+<span id="download-pct">42%</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary transition-all duration-300" id="download-fill" style="width: 42%;"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end gap-2 pt-space-xs mt-2" id="replace-actions">
+<button class="h-10 px-4 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-label-md text-label-md font-medium" onclick="closeReplaceModal()" type="button">
+          Cancel
+        </button>
+<button class="h-10 px-5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm flex items-center gap-1.5" onclick="startBinaryDownload()" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_download</span>
+<span>Download &amp; Hot-Reload</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Toast Notification Template -->
+<div class="fixed bottom-6 right-6 z-50 bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none translate-y-2" id="toast">
+<span class="material-symbols-outlined text-[20px] text-tertiary-fixed" id="toast-icon">check_circle</span>
+<span class="font-body-sm text-body-sm" id="toast-text">Action completed successfully</span>
+</div>
+</div>
+<script>
+  // Prototype State Controller
+  function setAppState(state) {
+    // Update button states
+    document.querySelectorAll('.state-btn').forEach(btn => {
+      btn.className = 'state-btn px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all shadow-sm';
+    });
+    const activeBtn = document.querySelector(`[data-state-btn="${state}"]`);
+    if (activeBtn) {
+      activeBtn.className = 'state-btn px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold transition-all shadow-sm';
+    }
+
+    // Containers
+    const canvas = document.getElementById('canvas-container');
+    const modelsTable = document.getElementById('models-table-view');
+    const modelsMobile = document.getElementById('models-mobile-view');
+    const modelsEmpty = document.getElementById('models-empty-state');
+    const modelsSkeleton = document.getElementById('models-skeleton-state');
+    const mismatchBanner = document.getElementById('mismatch-banner');
+
+    const usersTable = document.getElementById('users-table-view');
+    const usersMobile = document.getElementById('users-mobile-view');
+    const usersEmpty = document.getElementById('users-empty-state');
+    const usersSkeleton = document.getElementById('users-skeleton-state');
+
+    // Reset default view styles
+    canvas.style.maxWidth = '100%';
+    canvas.style.margin = '0 auto';
+    canvas.classList.remove('bg-surface-container-low', 'p-4', 'rounded-2xl', 'shadow-xl');
+
+    // Reset all sections to hidden before setting active
+    modelsTable.classList.add('hidden');
+    modelsMobile.classList.add('hidden');
+    modelsEmpty.classList.add('hidden');
+    modelsSkeleton.classList.add('hidden');
+    mismatchBanner.classList.remove('hidden');
+
+    usersTable.classList.add('hidden');
+    usersMobile.classList.add('hidden');
+    usersEmpty.classList.add('hidden');
+    usersSkeleton.classList.add('hidden');
+
+    if (state === 'default') {
+      modelsTable.classList.remove('hidden');
+      usersTable.classList.remove('hidden');
+      showToast('Loaded full administrative state (Kashti PHC Node)', 'verified');
+    } else if (state === 'mismatch-focused') {
+      modelsTable.classList.remove('hidden');
+      usersTable.classList.remove('hidden');
+      mismatchBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      mismatchBanner.classList.add('ring-4', 'ring-error/40');
+      setTimeout(() => mismatchBanner.classList.remove('ring-4', 'ring-error/40'), 2500);
+      showToast('Focusing on CDSCO checksum mismatch violation', 'warning');
+    } else if (state === 'empty') {
+      modelsEmpty.classList.remove('hidden');
+      modelsEmpty.classList.add('flex');
+      usersEmpty.classList.remove('hidden');
+      usersEmpty.classList.add('flex');
+      mismatchBanner.classList.add('hidden');
+      showToast('Simulation: Node with zero active models/users', 'info');
+    } else if (state === 'loading') {
+      modelsSkeleton.classList.remove('hidden');
+      modelsSkeleton.classList.add('flex');
+      usersSkeleton.classList.remove('hidden');
+      usersSkeleton.classList.add('flex');
+      showToast('Simulating background edge synchronization...', 'pending');
+    } else if (state === 'mobile') {
+      canvas.style.maxWidth = '390px';
+      canvas.style.margin = '0 auto';
+      canvas.classList.add('bg-surface-container-low', 'p-3', 'rounded-2xl', 'shadow-xl');
+      modelsMobile.classList.remove('hidden');
+      modelsMobile.classList.add('flex');
+      usersMobile.classList.remove('hidden');
+      usersMobile.classList.add('flex');
+      showToast('Simulating iPhone/Android Mobile viewport (390px)', 'smartphone');
+    }
+  }
+
+  // Micro-interactions & Functional Toasts
+  function showToast(message, icon = 'check_circle') {
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toast-text');
+    const toastIcon = document.getElementById('toast-icon');
+    
+    toastText.textContent = message;
+    toastIcon.textContent = icon;
+    
+    toast.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+    toast.classList.add('opacity-100', 'translate-y-0');
+    
+    setTimeout(() => {
+      toast.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+      toast.classList.remove('opacity-100', 'translate-y-0');
+    }, 3200);
+  }
+
+  function copyHash(hash, btn) {
+    navigator.clipboard.writeText(hash).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="material-symbols-outlined text-[16px] text-tertiary-container">done</span>';
+      showToast(`Copied digest: ${hash.slice(0, 18)}...`, 'content_copy');
+      setTimeout(() => {
+        btn.innerHTML = orig;
+      }, 1800);
+    }).catch(() => {
+      showToast(`Copied: ${hash.slice(0, 18)}...`, 'content_copy');
+    });
+  }
+
+  function toggleUserAccess(button) {
+    const isChecked = button.getAttribute('aria-checked') === 'true';
+    const knob = button.querySelector('span');
+    
+    if (isChecked) {
+      button.setAttribute('aria-checked', 'false');
+      button.classList.remove('bg-tertiary-container');
+      button.classList.add('bg-surface-container-high');
+      knob.classList.remove('translate-x-5');
+      knob.classList.add('translate-x-0.5');
+      showToast('Clinician inference permissions suspended', 'block');
+    } else {
+      button.setAttribute('aria-checked', 'true');
+      button.classList.add('bg-tertiary-container');
+      button.classList.remove('bg-surface-container-high');
+      knob.classList.remove('translate-x-0.5');
+      knob.classList.add('translate-x-5');
+      showToast('Clinician inference permissions active', 'check_circle');
+    }
+  }
+
+  function reverifyModel(modelName) {
+    showToast(`Re-verifying local SHA-256 for ${modelName}...`, 'sync');
+    setTimeout(() => {
+      showToast(`Digest match validated against Central Registry!`, 'verified');
+    }, 1200);
+  }
+
+  function verifyAllChecksums() {
+    const icon = document.getElementById('verify-icon');
+    icon.classList.add('animate-spin');
+    showToast('Computing SHA-256 digests across 4 local runtime binaries...', 'hourglass_top');
+    setTimeout(() => {
+      icon.classList.remove('animate-spin');
+      showToast('Verification complete: 3 Passed, 1 Mismatch quarantined', 'gpp_maybe');
+    }, 1500);
+  }
+
+  function syncWithCentralRegistry() {
+    const icon = document.getElementById('sync-icon');
+    icon.classList.add('animate-spin');
+    showToast('Connecting to MoHFW Central CDSS Registry (m2.abdm.gov.in)...', 'cloud_sync');
+    setTimeout(() => {
+      icon.classList.remove('animate-spin');
+      showToast('Edge repository is synced with release bundle 2024.10.4', 'done_all');
+    }, 1800);
+  }
+
+  // Modals handling
+  function openCreateUserModal() {
+    const modal = document.getElementById('modal-create-user');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeCreateUserModal() {
+    const modal = document.getElementById('modal-create-user');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function handleUserSubmit(e) {
+    e.preventDefault();
+    closeCreateUserModal();
+    showToast('New clinical user account registered & key issued', 'badge');
+  }
+
+  function resolveMismatchModal() {
+    const modal = document.getElementById('modal-replace-binary');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeReplaceModal() {
+    const modal = document.getElementById('modal-replace-binary');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function inspectMismatchDigest() {
+    showToast('Audit Log: Local digest does not match Central Registry hash', 'info');
+  }
+
+  function startBinaryDownload() {
+    const progress = document.getElementById('download-progress-bar');
+    const fill = document.getElementById('download-fill');
+    const pct = document.getElementById('download-pct');
+    const actions = document.getElementById('replace-actions');
+    
+    progress.classList.remove('hidden');
+    progress.classList.add('flex');
+    actions.classList.add('opacity-50', 'pointer-events-none');
+
+    let current = 10;
+    const interval = setInterval(() => {
+      current += 20;
+      if (current >= 100) {
+        current = 100;
+        clearInterval(interval);
+        setTimeout(() => {
+          closeReplaceModal();
+          showToast('Knee-BoneCAD replacement binary installed & verified!', 'verified');
+        }, 600);
+      }
+      fill.style.width = current + '%';
+      pct.textContent = current + '%';
+    }, 300);
+  }
+
+  function editUser(name) {
+    showToast(`Opening access control credentials for ${name}`, 'manage_accounts');
+  }
+
+  function exportAuditManifest() {
+    showToast('Exporting encrypted ABDM audit manifest #ATT-2024-9981.json', 'file_download');
+  }
+
+  function deployNewModel() {
+    showToast('Connecting to CDSCO Approved Registry catalog...', 'add_box');
+  }
+</script></main></div><footer class="w-full bg-surface-container-low py-space-xs px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-center gap-2 text-center text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[16px]">verified_user</span><span>Decision support only. Not a diagnosis. Requires clinician review.</span></div></footer></div></body></html>

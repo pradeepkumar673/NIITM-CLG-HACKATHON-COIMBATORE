@@ -70,11 +70,13 @@ def create_app() -> FastAPI:
     from backend.app.api.health import router as health_router
     from backend.app.api.studies import router as studies_router
     from backend.app.api.anatomy import router as anatomy_router
+    from backend.app.api.dashboard import router as dashboard_router
 
     app.include_router(auth_router)
     app.include_router(health_router)
     app.include_router(studies_router)
     app.include_router(anatomy_router)
+    app.include_router(dashboard_router)
 
     # Initialize pipeline
     from backend.app.services.pipeline import init_pipeline

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#004e5a", "secondary-fixed": "#d6e3fb", "surface-tint": "#1e6774", "surface-dim": "#d1daeb", "outline-variant": "#bfc8cb", "error": "#ba1a1a", "on-primary-container": "#93d5e4", "on-secondary-fixed-variant": "#3b485a", "on-background": "#131c28", "surface-container": "#e5eeff", "secondary-fixed-dim": "#bac7de", "secondary-container": "#d6e3fb", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#98f6bb", "on-error-container": "#93000a", "inverse-primary": "#8fd1e0", "on-secondary": "#ffffff", "on-surface-variant": "#3f484b", "primary": "#004550", "on-secondary-fixed": "#0f1c2d", "surface-variant": "#dae3f4", "tertiary-container": "#00633a", "on-primary-fixed": "#001f25", "outline": "#6f797b", "on-secondary-container": "#586579", "on-tertiary-fixed-variant": "#00522f", "tertiary-fixed-dim": "#7cd9a1", "on-tertiary": "#ffffff", "surface-bright": "#f8f9ff", "surface": "#f8f9ff", "inverse-surface": "#28313d", "surface-container-high": "#e0e9f9", "secondary": "#525f73", "inverse-on-surface": "#eaf1ff", "surface-container-highest": "#dae3f4", "background": "#f8f9ff", "tertiary": "#004929", "on-surface": "#131c28", "on-primary": "#ffffff", "primary-fixed": "#abedfc", "on-error": "#ffffff", "primary-fixed-dim": "#8fd1e0", "on-tertiary-container": "#81dea5", "on-tertiary-fixed": "#002110", "error-container": "#ffdad6", "surface-container-low": "#eff4ff", "primary-container": "#0f5e6b" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "margin": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-md": "1rem", "gutter": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-sm": [ "Inter" ], "mono-data-lg": [ "JetBrains Mono" ], "body-lg": [ "Inter" ], "label-sm": [ "Inter" ], "label-md": [ "Inter" ], "headline-xl": [ "Inter" ], "mono-data-md": [ "JetBrains Mono" ], "headline-md": [ "Inter" ], "body-md": [ "Inter" ], "mono-data-sm": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Inter" ], "headline-lg": [ "Inter" ], "headline-lg-mobile": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "600" } ], "mono-data-lg": [ "1.125rem", { "lineHeight": "1.5rem", "fontWeight": "500" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-xl": [ "2rem", { "lineHeight": "2.5rem", "fontWeight": "700" } ], "mono-data-md": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" } ], "headline-md": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-md": [ "1rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "mono-data-sm": [ "0.75rem", { "lineHeight": "1rem", "fontWeight": "400" } ], "headline-xl-mobile": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "700" } ], "headline-lg": [ "1.5rem", { "lineHeight": "2rem", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "600" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-60 bg-surface-container-low z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">XRAY-ASSISTANT</span><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>Online</span></div><div class="flex items-center gap-1 text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="material-symbols-outlined text-[14px]">wifi</span><span>Sync: Local Edge</span></div></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-primary text-on-primary font-label-md text-label-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="dashboard" href="#"><span>Dashboard</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="review-queue" href="#"><span>Review queue</span><span class="px-1.5 py-0.5 rounded-full bg-error text-on-error font-mono-data-sm text-mono-data-sm font-semibold leading-none">07</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="studies" href="#"><span>Studies</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-study" href="#"><span>Ingest / New study</span></a></nav><div class="px-space-md pt-space-xs"><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Language</label><div class="relative"><select class="w-full appearance-none bg-surface-container-lowest text-on-surface font-body-sm text-body-sm py-2 pl-3 pr-8 rounded-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-1 focus:ring-primary"><option value="en">English</option><option value="ta">Tamil [machine-drafted]</option><option value="hi">Hindi [machine-drafted]</option></select><span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span></div></div></div><div class="px-space-md flex flex-col gap-space-sm"><div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col gap-1"><div class="flex items-center justify-between text-on-surface-variant font-mono-data-sm text-mono-data-sm"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">dns</span>Edge Node</span><span class="font-medium text-on-surface">Active</span></div><div class="font-mono-data-sm text-mono-data-sm text-primary font-semibold">KASHTI-PHC-04</div></div><button class="w-full flex items-center justify-center gap-space-sm py-2 px-space-md rounded-lg text-error hover:bg-error-container hover:text-on-error-container font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">logout</span>Sign out</button></div></aside><div class="pl-60 min-h-screen flex flex-col justify-between"><div class="w-full"><header class="fixed top-0 left-60 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold">Kashti PHC / District Cluster</span><span class="font-body-sm text-body-sm text-on-surface-variant">District Ahmadnagar • Rural Health Cluster 2</span></div><div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="font-mono-data-sm text-mono-data-sm">ABHA Network Connected</span></div></div><div class="flex items-center gap-space-md"><div class="text-right hidden sm:flex flex-col"><span class="font-label-md text-label-md text-on-surface font-medium">Dr. Arti Sharma</span><span class="font-body-sm text-body-sm text-on-surface-variant">MO / Tele-radiologist</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-space-lg py-space-md bg-surface"><div class="flex flex-col w-full">
+<!-- Top Prototype Control Bar & Context Ribbon -->
+<div class="w-full bg-surface-container-low px-space-md py-space-sm rounded-xl shadow-sm mb-space-md flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-container text-on-primary font-mono-data-sm text-mono-data-sm">
+<span class="material-symbols-outlined text-[15px]">view_in_ar</span>
+        PROTOTYPE HARNESS
+      </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline">Active CDSS Model: DeepSkel-v3.4-Dist</span>
+<span class="font-mono-data-sm text-mono-data-sm text-secondary hidden md:inline">UID: STUDY-2024-KASHTI-9882</span>
+</div>
+<!-- State Switcher Tabs -->
+<div class="flex items-center gap-1 overflow-x-auto py-1">
+<button class="state-pill px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-primary text-on-primary shadow-sm" id="btn-state-default" onclick="setPrototypeState('default')" type="button">
+        1. Multi-Lesion Overview
+      </button>
+<button class="state-pill px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-container hover:bg-surface-container-high text-on-surface" id="btn-state-focus" onclick="setPrototypeState('focus')" type="button">
+        2. Femur Focus
+      </button>
+<button class="state-pill px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-container hover:bg-surface-container-high text-on-surface" id="btn-state-normal" onclick="setPrototypeState('normal')" type="button">
+        3. No Bone Findings
+      </button>
+<button class="state-pill px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-container hover:bg-surface-container-high text-on-surface" id="btn-state-unavailable" onclick="setPrototypeState('unavailable')" type="button">
+        4. Mapping Unavailable
+      </button>
+<button class="px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-variant text-on-surface-variant flex items-center gap-1" id="btn-mobile-sim" onclick="toggleMobileSimulation()" type="button">
+<span class="material-symbols-outlined text-[15px]">smartphone</span>
+<span>390px Mobile Sim</span>
+</button>
+</div>
+</div>
+<!-- Study Context Header Strip -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-start md:items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">radiology</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Case #KS-9882: Trauma Orthopaedic Polytrauma</h1>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-mono-data-sm text-mono-data-sm font-semibold">Triage Priority 1</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+<span>Patient: R. Deshmukh (M, 42y)</span>
+<span>•</span>
+<span>DICOM ID: DICOM_CR_40219</span>
+<span>•</span>
+<span class="font-mono-data-sm text-mono-data-sm">Acquisition: 11:42 AM IST (AP Full Skeletal Survey)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end md:self-auto">
+<div class="px-2.5 py-1 rounded-lg bg-surface-container-low text-on-surface-variant font-mono-data-sm text-mono-data-sm flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+        3D Inference: Latency 420ms
+      </div>
+<button class="px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">open_in_full</span>
+<span>Maximize View</span>
+</button>
+</div>
+</div>
+<!-- Main Work Area Container (Responsive wrapper that shrinks to 390px in mobile sim mode) -->
+<div class="w-full transition-all duration-300 mx-auto" id="simulation-wrapper">
+<!-- Clinical Grid: 3D Stage (62%) + Contextual Bone Evaluation Panel (38%) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-start" id="grid-container">
+<!-- LEFT / MAIN: 3D Bone Canvas Viewport (Span 7 or 8 on desktop) -->
+<div class="lg:col-span-7 xl:col-span-8 flex flex-col bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Canvas Top Toolbar -->
+<div class="px-space-md py-2.5 bg-surface-container-low flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-md bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">view_in_ar</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Skeleton view</span>
+<span class="hidden sm:inline-block ml-2 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-mono-data-sm text-mono-data-sm">
+                Interactive 3D Orientation Aid • CDSS Class-B
+              </span>
+</div>
+</div>
+<!-- Controls cluster -->
+<div class="flex items-center gap-1.5">
+<!-- Front / Back orientation toggle -->
+<div class="flex bg-surface-container p-0.5 rounded-lg">
+<button class="px-2.5 py-1 rounded-md font-label-sm text-label-sm font-semibold transition-all bg-surface-container-lowest text-primary shadow-xs" id="view-front-btn" onclick="setAspect('front')" type="button">
+                Front
+              </button>
+<button class="px-2.5 py-1 rounded-md font-label-sm text-label-sm font-semibold transition-all text-on-surface-variant hover:text-on-surface" id="view-back-btn" onclick="setAspect('back')" type="button">
+                Back
+              </button>
+</div>
+<!-- Zoom in / out -->
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface transition-colors" onclick="adjustZoom(0.1)" title="Zoom in" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface transition-colors" onclick="adjustZoom(-0.1)" title="Zoom out" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<!-- Reset view -->
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high flex items-center gap-1 text-on-surface font-label-sm text-label-sm transition-colors" onclick="resetOrientation()" title="Reset view rotation" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span class="hidden md:inline">Reset view</span>
+</button>
+<!-- Rotation readout -->
+<div class="hidden xl:flex items-center px-2 py-1 rounded-lg bg-surface-container-high text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<span id="rotation-readout">Yaw: 14° • Pitch: 4°</span>
+</div>
+</div>
+</div>
+<!-- Interactive 3D Render Stage -->
+<div class="relative w-full h-[580px] select-none cursor-grab active:cursor-grabbing overflow-hidden bg-gradient-to-b from-[#0f172a] via-[#111c24] to-[#0a1118]" id="interactive-stage">
+<!-- Grid Floor Reference (Perspective Matrix) -->
+<div class="absolute inset-x-0 bottom-0 h-44 pointer-events-none opacity-25" style="background: radial-gradient(ellipse at bottom, rgba(30,103,116,0.35) 0%, rgba(15,23,42,0) 70%), repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(143,209,224,0.15) 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(143,209,224,0.15) 20px); transform: perspective(400px) rotateX(60deg) scale(1.6);"></div>
+<!-- Ambient Studio Spotlight Gradient -->
+<div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_35%,rgba(15,94,107,0.18)_0%,transparent_65%)]"></div>
+<!-- Interaction Guides Overlay -->
+<div class="absolute top-3 right-3 pointer-events-none flex flex-col gap-1.5 items-end">
+<span class="px-2 py-1 rounded bg-black/40 backdrop-blur-md text-white/70 font-mono-data-sm text-mono-data-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">touch_app</span>
+<span>1-finger rotate • 2-finger zoom</span>
+</span>
+<span class="px-2 py-0.5 rounded bg-primary/40 backdrop-blur-md text-primary-fixed font-mono-data-sm text-mono-data-sm uppercase tracking-wider" id="aspect-indicator">
+              Anterior View (AP)
+            </span>
+</div>
+<!-- ================= SKELETON SVG STAGE ================= -->
+<div class="relative w-full h-full flex items-center justify-center transition-transform duration-100 ease-out" id="skeleton-transform-container" style="transform: perspective(800px) rotateY(14deg) rotateX(4deg) scale(1);">
+<svg class="w-[360px] h-[540px] drop-shadow-2xl" fill="none" id="skeleton-svg" viewbox="0 0 360 540" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<!-- Fracture Marker Radial Gradient -->
+<radialgradient cx="50%" cy="50%" id="heat-crimson" r="50%">
+<stop offset="0%" stop-color="#ef4444" stop-opacity="0.95"></stop>
+<stop offset="60%" stop-color="#b91c1c" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#7f1d1d" stop-opacity="0.2"></stop>
+</radialgradient>
+<radialgradient cx="50%" cy="50%" id="heat-orange" r="50%">
+<stop offset="0%" stop-color="#f97316" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#c2410c" stop-opacity="0.2"></stop>
+</radialgradient>
+<radialgradient cx="50%" cy="50%" id="heat-yellow" r="50%">
+<stop offset="0%" stop-color="#facc15" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#a16207" stop-opacity="0.2"></stop>
+</radialgradient>
+<!-- Healthy Bone Shading Filter -->
+<lineargradient id="bone-normal-grad" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#f1f5f9"></stop>
+<stop offset="60%" stop-color="#cbd5e1"></stop>
+<stop offset="100%" stop-color="#94a3b8"></stop>
+</lineargradient>
+<!-- Selection Glow Filter -->
+<filter height="140%" id="cyan-glow" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="0" flood-color="#06b6d4" flood-opacity="0.9" stddeviation="4"></fedropshadow>
+</filter>
+</defs>
+<!-- SKELETAL SYSTEM GROUPS (Clickable Bone Anatomical Entities) -->
+<!-- 1. Cranium / Skull -->
+<g class="cursor-pointer group" id="bone-cranium" onclick="selectBone('cranium', event)">
+<path class="bone-mesh transition-colors hover:brightness-125" d="M165 35 C165 18, 195 18, 195 35 C205 38, 203 55, 196 66 C190 75, 170 75, 164 66 C157 55, 155 38, 165 35 Z" fill="url(#bone-normal-grad)"></path>
+<path d="M172 66 L188 66 L185 75 L175 75 Z" fill="#94a3b8" opacity="0.8"></path>
+<!-- Mandible -->
+<path d="M170 75 C170 82, 190 82, 190 75 Z" fill="#cbd5e1"></path>
+</g>
+<!-- 2. Cervical Spine & Clavicles -->
+<g class="cursor-pointer" id="bone-cervical" onclick="selectBone('cervical', event)">
+<rect class="bone-mesh hover:brightness-125" fill="url(#bone-normal-grad)" height="15" rx="2" width="8" x="176" y="81"></rect>
+</g>
+<!-- Clavicles -->
+<g class="cursor-pointer" id="bone-clavicles">
+<!-- Right Clavicle -->
+<path class="bone-mesh" d="M175 96 C155 94, 138 98, 126 104" fill="none" stroke="#e2e8f0" stroke-linecap="round" stroke-width="4.5"></path>
+<!-- Left Clavicle -->
+<path class="bone-mesh" d="M185 96 C205 94, 222 98, 234 104" fill="none" stroke="#e2e8f0" stroke-linecap="round" stroke-width="4.5"></path>
+</g>
+<!-- 3. Sternum & Rib Cage -->
+<g class="cursor-pointer" id="bone-ribcage" onclick="selectBone('ribcage', event)">
+<!-- Sternum central -->
+<path class="bone-mesh" d="M177 101 L183 101 L182 148 L178 148 Z" fill="#e2e8f0"></path>
+<!-- Rib Arcs -->
+<path d="M176 108 C150 110, 140 128, 148 142 C158 152, 174 150, 178 142" fill="none" opacity="0.75" stroke="#94a3b8" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M184 108 C210 110, 220 128, 212 142 C202 152, 186 150, 182 142" fill="none" opacity="0.75" stroke="#94a3b8" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M176 118 C144 122, 135 145, 146 162 C158 174, 175 168, 178 158" fill="none" opacity="0.75" stroke="#94a3b8" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M184 118 C216 122, 225 145, 214 162 C202 174, 185 168, 182 158" fill="none" opacity="0.75" stroke="#94a3b8" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M177 130 C150 138, 142 165, 156 182" fill="none" opacity="0.6" stroke="#64748b" stroke-linecap="round" stroke-width="2.2"></path>
+<path d="M183 130 C210 138, 218 165, 204 182" fill="none" opacity="0.6" stroke="#64748b" stroke-linecap="round" stroke-width="2.2"></path>
+</g>
+<!-- 4. Thoracic & Lumbar Spine -->
+<g class="cursor-pointer group" id="bone-spine" onclick="selectBone('spine', event)">
+<rect class="bone-mesh" fill="#cbd5e1" height="85" rx="3" width="8" x="176" y="98"></rect>
+<!-- Individual Lumbar Vertebra L3 (Highlighted finding) -->
+<rect class="bone-mesh transition-all duration-300" fill="#eab308" height="12" id="mesh-l3" rx="2" stroke="#fef08a" stroke-width="0.5" width="14" x="173" y="162"></rect>
+</g>
+<!-- 5. Pelvis & Sacrum -->
+<g class="cursor-pointer" id="bone-pelvis" onclick="selectBone('pelvis', event)">
+<!-- Sacrum -->
+<polygon fill="#94a3b8" points="175,185 185,185 182,215 178,215"></polygon>
+<!-- Iliac Crests Right / Left -->
+<path class="bone-mesh" d="M174 192 C155 185, 140 196, 142 216 C144 230, 160 236, 172 225 Z" fill="url(#bone-normal-grad)"></path>
+<path class="bone-mesh" d="M186 192 C205 185, 220 196, 218 216 C216 230, 200 236, 188 225 Z" fill="url(#bone-normal-grad)"></path>
+<!-- Pubic Symphysis -->
+<circle cx="180" cy="235" fill="#64748b" r="4"></circle>
+</g>
+<!-- 6. Right Upper Extremity (Humerus, Radius, Ulna, Hand) -->
+<g class="cursor-pointer" id="bone-right-arm">
+<!-- Scapula Right -->
+<polygon fill="#64748b" opacity="0.7" points="128,104 140,112 135,130"></polygon>
+<!-- Right Humerus -->
+<path class="bone-mesh hover:brightness-125" d="M125 108 L114 174" id="mesh-right-humerus" onclick="selectBone('right_humerus', event)" stroke="#cbd5e1" stroke-linecap="round" stroke-width="7"></path>
+<!-- Right Forearm (Radius + Ulna) -->
+<path class="bone-mesh" d="M112 180 L98 240" stroke="#cbd5e1" stroke-linecap="round" stroke-width="4.5"></path>
+<path class="bone-mesh" d="M116 180 L103 241" stroke="#94a3b8" stroke-linecap="round" stroke-width="3"></path>
+<!-- Right Hand -->
+<circle cx="95" cy="248" fill="#94a3b8" r="4"></circle>
+</g>
+<!-- 7. Left Upper Extremity -->
+<g class="cursor-pointer" id="bone-left-arm">
+<!-- Scapula Left -->
+<polygon fill="#64748b" opacity="0.7" points="232,104 220,112 225,130"></polygon>
+<!-- Left Humerus -->
+<path class="bone-mesh hover:brightness-125" d="M235 108 L246 174" id="mesh-left-humerus" onclick="selectBone('left_humerus', event)" stroke="#cbd5e1" stroke-linecap="round" stroke-width="7"></path>
+<!-- Left Forearm -->
+<path class="bone-mesh" d="M248 180 L262 240" stroke="#cbd5e1" stroke-linecap="round" stroke-width="4.5"></path>
+<path class="bone-mesh" d="M244 180 L257 241" stroke="#94a3b8" stroke-linecap="round" stroke-width="3"></path>
+<!-- Left Hand -->
+<circle cx="265" cy="248" fill="#94a3b8" r="4"></circle>
+</g>
+<!-- 8. Right Lower Extremity (Femur, Patella, Tibia, Fibula) -->
+<g id="bone-right-leg">
+<!-- Right Femur (Healthy baseline or secondary) -->
+<path class="bone-mesh cursor-pointer hover:brightness-125" d="M162 236 L150 350" id="mesh-right-femur" onclick="selectBone('right_femur', event)" stroke="#cbd5e1" stroke-linecap="round" stroke-width="9.5"></path>
+<!-- Right Patella -->
+<circle cx="149" cy="355" fill="#e2e8f0" r="4"></circle>
+<!-- Right Tibia (TIER 2 LESION: Distal orange heat) -->
+<path class="bone-mesh cursor-pointer transition-all duration-300" d="M148 362 L142 470" id="mesh-right-tibia" onclick="selectBone('right_tibia', event)" stroke="#f97316" stroke-linecap="round" stroke-width="7.5"></path>
+<!-- Right Fibula -->
+<path d="M141 364 L135 468" stroke="#94a3b8" stroke-linecap="round" stroke-width="2.8"></path>
+<!-- Right Foot -->
+<path d="M141 475 L130 488" stroke="#cbd5e1" stroke-linecap="round" stroke-width="4.5"></path>
+</g>
+<!-- 9. Left Lower Extremity (Femur Shaft - TIER 1 PRIMARY LESION) -->
+<g id="bone-left-leg">
+<!-- Left Femur Shaft (Crucial lesion) -->
+<path class="bone-mesh cursor-pointer transition-all duration-300" d="M198 236 L210 350" filter="url(#cyan-glow)" id="mesh-left-femur" onclick="selectBone('left_femur', event)" stroke="#dc2626" stroke-linecap="round" stroke-width="10.5"></path>
+<!-- Left Patella -->
+<circle cx="211" cy="355" fill="#e2e8f0" r="4"></circle>
+<!-- Left Tibia -->
+<path class="bone-mesh cursor-pointer hover:brightness-125" d="M212 362 L218 470" id="mesh-left-tibia" onclick="selectBone('left_tibia', event)" stroke="#cbd5e1" stroke-linecap="round" stroke-width="7.5"></path>
+<!-- Left Fibula -->
+<path d="M219 364 L225 468" stroke="#94a3b8" stroke-linecap="round" stroke-width="2.8"></path>
+<!-- Left Foot -->
+<path d="M219 475 L230 488" stroke="#cbd5e1" stroke-linecap="round" stroke-width="4.5"></path>
+</g>
+<!-- ================= DYNAMIC LESION RIPPLE MARKERS ================= -->
+<!-- Finding 1: Left Femur Mid-Shaft (P=0.88, High Risk) -->
+<g class="lesion-pulse-group cursor-pointer pointer-events-auto" id="marker-femur" onclick="selectBone('left_femur', event)">
+<circle class="animate-ping" cx="205" cy="295" fill="url(#heat-crimson)" opacity="0.65" r="16" style="animation-duration: 2s;"></circle>
+<circle cx="205" cy="295" fill="#dc2626" r="10" stroke="#ffffff" stroke-width="2"></circle>
+<circle cx="205" cy="295" fill="#ffffff" r="3.5"></circle>
+<!-- Floating Callout Label -->
+<rect fill="#1e293b" height="20" rx="4" stroke="#dc2626" stroke-width="1" width="76" x="225" y="284"></rect>
+<text fill="#fecaca" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" x="231" y="298">p=0.88 T1</text>
+</g>
+<!-- Finding 2: Right Tibia Distal (P=0.64, Moderate Risk) -->
+<g class="lesion-pulse-group cursor-pointer pointer-events-auto" id="marker-tibia" onclick="selectBone('right_tibia', event)">
+<circle class="animate-ping" cx="144" cy="445" fill="url(#heat-orange)" opacity="0.5" r="14" style="animation-duration: 2.5s;"></circle>
+<circle cx="144" cy="445" fill="#ea580c" r="8" stroke="#ffffff" stroke-width="1.5"></circle>
+<circle cx="144" cy="445" fill="#ffffff" r="2.5"></circle>
+<rect fill="#1e293b" height="20" rx="4" stroke="#f97316" stroke-width="1" width="76" x="58" y="435"></rect>
+<text fill="#fed7aa" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" x="64" y="449">p=0.64 T2</text>
+</g>
+<!-- Finding 3: L3 Vertebra (P=0.31, Mild / Low Risk) -->
+<g class="lesion-pulse-group cursor-pointer pointer-events-auto" id="marker-l3" onclick="selectBone('spine', event)">
+<circle cx="180" cy="168" fill="#ca8a04" r="7" stroke="#ffffff" stroke-width="1.2"></circle>
+<circle cx="180" cy="168" fill="#ffffff" r="2"></circle>
+</g>
+</svg>
+</div>
+<!-- ================= STATE 3 OVERLAY: NORMAL SKELETON NOTIFICATION ================= -->
+<div class="hidden absolute inset-0 bg-[#0f172a]/70 backdrop-blur-sm flex items-center justify-center p-6 text-center" id="state-normal-banner">
+<div class="max-w-md bg-surface-container-lowest p-space-lg rounded-xl shadow-xl flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center mb-space-sm">
+<span class="material-symbols-outlined text-[28px]">check_circle</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-1">No bone findings for this study</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                All evaluated skeletal anatomical regions are within normal statistical limits (calibrated probability <span class="font-mono-data-sm text-mono-data-sm font-semibold">p &lt; 0.05</span>). Cortical margins intact.
+              </p>
+<div class="px-3 py-1.5 rounded-lg bg-surface-container font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+                DeepSkel Analysis Complete • Verification: Cleared
+              </div>
+</div>
+</div>
+<!-- ================= STATE 4 OVERLAY: MAPPING UNAVAILABLE ================= -->
+<div class="hidden absolute inset-0 bg-[#0b1319]/90 backdrop-blur-md flex items-center justify-center p-6 text-center" id="state-unavailable-banner">
+<div class="max-w-lg bg-surface-container-lowest p-space-lg rounded-xl shadow-xl flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-secondary flex items-center justify-center mb-space-sm">
+<span class="material-symbols-outlined text-[28px]">layers_clear</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-1">Bone position mapping is not available</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">
+                Bone position mapping is not available for this study. Use the X-ray viewer instead.
+              </p>
+<div class="p-3 bg-surface-container-high rounded-lg text-left font-mono-data-sm text-mono-data-sm text-on-surface-variant mb-space-md w-full">
+<div class="text-error font-medium mb-1">DIAGNOSTIC NOTICE: CODE_GEO_LANDMARK_MISSING</div>
+<div>Reason: Acquisition DICOM series lacks calibrated 3D orthogonal registration anchor tags (Tag 0020,0032).</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-4 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">radiology</span>
+<span>Open 2D DICOM Viewer</span>
+</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" onclick="setPrototypeState('default')" type="button">
+                  Dismiss
+                </button>
+</div>
+</div>
+</div>
+<!-- Bottom-Left Heatmap Probability Legend -->
+<div class="absolute bottom-3 left-3 bg-[#0f172a]/90 backdrop-blur-md p-space-sm rounded-lg max-w-[340px] pointer-events-auto">
+<div class="flex items-center justify-between gap-2 mb-1.5">
+<span class="font-label-sm text-label-sm text-slate-200 uppercase tracking-wider font-semibold">Calibrated fracture probability</span>
+<span class="font-mono-data-sm text-mono-data-sm text-teal-300">Bayesian Scale</span>
+</div>
+<!-- Continuous Gradient Bar with Ticks -->
+<div class="relative w-full h-3 rounded-full overflow-hidden shadow-inner bg-slate-800" style="background: linear-gradient(90deg, #94a3b8 0%, #eab308 25%, #f97316 65%, #dc2626 100%);">
+<!-- Micro tick marks -->
+<div class="absolute inset-y-0 left-1/4 w-[1px] bg-white/40"></div>
+<div class="absolute inset-y-0 left-2/4 w-[1px] bg-white/40"></div>
+<div class="absolute inset-y-0 left-3/4 w-[1px] bg-white/40"></div>
+</div>
+<!-- Quantitative intervals -->
+<div class="flex justify-between items-center text-[10px] font-mono-data-sm text-slate-400 mt-1">
+<span>0.00</span>
+<span>0.25</span>
+<span>0.50</span>
+<span>0.75</span>
+<span>1.00</span>
+</div>
+<!-- Risk Tier Tokens -->
+<div class="flex items-center gap-1.5 mt-2 pt-1.5 border-t border-slate-700/60">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono-data-sm font-semibold bg-slate-800 text-slate-300">
+                Low (T3)
+              </span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono-data-sm font-semibold bg-amber-950 text-amber-300">
+                Mod (T2)
+              </span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono-data-sm font-semibold bg-red-950 text-red-300">
+                High (T1)
+              </span>
+</div>
+</div>
+</div>
+<!-- Viewport Bottom Verification & ABDM Regulatory Ribbon -->
+<div class="px-space-md py-2.5 bg-surface-container-low flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+              Approximate position for orientation only. Not a diagnostic map. Requires clinician review.
+            </span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+              ISO 13485:2016
+            </span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-mono-data-sm text-mono-data-sm text-tertiary">
+              ABDM Validated
+            </span>
+</div>
+</div>
+</div>
+<!-- RIGHT: Selected Bone Inspection Details Panel (Span 5 or 4 on desktop) -->
+<div class="lg:col-span-5 xl:col-span-4 flex flex-col gap-space-md" id="inspector-panel">
+<!-- Active Inspection Card -->
+<div class="w-full bg-surface-container-lowest p-space-md rounded-xl shadow-sm transition-all duration-200">
+<!-- Card Header -->
+<div class="flex items-center justify-between mb-space-md pb-space-sm border-b border-surface-container-high">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">biotech</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Selected Bone Inspection</h2>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-mono-data-sm text-mono-data-sm font-semibold" id="card-status-badge">
+              TIER 1 HIGH RISK
+            </span>
+</div>
+<!-- Dynamic Inspection Content -->
+<div class="flex flex-col gap-space-md" id="bone-card-content">
+<!-- Bone Title & Anatomical Position -->
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-0.5">Anatomical Structure</div>
+<div class="font-headline-md text-headline-md text-on-surface font-bold" id="insp-name">Left femur, shaft</div>
+<div class="font-mono-data-md text-mono-data-md text-primary mt-0.5" id="insp-side">Left (Anterior-Lateral Cortex)</div>
+</div>
+<!-- Probability & CI Metric Pill Box -->
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Calibrated Probability</span>
+<span class="font-mono-data-lg text-mono-data-lg font-bold text-error" id="insp-prob">p = 0.88</span>
+</div>
+<!-- 95% Confidence micro range indicator -->
+<div class="w-full bg-surface-container h-2 rounded-full relative overflow-hidden">
+<div class="absolute h-full bg-error rounded-full" id="insp-ci-bar" style="left: 82%; width: 11%;"></div>
+</div>
+<div class="flex items-center justify-between font-mono-data-sm text-mono-data-sm text-on-surface-variant">
+<span>95% CI Range: <strong class="text-on-surface font-medium" id="insp-ci-text">[0.82 – 0.93]</strong></span>
+<span>Epistemic: <strong class="text-on-surface font-medium" id="insp-mc">σ_mc = ±0.038</strong></span>
+</div>
+</div>
+<!-- Primary Finding Description -->
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Associated Findings</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed" id="insp-desc">
+                Displaced oblique fracture with cortical disruption and adjacent soft-tissue density elevation.
+              </p>
+</div>
+<!-- Verbatim Region Correlation -->
+<div class="p-space-sm bg-secondary-container rounded-lg flex items-start gap-2">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant text-[18px] mt-0.5">heat_pump</span>
+<p class="font-body-sm text-body-sm text-on-secondary-fixed font-medium leading-normal" id="insp-region">
+                Region from the X-ray heatmap: Proximal to mid-diaphyseal femoral cortex.
+              </p>
+</div>
+<!-- Quick Jump Shortcuts for other findings in this study -->
+<div class="flex flex-col gap-1.5 pt-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Associated study findings:</span>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-left transition-colors flex items-center justify-between" onclick="selectBone('right_tibia')" type="button">
+<div class="flex flex-col truncate">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">R. Tibia distal</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">p = 0.64 • Tier 2</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-secondary">chevron_right</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-left transition-colors flex items-center justify-between" onclick="selectBone('spine')" type="button">
+<div class="flex flex-col truncate">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">L3 Vertebra</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant">p = 0.31 • Tier 3</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-secondary">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Clinician Action Buttons -->
+<div class="flex items-center gap-space-sm pt-space-xs border-t border-surface-container-high">
+<button class="flex-1 py-2.5 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-colors flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Confirm finding</span>
+</button>
+<button class="py-2.5 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" title="Mark as non-fracture or artifact" type="button">
+                Reject
+              </button>
+</div>
+</div>
+<!-- Empty Helper Card (Visible when nothing is selected) -->
+<div class="hidden flex-col items-center justify-center py-space-xl text-center" id="bone-card-empty">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant mb-space-sm">
+<span class="material-symbols-outlined text-[24px]">touch_app</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-1">Select a highlighted bone to see details</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs mb-space-md">
+              Click on any bone on the 3D anatomical model to view calibrated probability scores, epistemic confidence intervals, and correlated X-ray heatmaps.
+            </p>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm" onclick="selectBone('left_femur')" type="button">
+                Select Left Femur
+              </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm" onclick="selectBone('right_tibia')" type="button">
+                Select Right Tibia
+              </button>
+</div>
+</div>
+</div>
+<!-- Correlated 2D DICOM Orthogonal Reference Card -->
+<div class="w-full bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Registered 2D DICOM Slice</span>
+<span class="font-mono-data-sm text-mono-data-sm text-primary">Tag: AP_PELVIS_FEMUR</span>
+</div>
+<!-- DICOM Viewport Box -->
+<div class="relative w-full h-40 bg-black rounded-lg overflow-hidden flex items-center justify-center group">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 pointer-events-none"></div>
+<!-- Representative Clinical Radiograph Placeholder -->
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-300" data-alt="High precision clinical grayscale chest and pelvis radiograph with faint calibrated thermal heatmap overlay highlighting fracture lines in mid femoral diaphysis, medical radiology workstation view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx0NKvv_DlUT6nF-GXJp-Fa27_wyzWVNSynrosPsXsnbqEe8wXK7XHQFwrah5AI8vqlopN41dOVkOq5sVFJzurd7Nbj7uH_LpwwSXjGZ3XpXDlXQ4FYgOPjBCWDBs1KKhWkMhGew05HBJWw5VTKzNOvGvrmijWyARBtED2degpmraGEQhPTPqba4fTYALg7jdxzj2i7Nf_EeSR_a47YXf2VO96dtfjPQ8mBCkLO6Kl"/>
+<div class="absolute bottom-2 left-2 z-20 font-mono-data-sm text-mono-data-sm text-white/90">
+              FOV: 350mm • Matrix: 2048x2048 • Window: C:400 W:1500
+            </div>
+<button class="absolute top-2 right-2 z-20 px-2 py-1 rounded bg-black/60 hover:bg-black/80 text-white font-label-sm text-label-sm backdrop-blur-sm flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[14px]">zoom_in</span>
+<span>Compare</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Mobile Bottom Sheet Backdrop & Interactive Drawer (Active when in mobile sim) -->
+<div class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity" id="mobile-sheet-backdrop" onclick="closeMobileDrawer()">
+<div class="absolute bottom-0 inset-x-0 max-w-[390px] mx-auto bg-surface-container-lowest rounded-t-2xl shadow-2xl p-space-md flex flex-col gap-space-sm max-h-[870px] overflow-y-auto" id="mobile-drawer" onclick="event.stopPropagation()">
+<div class="w-10 h-1 rounded-full bg-surface-variant mx-auto mb-1"></div>
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold" id="mobile-sheet-title">Left femur, shaft</span>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface" onclick="closeMobileDrawer()" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-2" id="mobile-sheet-body">
+<!-- Content mirrored dynamically via JS -->
+</div>
+</div>
+</div>
+</div>
+<script>
+  // State Data Store
+  const BONE_DATABASE = {
+    'left_femur': {
+      name: 'Left femur, shaft',
+      side: 'Left (Anterior-Lateral)',
+      prob: '0.88',
+      tierText: 'TIER 1 HIGH RISK',
+      tierClass: 'bg-error-container text-on-error-container',
+      ciText: '[0.82 – 0.93]',
+      ciBarLeft: '82%',
+      ciBarWidth: '11%',
+      ciBarColor: 'bg-error',
+      probColor: 'text-error',
+      mc: '±0.038',
+      desc: 'Displaced oblique fracture with cortical disruption and adjacent soft-tissue density elevation.',
+      region: 'Proximal to mid-diaphyseal femoral cortex.',
+      markerId: 'marker-femur',
+      meshId: 'mesh-left-femur'
+    },
+    'right_tibia': {
+      name: 'Right tibia, distal shaft',
+      side: 'Right (Anterior-Medial)',
+      prob: '0.64',
+      tierText: 'TIER 2 MODERATE RISK',
+      tierClass: 'bg-secondary-container text-on-secondary-fixed-variant',
+      ciText: '[0.57 – 0.71]',
+      ciBarLeft: '57%',
+      ciBarWidth: '14%',
+      ciBarColor: 'bg-[#ea580c]',
+      probColor: 'text-[#ea580c]',
+      mc: '±0.046',
+      desc: 'Non-displaced hairline fracture traversing distal metaphyseal-diaphyseal junction.',
+      region: 'Distal tibia posterior cortex near syndesmosis.',
+      markerId: 'marker-tibia',
+      meshId: 'mesh-right-tibia'
+    },
+    'spine': {
+      name: 'L3 Lumbar Vertebra',
+      side: 'Central Axial Spine',
+      prob: '0.31',
+      tierText: 'TIER 3 LOW RISK',
+      tierClass: 'bg-surface-container text-on-surface',
+      ciText: '[0.24 – 0.38]',
+      ciBarLeft: '24%',
+      ciBarWidth: '14%',
+      ciBarColor: 'bg-amber-600',
+      probColor: 'text-amber-600',
+      mc: '±0.052',
+      desc: 'Mild anterior superior endplate depression suspicious for compression micro-trabecular fracture.',
+      region: 'Anterior superior margin of L3 vertebral body.',
+      markerId: 'marker-l3',
+      meshId: 'mesh-l3'
+    },
+    'cranium': {
+      name: 'Cranium & Calvarium',
+      side: 'Axial Cranial Vault',
+      prob: '0.02',
+      tierText: 'WITHIN NORMAL LIMITS',
+      tierClass: 'bg-surface-container-high text-on-surface-variant',
+      ciText: '[0.01 – 0.04]',
+      ciBarLeft: '1%',
+      ciBarWidth: '3%',
+      ciBarColor: 'bg-secondary',
+      probColor: 'text-secondary',
+      mc: '±0.012',
+      desc: 'No cranial vaults fractures, suture diastasis, or depressed bone fragments identified.',
+      region: 'Biparietal and frontal cranial arches.',
+      markerId: null,
+      meshId: null
+    }
+  };
+
+  let currentYaw = 14;
+  let currentPitch = 4;
+  let currentZoom = 1.0;
+  let currentAspect = 'front'; // 'front' | 'back'
+  let isMobileSimulation = false;
+  let activeSelectedBone = 'left_femur';
+
+  // State Switching Engine
+  function setPrototypeState(state) {
+    const stage = document.getElementById('skeleton-transform-container');
+    const normalBanner = document.getElementById('state-normal-banner');
+    const unavailableBanner = document.getElementById('state-unavailable-banner');
+    const markers = document.querySelectorAll('.lesion-pulse-group');
+    const meshLeftFemur = document.getElementById('mesh-left-femur');
+    const meshRightTibia = document.getElementById('mesh-right-tibia');
+    const meshL3 = document.getElementById('mesh-l3');
+
+    // Update active tab buttons
+    document.querySelectorAll('.state-pill').forEach(btn => {
+      btn.className = 'state-pill px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-container hover:bg-surface-container-high text-on-surface';
+    });
+
+    // Reset banners
+    normalBanner.classList.add('hidden');
+    unavailableBanner.classList.add('hidden');
+
+    if (state === 'default') {
+      document.getElementById('btn-state-default').className = 'state-pill px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-primary text-on-primary shadow-sm';
+      markers.forEach(m => m.style.display = 'block');
+      meshLeftFemur.setAttribute('stroke', '#dc2626');
+      meshRightTibia.setAttribute('stroke', '#f97316');
+      meshL3.setAttribute('fill', '#eab308');
+      showSelectedCard(true);
+      selectBone('left_femur');
+    } else if (state === 'focus') {
+      document.getElementById('btn-state-focus').className = 'state-pill px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-primary text-on-primary shadow-sm';
+      markers.forEach(m => m.style.display = 'block');
+      meshLeftFemur.setAttribute('stroke', '#dc2626');
+      meshRightTibia.setAttribute('stroke', '#cbd5e1'); // dim other finding
+      meshL3.setAttribute('fill', '#cbd5e1');
+      selectBone('left_femur');
+    } else if (state === 'normal') {
+      document.getElementById('btn-state-normal').className = 'state-pill px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-primary text-on-primary shadow-sm';
+      markers.forEach(m => m.style.display = 'none');
+      meshLeftFemur.setAttribute('stroke', '#cbd5e1');
+      meshRightTibia.setAttribute('stroke', '#cbd5e1');
+      meshL3.setAttribute('fill', '#cbd5e1');
+      normalBanner.classList.remove('hidden');
+      showSelectedCard(false);
+    } else if (state === 'unavailable') {
+      document.getElementById('btn-state-unavailable').className = 'state-pill px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-primary text-on-primary shadow-sm';
+      unavailableBanner.classList.remove('hidden');
+      showSelectedCard(false);
+    }
+  }
+
+  function showSelectedCard(hasSelection) {
+    const cardContent = document.getElementById('bone-card-content');
+    const cardEmpty = document.getElementById('bone-card-empty');
+    if (hasSelection) {
+      cardContent.classList.remove('hidden');
+      cardEmpty.classList.add('hidden');
+    } else {
+      cardContent.classList.add('hidden');
+      cardEmpty.classList.remove('hidden');
+    }
+  }
+
+  // Bone Selection Handler
+  function selectBone(boneKey, event) {
+    if (event) event.stopPropagation();
+    const data = BONE_DATABASE[boneKey];
+    if (!data) return;
+
+    activeSelectedBone = boneKey;
+
+    // Reset outline filters across meshes
+    document.querySelectorAll('.bone-mesh').forEach(el => {
+      el.removeAttribute('filter');
+    });
+
+    // Apply cyan glow to the chosen bone if it has a mesh
+    if (data.meshId) {
+      const mesh = document.getElementById(data.meshId);
+      if (mesh) mesh.setAttribute('filter', 'url(#cyan-glow)');
+    }
+
+    // Populate Right Inspector Card
+    showSelectedCard(true);
+    document.getElementById('insp-name').textContent = data.name;
+    document.getElementById('insp-side').textContent = data.side;
+    document.getElementById('insp-prob').textContent = `p = ${data.prob}`;
+    document.getElementById('insp-prob').className = `font-mono-data-lg text-mono-data-lg font-bold ${data.probColor}`;
+    document.getElementById('insp-ci-text').textContent = data.ciText;
+    document.getElementById('insp-ci-bar').style.left = data.ciBarLeft;
+    document.getElementById('insp-ci-bar').style.width = data.ciBarWidth;
+    document.getElementById('insp-ci-bar').className = `absolute h-full rounded-full ${data.ciBarColor}`;
+    document.getElementById('insp-mc').textContent = `σ_mc = ${data.mc}`;
+    document.getElementById('insp-desc').textContent = data.desc;
+    document.getElementById('insp-region').textContent = `Region from the X-ray heatmap: ${data.region}`;
+
+    const badge = document.getElementById('card-status-badge');
+    badge.textContent = data.tierText;
+    badge.className = `px-2.5 py-0.5 rounded-full font-mono-data-sm text-mono-data-sm font-semibold ${data.tierClass}`;
+
+    // Mobile sheet synchronization if drawer is active or in sim mode
+    if (isMobileSimulation) {
+      openMobileDrawer(data);
+    }
+  }
+
+  // 3D Canvas Orientation Controls
+  function applyTransform() {
+    const container = document.getElementById('skeleton-transform-container');
+    const readout = document.getElementById('rotation-readout');
+    container.style.transform = `perspective(800px) rotateY(${currentYaw}deg) rotateX(${currentPitch}deg) scale(${currentZoom})`;
+    if (readout) {
+      readout.textContent = `Yaw: ${Math.round(currentYaw)}° • Pitch: ${Math.round(currentPitch)}°`;
+    }
+  }
+
+  function adjustZoom(delta) {
+    currentZoom = Math.min(Math.max(0.65, currentZoom + delta), 1.6);
+    applyTransform();
+  }
+
+  function resetOrientation() {
+    currentYaw = currentAspect === 'front' ? 14 : 194;
+    currentPitch = 4;
+    currentZoom = 1.0;
+    applyTransform();
+  }
+
+  function setAspect(aspect) {
+    currentAspect = aspect;
+    const frontBtn = document.getElementById('view-front-btn');
+    const backBtn = document.getElementById('view-back-btn');
+    const ind = document.getElementById('aspect-indicator');
+
+    if (aspect === 'front') {
+      frontBtn.className = 'px-2.5 py-1 rounded-md font-label-sm text-label-sm font-semibold transition-all bg-surface-container-lowest text-primary shadow-xs';
+      backBtn.className = 'px-2.5 py-1 rounded-md font-label-sm text-label-sm font-semibold transition-all text-on-surface-variant hover:text-on-surface';
+      currentYaw = 14;
+      ind.textContent = 'Anterior View (AP)';
+    } else {
+      backBtn.className = 'px-2.5 py-1 rounded-md font-label-sm text-label-sm font-semibold transition-all bg-surface-container-lowest text-primary shadow-xs';
+      frontBtn.className = 'px-2.5 py-1 rounded-md font-label-sm text-label-sm font-semibold transition-all text-on-surface-variant hover:text-on-surface';
+      currentYaw = 194;
+      ind.textContent = 'Posterior View (PA)';
+    }
+    applyTransform();
+  }
+
+  // Pointer Drag Rotation Logic
+  (function initDragRotate() {
+    const stage = document.getElementById('interactive-stage');
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    stage.addEventListener('pointerdown', (e) => {
+      // Avoid drag when clicking badges or buttons
+      if (e.target.closest('button') || e.target.closest('a')) return;
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      stage.setPointerCapture(e.pointerId);
+    });
+
+    stage.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      currentYaw += dx * 0.45;
+      currentPitch = Math.min(Math.max(-35, currentPitch - dy * 0.3), 35);
+
+      startX = e.clientX;
+      startY = e.clientY;
+      applyTransform();
+    });
+
+    stage.addEventListener('pointerup', (e) => {
+      isDragging = false;
+      try { stage.releasePointerCapture(e.pointerId); } catch(err) {}
+    });
+
+    stage.addEventListener('pointercancel', () => { isDragging = false; });
+  })();
+
+  // Mobile Simulation Viewport Mode Toggle
+  function toggleMobileSimulation() {
+    isMobileSimulation = !isMobileSimulation;
+    const wrapper = document.getElementById('simulation-wrapper');
+    const simBtn = document.getElementById('btn-mobile-sim');
+    const grid = document.getElementById('grid-container');
+
+    if (isMobileSimulation) {
+      wrapper.classList.add('max-w-[390px]', 'shadow-2xl', 'p-2', 'bg-surface-container-low', 'rounded-2xl');
+      simBtn.className = 'px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-primary text-on-primary flex items-center gap-1';
+      openMobileDrawer(BONE_DATABASE[activeSelectedBone]);
+    } else {
+      wrapper.classList.remove('max-w-[390px]', 'shadow-2xl', 'p-2', 'bg-surface-container-low', 'rounded-2xl');
+      simBtn.className = 'px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all bg-surface-variant text-on-surface-variant flex items-center gap-1';
+      closeMobileDrawer();
+    }
+  }
+
+  function openMobileDrawer(data) {
+    if (!data) return;
+    const backdrop = document.getElementById('mobile-sheet-backdrop');
+    const title = document.getElementById('mobile-sheet-title');
+    const body = document.getElementById('mobile-sheet-body');
+
+    title.textContent = data.name;
+    body.innerHTML = `
+      <div class="flex items-center justify-between">
+        <span class="font-mono-data-sm text-mono-data-sm text-primary font-medium">${data.side}</span>
+        <span class="px-2 py-0.5 rounded-full font-mono-data-sm text-mono-data-sm font-semibold ${data.tierClass}">${data.tierText}</span>
+      </div>
+      <div class="p-3 bg-surface-container-low rounded-lg mt-1">
+        <div class="flex items-baseline justify-between font-mono-data-sm text-mono-data-sm">
+          <span>Calibrated: <strong class="${data.probColor} font-bold text-base">p = ${data.prob}</strong></span>
+          <span>CI: ${data.ciText}</span>
+        </div>
+      </div>
+      <p class="font-body-sm text-body-sm text-on-surface mt-1">${data.desc}</p>
+      <div class="p-2.5 bg-secondary-container rounded-lg text-body-sm text-on-secondary-fixed">
+        ${data.region}
+      </div>
+      <button onclick="closeMobileDrawer()" class="w-full mt-2 py-3 bg-primary text-on-primary rounded-lg font-label-md text-label-md" type="button">
+        Confirm Findings
+      </button>
+    `;
+
+    backdrop.classList.remove('hidden');
+  }
+
+  function closeMobileDrawer() {
+    document.getElementById('mobile-sheet-backdrop').classList.add('hidden');
+  }
+</script></main></div><footer class="w-full bg-surface-container-low py-space-xs px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-center gap-2 text-center text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[16px]">verified_user</span><span>Decision support only. Not a diagnosis. Requires clinician review.</span></div></footer></div></body></html>
