@@ -1,0 +1,23 @@
+registration:
+  method:
+    coarse: orb # sift or orb
+    refine: ecc # cv2.findTransformECC
+    optical_flow: false # non-rigid disabled by default for 2D medical
+  preprocessing:
+    clahe_clip_limit: 2.0
+    clahe_grid_size: [8, 8]
+    histogram_matching: true
+  coarse:
+    nfeatures: 1000
+    ransac_threshold: 5.0
+  ecc:
+    iterations: 50
+    termination_eps: 1e-4
+  mismatch:
+    # Normalized Cross Correlation threshold below which images are rejected
+    ncc_threshold: 0.6 
+  difference_map:
+    # Changed pixels threshold (normalized intensity diff)
+    change_threshold: 0.1
+    # Size for the downsampled hover grid
+    hover_grid_size: 64
