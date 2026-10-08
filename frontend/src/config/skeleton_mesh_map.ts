@@ -1,0 +1,20 @@
+export const SKELETON_MESH_MAP: Record<string, string[]> = {
+  "hand_wrist": ["hand_wrist"],
+  "forearm": ["forearm"],
+  "upper_arm": ["upper_arm"],
+  "leg_lower": ["leg_lower"],
+  "thigh": ["thigh"],
+  "foot_ankle": ["foot_ankle"],
+  "pelvis_hip": ["pelvis_hip"],
+  "knee": ["knee"],
+  "ribs_sternum": ["ribs_sternum"],
+  "spine_thoracic": ["spine_thoracic"],
+  "clavicle_shoulder": ["clavicle_shoulder"],
+  "lung_right_upper": ["ribs_sternum"],
+  "lung_right_mid": ["ribs_sternum"],
+  "lung_right_lower": ["ribs_sternum"],
+  "lung_left_upper": ["ribs_sternum"],
+  "lung_left_mid": ["ribs_sternum"],
+  "lung_left_lower": ["ribs_sternum"],
+  "heart_mediastinum": ["ribs_sternum"]
+};
