@@ -1,5 +1,6 @@
-import { useRef, useMemo, useState, useEffect } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useRef, useMemo, useState, useEffect, Component } from 'react';
+import type { ErrorInfo, ReactNode } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Bounds } from '@react-three/drei';
 import * as THREE from 'three';
 import { SKELETON_MESH_MAP } from '../config/skeleton_mesh_map';
@@ -73,7 +74,6 @@ function SkeletonModel({
 
   const targets = anatomyData?.targets || [];
   const status = anatomyData?.status || 'ok';
-  const showUncertain = status === 'region_uncertain' || status === 'not_applicable';
 
   const allMeshNames = useMemo(() => Object.values(nodes).filter((n: any) => n.isMesh).map((n: any) => n.name), [nodes]);
 
@@ -161,6 +161,31 @@ function WebGLFallback() {
   );
 }
 
+class WebGLErrorBoundary extends Component<{children: ReactNode}, {hasError: boolean}> {
+  constructor(props: {children: ReactNode}) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError(_: Error) {
+    return { hasError: true };
+  }
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("WebGL Error:", error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex-1 h-full flex flex-col items-center justify-center p-4 bg-surface-container-lowest text-center">
+          <span className="material-symbols-outlined text-4xl text-on-surface-variant mb-2">view_in_ar</span>
+          <p className="text-on-surface font-semibold">3D Viewer Unavailable</p>
+          <p className="text-on-surface-variant text-sm mt-1">WebGL is disabled or unsupported on your device.</p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export function SkeletonViewer({ anatomyData, onBoneClick }: SkeletonViewerProps) {
   const [activeFinding, setActiveFinding] = useState<string | null>(null);
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
@@ -199,39 +224,61 @@ export function SkeletonViewer({ anatomyData, onBoneClick }: SkeletonViewerProps
   const showUncertain = anatomyData?.status === 'region_uncertain' || anatomyData?.status === 'not_applicable';
 
   return (
-    <div className="w-full h-full relative bg-surface-dim rounded-xl overflow-hidden shadow-inner flex" role="region" aria-label="Interactive 3D Anatomical Map">
+    <div 
+      className="w-full h-full relative bg-surface-dim rounded-xl overflow-hidden shadow-inner flex focus:outline-none focus:ring-2 focus:ring-primary" 
+      role="region" 
+      aria-label="Interactive 3D Anatomical Map. Use arrow keys to rotate."
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (!controlsRef.current) return;
+        const step = 0.1;
+        if (e.key === 'ArrowLeft') controlsRef.current.setAzimuthalAngle(controlsRef.current.getAzimuthalAngle() - step);
+        else if (e.key === 'ArrowRight') controlsRef.current.setAzimuthalAngle(controlsRef.current.getAzimuthalAngle() + step);
+        else if (e.key === 'ArrowUp') controlsRef.current.setPolarAngle(controlsRef.current.getPolarAngle() - step);
+        else if (e.key === 'ArrowDown') controlsRef.current.setPolarAngle(controlsRef.current.getPolarAngle() + step);
+      }}
+    >
       
       {/* 3D Canvas */}
-      <div className="flex-1 h-full cursor-grab active:cursor-grabbing">
-        <Canvas 
-          camera={{ position: [0, 1.5, 4], fov: 50 }} 
-          dpr={[1, 2]} // cap pixel ratio to 2 for performance
-          gl={{ antialias: true, powerPreference: "high-performance" }}
-        >
-          <ambientLight intensity={0.8} />
-          <directionalLight position={[5, 5, 5]} intensity={1.2} />
-          <directionalLight position={[-5, 5, -5]} intensity={0.5} />
-          
-          <Bounds fit clip observe margin={1.2}>
-            <SkeletonModel 
-              anatomyData={anatomyData} 
-              onBoneClick={onBoneClick}
-              activeFinding={activeFinding}
-              setHoveredRegion={setHoveredRegion}
+      <div className="flex-1 h-full cursor-grab active:cursor-grabbing relative">
+        <WebGLErrorBoundary>
+          <Canvas 
+            camera={{ position: [0, 1.5, 4], fov: 50 }} 
+            dpr={[1, 2]} // cap pixel ratio to 2 for performance
+            gl={{ antialias: true, powerPreference: "high-performance", failIfMajorPerformanceCaveat: true }}
+            fallback={
+              <div className="flex-1 h-full flex flex-col items-center justify-center p-4 bg-surface-container-lowest text-center">
+                <span className="material-symbols-outlined text-4xl text-on-surface-variant mb-2">view_in_ar</span>
+                <p className="text-on-surface font-semibold">3D Viewer Unavailable</p>
+                <p className="text-on-surface-variant text-sm mt-1">WebGL fallback.</p>
+              </div>
+            }
+          >
+            <ambientLight intensity={0.8} />
+            <directionalLight position={[5, 5, 5]} intensity={1.2} />
+            <directionalLight position={[-5, 5, -5]} intensity={0.5} />
+            
+            <Bounds fit clip observe margin={1.2}>
+              <SkeletonModel 
+                anatomyData={anatomyData} 
+                onBoneClick={onBoneClick}
+                activeFinding={activeFinding}
+                setHoveredRegion={setHoveredRegion}
+              />
+            </Bounds>
+            
+            <OrbitControls 
+              ref={controlsRef}
+              enablePan={true} 
+              panSpeed={0.5}
+              minDistance={1} 
+              maxDistance={6}
+              minPolarAngle={0}
+              maxPolarAngle={Math.PI / 1.5} // Prevent going fully under
+              makeDefault
             />
-          </Bounds>
-          
-          <OrbitControls 
-            ref={controlsRef}
-            enablePan={true} 
-            panSpeed={0.5}
-            minDistance={1} 
-            maxDistance={6}
-            minPolarAngle={0}
-            maxPolarAngle={Math.PI / 1.5} // Prevent going fully under
-            makeDefault
-          />
-        </Canvas>
+          </Canvas>
+        </WebGLErrorBoundary>
       </div>
 
       {/* Side Legend & Controls */}

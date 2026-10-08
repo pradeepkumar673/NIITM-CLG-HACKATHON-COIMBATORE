@@ -44,7 +44,7 @@ export function MyStudiesHistory() {
 <p className="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
 <span>Complete radiograph triage audit trail and edge case log</span>
 <span className="inline-block w-1 h-1 rounded-full bg-outline-variant"></span>
-<span className="font-mono-data-sm text-mono-data-sm text-primary font-medium">Kashti PHC Edge Node #04</span>
+<span className="font-mono-data-sm text-mono-data-sm text-primary font-medium">{localStorage.getItem('edgeNode') || 'Edge Node'}</span>
 </p>
 </div>
 
@@ -213,7 +213,7 @@ export function MyStudiesHistory() {
                 </span>
 </td>
 <td className="py-3.5 px-space-md font-mono-data-sm text-mono-data-sm text-on-surface-variant">
-                24 Oct 14:12 IST
+                {new Date().toLocaleDateString()}
               </td>
 <td className="py-3.5 px-space-md">
 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#ECFDF3] text-[#067647] font-label-sm text-label-sm font-semibold">
@@ -260,7 +260,7 @@ export function MyStudiesHistory() {
                 </span>
 </td>
 <td className="py-3.5 px-space-md font-mono-data-sm text-mono-data-sm text-on-surface-variant">
-                24 Oct 13:48 IST
+                {new Date().toLocaleDateString()}
               </td>
 <td className="py-3.5 px-space-md">
 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#ECFDF3] text-[#067647] font-label-sm text-label-sm font-semibold">
@@ -306,7 +306,7 @@ export function MyStudiesHistory() {
                 </span>
 </td>
 <td className="py-3.5 px-space-md font-mono-data-sm text-mono-data-sm text-on-surface-variant">
-                24 Oct 13:15 IST
+                {new Date().toLocaleDateString()}
               </td>
 <td className="py-3.5 px-space-md">
 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">
@@ -343,7 +343,7 @@ export function MyStudiesHistory() {
                 </span>
 </td>
 <td className="py-3.5 px-space-md font-mono-data-sm text-mono-data-sm text-on-surface-variant">
-                24 Oct 12:40 IST
+                {new Date().toLocaleDateString()}
               </td>
 <td className="py-3.5 px-space-md">
 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#ECFDF3] text-[#067647] font-label-sm text-label-sm font-semibold">
@@ -389,7 +389,7 @@ export function MyStudiesHistory() {
                 </span>
 </td>
 <td className="py-3.5 px-space-md font-mono-data-sm text-mono-data-sm text-on-surface-variant">
-                24 Oct 11:22 IST
+                {new Date().toLocaleDateString()}
               </td>
 <td className="py-3.5 px-space-md">
 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFFAEB] text-[#B54708] font-label-sm text-label-sm font-semibold">
@@ -430,7 +430,7 @@ export function MyStudiesHistory() {
                 </span>
 </td>
 <td className="py-3.5 px-space-md font-mono-data-sm text-mono-data-sm text-on-surface-variant">
-                24 Oct 10:55 IST
+                {new Date().toLocaleDateString()}
               </td>
 <td className="py-3.5 px-space-md">
 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#ECFDF3] text-[#067647] font-label-sm text-label-sm font-semibold">
@@ -477,7 +477,7 @@ export function MyStudiesHistory() {
                 </span>
 </td>
 <td className="py-3.5 px-space-md font-mono-data-sm text-mono-data-sm text-on-surface-variant">
-                24 Oct 09:30 IST
+                {new Date().toLocaleDateString()}
               </td>
 <td className="py-3.5 px-space-md">
 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
@@ -516,7 +516,7 @@ export function MyStudiesHistory() {
                 </span>
 </td>
 <td className="py-3.5 px-space-md font-mono-data-sm text-mono-data-sm text-on-surface-variant">
-                23 Oct 17:05 IST
+                {new Date().toLocaleDateString()}
               </td>
 <td className="py-3.5 px-space-md">
 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#ECFDF3] text-[#067647] font-label-sm text-label-sm font-semibold">
@@ -661,7 +661,7 @@ export function MyStudiesHistory() {
 <div className="flex items-center justify-between">
 <div>
 <h2 className="font-headline-sm text-headline-sm font-bold text-on-surface">My studies</h2>
-<span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Kashti PHC • 140 studies</span>
+<span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">Edge Node • 140 studies</span>
 </div>
 <button className="w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm" type="button">
 <span className="material-symbols-outlined text-[20px]">add</span>
@@ -727,7 +727,7 @@ export function MyStudiesHistory() {
             </span>
 </div>
 <div className="flex items-center justify-between pt-1">
-<span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">24 Oct 14:12 IST</span>
+<span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">{new Date().toLocaleDateString()}</span>
 <div className="flex items-center gap-1">
 <span className="material-symbols-outlined text-[#B54708] text-[18px]" title="Diaphragm motion blur">warning</span>
 <span className="material-symbols-outlined text-secondary text-[20px]">chevron_right</span>
@@ -750,7 +750,7 @@ export function MyStudiesHistory() {
             </span>
 </div>
 <div className="flex items-center justify-between pt-1">
-<span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">24 Oct 13:48 IST</span>
+<span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">{new Date().toLocaleDateString()}</span>
 <div className="flex items-center gap-1">
 <span className="material-symbols-outlined text-[#067647] text-[18px]">verified</span>
 <span className="material-symbols-outlined text-secondary text-[20px]">chevron_right</span>
@@ -773,7 +773,7 @@ export function MyStudiesHistory() {
             </span>
 </div>
 <div className="flex items-center justify-between pt-1">
-<span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">24 Oct 11:22 IST</span>
+<span className="font-mono-data-sm text-mono-data-sm text-on-surface-variant">{new Date().toLocaleDateString()}</span>
 <div className="flex items-center gap-1">
 <span className="material-symbols-outlined text-[#B54708] text-[18px]">warning</span>
 <span className="material-symbols-outlined text-secondary text-[20px]">chevron_right</span>

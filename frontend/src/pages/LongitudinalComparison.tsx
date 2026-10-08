@@ -41,7 +41,7 @@ export function LongitudinalComparison() {
   };
 
   return (
-    <AppShell userRole="doctor" userName="Dr. Arti Sharma">
+    <AppShell userRole="doctor" userName={localStorage.getItem('userName') || 'Doctor'}>
       <div className="flex flex-col w-full gap-4 pb-8">
         <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex flex-col gap-1">

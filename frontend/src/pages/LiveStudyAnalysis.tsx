@@ -306,7 +306,7 @@ export function LiveStudyAnalysis() {
           <div className="w-full max-w-[720px] mx-auto mt-space-sm px-space-sm flex items-start gap-space-sm text-on-surface-variant">
             <span className="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">info</span>
             <p className="font-body-sm text-body-sm">
-              Edge processing runs locally on Kashti PHC node hardware with no offsite PHI transmission. All model outputs remain subject to mandatory clinician diagnostic review.
+              Edge processing runs locally on configured edge node hardware with no offsite PHI transmission. All model outputs remain subject to mandatory clinician diagnostic review.
             </p>
           </div>
         </div>

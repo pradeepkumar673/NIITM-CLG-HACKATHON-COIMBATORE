@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getQueueSizeDashboardStudiesQueueGet, listStudiesStudiesGet, getTriageDistributionDashboardStudiesTriageGet } from '../client';
 import { AppShell } from '../components/AppShell';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export function DoctorReviewQueue() {
-  const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(10);
+  const [size] = useState(10);
   const [status, setStatus] = useState('all'); 
   const [bodyPart, setBodyPart] = useState('all');
   const [tier, setTier] = useState('all');
@@ -71,7 +70,7 @@ export function DoctorReviewQueue() {
   };
 
   return (
-    <AppShell userRole="doctor" userName="Dr. Arti Sharma">
+    <AppShell userRole="doctor" userName={localStorage.getItem('userName') || 'Doctor'}>
       <div className="flex flex-col w-full">
         <div className="w-full bg-surface-container-high/60 backdrop-blur-md px-space-lg py-2.5 rounded-xl shadow-sm mb-space-md flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">

@@ -1,10 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getStudyResultStudiesIdResultGet, reviewStudyStudiesIdReviewPost } from '../client';
 import { AppShell } from '../components/AppShell';
-import { SkeletonViewer } from '../components/SkeletonViewer';
+import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
+
+const SkeletonViewer = React.lazy(() => import('../components/SkeletonViewer').then(module => ({ default: module.SkeletonViewer })));
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
@@ -32,32 +34,46 @@ function ZoomableViewer({ studyId, topLabel }: { studyId: string, topLabel: stri
 
   const handleMouseUp = () => setIsDragging(false);
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const step = 20;
+    if (e.key === 'ArrowUp') setTransform(prev => ({ ...prev, y: prev.y - step }));
+    else if (e.key === 'ArrowDown') setTransform(prev => ({ ...prev, y: prev.y + step }));
+    else if (e.key === 'ArrowLeft') setTransform(prev => ({ ...prev, x: prev.x - step }));
+    else if (e.key === 'ArrowRight') setTransform(prev => ({ ...prev, x: prev.x + step }));
+    else if (e.key === '+' || e.key === '=') setTransform(prev => ({ ...prev, scale: Math.min(5, prev.scale * 1.1) }));
+    else if (e.key === '-' || e.key === '_') setTransform(prev => ({ ...prev, scale: Math.max(0.5, prev.scale * 0.9) }));
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-4 bg-surface-container-low p-2 rounded-lg">
-        <button onClick={() => setTransform({ x: 0, y: 0, scale: 1 })} className="p-1 rounded hover:bg-surface-container">
-          <span className="material-symbols-outlined text-sm">filter_center_focus</span>
+        <button aria-label="Reset zoom and pan" onClick={() => setTransform({ x: 0, y: 0, scale: 1 })} className="p-1 rounded hover:bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary">
+          <span className="material-symbols-outlined text-sm" aria-hidden="true">filter_center_focus</span>
         </button>
         <div className="flex items-center gap-2 flex-1">
-          <span className="text-xs font-semibold">Heatmap Blend:</span>
-          <input type="range" min="0" max="100" value={opacity} onChange={e => setOpacity(parseInt(e.target.value))} className="w-full accent-primary h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer" />
+          <label htmlFor="heatmap-blend" className="text-xs font-semibold">Heatmap Blend:</label>
+          <input id="heatmap-blend" type="range" min="0" max="100" value={opacity} onChange={e => setOpacity(parseInt(e.target.value))} aria-label="Heatmap blend opacity" className="w-full accent-primary h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary" />
           <span className="text-xs text-primary font-bold">{opacity}%</span>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-4 h-[600px] overflow-hidden bg-black rounded-lg">
-        <div className="relative overflow-hidden cursor-move border border-surface-container-highest rounded"
+        <div className="relative overflow-hidden cursor-move border border-surface-container-highest rounded focus:outline-none focus:ring-2 focus:ring-primary"
+             tabIndex={0} aria-label="Original image viewer. Use arrow keys to pan and +/- to zoom."
+             onKeyDown={handleKeyDown}
              onWheel={handleWheel} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
           <div className="absolute top-2 left-2 z-10 px-2 py-1 bg-black/60 text-white text-xs font-bold rounded">Original</div>
           <div style={{ transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`, transformOrigin: 'center' }} className="w-full h-full flex items-center justify-center">
-            <img src={`${BASE_URL}/studies/${studyId}/image.png`} className="max-w-full max-h-full object-contain pointer-events-none" />
+            <img src={`${BASE_URL}/studies/${studyId}/image.png`} alt="Original radiograph" className="max-w-full max-h-full object-contain pointer-events-none" />
           </div>
         </div>
-        <div className="relative overflow-hidden cursor-move border border-surface-container-highest rounded"
+        <div className="relative overflow-hidden cursor-move border border-surface-container-highest rounded focus:outline-none focus:ring-2 focus:ring-primary"
+             tabIndex={0} aria-label="Heatmap overlay viewer. Use arrow keys to pan and +/- to zoom."
+             onKeyDown={handleKeyDown}
              onWheel={handleWheel} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
           <div className="absolute top-2 left-2 z-10 px-2 py-1 bg-black/60 text-primary-fixed text-xs font-bold rounded">Grad-CAM Overlay</div>
           <div style={{ transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`, transformOrigin: 'center' }} className="w-full h-full flex items-center justify-center relative">
-            <img src={`${BASE_URL}/studies/${studyId}/image.png`} className="absolute max-w-full max-h-full object-contain pointer-events-none" />
-            <img src={`${BASE_URL}/studies/${studyId}/heatmap_${topLabel}.png`} style={{ opacity: opacity / 100 }} className="absolute max-w-full max-h-full object-contain pointer-events-none mix-blend-screen" />
+            <img src={`${BASE_URL}/studies/${studyId}/image.png`} alt="Original radiograph base" className="absolute max-w-full max-h-full object-contain pointer-events-none" />
+            <img src={`${BASE_URL}/studies/${studyId}/heatmap_${topLabel}.png`} alt="Grad-CAM heatmap overlay" style={{ opacity: opacity / 100 }} className="absolute max-w-full max-h-full object-contain pointer-events-none mix-blend-screen" />
           </div>
         </div>
       </div>
@@ -90,10 +106,10 @@ export function DoctorReviewSignOff() {
     }
   });
 
-  if (isLoading) return <AppShell userRole="doctor" userName="Dr. Arti Sharma"><div className="p-8">Loading...</div></AppShell>;
+  if (isLoading) return <AppShell userRole="doctor" userName={localStorage.getItem('userName') || 'Doctor'}><div className="p-8">Loading...</div></AppShell>;
   
   const data = resp?.data as any;
-  if (!data || !data.study) return <AppShell userRole="doctor" userName="Dr. Arti Sharma"><div className="p-8">Study not found</div></AppShell>;
+  if (!data || !data.study) return <AppShell userRole="doctor" userName={localStorage.getItem('userName') || 'Doctor'}><div className="p-8">Study not found</div></AppShell>;
 
   const { study, patient, result, reviews } = data;
   const findings = result?.findings || {};
@@ -112,7 +128,7 @@ export function DoctorReviewSignOff() {
   const isSignedOff = reviews && reviews.length > 0;
 
   return (
-    <AppShell userRole="doctor" userName="Dr. Arti Sharma">
+    <AppShell userRole="doctor" userName={localStorage.getItem('userName') || 'Doctor'}>
       <div className="flex flex-col w-full gap-4 pb-8">
         {(i18n.language === 'ta' || i18n.language === 'hi') && (
           <div className="w-full bg-error-container text-on-error-container px-4 py-3 rounded-lg flex items-center justify-between border border-error-container/30">
@@ -191,10 +207,12 @@ export function DoctorReviewSignOff() {
             <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col h-[400px]">
               <h2 className="text-lg font-bold mb-4">Anatomy & 3D Skeleton</h2>
               <div className="flex-1 rounded-lg overflow-hidden relative border border-surface-container">
-                <SkeletonViewer anatomyData={{ 
-                  status: 'ok', 
-                  findings: Object.keys(findings).filter(k => findings[k].probability > 0.5).map(k => ({id: k, name: findings[k].label || k})) 
-                }} />
+                <Suspense fallback={<div className="flex items-center justify-center h-full text-sm text-on-surface-variant">Loading 3D Anatomy...</div>}>
+                  <SkeletonViewer anatomyData={{ 
+                    status: 'ok', 
+                    findings: Object.keys(findings).filter(k => findings[k].probability > 0.5).map(k => ({id: k, name: findings[k].label || k})) 
+                  }} />
+                </Suspense>
               </div>
             </div>
           </div>

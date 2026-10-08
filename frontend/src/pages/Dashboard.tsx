@@ -103,7 +103,7 @@ export function Dashboard() {
                   <span className="px-2 py-0.5 rounded-full bg-surface text-primary font-mono-data-sm text-mono-data-sm font-medium">95% CI Calibrated</span>
                 </div>
                 <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                  Local inference enabled on KASHTI-PHC-04 edge server. Studies flagged "High" will trigger an automated SMS notification to Dr. Arti Sharma (District Hospital Tele-radiology Unit).
+                  Local inference enabled on Edge Node edge server. Studies flagged "High" will trigger an automated SMS notification to {localStorage.getItem('userName') || 'Doctor'} (District Hospital Tele-radiology Unit).
                 </p>
               </div>
             </div>
@@ -167,7 +167,7 @@ export function Dashboard() {
                 <div className="flex items-baseline justify-between mt-space-md">
                   <span className="font-mono-data-lg text-[2.5rem] leading-none text-on-surface font-bold">{awaitingDoctor < 10 ? `0${awaitingDoctor}` : awaitingDoctor}</span>
                   <div className="flex flex-col items-end">
-                    <span className="font-label-sm text-label-sm text-primary font-semibold">Dr. Arti Sharma, MO</span>
+                    <span className="font-label-sm text-label-sm text-primary font-semibold">{localStorage.getItem('userName') || 'Doctor'}</span>
                     <span className="font-body-sm text-body-sm text-on-surface-variant">Tele-radiology cluster</span>
                   </div>
                 </div>

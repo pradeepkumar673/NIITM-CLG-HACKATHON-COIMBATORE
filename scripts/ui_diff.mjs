@@ -19,6 +19,12 @@ const SCREENS = [
 
 const BASE_URL = 'http://localhost:5173';
 const THRESHOLD = 0.02; // 2% mismatch allowed
+const VIEWPORTS = [
+  { width: 360, height: 800 },
+  { width: 390, height: 844 },
+  { width: 768, height: 1024 },
+  { width: 1280, height: 800 }
+];
 
 async function run() {
   const browser = await puppeteer.launch({ 
@@ -34,85 +40,87 @@ async function run() {
   let markdownTable = '| Screen | Viewport | Mismatch % | Status |\n|---|---|---|---|\n';
 
   for (const screen of SCREENS) {
-    const page = await browser.newPage();
-    await page.setViewport(screen.viewport);
-    console.log(`Checking ${screen.id}...`);
+    for (const vp of VIEWPORTS) {
+      const pageActual = await browser.newPage();
+      const pageTarget = await browser.newPage();
+      await pageActual.setViewport(vp);
+      await pageTarget.setViewport(vp);
+      const vpStr = `${vp.width}x${vp.height}`;
+      console.log(`Checking ${screen.id} at ${vpStr}...`);
 
-    try {
-      await page.goto(`${BASE_URL}${screen.url}`, { waitUntil: 'networkidle0', timeout: 10000 });
-      // Small delay for initial renders/animations
-      await new Promise(r => setTimeout(r, 1000));
-      
-      const screenshotPath = `reports/ui_diff/${screen.id}_actual.png`;
-      await page.screenshot({ path: screenshotPath });
+      try {
+        await pageActual.goto(`${BASE_URL}${screen.url}`, { waitUntil: 'networkidle0', timeout: 10000 });
+        await new Promise(r => setTimeout(r, 1000));
+        
+        const screenshotPath = `reports/ui_diff/${screen.id}_${vpStr}_actual.png`;
+        await pageActual.screenshot({ path: screenshotPath });
 
-      const targetPath = `docs/stitch/${screen.id}/screen.png`;
-      if (!fs.existsSync(targetPath)) {
-        console.warn(`[WARN] Missing target screenshot for ${screen.id}`);
-        markdownTable += `| ${screen.id} | ${screen.viewport.width}x${screen.viewport.height} | N/A | Missing reference |\n`;
-        continue;
-      }
+        const stitchHtmlPath = `file://${path.resolve('docs/stitch', screen.id, 'code.html')}`;
+        await pageTarget.goto(stitchHtmlPath, { waitUntil: 'networkidle0', timeout: 10000 });
+        await new Promise(r => setTimeout(r, 1000));
+        
+        const targetPath = `reports/ui_diff/${screen.id}_${vpStr}_target.png`;
+        await pageTarget.screenshot({ path: targetPath });
 
-      const imgActual = PNG.sync.read(fs.readFileSync(screenshotPath));
-      const imgTarget = PNG.sync.read(fs.readFileSync(targetPath));
+        const imgActual = PNG.sync.read(fs.readFileSync(screenshotPath));
+        const imgTarget = PNG.sync.read(fs.readFileSync(targetPath));
 
-      const { width, height } = imgTarget;
-      const diff = new PNG({ width, height });
+        const { width, height } = imgTarget;
+        const diff = new PNG({ width, height });
 
-      // If dimensions don't match exactly, crop/pad or just fail
-      if (imgActual.width !== width || imgActual.height !== height) {
-        console.warn(`[WARN] Dimension mismatch for ${screen.id}. Expected ${width}x${height}, got ${imgActual.width}x${imgActual.height}`);
-      }
-
-      // Safe width and height
-      const w = Math.min(width, imgActual.width);
-      const h = Math.min(height, imgActual.height);
-      const safeDiff = new PNG({ width: w, height: h });
-
-      // Create cropped buffers
-      const img1Buf = Buffer.alloc(w * h * 4);
-      const img2Buf = Buffer.alloc(w * h * 4);
-      
-      for (let y = 0; y < h; y++) {
-        for (let x = 0; x < w; x++) {
-          const idx1 = (w * y + x) << 2;
-          const idxTarget1 = (imgActual.width * y + x) << 2;
-          img1Buf[idx1] = imgActual.data[idxTarget1];
-          img1Buf[idx1 + 1] = imgActual.data[idxTarget1 + 1];
-          img1Buf[idx1 + 2] = imgActual.data[idxTarget1 + 2];
-          img1Buf[idx1 + 3] = imgActual.data[idxTarget1 + 3];
-
-          const idxTarget2 = (imgTarget.width * y + x) << 2;
-          img2Buf[idx1] = imgTarget.data[idxTarget2];
-          img2Buf[idx1 + 1] = imgTarget.data[idxTarget2 + 1];
-          img2Buf[idx1 + 2] = imgTarget.data[idxTarget2 + 2];
-          img2Buf[idx1 + 3] = imgTarget.data[idxTarget2 + 3];
+        if (imgActual.width !== width || imgActual.height !== height) {
+          console.warn(`[WARN] Dimension mismatch for ${screen.id} at ${vpStr}. Expected ${width}x${height}, got ${imgActual.width}x${imgActual.height}`);
         }
+
+        const w = Math.min(width, imgActual.width);
+        const h = Math.min(height, imgActual.height);
+        const safeDiff = new PNG({ width: w, height: h });
+
+        const img1Buf = Buffer.alloc(w * h * 4);
+        const img2Buf = Buffer.alloc(w * h * 4);
+        
+        for (let y = 0; y < h; y++) {
+          for (let x = 0; x < w; x++) {
+            const idx1 = (w * y + x) << 2;
+            const idxTarget1 = (imgActual.width * y + x) << 2;
+            img1Buf[idx1] = imgActual.data[idxTarget1];
+            img1Buf[idx1 + 1] = imgActual.data[idxTarget1 + 1];
+            img1Buf[idx1 + 2] = imgActual.data[idxTarget1 + 2];
+            img1Buf[idx1 + 3] = imgActual.data[idxTarget1 + 3];
+
+            const idxTarget2 = (imgTarget.width * y + x) << 2;
+            img2Buf[idx1] = imgTarget.data[idxTarget2];
+            img2Buf[idx1 + 1] = imgTarget.data[idxTarget2 + 1];
+            img2Buf[idx1 + 2] = imgTarget.data[idxTarget2 + 2];
+            img2Buf[idx1 + 3] = imgTarget.data[idxTarget2 + 3];
+          }
+        }
+
+        const numDiffPixels = pixelmatch(
+          img1Buf,
+          img2Buf,
+          safeDiff.data,
+          w,
+          h,
+          { threshold: 0.1 }
+        );
+
+        const diffPct = (numDiffPixels / (w * h)) * 100;
+        fs.writeFileSync(`reports/ui_diff/${screen.id}_${vpStr}_diff.png`, PNG.sync.write(safeDiff));
+
+        const status = diffPct > (THRESHOLD * 100) ? '❌ FAILED' : '✅ PASSED';
+        console.log(`Mismatch for ${screen.id} at ${vpStr}: ${diffPct.toFixed(2)}%`);
+        
+        markdownTable += `| ${screen.id} | ${vpStr} | ${diffPct.toFixed(2)}% | ${status} |\n`;
+
+      } catch (e) {
+        console.error(`Failed to process ${screen.id} at ${vpStr}:`, e);
+        markdownTable += `| ${screen.id} | ${vpStr} | N/A | Error |\n`;
       }
 
-      const numDiffPixels = pixelmatch(
-        img1Buf,
-        img2Buf,
-        safeDiff.data,
-        w,
-        h,
-        { threshold: 0.1 }
-      );
-
-      const diffPct = (numDiffPixels / (w * h)) * 100;
-      fs.writeFileSync(`reports/ui_diff/${screen.id}_diff.png`, PNG.sync.write(safeDiff));
-
-      const status = diffPct > (THRESHOLD * 100) ? '❌ FAILED' : '✅ PASSED';
-      console.log(`Mismatch for ${screen.id}: ${diffPct.toFixed(2)}%`);
-      
-      markdownTable += `| ${screen.id} | ${w}x${h} | ${diffPct.toFixed(2)}% | ${status} |\n`;
-
-    } catch (e) {
-      console.error(`Failed to process ${screen.id}:`, e);
-      markdownTable += `| ${screen.id} | ${screen.viewport.width}x${screen.viewport.height} | N/A | Error |\n`;
+      await pageActual.close();
+      await pageTarget.close();
     }
-
-    await page.close();
   }
 
   await browser.close();

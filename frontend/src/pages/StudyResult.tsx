@@ -3,7 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getStudyResultStudiesIdResultGet } from '../client';
 import { AppShell } from '../components/AppShell';
-import { SkeletonViewer } from '../components/SkeletonViewer';
+import React, { Suspense } from 'react';
+
+const SkeletonViewer = React.lazy(() => import('../components/SkeletonViewer').then(module => ({ default: module.SkeletonViewer })));
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
@@ -155,10 +157,12 @@ export function StudyResult() {
             <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col h-[400px]">
               <h2 className="text-lg font-bold mb-4">Anatomy & 3D Skeleton</h2>
               <div className="flex-1 rounded-lg overflow-hidden relative border border-surface-container">
-                <SkeletonViewer anatomyData={{ 
-                  status: 'ok', 
-                  findings: Object.keys(findings).filter(k => findings[k].probability > 0.5).map(k => ({id: k, name: k})) 
-                }} />
+                <Suspense fallback={<div className="flex items-center justify-center h-full text-sm text-on-surface-variant">Loading 3D Anatomy...</div>}>
+                  <SkeletonViewer anatomyData={{ 
+                    status: 'ok', 
+                    findings: Object.keys(findings).filter(k => findings[k].probability > 0.5).map(k => ({id: k, name: k})) 
+                  }} />
+                </Suspense>
               </div>
             </div>
           </div>
