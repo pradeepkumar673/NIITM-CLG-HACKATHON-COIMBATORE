@@ -10,6 +10,14 @@ client.setConfig({
   baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:8000'
 })
 
+client.interceptors.request.use((request, options) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    request.headers.set('Authorization', `Bearer ${token}`);
+  }
+  return request;
+});
+
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(

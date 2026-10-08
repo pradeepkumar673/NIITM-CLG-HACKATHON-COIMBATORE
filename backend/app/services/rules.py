@@ -68,7 +68,9 @@ class TriggerEvaluator(ast.NodeVisitor):
             return self.age
         
         if node.id in self.history:
-            return self.history[node.id]
+            if isinstance(self.history, dict):
+                return self.history[node.id]
+            return True # If it's a list, presence means true
         
         # Any other variable is treated as a missing history flag -> False
         return False
@@ -129,8 +131,12 @@ class RuleEngine:
                 needs_human_review = True
         
         # Populate history nodes
-        for h_key, h_val in history_flags.items():
-            if h_val:
+        if isinstance(history_flags, dict):
+            for h_key, h_val in history_flags.items():
+                if h_val:
+                    graph_nodes[h_key] = {"id": h_key, "type": "history", "tier": "n/a"}
+        elif isinstance(history_flags, list):
+            for h_key in history_flags:
                 graph_nodes[h_key] = {"id": h_key, "type": "history", "tier": "n/a"}
 
         for rule in self.rules:
@@ -181,9 +187,11 @@ class RuleEngine:
                     if entity["type"] == "finding" and eid in present_findings:
                         true_entities.append(eid)
                         graph_nodes[eid] = {"id": eid, "type": "finding", "tier": "present"}
-                    elif entity["type"] == "history" and history_flags.get(eid, False):
-                        true_entities.append(eid)
-                        graph_nodes[eid] = {"id": eid, "type": "history", "tier": "present"}
+                    elif entity["type"] == "history":
+                        is_present = (eid in history_flags) if isinstance(history_flags, list) else history_flags.get(eid, False)
+                        if is_present:
+                            true_entities.append(eid)
+                            graph_nodes[eid] = {"id": eid, "type": "history", "tier": "present"}
                 
                 # Connect all true entities of this rule to each other
                 for i in range(len(true_entities)):

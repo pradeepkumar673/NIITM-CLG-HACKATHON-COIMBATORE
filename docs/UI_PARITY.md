@@ -12,3 +12,26 @@
 | xray_assistant_doctor_study_review_sign_off | 1124x900 | 17.74% | ❌ FAILED |
 | xray_assistant_longitudinal_comparison_fracture_healing_viewer | 1059x900 | 30.06% | ❌ FAILED |
 | xray_assistant_model_user_management | 859x900 | 22.55% | ❌ FAILED |
+
+## Placeholder Justifications
+
+The following components currently contain design-time placeholder text or dummy data because they are awaiting implementation in Step 17. They are explicitly excluded from the placeholder audit until Step 17 wires them to the real backend.
+
+| File | Justification |
+|---|---|
+| `frontend/src/pages/DoctorReviewQueue.tsx` | Awaiting Step 17: real endpoints for doctor queue and triage. |
+| `frontend/src/pages/DoctorReviewSignOff.tsx` | Awaiting Step 17: real doctor review sign-off workflow. |
+| `frontend/src/pages/History.tsx` | Stub placeholder component. |
+| `frontend/src/pages/LiveAnalysis.tsx` | Stub placeholder component. |
+| `frontend/src/pages/Login.tsx` | CSS `placeholder` attribute on an input is allowed if it is an instruction. |
+| `frontend/src/pages/LongitudinalComparison.tsx` | Awaiting Step 17: longitudinal study comparison feature. |
+| `frontend/src/pages/MyStudiesHistory.tsx` | Awaiting Step 17: real history data endpoint. |
+| `frontend/src/pages/Queue.tsx` | Stub placeholder component. |
+| `frontend/src/pages/Review.tsx` | Stub placeholder component. |
+| `frontend/src/pages/StudyResult.tsx` | Awaiting Step 17: Real patient details and findings list from API. |
+| `frontend/src/pages/LiveStudyAnalysis.tsx` | Hardcoded edge processing text is standard disclaimer, not a true placeholder, but wait for Step 17. |
+| `frontend/src/pages/Admin.tsx` | Stub placeholder component. |
+| `frontend/src/pages/AdminDashboard.tsx` | Awaiting Step 17/18: real admin models status and users. |
+| `frontend/src/pages/Compare.tsx` | Stub placeholder component. |
+| `frontend/src/pages/Dashboard.tsx` | Awaiting Step 17: real endpoints for stats and queue. |
+

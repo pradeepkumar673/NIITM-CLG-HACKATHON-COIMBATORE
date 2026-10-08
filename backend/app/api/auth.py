@@ -15,17 +15,30 @@ from backend.app.core.config import get_settings
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
-def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)) -> User:
+def get_current_user(request: Request, db: Session = Depends(get_db)) -> User:
     try:
+        auth_header = request.headers.get("Authorization")
+        token = None
+        if auth_header and auth_header.startswith("Bearer "):
+            token = auth_header.split(" ")[1]
+        else:
+            token = request.query_params.get("token")
+        
+        if not token:
+            print("Auth error: No token")
+            raise HTTPException(status_code=401, detail="Not authenticated")
         settings = get_settings()
         payload = jwt.decode(token, settings.jwt_secret, algorithms=["HS256"])
         user_id: str = payload.get("sub")
         if user_id is None:
+            print("Auth error: user_id is None")
             raise HTTPException(status_code=401, detail="Invalid credentials")
-    except JWTError:
+    except JWTError as e:
+        print(f"Auth error: JWTError {e}")
         raise HTTPException(status_code=401, detail="Invalid credentials")
     user = db.query(User).filter(User.id == int(user_id)).first()
     if user is None:
+        print("Auth error: user is None")
         raise HTTPException(status_code=401, detail="User not found")
     return user
 

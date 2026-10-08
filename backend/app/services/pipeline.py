@@ -167,7 +167,9 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                     result_json["interactions"] = rule_res.get("interactions", [])
                     result_json["triage"] = rule_res.get("triage", {"level": "routine", "reasons": []})
                 except Exception as e:
+                    import traceback
                     log.error(f"Rule engine error: {e}")
+                    log.error(traceback.format_exc())
                 t_cpu += (time.perf_counter() - t_cpu_start)
                     
             elif study.body_part == BodyPart.bone:

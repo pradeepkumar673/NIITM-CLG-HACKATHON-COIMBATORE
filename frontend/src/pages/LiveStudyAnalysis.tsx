@@ -29,12 +29,15 @@ export function LiveStudyAnalysis() {
     });
     setProgress(30);
 
-    const eventSource = new EventSource(`${import.meta.env.VITE_API_URL}/studies/${id}/events`, {
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    const token = localStorage.getItem('token');
+    const eventSource = new EventSource(`${baseUrl}/studies/${id}/events?token=${token}`, {
       withCredentials: true // Depending on auth setup, might need this or pass token in URL if SSE doesn't support headers
     });
 
     eventSource.onmessage = (event) => {
       try {
+        console.log('SSE Received:', event.data);
         const data = JSON.parse(event.data);
         if (data.event === 'close') {
           eventSource.close();
@@ -52,15 +55,18 @@ export function LiveStudyAnalysis() {
           } else if (s === 'rules') {
             setPipelineState({ 1: 'completed', 2: 'completed', 3: 'completed', 4: 'completed', 5: 'running' });
             setProgress(90);
-          } else if (s === 'done') {
-            setPipelineState({ 1: 'completed', 2: 'completed', 3: 'completed', 4: 'completed', 5: 'completed' });
-            setProgress(100);
-            setStage('completed');
-            eventSource.close();
           } else if (s === 'failed') {
             setStage('rejected');
             eventSource.close();
           }
+        } else if (data.event === 'complete') {
+          setPipelineState({ 1: 'completed', 2: 'completed', 3: 'completed', 4: 'completed', 5: 'completed' });
+          setProgress(100);
+          setStage('completed');
+          eventSource.close();
+          setTimeout(() => {
+            navigate(`/studies/${id}`);
+          }, 1000);
         }
       } catch (e) {
         console.error('SSE Error:', e);

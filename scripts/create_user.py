@@ -36,8 +36,12 @@ def main() -> None:
         print(f"Error: role must be one of {[r.value for r in UserRole]}")
         sys.exit(1)
 
-    password = getpass.getpass("Password: ")
-    confirm = getpass.getpass("Confirm password: ")
+    if not sys.stdin.isatty():
+        password = input("Password: ")
+        confirm = input("Confirm password: ")
+    else:
+        password = getpass.getpass("Password: ")
+        confirm = getpass.getpass("Confirm password: ")
     if password != confirm:
         print("Error: passwords do not match.")
         sys.exit(1)

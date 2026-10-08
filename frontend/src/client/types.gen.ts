@@ -220,6 +220,82 @@ export type StudyCountsResponse = {
 };
 
 /**
+ * StudyListItem
+ */
+export type StudyListItem = {
+    /**
+     * Id
+     */
+    id: number;
+    /**
+     * Patient Ext Ref
+     */
+    patient_ext_ref: string | null;
+    /**
+     * Patient Age
+     */
+    patient_age: number | null;
+    /**
+     * Patient Sex
+     */
+    patient_sex: string | null;
+    /**
+     * Body Part
+     */
+    body_part: string;
+    /**
+     * Modality Hint
+     */
+    modality_hint: string | null;
+    /**
+     * Status
+     */
+    status: string;
+    /**
+     * Created At
+     */
+    created_at: string;
+    /**
+     * Needs Human Review
+     */
+    needs_human_review: boolean;
+    /**
+     * Findings
+     */
+    findings: {
+        [key: string]: unknown;
+    } | null;
+    /**
+     * Review Reasons
+     */
+    review_reasons: {
+        [key: string]: unknown;
+    } | null;
+};
+
+/**
+ * StudyListResponse
+ */
+export type StudyListResponse = {
+    /**
+     * Items
+     */
+    items: Array<StudyListItem>;
+    /**
+     * Total
+     */
+    total: number;
+    /**
+     * Page
+     */
+    page: number;
+    /**
+     * Size
+     */
+    size: number;
+};
+
+/**
  * TokenResponse
  */
 export type TokenResponse = {
@@ -411,6 +487,64 @@ export type ModelsStatusModelsStatusGetResponses = {
 };
 
 export type ModelsStatusModelsStatusGetResponse = ModelsStatusModelsStatusGetResponses[keyof ModelsStatusModelsStatusGetResponses];
+
+export type ListStudiesStudiesGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page
+         */
+        page?: number;
+        /**
+         * Size
+         */
+        size?: number;
+        /**
+         * Status
+         */
+        status?: string | null;
+        /**
+         * Body Part
+         */
+        body_part?: string | null;
+        /**
+         * Tier
+         */
+        tier?: string | null;
+        /**
+         * Date
+         */
+        date?: string | null;
+        /**
+         * Search
+         */
+        search?: string | null;
+        /**
+         * Patient Id
+         */
+        patient_id?: number | null;
+    };
+    url: '/studies';
+};
+
+export type ListStudiesStudiesGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type ListStudiesStudiesGetError = ListStudiesStudiesGetErrors[keyof ListStudiesStudiesGetErrors];
+
+export type ListStudiesStudiesGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: StudyListResponse;
+};
+
+export type ListStudiesStudiesGetResponse = ListStudiesStudiesGetResponses[keyof ListStudiesStudiesGetResponses];
 
 export type CreateStudyStudiesPostData = {
     body: BodyCreateStudyStudiesPost;

@@ -3,7 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html, Bounds } from '@react-three/drei';
 import * as THREE from 'three';
 import { SKELETON_MESH_MAP } from '../config/skeleton_mesh_map';
-import { Target, computeMeshStates } from '../utils/anatomyMapping';
+import { computeMeshStates, type Target } from '../utils/anatomyMapping';
 
 interface SkeletonViewerProps {
   anatomyData?: {

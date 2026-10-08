@@ -205,7 +205,7 @@ Live verification (browser screenshots): doctor logs in, opens queue, opens a ch
 
 **IDE: Antigravity | Model: Gemini 3.8 Flash (Medium)** · Fallback: Claude Sonnet 4.6 · about 1 h
 
-Use the original Step 18 prompt, and **add this paragraph at the end of it**:
+Use the original Step 18 prompt from D:\hackathons\NIITM CLG HACKATHON COIMBATORE\XRAY_ASSISTANT_24H_PLAYBOOK.md and **add this at the end of it**:
 
 ```text
 STITCH AND SKELETON ADDITIONS: every visible string in the Stitch screens (including labels that came from Stitch markup) goes through i18next with keys in en, ta and hi. Check that Tamil and Devanagari text does not overflow or break the Stitch layout at 360, 390, 768 and 1280 px, and fix wrapping with the Stitch tokens (line-height, min-width) rather than shrinking the font. Bone and region names on the 3D skeleton come from the labels in GET /anatomy/skeleton-map?lang=; add those labels to the ta/hi packs with the same review_status rules. The PDF report includes a static image of the skeleton view: render it from the real result (use the same Three.js scene in a headless Playwright capture, or a server-side render from the same mesh map), never a stock picture. Re-run the pixel-diff for English after the i18n change to confirm nothing regressed.

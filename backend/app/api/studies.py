@@ -1,14 +1,16 @@
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, BackgroundTasks, Query
 from fastapi.responses import JSONResponse, FileResponse, StreamingResponse
 from sqlalchemy.orm import Session
+from sqlalchemy import select, desc, or_, func, String
 from typing import List, Optional
 import os
 from pathlib import Path
 import json
 import asyncio
+from datetime import datetime, date
 
 from backend.app.db.session import get_db
-from backend.app.db.models import Study, User, BodyPart, StudyStatus, Review
+from backend.app.db.models import Study, User, BodyPart, StudyStatus, Review, Patient, Result
 from backend.app.api.auth import get_current_user
 from backend.app.services.pipeline import run_analysis_task, subscribe_events
 from backend.app.services.longitudinal.engine import LongitudinalEngine
@@ -17,6 +19,103 @@ router = APIRouter(prefix="/studies", tags=["studies"])
 
 STORAGE_DIR = Path("data/storage")
 STORAGE_DIR.mkdir(parents=True, exist_ok=True)
+
+from pydantic import BaseModel
+
+class StudyListItem(BaseModel):
+    id: int
+    patient_ext_ref: Optional[str]
+    patient_age: Optional[int]
+    patient_sex: Optional[str]
+    body_part: str
+    modality_hint: Optional[str]
+    status: str
+    created_at: datetime
+    needs_human_review: bool
+    findings: Optional[dict]
+    review_reasons: Optional[dict]
+
+class StudyListResponse(BaseModel):
+    items: List[StudyListItem]
+    total: int
+    page: int
+    size: int
+
+@router.get("", response_model=StudyListResponse)
+def list_studies(
+    page: int = 1,
+    size: int = 50,
+    status: Optional[str] = None,
+    body_part: Optional[str] = None,
+    tier: Optional[str] = None,
+    date_filter: Optional[date] = Query(None, alias="date"),
+    search: Optional[str] = None,
+    patient_id: Optional[int] = None,
+    db: Session = Depends(get_db),
+    user: User = Depends(get_current_user)
+):
+    query = select(Study, Patient, Result).outerjoin(Patient, Study.patient_id == Patient.id).outerjoin(Result, Study.id == Result.study_id)
+    
+    if status and status != "all":
+        query = query.where(Study.status == StudyStatus(status))
+    if body_part and body_part != "all":
+        query = query.where(Study.body_part == BodyPart(body_part))
+    if search:
+        query = query.where(or_(
+            Study.id.cast(String).ilike(f"%{search}%"),
+            Patient.external_ref.ilike(f"%{search}%")
+        ))
+    if date_filter:
+        query = query.where(func.date(Study.created_at) == date_filter)
+    if patient_id:
+        query = query.where(Study.patient_id == patient_id)
+
+    # Sort by created_at desc
+    query = query.order_by(desc(Study.created_at))
+
+    total = db.scalar(select(func.count()).select_from(query.subquery())) or 0
+    results = db.execute(query.offset((page - 1) * size).limit(size)).all()
+
+    items = []
+    for study, patient, result in results:
+        findings = result.findings_json if result else None
+        
+        # If tier filter is applied, skip if not matching
+        if tier and tier != "all" and findings:
+            is_tier1 = any(isinstance(v, dict) and v.get("tier") == "high" for v in findings.values())
+            is_tier2 = any(isinstance(v, dict) and v.get("tier") == "medium" for v in findings.values())
+            is_tier3 = not is_tier1 and not is_tier2
+            if tier == "tier1" and not is_tier1: continue
+            if tier == "tier2" and not is_tier2: continue
+            if tier == "tier3" and not is_tier3: continue
+
+        items.append(StudyListItem(
+            id=study.id,
+            patient_ext_ref=patient.external_ref if patient else None,
+            patient_age=patient.age if patient else None,
+            patient_sex=patient.sex if patient else None,
+            body_part=study.body_part.value,
+            modality_hint=study.modality_hint,
+            status=study.status.value,
+            created_at=study.created_at,
+            needs_human_review=result.needs_human_review if result else False,
+            findings=findings,
+            review_reasons=result.review_reasons_json if result else None
+        ))
+        
+    # Python-level sort for triage (tier 1 > tier 2 > tier 3) then needs_human_review
+    def sort_key(item):
+        tier_val = 3
+        if item.findings:
+            if any(isinstance(v, dict) and v.get("tier") == "high" for v in item.findings.values()):
+                tier_val = 1
+            elif any(isinstance(v, dict) and v.get("tier") == "medium" for v in item.findings.values()):
+                tier_val = 2
+        return (tier_val, 0 if item.needs_human_review else 1, -item.created_at.timestamp())
+        
+    items.sort(key=sort_key)
+
+    return StudyListResponse(items=items, total=total, page=page, size=size)
 
 @router.post("")
 async def create_study(
@@ -79,35 +178,79 @@ async def create_study(
     return {"id": study.id, "status": study.status, "body_part": study.body_part}
 
 @router.get("/{id}/events")
-async def study_events(id: int, user: User = Depends(get_current_user)):
-    # SSE
-    queue = subscribe_events(id)
+async def study_events(id: int, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+    # Check if already completed to avoid race condition
+    study = db.query(Study).filter(Study.id == id).first()
+    if not study:
+        raise HTTPException(404)
+        
     async def event_generator():
+        if study.status == StudyStatus.completed:
+            yield f"data: {json.dumps({'event': 'complete'})}\n\n"
+            await asyncio.sleep(0.1)
+            return
+            
+        queue = subscribe_events(id)
         try:
             while True:
                 msg = await queue.get()
                 if msg.get("event") == "close":
+                    yield f"data: {json.dumps({'event': 'complete'})}\n\n"
+                    await asyncio.sleep(0.1)
                     break
                 yield f"data: {json.dumps(msg)}\n\n"
         except asyncio.CancelledError:
             pass
-    return StreamingResponse(event_generator(), media_type="text/event-stream")
+    return StreamingResponse(
+        event_generator(), 
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive"
+        }
+    )
 
 @router.get("/{id}/result")
 def get_study_result(id: int, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
     study = db.query(Study).filter(Study.id == id).first()
     if not study:
         raise HTTPException(404, "Study not found")
-    if study.uploaded_by != user.id and user.role != "admin":
-        raise HTTPException(403, "Not authorized")
-    from backend.app.db.models import Result
+    
+    patient = db.query(Patient).filter(Patient.id == study.patient_id).first() if study.patient_id else None
     res = db.query(Result).filter(Result.study_id == id).first()
-    if not res:
-        return {}
+    reviews = db.query(Review).filter(Review.study_id == id).all()
+    
     return {
-        "findings": res.findings_json,
-        "interactions": res.interactions_json,
-        "review_reasons": res.review_reasons_json
+        "study": {
+            "id": study.id,
+            "body_part": study.body_part.value,
+            "modality_hint": study.modality_hint,
+            "status": study.status.value,
+            "created_at": study.created_at,
+            "sha256": study.sha256
+        },
+        "patient": {
+            "id": patient.id if patient else None,
+            "external_ref": patient.external_ref if patient else None,
+            "age": patient.age if patient else None,
+            "sex": patient.sex if patient else None
+        } if patient else None,
+        "result": {
+            "findings": res.findings_json if res else None,
+            "interactions": res.interactions_json if res else None,
+            "review_reasons": res.review_reasons_json if res else None,
+            "needs_human_review": res.needs_human_review if res else False,
+            "model_versions": res.model_versions_json if res else None
+        } if res else None,
+        "reviews": [
+            {
+                "id": r.id,
+                "decision": r.decision,
+                "notes": r.notes,
+                "created_at": r.created_at,
+                "doctor_id": r.doctor_id
+            } for r in reviews
+        ]
     }
 
 @router.post("/{id}/compare/{other_id}")

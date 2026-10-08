@@ -2,7 +2,7 @@
 
 import { type Client, type ClientMeta, formDataBodySerializer, type Options as Options2, type RequestResult, type TDataShape } from './client';
 import { client } from './client.gen';
-import type { CompareStudiesStudiesIdCompareOtherIdPostData, CompareStudiesStudiesIdCompareOtherIdPostErrors, CompareStudiesStudiesIdCompareOtherIdPostResponses, CreateStudyStudiesPostData, CreateStudyStudiesPostErrors, CreateStudyStudiesPostResponses, GetFindingFrequencyDashboardStudiesFindingsGetData, GetFindingFrequencyDashboardStudiesFindingsGetResponses, GetHeatmapStudiesIdHeatmapLabelPngGetData, GetHeatmapStudiesIdHeatmapLabelPngGetErrors, GetHeatmapStudiesIdHeatmapLabelPngGetResponses, GetLatencyStatsDashboardStudiesLatencyGetData, GetLatencyStatsDashboardStudiesLatencyGetResponses, GetModelStatusDashboardModelsStatusGetData, GetModelStatusDashboardModelsStatusGetResponses, GetQueueSizeDashboardStudiesQueueGetData, GetQueueSizeDashboardStudiesQueueGetResponses, GetRecentActivityDashboardAuditActivityGetData, GetRecentActivityDashboardAuditActivityGetResponses, GetSkeletonMapAnatomySkeletonMapGetData, GetSkeletonMapAnatomySkeletonMapGetResponses, GetStudyCountsDashboardStudiesCountsGetData, GetStudyCountsDashboardStudiesCountsGetResponses, GetStudyImageStudiesIdImagePngGetData, GetStudyImageStudiesIdImagePngGetErrors, GetStudyImageStudiesIdImagePngGetResponses, GetStudyResultStudiesIdResultGetData, GetStudyResultStudiesIdResultGetErrors, GetStudyResultStudiesIdResultGetResponses, GetTriageDistributionDashboardStudiesTriageGetData, GetTriageDistributionDashboardStudiesTriageGetResponses, GetUsersClinicsDashboardUsersClinicsGetData, GetUsersClinicsDashboardUsersClinicsGetResponses, HealthHealthGetData, HealthHealthGetResponses, LoginAuthLoginPostData, LoginAuthLoginPostErrors, LoginAuthLoginPostResponses, ModelsStatusModelsStatusGetData, ModelsStatusModelsStatusGetResponses, ReviewStudyStudiesIdReviewPostData, ReviewStudyStudiesIdReviewPostErrors, ReviewStudyStudiesIdReviewPostResponses, StudyEventsStudiesIdEventsGetData, StudyEventsStudiesIdEventsGetErrors, StudyEventsStudiesIdEventsGetResponses } from './types.gen';
+import type { CompareStudiesStudiesIdCompareOtherIdPostData, CompareStudiesStudiesIdCompareOtherIdPostErrors, CompareStudiesStudiesIdCompareOtherIdPostResponses, CreateStudyStudiesPostData, CreateStudyStudiesPostErrors, CreateStudyStudiesPostResponses, GetFindingFrequencyDashboardStudiesFindingsGetData, GetFindingFrequencyDashboardStudiesFindingsGetResponses, GetHeatmapStudiesIdHeatmapLabelPngGetData, GetHeatmapStudiesIdHeatmapLabelPngGetErrors, GetHeatmapStudiesIdHeatmapLabelPngGetResponses, GetLatencyStatsDashboardStudiesLatencyGetData, GetLatencyStatsDashboardStudiesLatencyGetResponses, GetModelStatusDashboardModelsStatusGetData, GetModelStatusDashboardModelsStatusGetResponses, GetQueueSizeDashboardStudiesQueueGetData, GetQueueSizeDashboardStudiesQueueGetResponses, GetRecentActivityDashboardAuditActivityGetData, GetRecentActivityDashboardAuditActivityGetResponses, GetSkeletonMapAnatomySkeletonMapGetData, GetSkeletonMapAnatomySkeletonMapGetResponses, GetStudyCountsDashboardStudiesCountsGetData, GetStudyCountsDashboardStudiesCountsGetResponses, GetStudyImageStudiesIdImagePngGetData, GetStudyImageStudiesIdImagePngGetErrors, GetStudyImageStudiesIdImagePngGetResponses, GetStudyResultStudiesIdResultGetData, GetStudyResultStudiesIdResultGetErrors, GetStudyResultStudiesIdResultGetResponses, GetTriageDistributionDashboardStudiesTriageGetData, GetTriageDistributionDashboardStudiesTriageGetResponses, GetUsersClinicsDashboardUsersClinicsGetData, GetUsersClinicsDashboardUsersClinicsGetResponses, HealthHealthGetData, HealthHealthGetResponses, ListStudiesStudiesGetData, ListStudiesStudiesGetErrors, ListStudiesStudiesGetResponses, LoginAuthLoginPostData, LoginAuthLoginPostErrors, LoginAuthLoginPostResponses, ModelsStatusModelsStatusGetData, ModelsStatusModelsStatusGetResponses, ReviewStudyStudiesIdReviewPostData, ReviewStudyStudiesIdReviewPostErrors, ReviewStudyStudiesIdReviewPostResponses, StudyEventsStudiesIdEventsGetData, StudyEventsStudiesIdEventsGetErrors, StudyEventsStudiesIdEventsGetResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -45,11 +45,15 @@ export const modelsStatusModelsStatusGet = <ThrowOnError extends boolean = false
 });
 
 /**
+ * List Studies
+ */
+export const listStudiesStudiesGet = <ThrowOnError extends boolean = false>(options?: Options<ListStudiesStudiesGetData, ThrowOnError>): RequestResult<ListStudiesStudiesGetResponses, ListStudiesStudiesGetErrors, ThrowOnError> => (options?.client ?? client).get<ListStudiesStudiesGetResponses, ListStudiesStudiesGetErrors, ThrowOnError>({ url: '/studies', ...options });
+
+/**
  * Create Study
  */
 export const createStudyStudiesPost = <ThrowOnError extends boolean = false>(options: Options<CreateStudyStudiesPostData, ThrowOnError>): RequestResult<CreateStudyStudiesPostResponses, CreateStudyStudiesPostErrors, ThrowOnError> => (options.client ?? client).post<CreateStudyStudiesPostResponses, CreateStudyStudiesPostErrors, ThrowOnError>({
     ...formDataBodySerializer,
-    security: [{ scheme: 'bearer', type: 'http' }],
     url: '/studies',
     ...options,
     headers: {
@@ -61,53 +65,32 @@ export const createStudyStudiesPost = <ThrowOnError extends boolean = false>(opt
 /**
  * Study Events
  */
-export const studyEventsStudiesIdEventsGet = <ThrowOnError extends boolean = false>(options: Options<StudyEventsStudiesIdEventsGetData, ThrowOnError>): RequestResult<StudyEventsStudiesIdEventsGetResponses, StudyEventsStudiesIdEventsGetErrors, ThrowOnError> => (options.client ?? client).get<StudyEventsStudiesIdEventsGetResponses, StudyEventsStudiesIdEventsGetErrors, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/studies/{id}/events',
-    ...options
-});
+export const studyEventsStudiesIdEventsGet = <ThrowOnError extends boolean = false>(options: Options<StudyEventsStudiesIdEventsGetData, ThrowOnError>): RequestResult<StudyEventsStudiesIdEventsGetResponses, StudyEventsStudiesIdEventsGetErrors, ThrowOnError> => (options.client ?? client).get<StudyEventsStudiesIdEventsGetResponses, StudyEventsStudiesIdEventsGetErrors, ThrowOnError>({ url: '/studies/{id}/events', ...options });
 
 /**
  * Get Study Result
  */
-export const getStudyResultStudiesIdResultGet = <ThrowOnError extends boolean = false>(options: Options<GetStudyResultStudiesIdResultGetData, ThrowOnError>): RequestResult<GetStudyResultStudiesIdResultGetResponses, GetStudyResultStudiesIdResultGetErrors, ThrowOnError> => (options.client ?? client).get<GetStudyResultStudiesIdResultGetResponses, GetStudyResultStudiesIdResultGetErrors, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/studies/{id}/result',
-    ...options
-});
+export const getStudyResultStudiesIdResultGet = <ThrowOnError extends boolean = false>(options: Options<GetStudyResultStudiesIdResultGetData, ThrowOnError>): RequestResult<GetStudyResultStudiesIdResultGetResponses, GetStudyResultStudiesIdResultGetErrors, ThrowOnError> => (options.client ?? client).get<GetStudyResultStudiesIdResultGetResponses, GetStudyResultStudiesIdResultGetErrors, ThrowOnError>({ url: '/studies/{id}/result', ...options });
 
 /**
  * Compare Studies
  */
-export const compareStudiesStudiesIdCompareOtherIdPost = <ThrowOnError extends boolean = false>(options: Options<CompareStudiesStudiesIdCompareOtherIdPostData, ThrowOnError>): RequestResult<CompareStudiesStudiesIdCompareOtherIdPostResponses, CompareStudiesStudiesIdCompareOtherIdPostErrors, ThrowOnError> => (options.client ?? client).post<CompareStudiesStudiesIdCompareOtherIdPostResponses, CompareStudiesStudiesIdCompareOtherIdPostErrors, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/studies/{id}/compare/{other_id}',
-    ...options
-});
+export const compareStudiesStudiesIdCompareOtherIdPost = <ThrowOnError extends boolean = false>(options: Options<CompareStudiesStudiesIdCompareOtherIdPostData, ThrowOnError>): RequestResult<CompareStudiesStudiesIdCompareOtherIdPostResponses, CompareStudiesStudiesIdCompareOtherIdPostErrors, ThrowOnError> => (options.client ?? client).post<CompareStudiesStudiesIdCompareOtherIdPostResponses, CompareStudiesStudiesIdCompareOtherIdPostErrors, ThrowOnError>({ url: '/studies/{id}/compare/{other_id}', ...options });
 
 /**
  * Get Study Image
  */
-export const getStudyImageStudiesIdImagePngGet = <ThrowOnError extends boolean = false>(options: Options<GetStudyImageStudiesIdImagePngGetData, ThrowOnError>): RequestResult<GetStudyImageStudiesIdImagePngGetResponses, GetStudyImageStudiesIdImagePngGetErrors, ThrowOnError> => (options.client ?? client).get<GetStudyImageStudiesIdImagePngGetResponses, GetStudyImageStudiesIdImagePngGetErrors, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/studies/{id}/image.png',
-    ...options
-});
+export const getStudyImageStudiesIdImagePngGet = <ThrowOnError extends boolean = false>(options: Options<GetStudyImageStudiesIdImagePngGetData, ThrowOnError>): RequestResult<GetStudyImageStudiesIdImagePngGetResponses, GetStudyImageStudiesIdImagePngGetErrors, ThrowOnError> => (options.client ?? client).get<GetStudyImageStudiesIdImagePngGetResponses, GetStudyImageStudiesIdImagePngGetErrors, ThrowOnError>({ url: '/studies/{id}/image.png', ...options });
 
 /**
  * Get Heatmap
  */
-export const getHeatmapStudiesIdHeatmapLabelPngGet = <ThrowOnError extends boolean = false>(options: Options<GetHeatmapStudiesIdHeatmapLabelPngGetData, ThrowOnError>): RequestResult<GetHeatmapStudiesIdHeatmapLabelPngGetResponses, GetHeatmapStudiesIdHeatmapLabelPngGetErrors, ThrowOnError> => (options.client ?? client).get<GetHeatmapStudiesIdHeatmapLabelPngGetResponses, GetHeatmapStudiesIdHeatmapLabelPngGetErrors, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/studies/{id}/heatmap_{label}.png',
-    ...options
-});
+export const getHeatmapStudiesIdHeatmapLabelPngGet = <ThrowOnError extends boolean = false>(options: Options<GetHeatmapStudiesIdHeatmapLabelPngGetData, ThrowOnError>): RequestResult<GetHeatmapStudiesIdHeatmapLabelPngGetResponses, GetHeatmapStudiesIdHeatmapLabelPngGetErrors, ThrowOnError> => (options.client ?? client).get<GetHeatmapStudiesIdHeatmapLabelPngGetResponses, GetHeatmapStudiesIdHeatmapLabelPngGetErrors, ThrowOnError>({ url: '/studies/{id}/heatmap_{label}.png', ...options });
 
 /**
  * Review Study
  */
 export const reviewStudyStudiesIdReviewPost = <ThrowOnError extends boolean = false>(options: Options<ReviewStudyStudiesIdReviewPostData, ThrowOnError>): RequestResult<ReviewStudyStudiesIdReviewPostResponses, ReviewStudyStudiesIdReviewPostErrors, ThrowOnError> => (options.client ?? client).post<ReviewStudyStudiesIdReviewPostResponses, ReviewStudyStudiesIdReviewPostErrors, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
     url: '/studies/{id}/review',
     ...options,
     headers: {
@@ -127,71 +110,39 @@ export const getSkeletonMapAnatomySkeletonMapGet = <ThrowOnError extends boolean
 /**
  * Get Study Counts
  */
-export const getStudyCountsDashboardStudiesCountsGet = <ThrowOnError extends boolean = false>(options?: Options<GetStudyCountsDashboardStudiesCountsGetData, ThrowOnError>): RequestResult<GetStudyCountsDashboardStudiesCountsGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetStudyCountsDashboardStudiesCountsGetResponses, unknown, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/dashboard/studies/counts',
-    ...options
-});
+export const getStudyCountsDashboardStudiesCountsGet = <ThrowOnError extends boolean = false>(options?: Options<GetStudyCountsDashboardStudiesCountsGetData, ThrowOnError>): RequestResult<GetStudyCountsDashboardStudiesCountsGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetStudyCountsDashboardStudiesCountsGetResponses, unknown, ThrowOnError>({ url: '/dashboard/studies/counts', ...options });
 
 /**
  * Get Triage Distribution
  */
-export const getTriageDistributionDashboardStudiesTriageGet = <ThrowOnError extends boolean = false>(options?: Options<GetTriageDistributionDashboardStudiesTriageGetData, ThrowOnError>): RequestResult<GetTriageDistributionDashboardStudiesTriageGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetTriageDistributionDashboardStudiesTriageGetResponses, unknown, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/dashboard/studies/triage',
-    ...options
-});
+export const getTriageDistributionDashboardStudiesTriageGet = <ThrowOnError extends boolean = false>(options?: Options<GetTriageDistributionDashboardStudiesTriageGetData, ThrowOnError>): RequestResult<GetTriageDistributionDashboardStudiesTriageGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetTriageDistributionDashboardStudiesTriageGetResponses, unknown, ThrowOnError>({ url: '/dashboard/studies/triage', ...options });
 
 /**
  * Get Queue Size
  */
-export const getQueueSizeDashboardStudiesQueueGet = <ThrowOnError extends boolean = false>(options?: Options<GetQueueSizeDashboardStudiesQueueGetData, ThrowOnError>): RequestResult<GetQueueSizeDashboardStudiesQueueGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetQueueSizeDashboardStudiesQueueGetResponses, unknown, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/dashboard/studies/queue',
-    ...options
-});
+export const getQueueSizeDashboardStudiesQueueGet = <ThrowOnError extends boolean = false>(options?: Options<GetQueueSizeDashboardStudiesQueueGetData, ThrowOnError>): RequestResult<GetQueueSizeDashboardStudiesQueueGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetQueueSizeDashboardStudiesQueueGetResponses, unknown, ThrowOnError>({ url: '/dashboard/studies/queue', ...options });
 
 /**
  * Get Finding Frequency
  */
-export const getFindingFrequencyDashboardStudiesFindingsGet = <ThrowOnError extends boolean = false>(options?: Options<GetFindingFrequencyDashboardStudiesFindingsGetData, ThrowOnError>): RequestResult<GetFindingFrequencyDashboardStudiesFindingsGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetFindingFrequencyDashboardStudiesFindingsGetResponses, unknown, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/dashboard/studies/findings',
-    ...options
-});
+export const getFindingFrequencyDashboardStudiesFindingsGet = <ThrowOnError extends boolean = false>(options?: Options<GetFindingFrequencyDashboardStudiesFindingsGetData, ThrowOnError>): RequestResult<GetFindingFrequencyDashboardStudiesFindingsGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetFindingFrequencyDashboardStudiesFindingsGetResponses, unknown, ThrowOnError>({ url: '/dashboard/studies/findings', ...options });
 
 /**
  * Get Recent Activity
  */
-export const getRecentActivityDashboardAuditActivityGet = <ThrowOnError extends boolean = false>(options?: Options<GetRecentActivityDashboardAuditActivityGetData, ThrowOnError>): RequestResult<GetRecentActivityDashboardAuditActivityGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetRecentActivityDashboardAuditActivityGetResponses, unknown, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/dashboard/audit/activity',
-    ...options
-});
+export const getRecentActivityDashboardAuditActivityGet = <ThrowOnError extends boolean = false>(options?: Options<GetRecentActivityDashboardAuditActivityGetData, ThrowOnError>): RequestResult<GetRecentActivityDashboardAuditActivityGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetRecentActivityDashboardAuditActivityGetResponses, unknown, ThrowOnError>({ url: '/dashboard/audit/activity', ...options });
 
 /**
  * Get Users Clinics
  */
-export const getUsersClinicsDashboardUsersClinicsGet = <ThrowOnError extends boolean = false>(options?: Options<GetUsersClinicsDashboardUsersClinicsGetData, ThrowOnError>): RequestResult<GetUsersClinicsDashboardUsersClinicsGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetUsersClinicsDashboardUsersClinicsGetResponses, unknown, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/dashboard/users/clinics',
-    ...options
-});
+export const getUsersClinicsDashboardUsersClinicsGet = <ThrowOnError extends boolean = false>(options?: Options<GetUsersClinicsDashboardUsersClinicsGetData, ThrowOnError>): RequestResult<GetUsersClinicsDashboardUsersClinicsGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetUsersClinicsDashboardUsersClinicsGetResponses, unknown, ThrowOnError>({ url: '/dashboard/users/clinics', ...options });
 
 /**
  * Get Model Status
  */
-export const getModelStatusDashboardModelsStatusGet = <ThrowOnError extends boolean = false>(options?: Options<GetModelStatusDashboardModelsStatusGetData, ThrowOnError>): RequestResult<GetModelStatusDashboardModelsStatusGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetModelStatusDashboardModelsStatusGetResponses, unknown, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/dashboard/models/status',
-    ...options
-});
+export const getModelStatusDashboardModelsStatusGet = <ThrowOnError extends boolean = false>(options?: Options<GetModelStatusDashboardModelsStatusGetData, ThrowOnError>): RequestResult<GetModelStatusDashboardModelsStatusGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetModelStatusDashboardModelsStatusGetResponses, unknown, ThrowOnError>({ url: '/dashboard/models/status', ...options });
 
 /**
  * Get Latency Stats
  */
-export const getLatencyStatsDashboardStudiesLatencyGet = <ThrowOnError extends boolean = false>(options?: Options<GetLatencyStatsDashboardStudiesLatencyGetData, ThrowOnError>): RequestResult<GetLatencyStatsDashboardStudiesLatencyGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetLatencyStatsDashboardStudiesLatencyGetResponses, unknown, ThrowOnError>({
-    security: [{ scheme: 'bearer', type: 'http' }],
-    url: '/dashboard/studies/latency',
-    ...options
-});
+export const getLatencyStatsDashboardStudiesLatencyGet = <ThrowOnError extends boolean = false>(options?: Options<GetLatencyStatsDashboardStudiesLatencyGetData, ThrowOnError>): RequestResult<GetLatencyStatsDashboardStudiesLatencyGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<GetLatencyStatsDashboardStudiesLatencyGetResponses, unknown, ThrowOnError>({ url: '/dashboard/studies/latency', ...options });
