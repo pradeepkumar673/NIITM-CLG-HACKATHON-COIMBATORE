@@ -16,7 +16,7 @@
 | 12 | Comorbidity engine | Done | 2026-10-08 | | Live verified engine, graph, and triage |
 | 13 | Longitudinal engine | Done | 2026-10-08 | | Registration, diff maps, mismatch check, and caliper measures |
 | 14 | Healing priors + exploratory predictor | Done | 2026-10-08 | | Researched priors, built outcome DB logic |
-| 15 | Orchestrator + API | Pending | | | |
+| 15 | Orchestrator + API | Done | 2026-10-08 | | Pipeline, Endpoints, Latency Profiling |
 | 16 | Frontend foundation | Pending | | | |
 | 17 | Doctor dashboard + compare | Pending | | | |
 | 18 | Languages + PDF | Pending | | | |

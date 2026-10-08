@@ -4,12 +4,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(ROOT))
 
-from backend.app.db.session import _SessionLocal
+from backend.app.db import session as db_session
 from backend.app.db.models import Outcome
 
 def main():
     try:
-        db = _SessionLocal()
+        db = db_session._SessionLocal()
         outcomes = db.query(Outcome).filter(Outcome.union_confirmed_date.isnot(None)).all()
         n = len(outcomes)
     except Exception as e:

@@ -9,6 +9,25 @@ from backend.app.core.logging import get_logger
 from backend.app.core.security import create_access_token, verify_password
 from backend.app.db.models import AuditLog, User
 from backend.app.db.session import get_db
+from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError, jwt
+from backend.app.core.config import get_settings
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+
+def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)) -> User:
+    try:
+        settings = get_settings()
+        payload = jwt.decode(token, settings.jwt_secret, algorithms=["HS256"])
+        user_id: str = payload.get("sub")
+        if user_id is None:
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    user = db.query(User).filter(User.id == int(user_id)).first()
+    if user is None:
+        raise HTTPException(status_code=401, detail="User not found")
+    return user
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 log = get_logger(__name__)

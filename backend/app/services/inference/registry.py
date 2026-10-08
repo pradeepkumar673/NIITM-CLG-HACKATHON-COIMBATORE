@@ -16,6 +16,7 @@ class UnifiedModelRegistry:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
         # Parse models.yaml
+        import yaml
         with open(self.models_yaml_path, "r", encoding="utf-8") as f:
             cfg = yaml.safe_load(f)
             self.model_configs = {m["name"]: m for m in cfg.get("models", [])}
@@ -80,8 +81,13 @@ class UnifiedModelRegistry:
             model = self._instantiate_model(name, m_cfg)
             ckpt = torch.load(weight_path, map_location=self.device)
             # Handle standard vs dictionary checkpoint
-            if isinstance(ckpt, dict) and "model" in ckpt:
-                model.load_state_dict(ckpt["model"])
+            if isinstance(ckpt, dict):
+                if "model" in ckpt:
+                    model.load_state_dict(ckpt["model"])
+                elif "model_state_dict" in ckpt:
+                    model.load_state_dict(ckpt["model_state_dict"])
+                else:
+                    model.load_state_dict(ckpt)
             else:
                 model.load_state_dict(ckpt)
                 
