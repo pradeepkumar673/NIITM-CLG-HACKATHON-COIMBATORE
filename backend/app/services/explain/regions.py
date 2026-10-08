@@ -105,9 +105,25 @@ def extract_saliency(
     peak_x = float(np.clip(peak_x, 0.0, 1.0))
     peak_y = float(np.clip(peak_y, 0.0, 1.0))
 
+    # Min-Max normalize to strictly span [0, 1] so thresholding is relative to the peak
+    c_min, c_max = cam_f.min(), cam_f.max()
+    if c_max > c_min:
+        norm_cam = (cam_f - c_min) / (c_max - c_min)
+    else:
+        norm_cam = cam_f
+
     # ── Salient regions ──────────────────────────────────────────────────────
-    # Threshold → binary mask
-    binary = (cam_f >= float(salient_threshold)).astype(np.uint8)
+    # Dynamically select threshold to isolate the focal fracture site
+    eff_thresh = float(salient_threshold)
+    binary = (norm_cam >= eff_thresh).astype(np.uint8)
+
+    # If the thresholded area covers more than 35% of the total image,
+    # increase the threshold to isolate the focal peak area
+    if binary.mean() > 0.35:
+        # Pick 80th percentile or 0.70, whichever is higher
+        p80 = float(np.percentile(norm_cam, 80))
+        eff_thresh = max(eff_thresh, min(0.85, p80))
+        binary = (norm_cam >= eff_thresh).astype(np.uint8)
 
     salient_regions: list[SalientRegion] = []
 
@@ -123,8 +139,11 @@ def extract_saliency(
             w_px = int(stats[lbl, cv2.CC_STAT_WIDTH])
             h_px = int(stats[lbl, cv2.CC_STAT_HEIGHT])
 
+            # Ignore tiny noise artifacts (< 8 pixels)
+            if w_px * h_px < 16:
+                continue
+
             # Bounding box as fractions of original image dimensions
-            # (using cam dimensions as a proxy for the original image proportion)
             xmin = float(np.clip(x_px / cam_w, 0.0, 1.0))
             ymin = float(np.clip(y_px / cam_h, 0.0, 1.0))
             xmax = float(np.clip((x_px + w_px) / cam_w, 0.0, 1.0))
@@ -133,22 +152,37 @@ def extract_saliency(
             component_mask = labels == lbl
             mean_sal = float(cam_f[component_mask].mean())
 
+            # Prioritize components containing or close to the peak
+            contains_peak = (xmin <= peak_x <= xmax) and (ymin <= peak_y <= ymax)
+            priority_score = mean_sal + (1.0 if contains_peak else 0.0)
+
             region_candidates.append(
-                SalientRegion(
+                (priority_score, SalientRegion(
                     xmin=xmin,
                     ymin=ymin,
                     xmax=xmax,
                     ymax=ymax,
                     mean_saliency=round(mean_sal, 6),
-                )
+                ))
             )
 
-        # Sort descending by mean saliency, keep top-N
-        region_candidates.sort(key=lambda r: r["mean_saliency"], reverse=True)
-        salient_regions = region_candidates[:int(salient_max_regions)]
+        # Sort descending by priority, keep top-N
+        region_candidates.sort(key=lambda r: r[0], reverse=True)
+        salient_regions = [r[1] for r in region_candidates[:int(salient_max_regions)]]
+
+    # If the binary CAM had signal but no region survived or none contained the focal peak, add a tight focal region at the peak
+    if binary.any() and (not salient_regions or not any(r["xmin"] <= peak_x <= r["xmax"] and r["ymin"] <= peak_y <= r["ymax"] for r in salient_regions)):
+        half_box = 0.08  # 16% width/height focal window
+        salient_regions.insert(0, SalientRegion(
+            xmin=round(max(0.0, peak_x - half_box), 6),
+            ymin=round(max(0.0, peak_y - half_box), 6),
+            xmax=round(min(1.0, peak_x + half_box), 6),
+            ymax=round(min(1.0, peak_y + half_box), 6),
+            mean_saliency=round(float(norm_cam[peak_row, peak_col]), 6),
+        ))
 
     return HeatmapSaliency(
         peak_x=round(peak_x, 6),
         peak_y=round(peak_y, 6),
-        salient_regions=salient_regions,
+        salient_regions=salient_regions[:int(salient_max_regions)],
     )

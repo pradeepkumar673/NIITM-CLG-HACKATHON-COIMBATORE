@@ -19,7 +19,7 @@
 | 15 | Orchestrator + API | Done | 2026-10-08 | | Pipeline, Endpoints, Latency Profiling. Step 15A: Dashboard metrics built (counts, triage, queue, findings, audit). |
 | 17 | Doctor dashboard + compare | Done | 2026-10-08 | | Built DoctorReviewQueue, DoctorReviewSignOff, StudyResult, LongitudinalComparison, and AdminDashboard wired to actual API data, fully functional. |
 | 18 | Languages + PDF | Done | 2026-10-08 | | i18next implemented in UI (en/ta/hi), machine drafted banner added, PDF download added, NotoSans fonts configured. |
-| 19 | Cursor UI polish | Pending | | | |
+| 19 | Cursor UI polish | Done | 2026-10-09 | | Built interactive ClinicalDecisionGraph visualizing the complete AI decision architecture (Input X-Ray -> Margin Analysis -> Neural Hotspot -> Probability Calibration -> Triage Action). Enhanced RegionAnnotationModal with side-by-side broken bone circle & real heat structure. Zero-CAM & test suite verified. |
 | 20 | ML acceptance evaluation | Pending | | | |
 | 21 | Live browser end-to-end tests | Pending | | | |
 | 22 | Anti-fake audit + review | Pending | | | |

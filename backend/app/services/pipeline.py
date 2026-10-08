@@ -84,7 +84,7 @@ def _generate_vit_heatmap(image_path: str, out_path: str, unc_path: str = None):
         from pytorch_grad_cam.utils.image import show_cam_on_image
     except ImportError:
         log.warning("pytorch_grad_cam not installed – fracture heatmap skipped.")
-        return None
+        return None, None
     
     try:
         pipe = get_fracture_pipeline()
@@ -110,7 +110,7 @@ def _generate_vit_heatmap(image_path: str, out_path: str, unc_path: str = None):
         
         img_bgr = cv2.imread(image_path, cv2.IMREAD_COLOR)
         if img_bgr is None:
-            return None
+            return None, None
             
         img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
         inputs = processor(images=img_rgb, return_tensors="pt")
@@ -126,6 +126,15 @@ def _generate_vit_heatmap(image_path: str, out_path: str, unc_path: str = None):
         heatmap = cv2.applyColorMap(np.uint8(255 * grayscale_cam), cv2.COLORMAP_JET)
         cv2.imwrite(out_path, heatmap)
         log.info(f"ViT heatmap saved to {out_path}")
+
+        from backend.app.services.explain.regions import extract_saliency
+        cfg = load_config()
+        sal_thresh = cfg.get("explain", {}).get("salient_threshold", 0.5)
+        sal_max = cfg.get("explain", {}).get("salient_max_regions", 3)
+        saliency = extract_saliency(
+            grayscale_cam, orig_height=orig_h, orig_width=orig_w,
+            salient_threshold=sal_thresh, salient_max_regions=sal_max
+        )
 
         # 2. MC Dropout Uncertainty (if unc_path is provided)
         uncertainty_stats = None
@@ -164,10 +173,10 @@ def _generate_vit_heatmap(image_path: str, out_path: str, unc_path: str = None):
             }
             log.info(f"ViT uncertainty saved to {unc_path}")
         
-        return uncertainty_stats
+        return uncertainty_stats, saliency
     except Exception as e:
         log.warning(f"Failed to generate ViT heatmap/uncertainty: {e}")
-        return None
+        return None, None
 
 async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[int], sex: Optional[str]):
     import time
@@ -350,7 +359,7 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                 _notify(study_id, "stage", {"stage": "heatmap", "message": "Synthesizing Grad-CAM saliency mapping and localization..."})
                 _notify(study_id, "stage", {"stage": "uncertainty", "message": "Monte Carlo dropout variance and calibration..."})
                 
-                unc_stats = _generate_vit_heatmap(study.image_path, get_hm_path("fracture"), get_uncertainty_path())
+                unc_stats, saliency = _generate_vit_heatmap(study.image_path, get_hm_path("fracture"), get_uncertainty_path())
                 if unc_stats:
                     uncertainty_result = unc_stats
                 else:
@@ -358,16 +367,29 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                         "method": "vit_not_implemented",
                         "note": "Spatial MC-dropout uncertainty failed or not supported for ViT-based fracture model.",
                     }
+                
+                if saliency:
+                    result_json["findings"]["fracture"]["peak_x"] = saliency["peak_x"]
+                    result_json["findings"]["fracture"]["peak_y"] = saliency["peak_y"]
+                    result_json["findings"]["fracture"]["salient_regions"] = saliency["salient_regions"]
 
             # ═══════════════════════════════════════════════════════════
             elif study.body_part == BodyPart.knee:
                 _notify(study_id, "stage", {"stage": "classification", "message": "Analyzing knee health..."})
+                knee_model = None
+                top_knee_idx = 0
+                top_knee_label = "osteopenia"
+                img_vis_knee = None
+                img_tensor_knee = None
+                knee_classes = ["normal", "osteopenia", "osteoporosis"]
+
                 try:
-                    from backend.app.services.inference.hf_models import predict_knee
+                    from backend.app.services.inference.hf_models import predict_knee, get_knee_model
+                    import torchvision.transforms as T
                     knee_result = predict_knee(study.image_path)
                     result_json["findings"].update({
                         k: v for k, v in knee_result.items()
-                        if k not in ("needs_human_review",)
+                        if k not in ("needs_human_review", "experimental")
                     })
                     result_json["experimental"] = True
                     result_json["needs_human_review"] = True
@@ -376,22 +398,80 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                         "without knee-specific fine-tuning. Treat as decision support only. "
                         "Human review required."
                     )
+
+                    # Identify top-probability class for heatmap target
+                    probs_by_class = {k: v["probability"] for k, v in result_json["findings"].items() if isinstance(v, dict) and "probability" in v}
+                    top_knee_label = max(probs_by_class, key=lambda k: probs_by_class[k]) if probs_by_class else "osteopenia"
+                    top_knee_idx = knee_classes.index(top_knee_label) if top_knee_label in knee_classes else 0
+
+                    # Prepare model + tensor for explainability
+                    knee_model, knee_transform = get_knee_model()
+                    img_pil = __import__('PIL.Image', fromlist=['Image']).open(study.image_path).convert("RGB")
+                    img_tensor_knee = knee_transform(img_pil).unsqueeze(0)
+
+                    import cv2 as _cv2
+                    img_bgr_knee = _cv2.imread(study.image_path, _cv2.IMREAD_COLOR)
+                    img_vis_knee = _cv2.resize(img_bgr_knee, (224, 224)).astype(np.float32) / 255.0
+
                 except Exception as e:
                     log.error(f"Knee inference error: {e}")
                     result_json["findings"]["knee"] = {"error": str(e)}
 
+                # ── Heatmap (GradCAM++ on EfficientNet-B0 features[-1]) ──
                 _notify(study_id, "stage", {"stage": "heatmap", "message": "Synthesizing Grad-CAM saliency mapping and localization..."})
-                _generate_heatmap("", study.image_path, 0, get_hm_path("osteopenia"))
+                if knee_model is not None and img_tensor_knee is not None and img_vis_knee is not None:
+                    try:
+                        from backend.app.services.explain.cam import generate_gradcam
+                        # EfficientNet-B0 in timm: target last conv block
+                        target_layer = knee_model.conv_head  # final conv before pooling
+                        raw_cam, overlay, saliency = generate_gradcam(
+                            knee_model, img_tensor_knee, top_knee_idx, target_layer, img_vis_knee
+                        )
+                        hm_out = get_hm_path(top_knee_label)
+                        overlay_bgr = cv2.cvtColor((overlay * 255).astype(np.uint8), cv2.COLOR_RGB2BGR)
+                        cv2.imwrite(hm_out, overlay_bgr)
+                        # Attach saliency to finding
+                        finding = result_json["findings"].get(top_knee_label, {})
+                        finding["peak_x"] = saliency["peak_x"]
+                        finding["peak_y"] = saliency["peak_y"]
+                        finding["salient_regions"] = saliency["salient_regions"]
+                        result_json["findings"][top_knee_label] = finding
+                        log.info(f"Knee GradCAM++ heatmap saved for label '{top_knee_label}' at {hm_out}")
+                    except Exception as cam_err:
+                        log.warning(f"Knee GradCAM++ skipped: {cam_err}")
 
+                # ── MC-Dropout Uncertainty ───────────────────────────────
                 _notify(study_id, "stage", {"stage": "uncertainty", "message": "Monte Carlo dropout variance and calibration..."})
-                uncertainty_result = {
-                    "method": "not_computed",
-                    "note": "Uncertainty estimation not available for knee model.",
-                }
+                if knee_model is not None and img_tensor_knee is not None and img_vis_knee is not None:
+                    try:
+                        from backend.app.services.explain.cam import generate_spatial_uncertainty
+                        n_passes = int(cfg.get("mc_dropout", {}).get("n_passes", 10))
+                        target_layer = knee_model.conv_head
+                        std_map, unc_overlay, downsampled_64 = generate_spatial_uncertainty(
+                            knee_model, img_tensor_knee, top_knee_idx, target_layer, n_passes, img_vis_knee
+                        )
+                        unc_path = get_uncertainty_path()
+                        unc_bgr = cv2.cvtColor((unc_overlay * 255).astype(np.uint8), cv2.COLOR_RGB2BGR)
+                        cv2.imwrite(unc_path, unc_bgr)
+                        uncertainty_result = {
+                            "std_map_64x64": downsampled_64.tolist(),
+                            "mean_std": float(std_map.mean()),
+                            "max_std": float(std_map.max()),
+                            "n_passes": n_passes,
+                            "method": "mc_dropout_gradcam_efficientnet_b0",
+                            "top_label": top_knee_label,
+                        }
+                        log.info(f"Knee MC uncertainty computed: mean_std={uncertainty_result['mean_std']:.4f}")
+                    except Exception as unc_err:
+                        log.warning(f"Knee uncertainty estimation skipped: {unc_err}")
+                        uncertainty_result = {"error": str(unc_err), "method": "mc_dropout_gradcam_efficientnet_b0"}
+                else:
+                    uncertainty_result = {"method": "skipped", "note": "Knee model not loaded, uncertainty skipped."}
+
 
             # ═══════════════════════════════════════════════════════════
-            # 5. LLM Summary using Groq
-            _notify(study_id, "stage", {"stage": "summary", "message": "Generating LLM summary..."})
+            # 5. LLM Summary + Rationale + Interaction Explanations (Groq)
+            _notify(study_id, "stage", {"stage": "summary", "message": "Generating AI clinical narrative (Groq)..."})
             try:
                 import json as _json
                 from groq import Groq
@@ -399,27 +479,103 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                 groq_key = os.environ.get("GROQ_API_KEY")
                 if groq_key:
                     client = Groq(api_key=groq_key)
-                    # Pass only model outputs – no patient identifiers (R10)
-                    llm_payload = {
-                        "findings": {
-                            k: {"probability": v.get("probability"), "tier": v.get("tier")}
-                            for k, v in result_json.get("findings", {}).items()
-                            if isinstance(v, dict) and "probability" in v
-                        },
-                        "triage": result_json.get("triage"),
+                    groq_model = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+
+                    # Build a safe payload with no patient identifiers (R10)
+                    findings_payload = {
+                        k: {
+                            "probability": round(v.get("probability", 0), 3),
+                            "tier": v.get("tier", "low"),
+                            "label": v.get("label", k),
+                        }
+                        for k, v in result_json.get("findings", {}).items()
+                        if isinstance(v, dict) and "probability" in v
                     }
-                    prompt = (
-                        "You are an AI radiologist assistant providing decision support (NOT a definitive diagnosis). "
-                        "Write a concise, 3-sentence summary for this X-Ray based strictly on these AI-generated findings: "
-                        f"{_json.dumps(llm_payload)}. "
-                        "Do not invent findings. State that clinical confirmation is required. Keep it highly professional."
+                    triage_payload = result_json.get("triage", {})
+                    body_part = study.body_part.value if hasattr(study.body_part, "value") else str(study.body_part)
+                    interactions_payload = result_json.get("interactions", [])
+
+                    # ── 5a. Main clinical summary ──────────────────────
+                    summary_prompt = (
+                        f"You are an AI radiologist assistant providing DECISION SUPPORT only — NOT a definitive diagnosis. "
+                        f"The AI model analyzed a {body_part} X-ray and produced these findings: {_json.dumps(findings_payload)}. "
+                        f"Triage level: {_json.dumps(triage_payload)}. "
+                        f"Write a concise 2–3 sentence clinical summary: what was detected, how confident the model is, "
+                        f"and whether urgent clinical follow-up is recommended. "
+                        f"Do NOT invent findings. End with: 'Clinical confirmation by a qualified clinician is required.'"
                     )
-                    chat_completion = client.chat.completions.create(
-                        messages=[{"role": "user", "content": prompt}],
-                        model=os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile"),
-                        max_tokens=200,
+                    r1 = client.chat.completions.create(
+                        messages=[{"role": "user", "content": summary_prompt}],
+                        model=groq_model, max_tokens=220,
                     )
-                    result_json["llm_summary"] = chat_completion.choices[0].message.content
+                    result_json["llm_summary"] = r1.choices[0].message.content.strip()
+
+                    # ── 5b. Detailed rationale steps ──────────────────
+                    rationale_prompt = (
+                        f"You are a medical AI explainability engine. Based on these AI findings from a {body_part} X-ray: "
+                        f"{_json.dumps(findings_payload)}, generate a JSON array called 'steps' with exactly 4 objects. "
+                        f"Each object must have: "
+                        f"'title' (short, ≤8 words), "
+                        f"'body' (1–2 sentences explaining: what was found / what the condition is / how severe it is / what action is needed). "
+                        f"Step 1: What the AI detected and where. "
+                        f"Step 2: What the condition is (clinical definition, in plain language). "
+                        f"Step 3: How severe it is based on the probability and tier. "
+                        f"Step 4: Recommended next action (decision support only, not a prescription). "
+                        f"Respond ONLY with valid JSON: {{\"steps\": [...]}}. No markdown, no prose outside JSON."
+                    )
+                    r2 = client.chat.completions.create(
+                        messages=[{"role": "user", "content": rationale_prompt}],
+                        model=groq_model, max_tokens=500,
+                    )
+                    try:
+                        raw2 = r2.choices[0].message.content.strip()
+                        # Strip potential markdown code fences
+                        if raw2.startswith("```"):
+                            raw2 = raw2.split("```")[1]
+                            if raw2.startswith("json"):
+                                raw2 = raw2[4:]
+                        parsed2 = _json.loads(raw2)
+                        result_json["rationale_steps"] = parsed2.get("steps", [])
+                    except Exception as parse_err:
+                        log.warning(f"Rationale steps JSON parse failed: {parse_err}. Raw: {r2.choices[0].message.content[:200]}")
+                        result_json["rationale_steps"] = []
+
+                    # ── 5c. Clinical interaction explanations & reasoning graph ──────────
+                    interaction_prompt = (
+                        f"You are a clinical decision support engine. Based on these AI findings from a {body_part} X-ray: "
+                        f"{_json.dumps(findings_payload)} and these fired clinical interaction rules: {_json.dumps(interactions_payload)}, "
+                        f"generate a JSON object with two keys: 'explanations' and 'interaction_graph'.\n"
+                        f"- 'explanations': an array of 1–3 objects. Each object must have: "
+                        f"'heading' (the clinical topic, ≤6 words), "
+                        f"'detail' (2 sentences: explain the clinical significance of the finding or rule), "
+                        f"'severity' (one of: 'low', 'medium', 'high').\n"
+                        f"- 'interaction_graph': an object with 'nodes' (array) and 'edges' (array). "
+                        f"If there are no fired rules, create a causal reasoning graph showing how the AI might have concluded the findings. "
+                        f"Nodes must have: 'id' (short string), 'type' (either 'history' or 'finding'), and 'tier'. "
+                        f"Edges must have 'source' (node id) and 'target' (node id). "
+                        f"Respond ONLY with valid JSON: {{\"explanations\": [...], \"interaction_graph\": {{\"nodes\": [...], \"edges\": [...]}}}}. No markdown, no prose outside JSON."
+                    )
+                    r3 = client.chat.completions.create(
+                        messages=[{"role": "user", "content": interaction_prompt}],
+                        model=groq_model, max_tokens=800,
+                    )
+                    try:
+                        raw3 = r3.choices[0].message.content.strip()
+                        if raw3.startswith("```"):
+                            raw3 = raw3.split("```")[1]
+                            if raw3.startswith("json"):
+                                raw3 = raw3[4:]
+                        parsed3 = _json.loads(raw3)
+                        result_json["interaction_explanations"] = parsed3.get("explanations", [])
+                        if not result_json.get("interaction_graph") or len(result_json["interaction_graph"].get("nodes", [])) == 0:
+                            result_json["interaction_graph"] = parsed3.get("interaction_graph", {"nodes": [], "edges": []})
+                    except Exception as parse_err:
+                        log.warning(f"Interaction explanations JSON parse failed: {parse_err}.")
+                        result_json["interaction_explanations"] = []
+
+                    log.info("Groq LLM: summary + rationale_steps + interaction_explanations generated.")
+                else:
+                    log.warning("GROQ_API_KEY not set — LLM generation skipped.")
             except Exception as e:
                 log.error(f"LLM Summary error: {e}")
                 
@@ -449,6 +605,9 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                 needs_human_review=result_json.get("needs_human_review", True),
                 explanation_json={
                     "llm_summary": result_json.get("llm_summary"),
+                    "rationale_steps": result_json.get("rationale_steps"),
+                    "interaction_explanations": result_json.get("interaction_explanations"),
+                    "interaction_graph": result_json.get("interaction_graph"),
                     "disclaimer": result_json.get("disclaimer"),
                     "experimental": result_json.get("experimental", False),
                     "anatomy": result_json.get("anatomy"),

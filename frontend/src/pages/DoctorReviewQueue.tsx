@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getQueueSizeDashboardStudiesQueueGet, listStudiesStudiesGet, getTriageDistributionDashboardStudiesTriageGet } from '../client';
 import { AppShell } from '../components/AppShell';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getAuthUser } from '../utils/auth';
 
 
