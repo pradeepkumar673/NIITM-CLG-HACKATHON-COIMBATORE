@@ -69,15 +69,9 @@ def _notify(study_id: int, event: str, data: dict = None):
             q.put_nowait(msg)
 
 def _generate_heatmap(model_name: str, image_path: str, label_idx: int, out_path: str, threshold: float = 0.5):
-    import cv2
-    import numpy as np
-    try:
-        # Create a dummy heatmap file for API tests
-        dummy = np.zeros((256, 256, 3), dtype=np.uint8)
-        cv2.putText(dummy, "Heatmap", (50, 128), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-        cv2.imwrite(out_path, dummy)
-    except Exception as e:
-        log.error(f"Heatmap generation failed: {e}")
+    # Generating real heatmaps for ViT models requires Attention Rollout, which is not currently implemented.
+    # We will NOT generate a fake/dummy heatmap to comply with strict medical data rules.
+    log.warning(f"Heatmap generation not supported for this model architecture ({model_name}).")
 
 async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[int], sex: Optional[str]):
     import time
@@ -145,10 +139,19 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                         target_layer = xrv_model.features[-1]
                         img_bgr = cv2.imread(study.image_path, cv2.IMREAD_COLOR)
                         img_vis = cv2.resize(img_bgr, (224, 224)).astype(np.float32) / 255.0
-                        _, overlay = generate_gradcam(xrv_model, img_tensor, top_idx, target_layer, img_vis)
+                        raw_cam, overlay, saliency = generate_gradcam(
+                            xrv_model, img_tensor, top_idx, target_layer, img_vis
+                        )
                         out_path = get_hm_path(top_label)
                         overlay_bgr = cv2.cvtColor((overlay * 255).astype(np.uint8), cv2.COLOR_RGB2BGR)
                         cv2.imwrite(out_path, overlay_bgr)
+                        # ── Step 9A: add peak + salient regions to the finding ──────────
+                        top_finding = result_json["findings"].get(top_label, {})
+                        top_finding["peak_x"] = saliency["peak_x"]
+                        top_finding["peak_y"] = saliency["peak_y"]
+                        top_finding["salient_regions"] = saliency["salient_regions"]
+                        result_json["findings"][top_label] = top_finding
+
                     except Exception as cam_err:
                         log.warning(f"GradCAM skipped: {cam_err}")
 
@@ -159,7 +162,8 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                 _notify(study_id, "stage", {"stage": "rules", "message": "Applying comorbidity rules..."})
                 t_cpu_start = time.perf_counter()
                 try:
-                    rule_res = get_rule_engine().evaluate(result_json["findings"], history_flags, age)
+                    findings_list = [{"label": k, **v} for k, v in result_json["findings"].items() if isinstance(v, dict)]
+                    rule_res = get_rule_engine().evaluate(findings_list, history_flags, age)
                     result_json["interactions"] = rule_res.get("interactions", [])
                     result_json["triage"] = rule_res.get("triage", {"level": "routine", "reasons": []})
                 except Exception as e:
@@ -183,7 +187,7 @@ async def run_analysis_task(study_id: int, history_flags: dict, age: Optional[in
                 except Exception as e:
                     log.error(f"Fracture inference error: {e}")
                     result_json["findings"]["fracture"] = {"error": str(e)}
-                _generate_heatmap("", study.image_path, 0, get_hm_path("fracture"))
+                _generate_heatmap("ViT", study.image_path, 0, get_hm_path("fracture"))
 
             elif study.body_part == BodyPart.knee:
                 # Knee: timm EfficientNet-B0 ImageNet pretrained (no knee-specific HF model)
