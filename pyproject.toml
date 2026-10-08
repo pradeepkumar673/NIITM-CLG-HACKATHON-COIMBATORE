@@ -35,6 +35,7 @@ dependencies = [
     "torchxrayvision>=1.5.5",
     "transformers>=5.19.0",
     "email-validator>=2.3.0",
+    "groq>=1.7.0",
 ]
 
 [[tool.uv.index]]
@@ -48,3 +49,11 @@ torchvision = { index = "pytorch-cu128" }
 
 [tool.ruff]
 line-length = 88
+
+[tool.pytest.ini_options]
+# Only collect tests from the tests/ directory.
+# scratch/ contains exploratory one-off scripts that are not test suites (R9).
+testpaths = ["tests"]
+# Make the project root available as a Python path so `import backend` works
+# regardless of whether pytest is invoked via `pytest` or `python -m pytest`.
+pythonpath = ["."]
