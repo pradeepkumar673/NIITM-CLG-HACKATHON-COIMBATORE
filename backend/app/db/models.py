@@ -193,3 +193,17 @@ class AuditLog(Base):
     )
 
     user: Mapped[User | None] = relationship("User", back_populates="audit_logs")
+
+class Outcome(Base):
+    __tablename__ = "outcomes"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    patient_id: Mapped[int] = mapped_column(Integer, ForeignKey("patients.id"), nullable=False)
+    study_series_id: Mapped[str] = mapped_column(String(128), nullable=False)
+    injury_date: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    union_confirmed_date: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    confirmed_by: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False)
+    method: Mapped[str] = mapped_column(String(64), nullable=False) # e.g., 'clinical', 'radiographic'
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=_utcnow, nullable=False
+    )
