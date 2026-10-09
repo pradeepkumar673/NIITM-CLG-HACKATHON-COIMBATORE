@@ -1086,6 +1086,7 @@ function ClinicalDecisionGraph({
   interactions,
   interactionExplanations,
   interactionGraph,
+  rationaleSteps,
   showGraph = true,
 }: {
   study: any;
@@ -1096,16 +1097,17 @@ function ClinicalDecisionGraph({
   interactions?: any[];
   interactionExplanations?: any[];
   interactionGraph?: any;
+  rationaleSteps?: any[];
   showGraph?: boolean;
 }) {
   const [activeTab, setActiveTab] = useState<"decision-flow" | "rules">("decision-flow");
   const [selectedNodeId, setSelectedNodeId] = useState<string>("node-3");
 
   const topFinding = findings[topLabel] || {};
-  const prob = topFinding.probability ?? 0.88;
+  const prob = topFinding.probability ?? 0;
   const label = topFinding.label || topLabel.replace(/_/g, " ");
-  const peakX = topFinding.peak_x ?? 0.48;
-  const peakY = topFinding.peak_y ?? 0.52;
+  const peakX = topFinding.peak_x ?? 0.5;
+  const peakY = topFinding.peak_y ?? 0.5;
 
   // The 6 structural nodes explaining how the AI took the decision:
   const decisionNodes = [
@@ -1117,52 +1119,52 @@ function ClinicalDecisionGraph({
       color: "#0284c7",
       col: 0,
       row: 0,
-      desc: "High-resolution radiographic frame loaded. Pixel matrix validated, contrast calibrated, and anatomical positioning verified without motion artifacts.",
+      desc: `Radiographic frame loaded. Matrix validated and anatomical positioning verified.`,
       metrics: `Modality: ${study.modality_hint || "CR"} · Body Part: ${study.body_part?.toUpperCase() || "X-RAY"}`,
     },
     {
       id: "node-2",
-      title: "Cortical Edge Scan",
+      title: rationaleSteps?.[0]?.title || "Feature Extraction",
       type: "Feature Extraction",
-      badge: "Margin Discontinuity",
+      badge: "Detection",
       color: "#0d9488",
       col: 0,
       row: 1,
-      desc: "Algorithmic edge and gradient analysis scanned bone cortical margins and trabecular patterns, detecting clear structural contour disruption.",
-      metrics: "Gradient Magnitude: High · Cortical Line: Interrupted",
+      desc: rationaleSteps?.[0]?.body || `Algorithmic edge and gradient analysis scanned bone cortical margins and trabecular patterns.`,
+      metrics: "Gradient Magnitude: Active",
     },
     {
       id: "node-3",
-      title: "Neural Fracture Focus",
+      title: rationaleSteps?.[1]?.title || "Neural Fracture Focus",
       type: "Grad-CAM++ Saliency",
       badge: `Peak Hotspot (${(peakX * 100).toFixed(0)}%, ${(peakY * 100).toFixed(0)}%)`,
       color: "#d97706",
       col: 1,
       row: 0,
-      desc: `Vision model neural gradient attention is concentrated directly at coordinates (X: ${(peakX * 100).toFixed(0)}%, Y: ${(peakY * 100).toFixed(0)}%), isolating the focal fracture site.`,
+      desc: rationaleSteps?.[1]?.body || `Neural gradient attention is concentrated directly at coordinates (X: ${(peakX * 100).toFixed(0)}%, Y: ${(peakY * 100).toFixed(0)}%), isolating the focal site.`,
       metrics: `Peak Saliency: 1.00 max · Spatial Focus: ${(peakX * 100).toFixed(0)}% X, ${(peakY * 100).toFixed(0)}% Y`,
     },
     {
       id: "node-4",
-      title: "Confidence Calibration",
+      title: rationaleSteps?.[2]?.title || "Confidence Calibration",
       type: "Platt / Temperature",
       badge: `${(prob * 100).toFixed(1)}% Calibrated`,
       color: "#2563eb",
       col: 1,
       row: 1,
-      desc: `Raw model logits mapped through temperature-scaled calibration yielding ${(prob * 100).toFixed(1)}% posterior probability. MC-dropout passes confirm low uncertainty variance (±${((uncertainty?.mean_std ?? 0.032) * 100).toFixed(1)}%).`,
+      desc: rationaleSteps?.[2]?.body || `Raw model logits mapped through temperature-scaled calibration yielding ${(prob * 100).toFixed(1)}% posterior probability.`,
       metrics: `Calibrated p: ${(prob * 100).toFixed(1)}% · MC-Variance: ±${((uncertainty?.mean_std ?? 0.032) * 100).toFixed(1)}% σ`,
     },
     {
       id: "node-5",
-      title: `${label.toUpperCase()} Decision`,
+      title: rationaleSteps?.[3]?.title || `${label.toUpperCase()} Decision`,
       type: "Diagnostic Classifier",
-      badge: "Tier 1 High Priority",
+      badge: `${triage?.level?.toUpperCase() || "URGENT"} Priority`,
       color: "#dc2626",
       col: 2,
       row: 0,
-      desc: `Confidence ${(prob * 100).toFixed(1)}% exceeds the 0.50 threshold with high margin. Positive fracture finding affirmed as Tier 1 High Priority.`,
-      metrics: `Threshold: > 0.50 · Decision: Positive (${(prob * 100).toFixed(1)}%)`,
+      desc: rationaleSteps?.[3]?.body || `Confidence ${(prob * 100).toFixed(1)}%. Positive finding affirmed.`,
+      metrics: `Decision: Positive (${(prob * 100).toFixed(1)}%)`,
     },
     {
       id: "node-6",
@@ -1172,7 +1174,7 @@ function ClinicalDecisionGraph({
       color: "#7c3aed",
       col: 2,
       row: 1,
-      desc: `${triage?.level?.toUpperCase() || "URGENT"} triage protocol activated. Recommends anatomical stabilization, attending doctor validation, and tele-consultation.`,
+      desc: `${triage?.level?.toUpperCase() || "URGENT"} triage protocol activated. Recommends anatomical stabilization and attending doctor validation.`,
       metrics: `Level: ${triage?.level?.toUpperCase() || "URGENT"} · Review: Required`,
     },
   ];
@@ -1639,6 +1641,7 @@ export function StudyResult() {
               interactions={interactions}
               interactionExplanations={interactionExplanations}
               interactionGraph={interactionGraph}
+              rationaleSteps={rationaleSteps}
               showGraph={showGraph}
             />
           </div>
