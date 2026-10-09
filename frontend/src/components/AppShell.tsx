@@ -17,8 +17,8 @@ export function AppShell({ children, userRole, userName, clinicName }: AppShellP
   const isActive = (path: string) => location.pathname === path;
   const { t, i18n } = useTranslation();
 
-  const studyMatch = matchPath('/studies/:id/result', location.pathname);
-  const studyId = studyMatch?.params?.id;
+  const studyMatch = matchPath('/studies/:id', location.pathname);
+  const studyId = (studyMatch && studyMatch.params.id !== 'new') ? studyMatch.params.id : undefined;
 
   const { data: studyResult } = useQuery({
     queryKey: ['studyResult', studyId],
@@ -110,8 +110,8 @@ export function AppShell({ children, userRole, userName, clinicName }: AppShellP
                   Compare
                 </Link>
           </nav>
-
-          {studyId && activeMuscles.length > 0 && (
+          
+          {studyId && (
             <div className="px-space-md py-4 mt-2 mb-2 border-t border-b border-outline-variant">
               <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 block">Region Highlight</span>
               <AnatomyHighlight selectedMuscles={activeMuscles} />
