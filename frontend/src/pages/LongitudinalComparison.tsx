@@ -117,14 +117,56 @@ export function LongitudinalComparison() {
           </div>
         </div>
 
-        {compareMutation.isSuccess && (
-          <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
-            <h2 className="text-lg font-bold mb-4">Comparison Results</h2>
-            <pre className="bg-surface-container-low p-4 rounded text-sm overflow-x-auto">
-              {JSON.stringify(compareMutation.data.data, null, 2)}
-            </pre>
-          </div>
-        )}
+        {compareMutation.isSuccess && !!compareMutation.data?.data && (() => {
+          const comparisonData = compareMutation.data.data as any;
+          return (
+            <div className="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex flex-col gap-6 mt-4">
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary">analytics</span>
+                Comparison Results
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="flex flex-col gap-3">
+                  <span className="font-bold text-on-surface-variant uppercase tracking-wider text-xs">Structural Similarity (NCC)</span>
+                  <div className="flex items-end gap-3">
+                    <span className="text-4xl font-black text-primary">
+                      {(comparisonData.ncc * 100).toFixed(1)}%
+                    </span>
+                  </div>
+                  <div className="w-full h-4 bg-surface-container-high rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full rounded-full transition-all duration-1000 ${comparisonData.ncc > 0.8 ? 'bg-primary' : 'bg-error'}`} 
+                      style={{ width: `${Math.max(0, Math.min(100, comparisonData.ncc * 100))}%` }} 
+                    />
+                  </div>
+                  <p className="text-xs text-on-surface-variant mt-1">
+                    Normalized Cross Correlation measures pixel-level alignment. Scores &gt; 80% indicate successful registration.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <span className="font-bold text-on-surface-variant uppercase tracking-wider text-xs">Anatomy Mismatch Check</span>
+                  <div className={`flex items-center gap-4 p-4 rounded-xl border ${comparisonData.mismatch ? 'bg-error-container text-error border-error/20' : 'bg-primary-container text-on-primary-container border-primary/20'}`}>
+                    <span className="material-symbols-outlined text-[40px]">
+                      {comparisonData.mismatch ? 'warning' : 'check_circle'}
+                    </span>
+                    <div className="flex flex-col">
+                      <span className="text-lg font-bold">
+                        {comparisonData.mismatch ? 'Anatomy Mismatch Detected' : 'Anatomy Matched'}
+                      </span>
+                      <span className="text-sm opacity-90">
+                        {comparisonData.mismatch 
+                          ? 'The system detected significant structural differences. These might be different body parts or severely misaligned acquisitions.' 
+                          : 'The studies are correctly matched and aligned for longitudinal tracking.'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
       </div>
     </AppShell>
   );
