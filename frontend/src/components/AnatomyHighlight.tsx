@@ -235,139 +235,30 @@ const AnatomyHighlight = ({ selectedMuscles = [], onSelect = () => {} }: Anatomy
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="relative w-full flex flex-col items-center justify-center">
       {style}
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-white mb-1">Select the muscle(s) you want to train</h2>
-        <p className="text-gray-400 text-sm">Click directly on the diagram or use the list below</p>
+      <div className="flex space-x-1 bg-surface-container-high rounded-lg p-1 mb-2 w-full max-w-[200px] justify-center shadow-sm">
+        <button
+          onClick={() => setView('front')}
+          className={`px-3 py-1 text-xs font-semibold rounded-md transition flex-1 text-center ${
+            view === 'front' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface'
+          }`}
+        >
+          Front
+        </button>
+        <button
+          onClick={() => setView('back')}
+          className={`px-3 py-1 text-xs font-semibold rounded-md transition flex-1 text-center ${
+            view === 'back' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface'
+          }`}
+        >
+          Back
+        </button>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        {/* LEFT COLUMN – muscle list */}
-        <div className="lg:col-span-1 bg-gray-900 border border-gray-800 rounded-xl p-5">
-          <h3 className="text-lg font-semibold text-white mb-4">Muscles</h3>
-          <div className="space-y-6">
-            {muscleGroups.map((group) => (
-              <div key={group.name}>
-                <h4 className="text-xs uppercase tracking-wider text-gray-500 mb-2">{group.name}</h4>
-                <div className="space-y-1">
-                  {group.muscles.map((muscle) => (
-                    <MuscleRow
-                      key={muscle}
-                      muscle={muscle}
-                      label={muscle.charAt(0).toUpperCase() + muscle.slice(1)}
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Quick select */}
-          <div className="mt-6 pt-6 border-t border-gray-800">
-            <h4 className="text-xs text-gray-400 mb-3">Quick routines</h4>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                onClick={() => {
-                  handleMuscleClick('chest')
-                  handleMuscleClick('shoulders')
-                  handleMuscleClick('triceps')
-                }}
-                className="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded-md text-xs text-white"
-              >
-                Push
-              </button>
-              <button
-                onClick={() => {
-                  handleMuscleClick('lats')
-                  handleMuscleClick('biceps')
-                  handleMuscleClick('traps')
-                }}
-                className="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded-md text-xs text-white"
-              >
-                Pull
-              </button>
-              <button
-                onClick={() => {
-                  handleMuscleClick('quadriceps')
-                  handleMuscleClick('hamstrings')
-                  handleMuscleClick('glutes')
-                  handleMuscleClick('calves')
-                }}
-                className="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded-md text-xs text-white"
-              >
-                Legs
-              </button>
-              <button
-                onClick={() => {
-                  handleMuscleClick('abdominals')
-                  handleMuscleClick('shoulders')
-                }}
-                className="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded-md text-xs text-white"
-              >
-                Core
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT COLUMN – interactive SVG */}
-        <div className="lg:col-span-2">
-          <div className="bg-gray-900 border border-gray-800 rounded-xl p-5 h-full flex flex-col">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex space-x-1 bg-gray-800 rounded-lg p-1">
-                <button
-                  onClick={() => setView('front')}
-                  className={`px-5 py-1.5 text-xs rounded-md transition ${
-                    view === 'front' ? 'bg-red-600 text-white' : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  Front
-                </button>
-                <button
-                  onClick={() => setView('back')}
-                  className={`px-5 py-1.5 text-xs rounded-md transition ${
-                    view === 'back' ? 'bg-red-600 text-white' : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  Back
-                </button>
-              </div>
-              <span className="text-xs bg-gray-800 px-3 py-1.5 rounded-md text-gray-300">
-                {selectedMuscles.length} selected
-              </span>
-            </div>
-
-            <div className="flex-1 flex justify-center items-center">
-              {view === 'front' ? frontSVG : backSVG}
-            </div>
-
-            <p className="text-xs text-gray-500 text-center mt-4">
-              Click on any coloured area to select / deselect
-            </p>
-          </div>
-        </div>
+      <div className="w-full max-w-[200px] flex justify-center items-center">
+        {view === 'front' ? frontSVG : backSVG}
       </div>
-
-      {/* Selected muscles summary */}
-      {selectedMuscles.length > 0 && (
-        <div className="mt-6 p-3 bg-gray-800/50 rounded-lg border border-gray-700">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-gray-400">Selected:</span>
-            {selectedMuscles.map((muscle) => (
-              <span
-                key={muscle}
-                className="inline-flex items-center space-x-1 px-2 py-1 bg-blue-900/50 text-blue-200 rounded-md text-xs"
-              >
-                <span>{muscle.charAt(0).toUpperCase() + muscle.slice(1)}</span>
-                <button onClick={() => handleMuscleClick(muscle)} className="hover:text-red-300">
-                  x
-                </button>
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
