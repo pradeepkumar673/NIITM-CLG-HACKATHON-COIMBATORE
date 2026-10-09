@@ -14,12 +14,12 @@ const AnatomyHighlight = ({ selectedMuscles = [], onSelect = () => {} }: Anatomy
     onSelect(muscle);
   };
 
-  // ----- Selected muscle style (persistent blue, overrides hover) -----
+  // ----- Selected muscle style (persistent red, overrides hover) -----
   const style = (
     <style>{`
       .selected-muscle path {
-        fill: #3b82f6 !important;
-        stroke: #93c5fd !important;
+        fill: #ef4444 !important;
+        stroke: #f87171 !important;
       }
     `}</style>
   )
