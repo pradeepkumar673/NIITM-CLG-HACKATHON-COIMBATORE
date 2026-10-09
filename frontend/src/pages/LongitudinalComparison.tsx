@@ -31,11 +31,15 @@ export function LongitudinalComparison() {
   const currentData = respCurrent?.data as any;
 
   const { data: respSeries } = useQuery({
-    queryKey: ['series', currentData?.patient?.id],
+    queryKey: ['series', currentData?.patient?.id, currentData?.study?.body_part],
     queryFn: () => listStudiesStudiesGet({ 
-      query: { patient_id: currentData.patient.id, body_part: currentData.study.body_part, size: 50 } 
+      query: { 
+        patient_id: currentData?.patient?.id || undefined, 
+        body_part: currentData?.study?.body_part, 
+        size: 50 
+      } 
     }),
-    enabled: !!currentData?.patient?.id
+    enabled: !!currentData?.study?.body_part
   });
 
   const seriesStudies = respSeries?.data?.items?.filter(s => s.id !== parseInt(currentId)) || [];
