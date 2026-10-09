@@ -23,6 +23,7 @@ function App() {
       <Route path="/queue" element={<DoctorReviewQueue />} />
       <Route path="/review/:id" element={<DoctorReviewSignOff />} />
       <Route path="/compare" element={<LongitudinalComparison />} />
+      <Route path="/compare/:id" element={<LongitudinalComparison />} />
       <Route path="/admin" element={<AdminDashboard />} />
     </Routes>
   );

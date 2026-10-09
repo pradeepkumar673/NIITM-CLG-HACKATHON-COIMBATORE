@@ -9,15 +9,23 @@ const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export function LongitudinalComparison() {
   const authUser = getAuthUser();
-  const { id } = useParams<{ id: string }>();
+  const { id: paramId } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
+  const [currentId, setCurrentId] = useState<string>(paramId || '');
   const [otherId, setOtherId] = useState<string>('');
 
+  const { data: respAll } = useQuery({
+    queryKey: ['allStudies_compare'],
+    queryFn: () => listStudiesStudiesGet({ query: { size: 100 } }),
+    enabled: !paramId
+  });
+  const allStudies = respAll?.data?.items || [];
+
   const { data: respCurrent } = useQuery({
-    queryKey: ['studyResult', id],
-    queryFn: () => getStudyResultStudiesIdResultGet({ path: { id: parseInt(id!) } }),
-    enabled: !!id
+    queryKey: ['studyResult', currentId],
+    queryFn: () => getStudyResultStudiesIdResultGet({ path: { id: parseInt(currentId) } }),
+    enabled: !!currentId
   });
   
   const currentData = respCurrent?.data as any;
@@ -30,10 +38,10 @@ export function LongitudinalComparison() {
     enabled: !!currentData?.patient?.id
   });
 
-  const seriesStudies = respSeries?.data?.items?.filter(s => s.id !== parseInt(id!)) || [];
+  const seriesStudies = respSeries?.data?.items?.filter(s => s.id !== parseInt(currentId)) || [];
 
   const compareMutation = useMutation({
-    mutationFn: (other_id: number) => compareStudiesStudiesIdCompareOtherIdPost({ path: { id: parseInt(id!), other_id } })
+    mutationFn: (other_id: number) => compareStudiesStudiesIdCompareOtherIdPost({ path: { id: parseInt(currentId), other_id } })
   });
 
   const handleCompare = () => {
@@ -48,7 +56,7 @@ export function LongitudinalComparison() {
         <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex flex-col gap-1">
             <h1 className="text-xl font-bold">Longitudinal Comparison</h1>
-            <p className="text-sm text-on-surface-variant">Compare current study STU-{id} with previous acquisitions.</p>
+            <p className="text-sm text-on-surface-variant">Compare {currentId ? `study STU-${currentId}` : 'a study'} with previous acquisitions.</p>
           </div>
           <button onClick={() => navigate(-1)} className="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-sm font-semibold flex items-center gap-1 transition-colors">
             <span className="material-symbols-outlined text-sm">arrow_back</span> Back
@@ -56,23 +64,35 @@ export function LongitudinalComparison() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
-            <h2 className="text-lg font-bold mb-4">Current Study (T-1)</h2>
+          <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-4">
+            <h2 className="text-lg font-bold">Current Study (T-1)</h2>
+            
+            {!paramId && (
+              <select className="h-10 px-3 bg-surface-container-low rounded border-none focus:ring-2 focus:ring-primary text-sm outline-none w-full" value={currentId} onChange={e => { setCurrentId(e.target.value); setOtherId(''); compareMutation.reset(); }}>
+                <option value="">Select current study...</option>
+                {allStudies.map(s => (
+                  <option key={s.id} value={s.id}>STU-{s.id} - {new Date(s.created_at).toLocaleDateString()} {s.patient_ext_ref ? `(${s.patient_ext_ref})` : ''}</option>
+                ))}
+              </select>
+            )}
+
             {currentData ? (
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between bg-surface-container-low p-3 rounded">
                   <span className="font-bold">STU-{currentData.study.id}</span>
                   <span className="text-sm">{new Date(currentData.study.created_at).toLocaleDateString()}</span>
                 </div>
-                <img src={`${BASE_URL}/studies/${id}/image.png`} className="w-full h-auto bg-black rounded" />
+                <img src={`${BASE_URL}/studies/${currentId}/image.png`} className="w-full h-auto bg-black rounded" />
               </div>
-            ) : <p>Loading current study...</p>}
+            ) : (
+              <p className="text-sm text-on-surface-variant">{currentId ? 'Loading current study...' : 'Please select a study above.'}</p>
+            )}
           </div>
 
           <div className="bg-surface-container-lowest rounded-xl p-4 shadow-sm">
             <h2 className="text-lg font-bold mb-4">Baseline Study (T-0)</h2>
             <div className="flex items-center gap-2 mb-4">
-              <select className="flex-1 h-10 px-3 bg-surface-container-low rounded border-none focus:ring-2 focus:ring-primary text-sm outline-none" value={otherId} onChange={e => setOtherId(e.target.value)}>
+              <select className="flex-1 h-10 px-3 bg-surface-container-low rounded border-none focus:ring-2 focus:ring-primary text-sm outline-none" value={otherId} onChange={e => setOtherId(e.target.value)} disabled={!currentId}>
                 <option value="">Select previous study to compare...</option>
                 {seriesStudies.map(s => (
                   <option key={s.id} value={s.id}>STU-{s.id} - {new Date(s.created_at).toLocaleDateString()}</option>
