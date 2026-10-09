@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, matchPath } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@tanstack/react-query';
+import { getStudyResultStudiesIdResultGet } from '../client/sdk.gen';
+import AnatomyHighlight from './AnatomyHighlight';
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -13,6 +16,20 @@ export function AppShell({ children, userRole, userName, clinicName }: AppShellP
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
   const { t, i18n } = useTranslation();
+
+  const studyMatch = matchPath('/studies/:id/result', location.pathname);
+  const studyId = studyMatch?.params?.id;
+
+  const { data: studyResult } = useQuery({
+    queryKey: ['studyResult', studyId],
+    queryFn: () => getStudyResultStudiesIdResultGet({ path: { id: parseInt(studyId!) } }),
+    enabled: !!studyId
+  });
+
+  const studyData = studyResult?.data as any;
+  const activeMuscles = studyData?.result?.anatomy?.muscle_group 
+    ? [studyData.result.anatomy.muscle_group] 
+    : [];
 
   const handleLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     i18n.changeLanguage(e.target.value);
@@ -93,6 +110,13 @@ export function AppShell({ children, userRole, userName, clinicName }: AppShellP
                   Compare
                 </Link>
           </nav>
+
+          {studyId && activeMuscles.length > 0 && (
+            <div className="px-space-md py-4 mt-2 mb-2 border-t border-b border-outline-variant">
+              <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2 block">Region Highlight</span>
+              <AnatomyHighlight selectedMuscles={activeMuscles} />
+            </div>
+          )}
           
           <div className="px-space-md pt-space-xs">
             <label className="block font-label-sm text-label-sm text-on-surface-variant mb-1">Language</label>
