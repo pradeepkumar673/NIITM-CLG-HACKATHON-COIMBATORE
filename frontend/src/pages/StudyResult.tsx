@@ -1561,6 +1561,9 @@ export function StudyResult() {
             <button onClick={() => alert("Peer review flagged! Notification sent to available specialists.")} className="h-8 px-3 rounded-md bg-error/10 text-error font-bold flex items-center gap-1 transition-colors hover:bg-error/20 text-sm">
               <span className="material-symbols-outlined text-[16px]">flag</span> Peer Review
             </button>
+            <button onClick={() => navigate(`/compare/${id}`)} className="h-8 px-3 rounded-md bg-secondary/10 text-secondary font-bold flex items-center gap-1 transition-colors hover:bg-secondary/20 text-sm">
+              <span className="material-symbols-outlined text-[16px]">compare</span> Compare
+            </button>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-[10px] font-mono text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant/50">
             <span>sha256: {study.sha256?.substring(0, 20)}…</span>
