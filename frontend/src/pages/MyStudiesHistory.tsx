@@ -294,7 +294,7 @@ export function MyStudiesHistory() {
                       <tr
                         key={s.id}
                         className={`hover:bg-surface-container-low transition-colors cursor-pointer group ${i % 2 === 0 ? 'bg-surface-container-lowest' : 'bg-surface-bright'}`}
-                        onClick={() => navigate(`/studies/${s.id}/result`)}
+                        onClick={() => navigate(`/studies/${s.id}`)}
                       >
                         <td className="py-3.5 px-4 font-mono-data-sm text-mono-data-sm font-semibold text-primary">
                           #{s.id}
@@ -328,7 +328,7 @@ export function MyStudiesHistory() {
                         <td className="py-3.5 px-4 text-right">
                           <button
                             className="px-3 py-1.5 rounded-lg bg-surface-container text-primary font-label-sm text-label-sm font-semibold group-hover:bg-primary group-hover:text-on-primary transition-all"
-                            onClick={e => { e.stopPropagation(); navigate(`/studies/${s.id}/result`); }}
+                            onClick={e => { e.stopPropagation(); navigate(`/studies/${s.id}`); }}
                           >
                             Open
                           </button>
@@ -346,7 +346,7 @@ export function MyStudiesHistory() {
                 <div
                   key={s.id}
                   className="bg-surface-container-lowest rounded-xl shadow-sm p-4 flex flex-col gap-2.5 hover:bg-surface-container-low transition-colors cursor-pointer active:scale-[0.99]"
-                  onClick={() => navigate(`/studies/${s.id}/result`)}
+                  onClick={() => navigate(`/studies/${s.id}`)}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
