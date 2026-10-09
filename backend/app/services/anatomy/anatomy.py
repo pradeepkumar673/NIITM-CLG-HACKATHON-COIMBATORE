@@ -169,4 +169,33 @@ def resolve_anatomy(body_part: BodyPart, image_path: str, result_json: dict) -> 
                         "tier": finding["tier"]
                     })
                     
+    import os
+    gemini_key = os.environ.get("GEMINI_API_KEY")
+    if gemini_key:
+        try:
+            import requests
+            import json
+            gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_key}"
+            gemini_prompt = (
+                f"You are an anatomy mapping assistant. Based on the body part '{body_part}' and findings '{json.dumps(result_json.get('findings', {}))}', "
+                f"select the ONE most appropriate muscle/anatomy group from this exact list: "
+                f"[biceps, forearms, chest, triceps, abdominals, quadriceps, shoulders, calves, traps, lats, hamstrings, glutes]. "
+                f"For a chest x-ray, pick 'chest'. For a knee x-ray, pick 'quadriceps'. For a wrist/hand/arm, pick 'forearms'. "
+                f"Respond ONLY with the exact single lowercase word from the list."
+            )
+            resp = requests.post(
+                gemini_url,
+                headers={"Content-Type": "application/json"},
+                json={"contents": [{"parts": [{"text": gemini_prompt}]}]}
+            )
+            if resp.status_code == 200:
+                text_val = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip().lower()
+                valid_muscles = ["biceps", "forearms", "chest", "triceps", "abdominals", "quadriceps", "shoulders", "calves", "traps", "lats", "hamstrings", "glutes"]
+                import re
+                text_val = re.sub(r'[^a-z]', '', text_val)
+                if text_val in valid_muscles:
+                    anatomy_res["muscle_group"] = text_val
+        except Exception:
+            pass
+            
     return anatomy_res
