@@ -1256,7 +1256,7 @@ function ClinicalDecisionGraph({
           </div>
 
           {/* Graph Visual Canvas */}
-          <div className="relative bg-[#08111D] rounded-xl p-4 border border-outline-variant overflow-x-auto min-h-[260px] shadow-inner">
+          <div className="relative bg-white rounded-xl p-4 border border-outline-variant overflow-x-auto min-h-[260px] shadow-inner">
             <div className="relative w-[680px] h-[230px] mx-auto">
               {/* Connecting Curved SVG Edges */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
@@ -1312,8 +1312,8 @@ function ClinicalDecisionGraph({
                     onClick={() => setSelectedNodeId(n.id)}
                     className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-xl p-2.5 transition-all text-left flex flex-col gap-1 w-[180px] shadow-lg cursor-pointer ${
                       isSelected
-                        ? "bg-[#112235] border-2 ring-2 ring-primary/40 scale-105 z-20"
-                        : "bg-[#0C1928] border border-white/10 hover:border-white/30 z-10"
+                        ? "bg-blue-50 border-2 ring-2 ring-primary/40 scale-105 z-20"
+                        : "bg-white border border-outline-variant hover:border-outline z-10"
                     }`}
                     style={{
                       left: p.x,
@@ -1322,7 +1322,7 @@ function ClinicalDecisionGraph({
                     }}
                   >
                     <div className="flex items-center justify-between w-full">
-                      <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-white/50">
+                      <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-on-surface-variant">
                         {n.type}
                       </span>
                       <span
@@ -1330,11 +1330,11 @@ function ClinicalDecisionGraph({
                         style={{ backgroundColor: n.color }}
                       />
                     </div>
-                    <div className="text-xs font-bold text-white truncate w-full">
+                    <div className="text-xs font-bold text-on-surface truncate w-full">
                       {n.title}
                     </div>
                     <div
-                      className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded w-fit text-white"
+                      className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded w-fit bg-white"
                       style={{ backgroundColor: `${n.color}33`, color: n.color }}
                     >
                       {n.badge}
@@ -1346,13 +1346,13 @@ function ClinicalDecisionGraph({
           </div>
 
           {/* Evidence Inspector for Selected Node */}
-          <div className="bg-[#0B1522] rounded-xl p-3.5 border border-white/10 flex flex-col gap-2">
-            <div className="flex items-center justify-between border-b border-white/10 pb-2">
+          <div className="bg-surface-container-low rounded-xl p-3.5 border border-outline-variant flex flex-col gap-2">
+            <div className="flex items-center justify-between border-b border-outline-variant pb-2">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-[18px]" style={{ color: selectedNode.color }}>
                   info
                 </span>
-                <span className="text-xs font-bold text-white">
+                <span className="text-xs font-bold text-on-surface">
                   Evidence Inspector: {selectedNode.title}
                 </span>
                 <span
@@ -1362,11 +1362,11 @@ function ClinicalDecisionGraph({
                   {selectedNode.type}
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-white/50">
+              <span className="text-[10px] font-mono text-on-surface-variant">
                 {selectedNode.metrics}
               </span>
             </div>
-            <p className="text-xs text-white/80 leading-relaxed">
+            <p className="text-xs text-on-surface-variant leading-relaxed">
               {selectedNode.desc}
             </p>
           </div>
